@@ -1,0 +1,426 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class InventoryItem
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()>
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtUPC = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtItemName = New System.Windows.Forms.TextBox()
+        Me.txtNotes = New System.Windows.Forms.TextBox()
+        Me.cboType = New System.Windows.Forms.ComboBox()
+        Me.cboDepartment = New System.Windows.Forms.ComboBox()
+        Me.cboVendor = New System.Windows.Forms.ComboBox()
+        Me.numPrice = New System.Windows.Forms.NumericUpDown()
+        Me.numUnitCost = New System.Windows.Forms.NumericUpDown()
+        Me.numOnHandQuantity = New System.Windows.Forms.NumericUpDown()
+        Me.numItemNumber = New System.Windows.Forms.NumericUpDown()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.InvName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvVendor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvOnHandQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UPC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lblChanged = New System.Windows.Forms.Label()
+        Me.btnNew = New System.Windows.Forms.Button()
+        CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numItemNumber, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(29, 49)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(36, 17)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "UPC"
+        '
+        'txtUPC
+        '
+        Me.txtUPC.Location = New System.Drawing.Point(76, 46)
+        Me.txtUPC.MaxLength = 12
+        Me.txtUPC.Name = "txtUPC"
+        Me.txtUPC.ReadOnly = True
+        Me.txtUPC.Size = New System.Drawing.Size(198, 22)
+        Me.txtUPC.TabIndex = 1
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(25, 84)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(75, 17)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Item Name"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(25, 118)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(45, 17)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Notes"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(25, 148)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(40, 17)
+        Me.Label4.TabIndex = 4
+        Me.Label4.Text = "Type"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(25, 180)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(82, 17)
+        Me.Label5.TabIndex = 5
+        Me.Label5.Text = "Department"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(25, 210)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(54, 17)
+        Me.Label6.TabIndex = 6
+        Me.Label6.Text = "Vendor"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(25, 239)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(40, 17)
+        Me.Label7.TabIndex = 7
+        Me.Label7.Text = "Price"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(25, 269)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(65, 17)
+        Me.Label8.TabIndex = 8
+        Me.Label8.Text = "Unit Cost"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(25, 299)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(122, 17)
+        Me.Label9.TabIndex = 9
+        Me.Label9.Text = "On Hand Quantity"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(25, 334)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(88, 17)
+        Me.Label10.TabIndex = 10
+        Me.Label10.Text = "Item Number"
+        '
+        'txtItemName
+        '
+        Me.txtItemName.Location = New System.Drawing.Point(117, 84)
+        Me.txtItemName.MaxLength = 10
+        Me.txtItemName.Name = "txtItemName"
+        Me.txtItemName.Size = New System.Drawing.Size(234, 22)
+        Me.txtItemName.TabIndex = 11
+        '
+        'txtNotes
+        '
+        Me.txtNotes.Location = New System.Drawing.Point(103, 118)
+        Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.Size = New System.Drawing.Size(478, 22)
+        Me.txtNotes.TabIndex = 12
+        '
+        'cboType
+        '
+        Me.cboType.FormattingEnabled = True
+        Me.cboType.Location = New System.Drawing.Point(103, 148)
+        Me.cboType.MaxDropDownItems = 80
+        Me.cboType.MaxLength = 10
+        Me.cboType.Name = "cboType"
+        Me.cboType.Size = New System.Drawing.Size(121, 24)
+        Me.cboType.TabIndex = 13
+        '
+        'cboDepartment
+        '
+        Me.cboDepartment.FormattingEnabled = True
+        Me.cboDepartment.Location = New System.Drawing.Point(114, 180)
+        Me.cboDepartment.Name = "cboDepartment"
+        Me.cboDepartment.Size = New System.Drawing.Size(121, 24)
+        Me.cboDepartment.TabIndex = 14
+        '
+        'cboVendor
+        '
+        Me.cboVendor.FormattingEnabled = True
+        Me.cboVendor.Location = New System.Drawing.Point(103, 211)
+        Me.cboVendor.Name = "cboVendor"
+        Me.cboVendor.Size = New System.Drawing.Size(121, 24)
+        Me.cboVendor.TabIndex = 15
+        '
+        'numPrice
+        '
+        Me.numPrice.DecimalPlaces = 2
+        Me.numPrice.Location = New System.Drawing.Point(103, 241)
+        Me.numPrice.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.numPrice.Name = "numPrice"
+        Me.numPrice.Size = New System.Drawing.Size(120, 22)
+        Me.numPrice.TabIndex = 16
+        '
+        'numUnitCost
+        '
+        Me.numUnitCost.DecimalPlaces = 2
+        Me.numUnitCost.Location = New System.Drawing.Point(104, 269)
+        Me.numUnitCost.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.numUnitCost.Name = "numUnitCost"
+        Me.numUnitCost.Size = New System.Drawing.Size(120, 22)
+        Me.numUnitCost.TabIndex = 17
+        '
+        'numOnHandQuantity
+        '
+        Me.numOnHandQuantity.Location = New System.Drawing.Point(154, 299)
+        Me.numOnHandQuantity.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.numOnHandQuantity.Name = "numOnHandQuantity"
+        Me.numOnHandQuantity.Size = New System.Drawing.Size(120, 22)
+        Me.numOnHandQuantity.TabIndex = 18
+        '
+        'numItemNumber
+        '
+        Me.numItemNumber.Location = New System.Drawing.Point(130, 332)
+        Me.numItemNumber.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.numItemNumber.Name = "numItemNumber"
+        Me.numItemNumber.Size = New System.Drawing.Size(120, 22)
+        Me.numItemNumber.TabIndex = 19
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(448, 392)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(118, 46)
+        Me.btnSave.TabIndex = 22
+        Me.btnSave.Text = "Save Changes"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToResizeColumns = False
+        Me.DataGridView1.AllowUserToResizeRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC})
+        Me.DataGridView1.Location = New System.Drawing.Point(655, 12)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.RowTemplate.Height = 24
+        Me.DataGridView1.Size = New System.Drawing.Size(665, 412)
+        Me.DataGridView1.TabIndex = 23
+        '
+        'InvName
+        '
+        Me.InvName.HeaderText = "Item Name"
+        Me.InvName.MinimumWidth = 6
+        Me.InvName.Name = "InvName"
+        Me.InvName.Width = 225
+        '
+        'InvType
+        '
+        Me.InvType.HeaderText = "Type"
+        Me.InvType.MinimumWidth = 6
+        Me.InvType.Name = "InvType"
+        Me.InvType.Width = 125
+        '
+        'InvDepartment
+        '
+        Me.InvDepartment.HeaderText = "Dept"
+        Me.InvDepartment.MinimumWidth = 6
+        Me.InvDepartment.Name = "InvDepartment"
+        Me.InvDepartment.ReadOnly = True
+        Me.InvDepartment.Width = 125
+        '
+        'InvVendor
+        '
+        Me.InvVendor.HeaderText = "Vendor"
+        Me.InvVendor.MinimumWidth = 6
+        Me.InvVendor.Name = "InvVendor"
+        Me.InvVendor.ReadOnly = True
+        Me.InvVendor.Width = 125
+        '
+        'InvPrice
+        '
+        Me.InvPrice.HeaderText = "Price"
+        Me.InvPrice.MinimumWidth = 6
+        Me.InvPrice.Name = "InvPrice"
+        Me.InvPrice.ReadOnly = True
+        Me.InvPrice.Width = 125
+        '
+        'InvCost
+        '
+        Me.InvCost.HeaderText = "Cost/Unit"
+        Me.InvCost.MinimumWidth = 6
+        Me.InvCost.Name = "InvCost"
+        Me.InvCost.ReadOnly = True
+        Me.InvCost.Width = 125
+        '
+        'InvOnHandQuantity
+        '
+        Me.InvOnHandQuantity.HeaderText = "Qty"
+        Me.InvOnHandQuantity.MinimumWidth = 6
+        Me.InvOnHandQuantity.Name = "InvOnHandQuantity"
+        Me.InvOnHandQuantity.ReadOnly = True
+        Me.InvOnHandQuantity.Width = 125
+        '
+        'ID
+        '
+        Me.ID.HeaderText = "Item #"
+        Me.ID.MinimumWidth = 6
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 125
+        '
+        'UPC
+        '
+        Me.UPC.HeaderText = "UPC"
+        Me.UPC.MinimumWidth = 6
+        Me.UPC.Name = "UPC"
+        Me.UPC.Width = 125
+        '
+        'lblChanged
+        '
+        Me.lblChanged.AutoSize = True
+        Me.lblChanged.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblChanged.ForeColor = System.Drawing.Color.Coral
+        Me.lblChanged.Location = New System.Drawing.Point(392, 46)
+        Me.lblChanged.Name = "lblChanged"
+        Me.lblChanged.Size = New System.Drawing.Size(72, 17)
+        Me.lblChanged.TabIndex = 24
+        Me.lblChanged.Text = "Changed"
+        Me.lblChanged.Visible = False
+        '
+        'btnNew
+        '
+        Me.btnNew.Location = New System.Drawing.Point(32, 392)
+        Me.btnNew.Name = "btnNew"
+        Me.btnNew.Size = New System.Drawing.Size(101, 46)
+        Me.btnNew.TabIndex = 25
+        Me.btnNew.Text = "Add New"
+        Me.btnNew.UseVisualStyleBackColor = True
+        '
+        'InventoryItem
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1493, 450)
+        Me.Controls.Add(Me.btnNew)
+        Me.Controls.Add(Me.lblChanged)
+        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.numItemNumber)
+        Me.Controls.Add(Me.numOnHandQuantity)
+        Me.Controls.Add(Me.numUnitCost)
+        Me.Controls.Add(Me.numPrice)
+        Me.Controls.Add(Me.cboVendor)
+        Me.Controls.Add(Me.cboDepartment)
+        Me.Controls.Add(Me.cboType)
+        Me.Controls.Add(Me.txtNotes)
+        Me.Controls.Add(Me.txtItemName)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.txtUPC)
+        Me.Controls.Add(Me.Label1)
+        Me.Name = "InventoryItem"
+        Me.Text = "Inventory Item"
+        CType(Me.numPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numItemNumber, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtUPC As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtItemName As TextBox
+    Friend WithEvents txtNotes As TextBox
+    Friend WithEvents cboType As ComboBox
+    Friend WithEvents cboDepartment As ComboBox
+    Friend WithEvents cboVendor As ComboBox
+    Friend WithEvents numPrice As NumericUpDown
+    Friend WithEvents numUnitCost As NumericUpDown
+    Friend WithEvents numOnHandQuantity As NumericUpDown
+    Friend WithEvents numItemNumber As NumericUpDown
+    Friend WithEvents btnSave As Button
+    Friend WithEvents IdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents InvName As DataGridViewTextBoxColumn
+    Friend WithEvents InvType As DataGridViewTextBoxColumn
+    Friend WithEvents InvDepartment As DataGridViewTextBoxColumn
+    Friend WithEvents InvVendor As DataGridViewTextBoxColumn
+    Friend WithEvents InvPrice As DataGridViewTextBoxColumn
+    Friend WithEvents InvCost As DataGridViewTextBoxColumn
+    Friend WithEvents InvOnHandQuantity As DataGridViewTextBoxColumn
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents UPC As DataGridViewTextBoxColumn
+    Friend WithEvents lblChanged As Label
+    Friend WithEvents btnNew As Button
+End Class
