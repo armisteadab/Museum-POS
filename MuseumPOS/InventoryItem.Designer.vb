@@ -55,6 +55,7 @@ Partial Class InventoryItem
         Me.UPC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblChanged = New System.Windows.Forms.Label()
         Me.btnNew = New System.Windows.Forms.Button()
+        Me.btnAllowUPCChange = New System.Windows.Forms.Button()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -172,6 +173,7 @@ Partial Class InventoryItem
         'txtNotes
         '
         Me.txtNotes.Location = New System.Drawing.Point(103, 118)
+        Me.txtNotes.MaxLength = 50
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.Size = New System.Drawing.Size(478, 22)
         Me.txtNotes.TabIndex = 12
@@ -238,7 +240,7 @@ Partial Class InventoryItem
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(448, 392)
+        Me.btnSave.Location = New System.Drawing.Point(154, 392)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(118, 46)
         Me.btnSave.TabIndex = 22
@@ -247,10 +249,14 @@ Partial Class InventoryItem
         '
         'DataGridView1
         '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.AllowUserToOrderColumns = True
         Me.DataGridView1.AllowUserToResizeColumns = False
         Me.DataGridView1.AllowUserToResizeRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC})
+        Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DataGridView1.Location = New System.Drawing.Point(655, 12)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
@@ -348,11 +354,21 @@ Partial Class InventoryItem
         Me.btnNew.Text = "Add New"
         Me.btnNew.UseVisualStyleBackColor = True
         '
+        'btnAllowUPCChange
+        '
+        Me.btnAllowUPCChange.Location = New System.Drawing.Point(281, 44)
+        Me.btnAllowUPCChange.Name = "btnAllowUPCChange"
+        Me.btnAllowUPCChange.Size = New System.Drawing.Size(75, 23)
+        Me.btnAllowUPCChange.TabIndex = 26
+        Me.btnAllowUPCChange.Text = "Allow UPC Change"
+        Me.btnAllowUPCChange.UseVisualStyleBackColor = True
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 450)
+        Me.Controls.Add(Me.btnAllowUPCChange)
         Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.lblChanged)
         Me.Controls.Add(Me.DataGridView1)
@@ -423,4 +439,5 @@ Partial Class InventoryItem
     Friend WithEvents UPC As DataGridViewTextBoxColumn
     Friend WithEvents lblChanged As Label
     Friend WithEvents btnNew As Button
+    Friend WithEvents btnAllowUPCChange As Button
 End Class

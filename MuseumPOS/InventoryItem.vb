@@ -1,26 +1,35 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data.SqlDbType
 
+
 Public Class InventoryItem
     Private ChangedValue As Boolean
     'button1 = btnSave
+    Dim sConnectionString As String
+
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim sqlConnect As New SqlConnection(My.Settings.MuseumPOSConnectionString)
-        sqlConnect.Open()
 
         Dim sqlString As String, AlreadyInTable As Boolean = False
-        Dim commandSQL As SqlCommand
+        Dim sqlConnect As New SqlConnection()
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         If Not (txtUPC.Text = "") Then
+            sqlConnect.ConnectionString = sConnectionString
+            sqlConnect.Open()
+            Dim commandSQL As SqlCommand
             sqlString = "SELECT InvUPC from InventoryItems WHERE InvUPC = '" & Me.txtUPC.Text.Trim & "'"
             commandSQL = New SqlCommand(sqlString, sqlConnect)
 
             Dim reader = commandSQL.ExecuteReader()
             AlreadyInTable = reader.HasRows
             reader.Close()
+            sqlConnect.Close()
 
         End If
 
+        Dim sqlConnect1 As New SqlConnection(sConnectionString)
+        Dim commandSQL1 As SqlCommand
 
         If Not AlreadyInTable Then
             sqlString = "INSERT INTO InventoryItems(Id, InvUPC, InvName, InvNotes, InvType, InvCost, OnHandQuantity, Vendor, InvPrice, Department) "
@@ -31,17 +40,20 @@ Public Class InventoryItem
             sqlString = sqlString & "," & QTrim(cboDepartment.Text) & ")"
             Try
 
-                MsgBox(sqlString)
-                commandSQL = New SqlCommand(sqlString, sqlConnect)
-                commandSQL.ExecuteNonQuery()
+                sqlConnect1.Open()
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+                'commandSQL1.CommandType = CommandType.Text
+                commandSQL1.ExecuteNonQuery()
+                commandSQL1.Dispose()
+                sqlConnect1.Close()
 
             Catch ex As ArgumentException
                 MsgBox("" & ex.Message)
 
             Finally
-                MsgBox("SQL FAIL: " & sqlString)
 
             End Try
+            Debug.Print(sqlString)
 
         Else 'update instead
             'InvType, InvCost, InvPrice, Department,  OnHandQuantity, Vendor, InvNotes, Id) values ("
@@ -60,30 +72,42 @@ Public Class InventoryItem
 
             Try
 
-                commandSQL = New SqlCommand(sqlString, sqlConnect)
-                commandSQL.ExecuteNonQuery()
+                sqlConnect1.Open()
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+                commandSQL1.ExecuteNonQuery()
+                commandSQL1.Dispose()
+                sqlConnect1.Close()
 
             Catch ex As ArgumentException
                 MsgBox("" & ex.Message)
 
             Finally
-                MsgBox("SQL FAIL: " & sqlString)
 
             End Try
         End If
 
-        Dim saveRow As Integer = 0
+        LoadGrid()
+        Scatter()
+        Me.Changed = False
 
     End Sub
 
     Private Sub txtUPC_TextChanged(sender As Object, e As EventArgs) Handles txtUPC.TextChanged
-
+        Me.Changed = True
 
     End Sub
 
     Private Sub InventoryItem_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadGrid()
+    End Sub
+
+    Private Sub LoadGrid()
+
         Dim sqlConnect As New SqlConnection()
-        sqlConnect.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
 
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
@@ -94,6 +118,7 @@ Public Class InventoryItem
         Dim reader As SqlDataReader
         Dim previousConnectionState As ConnectionState = sqlConnect.State
         Dim nPriceDisplayGrid As Double, sPriceDisplayGrid As String
+        Me.DataGridView1.Rows.Clear()
 
         Try
             If sqlConnect.State = ConnectionState.Closed Then
@@ -103,14 +128,12 @@ Public Class InventoryItem
             Using reader
                 While reader.Read
                     ' Process SprocResults datareader here.
-                    Me.DataGridView1.AllowUserToAddRows = True
                     nPriceDisplayGrid = reader.Item("InvPrice")
                     sPriceDisplayGrid = Strings.FormatNumber(reader.Item("InvPrice"), 2)
 
                     Me.DataGridView1.Rows.Add(reader.Item("InvName"), reader.Item("InvType"), reader.Item("Department"),
                                               reader.Item("Vendor"), sPriceDisplayGrid, reader.Item("InvCost"),
                                               reader.Item("OnHandQuantity"), reader.Item("Id"), reader.Item("InvUPC"))
-                    Me.DataGridView1.AllowUserToAddRows = False
                 End While
             End Using
         Finally
@@ -119,20 +142,33 @@ Public Class InventoryItem
             End If
         End Try
 
+        If DataGridView1.Rows.Count > 1 Then
+            '       Me.DataGridView1.Rows.Remove(DataGridView1.Rows(DataGridView1.Rows.Count - 1))
+        End If
+
+        Scatter()
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick, DataGridView1.CellClick
+        Scatter()
+    End Sub
+
+    Private Sub Scatter()
+
         Dim sqlConnect As New SqlConnection()
-        sqlConnect.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sqlConnect.ConnectionString = sConnectionString
 
-        Dim cmd As New SqlCommand, sSQL As String, sInvUPC As String
+        Dim cmd As New SqlCommand, sSQL As String, sInvUPC As String, sUPC_Validation As String
 
-        sInvUPC = DataGridView1.Item(8, DataGridView1.CurrentRow.Index).Value
+        sInvUPC = ("" & DataGridView1.Item(8, DataGridView1.CurrentRow.Index).Value)
+
+        sUPC_Validation = ("" & sInvUPC.Trim)
+        If sUPC_Validation.Length < 1 Then Exit Sub
 
         cmd.CommandType = CommandType.Text
         sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes FROM InventoryItems"
-        sSQL += " WHERE InvUPC = '" & sInvUPC.Trim & "'"
+        sSQL += " WHERE InvUPC = " & QTrim(sInvUPC.Trim)
 
         cmd.CommandText = sSQL
         cmd.Connection = sqlConnect
@@ -150,7 +186,6 @@ Public Class InventoryItem
             Using reader
                 While reader.Read
                     ' Process SprocResults datareader here.
-                    Me.DataGridView1.AllowUserToAddRows = True
                     nPriceDisplayGrid = reader.Item("InvPrice")
                     sPriceDisplayGrid = Strings.FormatNumber(reader.Item("InvPrice"), 2)
 
@@ -164,8 +199,10 @@ Public Class InventoryItem
                     Me.numOnHandQuantity.Value = reader.Item("OnHandQuantity")
                     Me.numItemNumber.Value = reader.Item("Id")
                     Me.txtUPC.Text = reader.Item("InvUPC")
-                    Me.DataGridView1.AllowUserToAddRows = True
+                    Me.txtNotes.Text = reader.Item("InvNotes")
                     Me.Changed = False   ' we haven't really changed data, just display/scatter
+                    txtUPC.ReadOnly = True ' not allow new UPC
+
                 End While
             End Using
         Finally
@@ -188,8 +225,8 @@ Public Class InventoryItem
             ChangedValue = value
             lblChanged.Visible = ChangedValue
             DataGridView1.Enabled = Not ChangedValue
-            btnNew.Visible = Not ChangedValue
-            btnSave.Visible = ChangedValue
+            btnNew.Enabled = Not ChangedValue
+            btnSave.Enabled = ChangedValue
         End Set
     End Property
 
@@ -230,5 +267,30 @@ Public Class InventoryItem
     Private Sub numItemNumber_ValueChanged(sender As Object, e As EventArgs) Handles numItemNumber.ValueChanged
         Me.Changed = True
 
+    End Sub
+
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+        ClearValues()
+        txtUPC.ReadOnly = False ' allow new UPC
+    End Sub
+
+    Private Sub ClearValues()
+
+        Me.txtItemName.Text = ""  '"InvName")
+        Me.cboType.Text = ""  '"InvType")
+        Me.cboDepartment.Text = ""  '"Department")
+        Me.cboVendor.Text = ""  '"Vendor")
+        Me.numPrice.Value = 0
+        Me.numUnitCost.Value = 0  '"InvCost")
+        Me.numOnHandQuantity.Value = 0  '"OnHandQuantity")
+        Me.numItemNumber.Value = 0  '"Id")
+        Me.txtUPC.Text = ""  '"InvUPC")
+        Me.txtNotes.Text = ""  '"InvNotes")
+        Me.Changed = False   ' we haven't really changed data, just new record
+
+    End Sub
+
+    Private Sub btnAllowUPCChange_Click(sender As Object, e As EventArgs) Handles btnAllowUPCChange.Click
+        Me.txtUPC.ReadOnly = Not (Me.txtUPC.ReadOnly) ' switch it
     End Sub
 End Class
