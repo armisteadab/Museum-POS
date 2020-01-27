@@ -56,6 +56,9 @@ Partial Class InventoryItem
         Me.lblChanged = New System.Windows.Forms.Label()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnAllowUPCChange = New System.Windows.Forms.Button()
+        Me.btnCancelChanges = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnActualDelete = New System.Windows.Forms.Button()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,183 +69,204 @@ Partial Class InventoryItem
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(29, 49)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(36, 17)
+        Me.Label1.Size = New System.Drawing.Size(63, 29)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "UPC"
         '
         'txtUPC
         '
-        Me.txtUPC.Location = New System.Drawing.Point(76, 46)
+        Me.txtUPC.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUPC.Location = New System.Drawing.Point(98, 44)
         Me.txtUPC.MaxLength = 12
         Me.txtUPC.Name = "txtUPC"
         Me.txtUPC.ReadOnly = True
-        Me.txtUPC.Size = New System.Drawing.Size(198, 22)
+        Me.txtUPC.Size = New System.Drawing.Size(308, 34)
         Me.txtUPC.TabIndex = 1
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(25, 84)
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(27, 93)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(75, 17)
+        Me.Label2.Size = New System.Drawing.Size(130, 29)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Item Name"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(25, 118)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(31, 142)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 17)
+        Me.Label3.Size = New System.Drawing.Size(77, 29)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Notes"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(25, 148)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(31, 182)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(40, 17)
+        Me.Label4.Size = New System.Drawing.Size(68, 29)
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Type"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(25, 180)
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(32, 225)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(82, 17)
+        Me.Label5.Size = New System.Drawing.Size(138, 29)
         Me.Label5.TabIndex = 5
         Me.Label5.Text = "Department"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(25, 210)
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(32, 267)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(54, 17)
+        Me.Label6.Size = New System.Drawing.Size(91, 29)
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Vendor"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(25, 239)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(31, 309)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(40, 17)
+        Me.Label7.Size = New System.Drawing.Size(69, 29)
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "Price"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(25, 269)
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(30, 351)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(65, 17)
+        Me.Label8.Size = New System.Drawing.Size(110, 29)
         Me.Label8.TabIndex = 8
         Me.Label8.Text = "Unit Cost"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(25, 299)
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(30, 392)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(122, 17)
+        Me.Label9.Size = New System.Drawing.Size(201, 29)
         Me.Label9.TabIndex = 9
         Me.Label9.Text = "On Hand Quantity"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(25, 334)
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(30, 434)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(88, 17)
+        Me.Label10.Size = New System.Drawing.Size(152, 29)
         Me.Label10.TabIndex = 10
         Me.Label10.Text = "Item Number"
         '
         'txtItemName
         '
-        Me.txtItemName.Location = New System.Drawing.Point(117, 84)
-        Me.txtItemName.MaxLength = 10
+        Me.txtItemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtItemName.Location = New System.Drawing.Point(172, 93)
+        Me.txtItemName.MaxLength = 20
         Me.txtItemName.Name = "txtItemName"
-        Me.txtItemName.Size = New System.Drawing.Size(234, 22)
+        Me.txtItemName.Size = New System.Drawing.Size(415, 34)
         Me.txtItemName.TabIndex = 11
         '
         'txtNotes
         '
-        Me.txtNotes.Location = New System.Drawing.Point(103, 118)
+        Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNotes.Location = New System.Drawing.Point(109, 142)
         Me.txtNotes.MaxLength = 50
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.Size = New System.Drawing.Size(478, 22)
+        Me.txtNotes.Size = New System.Drawing.Size(478, 28)
         Me.txtNotes.TabIndex = 12
         '
         'cboType
         '
+        Me.cboType.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboType.FormattingEnabled = True
-        Me.cboType.Location = New System.Drawing.Point(103, 148)
+        Me.cboType.Location = New System.Drawing.Point(109, 182)
         Me.cboType.MaxDropDownItems = 80
         Me.cboType.MaxLength = 10
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(121, 24)
+        Me.cboType.Size = New System.Drawing.Size(210, 37)
         Me.cboType.TabIndex = 13
         '
         'cboDepartment
         '
+        Me.cboDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDepartment.FormattingEnabled = True
-        Me.cboDepartment.Location = New System.Drawing.Point(114, 180)
+        Me.cboDepartment.Location = New System.Drawing.Point(176, 225)
         Me.cboDepartment.Name = "cboDepartment"
-        Me.cboDepartment.Size = New System.Drawing.Size(121, 24)
+        Me.cboDepartment.Size = New System.Drawing.Size(230, 37)
         Me.cboDepartment.TabIndex = 14
         '
         'cboVendor
         '
+        Me.cboVendor.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboVendor.FormattingEnabled = True
-        Me.cboVendor.Location = New System.Drawing.Point(103, 211)
+        Me.cboVendor.Location = New System.Drawing.Point(129, 268)
         Me.cboVendor.Name = "cboVendor"
-        Me.cboVendor.Size = New System.Drawing.Size(121, 24)
+        Me.cboVendor.Size = New System.Drawing.Size(228, 37)
         Me.cboVendor.TabIndex = 15
         '
         'numPrice
         '
         Me.numPrice.DecimalPlaces = 2
-        Me.numPrice.Location = New System.Drawing.Point(103, 241)
+        Me.numPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numPrice.Location = New System.Drawing.Point(109, 311)
         Me.numPrice.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numPrice.Name = "numPrice"
-        Me.numPrice.Size = New System.Drawing.Size(120, 22)
+        Me.numPrice.Size = New System.Drawing.Size(120, 34)
         Me.numPrice.TabIndex = 16
         '
         'numUnitCost
         '
         Me.numUnitCost.DecimalPlaces = 2
-        Me.numUnitCost.Location = New System.Drawing.Point(104, 269)
+        Me.numUnitCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numUnitCost.Location = New System.Drawing.Point(146, 351)
         Me.numUnitCost.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numUnitCost.Name = "numUnitCost"
-        Me.numUnitCost.Size = New System.Drawing.Size(120, 22)
+        Me.numUnitCost.Size = New System.Drawing.Size(120, 34)
         Me.numUnitCost.TabIndex = 17
         '
         'numOnHandQuantity
         '
-        Me.numOnHandQuantity.Location = New System.Drawing.Point(154, 299)
+        Me.numOnHandQuantity.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numOnHandQuantity.Location = New System.Drawing.Point(237, 392)
         Me.numOnHandQuantity.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numOnHandQuantity.Name = "numOnHandQuantity"
-        Me.numOnHandQuantity.Size = New System.Drawing.Size(120, 22)
+        Me.numOnHandQuantity.Size = New System.Drawing.Size(120, 34)
         Me.numOnHandQuantity.TabIndex = 18
         '
         'numItemNumber
         '
-        Me.numItemNumber.Location = New System.Drawing.Point(130, 332)
+        Me.numItemNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numItemNumber.Location = New System.Drawing.Point(199, 432)
         Me.numItemNumber.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.numItemNumber.Name = "numItemNumber"
-        Me.numItemNumber.Size = New System.Drawing.Size(120, 22)
+        Me.numItemNumber.Size = New System.Drawing.Size(120, 34)
         Me.numItemNumber.TabIndex = 19
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(154, 392)
+        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Location = New System.Drawing.Point(214, 485)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(118, 46)
+        Me.btnSave.Size = New System.Drawing.Size(192, 70)
         Me.btnSave.TabIndex = 22
         Me.btnSave.Text = "Save Changes"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -261,7 +285,7 @@ Partial Class InventoryItem
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(665, 412)
+        Me.DataGridView1.Size = New System.Drawing.Size(665, 609)
         Me.DataGridView1.TabIndex = 23
         '
         'InvName
@@ -336,38 +360,73 @@ Partial Class InventoryItem
         'lblChanged
         '
         Me.lblChanged.AutoSize = True
-        Me.lblChanged.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblChanged.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblChanged.ForeColor = System.Drawing.Color.Coral
-        Me.lblChanged.Location = New System.Drawing.Point(392, 46)
+        Me.lblChanged.Location = New System.Drawing.Point(545, 44)
         Me.lblChanged.Name = "lblChanged"
-        Me.lblChanged.Size = New System.Drawing.Size(72, 17)
+        Me.lblChanged.Size = New System.Drawing.Size(95, 24)
         Me.lblChanged.TabIndex = 24
         Me.lblChanged.Text = "Changed"
         Me.lblChanged.Visible = False
         '
         'btnNew
         '
-        Me.btnNew.Location = New System.Drawing.Point(32, 392)
+        Me.btnNew.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNew.Location = New System.Drawing.Point(37, 485)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(101, 46)
+        Me.btnNew.Size = New System.Drawing.Size(169, 70)
         Me.btnNew.TabIndex = 25
         Me.btnNew.Text = "Add New"
         Me.btnNew.UseVisualStyleBackColor = True
         '
         'btnAllowUPCChange
         '
-        Me.btnAllowUPCChange.Location = New System.Drawing.Point(281, 44)
+        Me.btnAllowUPCChange.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAllowUPCChange.Location = New System.Drawing.Point(412, 44)
         Me.btnAllowUPCChange.Name = "btnAllowUPCChange"
-        Me.btnAllowUPCChange.Size = New System.Drawing.Size(75, 23)
+        Me.btnAllowUPCChange.Size = New System.Drawing.Size(89, 36)
         Me.btnAllowUPCChange.TabIndex = 26
         Me.btnAllowUPCChange.Text = "Allow UPC Change"
         Me.btnAllowUPCChange.UseVisualStyleBackColor = True
+        '
+        'btnCancelChanges
+        '
+        Me.btnCancelChanges.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancelChanges.Location = New System.Drawing.Point(412, 485)
+        Me.btnCancelChanges.Name = "btnCancelChanges"
+        Me.btnCancelChanges.Size = New System.Drawing.Size(190, 70)
+        Me.btnCancelChanges.TabIndex = 27
+        Me.btnCancelChanges.Text = "Cancel" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Changes"
+        Me.btnCancelChanges.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.Location = New System.Drawing.Point(487, 238)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(131, 44)
+        Me.btnDelete.TabIndex = 28
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnActualDelete
+        '
+        Me.btnActualDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnActualDelete.Location = New System.Drawing.Point(487, 294)
+        Me.btnActualDelete.Name = "btnActualDelete"
+        Me.btnActualDelete.Size = New System.Drawing.Size(131, 44)
+        Me.btnActualDelete.TabIndex = 29
+        Me.btnActualDelete.Text = "Delete?"
+        Me.btnActualDelete.UseVisualStyleBackColor = True
         '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1493, 450)
+        Me.ClientSize = New System.Drawing.Size(1493, 633)
+        Me.Controls.Add(Me.btnActualDelete)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnCancelChanges)
         Me.Controls.Add(Me.btnAllowUPCChange)
         Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.lblChanged)
@@ -393,6 +452,7 @@ Partial Class InventoryItem
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtUPC)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "InventoryItem"
         Me.Text = "Inventory Item"
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).EndInit()
@@ -440,4 +500,7 @@ Partial Class InventoryItem
     Friend WithEvents lblChanged As Label
     Friend WithEvents btnNew As Button
     Friend WithEvents btnAllowUPCChange As Button
+    Friend WithEvents btnCancelChanges As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnActualDelete As Button
 End Class

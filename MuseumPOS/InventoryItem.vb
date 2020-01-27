@@ -98,6 +98,7 @@ Public Class InventoryItem
     End Sub
 
     Private Sub InventoryItem_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnActualDelete.Visible = False
         LoadGrid()
     End Sub
 
@@ -142,11 +143,11 @@ Public Class InventoryItem
             End If
         End Try
 
-        If DataGridView1.Rows.Count > 1 Then
+        If DataGridView1.Rows.Count > 0 Then
+            Scatter()
             '       Me.DataGridView1.Rows.Remove(DataGridView1.Rows(DataGridView1.Rows.Count - 1))
         End If
 
-        Scatter()
 
     End Sub
 
@@ -190,16 +191,16 @@ Public Class InventoryItem
                     sPriceDisplayGrid = Strings.FormatNumber(reader.Item("InvPrice"), 2)
 
 
-                    Me.txtItemName.Text = reader.Item("InvName")
-                    Me.cboType.Text = reader.Item("InvType")
-                    Me.cboDepartment.Text = reader.Item("Department")
-                    Me.cboVendor.Text = reader.Item("Vendor")
+                    Me.txtItemName.Text = reader.Item("InvName").ToString.Trim
+                    Me.cboType.Text = reader.Item("InvType").ToString.Trim
+                    Me.cboDepartment.Text = reader.Item("Department").ToString.Trim
+                    Me.cboVendor.Text = reader.Item("Vendor").ToString.Trim
                     Me.numPrice.Value = nPriceDisplayGrid
                     Me.numUnitCost.Value = reader.Item("InvCost")
                     Me.numOnHandQuantity.Value = reader.Item("OnHandQuantity")
                     Me.numItemNumber.Value = reader.Item("Id")
-                    Me.txtUPC.Text = reader.Item("InvUPC")
-                    Me.txtNotes.Text = reader.Item("InvNotes")
+                    Me.txtUPC.Text = reader.Item("InvUPC").ToString.Trim
+                    Me.txtNotes.Text = reader.Item("InvNotes").ToString.Trim
                     Me.Changed = False   ' we haven't really changed data, just display/scatter
                     txtUPC.ReadOnly = True ' not allow new UPC
 
@@ -227,6 +228,7 @@ Public Class InventoryItem
             DataGridView1.Enabled = Not ChangedValue
             btnNew.Enabled = Not ChangedValue
             btnSave.Enabled = ChangedValue
+            btnCancelChanges.Enabled = ChangedValue
         End Set
     End Property
 
@@ -292,5 +294,75 @@ Public Class InventoryItem
 
     Private Sub btnAllowUPCChange_Click(sender As Object, e As EventArgs) Handles btnAllowUPCChange.Click
         Me.txtUPC.ReadOnly = Not (Me.txtUPC.ReadOnly) ' switch it
+    End Sub
+
+    Private Sub numPrice_KeyPress(sender As Object, e As KeyPressEventArgs) Handles numPrice.KeyPress
+        Me.Changed = True
+    End Sub
+
+    Private Sub numUnitCost_KeyPress(sender As Object, e As KeyPressEventArgs) Handles numUnitCost.KeyPress
+        Me.Changed = True
+
+    End Sub
+
+    Private Sub numOnHandQuantity_Validated(sender As Object, e As EventArgs) Handles numOnHandQuantity.Validated
+        Me.Changed = True
+    End Sub
+
+    Private Sub numItemNumber_Validated(sender As Object, e As EventArgs) Handles numItemNumber.Validated
+        Me.Changed = True
+    End Sub
+
+    Private Sub numPrice_Validated(sender As Object, e As EventArgs) Handles numPrice.Validated
+        Me.Changed = True
+    End Sub
+
+    Private Sub cboVendor_TextUpdate(sender As Object, e As EventArgs) Handles cboVendor.TextUpdate
+        Me.Changed = True
+    End Sub
+
+    Private Sub cboDepartment_TextUpdate(sender As Object, e As EventArgs) Handles cboDepartment.TextUpdate
+        Me.Changed = True
+
+    End Sub
+
+    Private Sub cboType_TextUpdate(sender As Object, e As EventArgs) Handles cboType.TextUpdate
+        Me.Changed = True
+    End Sub
+
+    Private Sub btnCancelChanges_Click(sender As Object, e As EventArgs) Handles btnCancelChanges.Click
+        Scatter()
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        ' delete current row/record
+        btnDelete.Visible = False ' hide this button
+        btnActualDelete.Visible = True ' make ACTUAL delete button visible (instead of 'are you sure Y/N?')
+    End Sub
+
+    Private Sub btnActualDelete_Click(sender As Object, e As EventArgs) Handles btnActualDelete.Click
+        btnActualDelete.Visible = False
+        btnDelete.Visible = True
+
+
+        Dim sqlString As String, AlreadyInTable As Boolean = False
+        Dim sqlConnect As New SqlConnection()
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        If Not (txtUPC.Text = "") Then
+            sqlConnect.ConnectionString = sConnectionString
+            sqlConnect.Open()
+            Dim commandSQL As SqlCommand
+            sqlString = "DELETE FROM InventoryItems WHERE InvUPC = '" & Me.txtUPC.Text.Trim & "'"
+            commandSQL = New SqlCommand(sqlString, sqlConnect)
+
+            commandSQL.ExecuteNonQuery()
+            sqlConnect.Close()
+
+        End If
+
+        LoadGrid()
+
     End Sub
 End Class
