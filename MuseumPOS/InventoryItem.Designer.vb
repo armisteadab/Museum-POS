@@ -59,6 +59,7 @@ Partial Class InventoryItem
         Me.btnCancelChanges = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnActualDelete = New System.Windows.Forms.Button()
+        Me.btnListSetup = New System.Windows.Forms.Button()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -419,11 +420,22 @@ Partial Class InventoryItem
         Me.btnActualDelete.Text = "Delete?"
         Me.btnActualDelete.UseVisualStyleBackColor = True
         '
+        'btnListSetup
+        '
+        Me.btnListSetup.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnListSetup.Location = New System.Drawing.Point(505, 382)
+        Me.btnListSetup.Name = "btnListSetup"
+        Me.btnListSetup.Size = New System.Drawing.Size(113, 39)
+        Me.btnListSetup.TabIndex = 30
+        Me.btnListSetup.Text = "Setup"
+        Me.btnListSetup.UseVisualStyleBackColor = True
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 633)
+        Me.Controls.Add(Me.btnListSetup)
         Me.Controls.Add(Me.btnActualDelete)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnCancelChanges)
@@ -503,4 +515,5 @@ Partial Class InventoryItem
     Friend WithEvents btnCancelChanges As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnActualDelete As Button
+    Friend WithEvents btnListSetup As Button
 End Class

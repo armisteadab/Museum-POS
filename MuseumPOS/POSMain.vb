@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Public Class POSMain
-
+    Dim nReceiptNumber As Integer
     Private nReceiptCurrent As Integer
 
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
@@ -55,9 +55,20 @@ Public Class POSMain
         End If
 
         nReceiptCurrent += 1
-        MsgBox(nReceiptCurrent.ToString)
+        Me.ReceiptNumber = (nReceiptCurrent)
         reader.Close()
         sqlConnect.Close()
 
     End Sub
+
+    Public Property ReceiptNumber() As Integer
+        Get
+            Return nReceiptNumber
+        End Get
+        Set(ByVal value As Integer)
+            lblReceiptNumber.Text = value.ToString.Trim
+            nReceiptNumber = (value)
+
+        End Set
+    End Property
 End Class

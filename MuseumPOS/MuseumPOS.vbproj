@@ -94,6 +94,12 @@
     <Compile Include="InventoryItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ListsSetup.Designer.vb">
+      <DependentUpon>ListsSetup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListsSetup.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="MuseumPOSDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -125,6 +131,9 @@
   <ItemGroup>
     <EmbeddedResource Include="InventoryItem.resx">
       <DependentUpon>InventoryItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListsSetup.resx">
+      <DependentUpon>ListsSetup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

@@ -35,9 +35,12 @@ Partial Class POSMain
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblReceiptNumber = New System.Windows.Forms.Label()
+        Me.colItem = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colQTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colUPC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -103,7 +106,7 @@ Partial Class POSMain
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colItem, Me.colQTY, Me.colPrice, Me.colUPC})
         Me.DataGridView1.Location = New System.Drawing.Point(424, 58)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
@@ -172,35 +175,63 @@ Partial Class POSMain
         Me.Button1.Text = "SAVE AND" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PRINT"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Column1
+        'Label1
         '
-        Me.Column1.HeaderText = "Item"
-        Me.Column1.MinimumWidth = 6
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 400
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(933, 13)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(72, 17)
+        Me.Label1.TabIndex = 17
+        Me.Label1.Text = "Receipt #:"
         '
-        'Column2
+        'lblReceiptNumber
         '
-        Me.Column2.HeaderText = "QTY"
-        Me.Column2.MinimumWidth = 6
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 125
+        Me.lblReceiptNumber.AutoSize = True
+        Me.lblReceiptNumber.Location = New System.Drawing.Point(1011, 13)
+        Me.lblReceiptNumber.Name = "lblReceiptNumber"
+        Me.lblReceiptNumber.Size = New System.Drawing.Size(42, 17)
+        Me.lblReceiptNumber.TabIndex = 18
+        Me.lblReceiptNumber.Text = "None"
         '
-        'Column3
+        'colItem
         '
-        Me.Column3.HeaderText = "Price"
-        Me.Column3.MinimumWidth = 6
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 125
+        Me.colItem.HeaderText = "Item"
+        Me.colItem.MinimumWidth = 6
+        Me.colItem.Name = "colItem"
+        Me.colItem.ReadOnly = True
+        Me.colItem.Width = 400
+        '
+        'colQTY
+        '
+        Me.colQTY.HeaderText = "QTY"
+        Me.colQTY.MinimumWidth = 6
+        Me.colQTY.Name = "colQTY"
+        Me.colQTY.ReadOnly = True
+        Me.colQTY.Width = 125
+        '
+        'colPrice
+        '
+        Me.colPrice.HeaderText = "Price"
+        Me.colPrice.MinimumWidth = 6
+        Me.colPrice.Name = "colPrice"
+        Me.colPrice.ReadOnly = True
+        Me.colPrice.Width = 125
+        '
+        'colUPC
+        '
+        Me.colUPC.HeaderText = "UPC"
+        Me.colUPC.MinimumWidth = 6
+        Me.colUPC.Name = "colUPC"
+        Me.colUPC.ReadOnly = True
+        Me.colUPC.Width = 125
         '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1471, 741)
+        Me.Controls.Add(Me.lblReceiptNumber)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Button11)
@@ -235,7 +266,10 @@ Partial Class POSMain
     Friend WithEvents Button11 As Button
     Friend WithEvents Button12 As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblReceiptNumber As Label
+    Friend WithEvents colItem As DataGridViewTextBoxColumn
+    Friend WithEvents colQTY As DataGridViewTextBoxColumn
+    Friend WithEvents colPrice As DataGridViewTextBoxColumn
+    Friend WithEvents colUPC As DataGridViewTextBoxColumn
 End Class
