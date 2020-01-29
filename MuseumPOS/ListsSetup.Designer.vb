@@ -102,8 +102,9 @@ Partial Class ListsSetup
         '
         Me.txtListValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtListValue.Location = New System.Drawing.Point(238, 48)
+        Me.txtListValue.MaxLength = 20
         Me.txtListValue.Name = "txtListValue"
-        Me.txtListValue.Size = New System.Drawing.Size(229, 41)
+        Me.txtListValue.Size = New System.Drawing.Size(345, 41)
         Me.txtListValue.TabIndex = 2
         '
         'Label3
@@ -137,7 +138,7 @@ Partial Class ListsSetup
         'btnActualDelete
         '
         Me.btnActualDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnActualDelete.Location = New System.Drawing.Point(462, 342)
+        Me.btnActualDelete.Location = New System.Drawing.Point(462, 286)
         Me.btnActualDelete.Name = "btnActualDelete"
         Me.btnActualDelete.Size = New System.Drawing.Size(131, 44)
         Me.btnActualDelete.TabIndex = 35
@@ -227,7 +228,7 @@ Partial Class ListsSetup
         Me.cboType.Items.AddRange(New Object() {"DEPT", "INVTYPE", "VENDOR"})
         Me.cboType.Location = New System.Drawing.Point(238, 127)
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(229, 44)
+        Me.cboType.Size = New System.Drawing.Size(345, 44)
         Me.cboType.TabIndex = 3
         '
         'ListsSetup

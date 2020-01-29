@@ -394,7 +394,7 @@ Public Class InventoryItem
         cmd.CommandType = CommandType.Text
         sSQL = "SELECT ListOrder, ListValue, ListType, Id FROM ListSetup"
         sSQL += " WHERE ListType = " & QTrim(sComboType)
-        sSQL += " ORDER BY ListOrder"
+        sSQL += " ORDER BY ListOrder, Id"
 
         cmd.CommandText = sSQL
         cmd.Connection = sqlConnect

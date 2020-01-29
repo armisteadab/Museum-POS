@@ -201,7 +201,7 @@ Partial Class InventoryItem
         Me.cboType.FormattingEnabled = True
         Me.cboType.Location = New System.Drawing.Point(109, 182)
         Me.cboType.MaxDropDownItems = 80
-        Me.cboType.MaxLength = 10
+        Me.cboType.MaxLength = 20
         Me.cboType.Name = "cboType"
         Me.cboType.Size = New System.Drawing.Size(210, 37)
         Me.cboType.TabIndex = 13
@@ -211,6 +211,7 @@ Partial Class InventoryItem
         Me.cboDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDepartment.FormattingEnabled = True
         Me.cboDepartment.Location = New System.Drawing.Point(176, 225)
+        Me.cboDepartment.MaxLength = 20
         Me.cboDepartment.Name = "cboDepartment"
         Me.cboDepartment.Size = New System.Drawing.Size(230, 37)
         Me.cboDepartment.TabIndex = 14
@@ -220,6 +221,7 @@ Partial Class InventoryItem
         Me.cboVendor.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboVendor.FormattingEnabled = True
         Me.cboVendor.Location = New System.Drawing.Point(129, 268)
+        Me.cboVendor.MaxLength = 20
         Me.cboVendor.Name = "cboVendor"
         Me.cboVendor.Size = New System.Drawing.Size(228, 37)
         Me.cboVendor.TabIndex = 15

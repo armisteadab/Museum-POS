@@ -22,7 +22,7 @@ Public Class ListsSetup
 
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = "SELECT ListOrder, ListValue, ListType, Id FROM ListSetup"
+        cmd.CommandText = "SELECT ListOrder, ListValue, ListType, Id FROM ListSetup ORDER BY ListType, ListOrder, Id"
         cmd.Connection = sqlConnect
         ' Create a SqlParameter for each parameter in the stored procedure.
 
