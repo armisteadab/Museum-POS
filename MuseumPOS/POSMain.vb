@@ -4,7 +4,10 @@ Public Class POSMain
     Private nReceiptCurrent As Integer
 
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
-        InventoryItem.ShowDialog()
+        Dim fInventoryItem As New InventoryItem
+        fInventoryItem.ShowDialog()
+        fInventoryItem = Nothing
+
     End Sub
 
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load

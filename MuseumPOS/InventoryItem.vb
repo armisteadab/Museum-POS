@@ -372,7 +372,9 @@ Public Class InventoryItem
     End Sub
 
     Private Sub btnListSetup_Click(sender As Object, e As EventArgs) Handles btnListSetup.Click
-        ListsSetup.ShowDialog()
+        Dim sListsSetup As New ListsSetup
+        sListsSetup.ShowDialog()
+        sListsSetup = Nothing
     End Sub
 
     Private Sub LoadALLComboBoxes()

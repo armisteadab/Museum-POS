@@ -98,7 +98,7 @@ Public Class ListsSetup
                     ' Process SprocResults datareader here.
                     With Me
 
-                        .txtListType.Text = reader.Item("ListType").ToString.Trim
+                        .cboType.Text = reader.Item("ListType").ToString.Trim
                         .txtListValue.Text = reader.Item("ListValue").ToString.Trim
                         .numListOrder.Value = reader.Item("ListOrder")
                         .lblID.Text = reader.Item("Id").ToString.Trim
@@ -139,7 +139,7 @@ Public Class ListsSetup
 
         With Me
 
-            .txtListType.Text = ""
+            .cboType.Text = "DEPT"
             .txtListValue.Text = ""
             .numListOrder.Value = 0
             .lblID.Text = "0"
@@ -212,7 +212,7 @@ Public Class ListsSetup
         If Not AlreadyInTable Then
             sqlString = "INSERT INTO ListSetup(ListOrder, ListValue, ListType) "
             sqlString += " VALUES ("
-            sqlString = sqlString & (numListOrder.Value.ToString) & "," & QTrim(txtListValue.Text) & "," & QTrim(txtListType.Text) & ")"
+            sqlString = sqlString & (numListOrder.Value.ToString) & "," & QTrim(txtListValue.Text) & "," & QTrim(cboType.Text) & ")"
             Try
 
                 sqlConnect1.Open()
@@ -232,7 +232,7 @@ Public Class ListsSetup
         Else 'update instead
             'InvType, InvCost, InvPrice, Department,  OnHandQuantity, Vendor, InvNotes, Id) values ("
             sqlString = "UPDATE ListSetup SET ListOrder = " & QTrim(numListOrder.Value.ToString) & ","
-            sqlString += " ListType = " & QTrim(txtListType.Text) & ","
+            sqlString += " ListType = " & QTrim(cboType.Text) & ","
             sqlString += " ListValue = " & QTrim(txtListValue.Text)
             sqlString += " WHERE Id =" & lblID.Text.Trim
 
@@ -262,7 +262,7 @@ Public Class ListsSetup
         Me.Changed = True
     End Sub
 
-    Private Sub txtListType_TextChanged(sender As Object, e As EventArgs) Handles txtListType.TextChanged
+    Private Sub cboType_TextChanged(sender As Object, e As EventArgs)
         Me.Changed = True
 
     End Sub
@@ -270,5 +270,9 @@ Public Class ListsSetup
     Private Sub numListOrder_ValueChanged(sender As Object, e As EventArgs) Handles numListOrder.ValueChanged
         Me.Changed = True
 
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboType.SelectedIndexChanged
+        Me.Changed = True
     End Sub
 End Class

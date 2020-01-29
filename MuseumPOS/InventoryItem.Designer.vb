@@ -413,7 +413,7 @@ Partial Class InventoryItem
         'btnActualDelete
         '
         Me.btnActualDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnActualDelete.Location = New System.Drawing.Point(487, 294)
+        Me.btnActualDelete.Location = New System.Drawing.Point(487, 238)
         Me.btnActualDelete.Name = "btnActualDelete"
         Me.btnActualDelete.Size = New System.Drawing.Size(131, 44)
         Me.btnActualDelete.TabIndex = 29
