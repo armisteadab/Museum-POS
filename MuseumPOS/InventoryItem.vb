@@ -66,7 +66,7 @@ Public Class InventoryItem
             sqlString += " Department = " & QTrim(cboDepartment.Text) & ","
             sqlString += " InvNotes = " & QTrim(txtNotes.Text) & ", "
             sqlString += "Id =" & numItemNumber.Value
-            sqlString += " WHERE InvUPC = " & QTrim(txtUPC.Text)
+            sqlString += " WHERE UniqueID = " & (lblUniqueID.Text)
 
             Debug.Print(sqlString)
 
@@ -113,13 +113,14 @@ Public Class InventoryItem
 
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes FROM InventoryItems"
+        cmd.CommandText = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
         cmd.Connection = sqlConnect
         ' Create a SqlParameter for each parameter in the stored procedure.
 
         Dim reader As SqlDataReader
         Dim previousConnectionState As ConnectionState = sqlConnect.State
         Dim nPriceDisplayGrid As Double, sPriceDisplayGrid As String
+
         Me.DataGridView1.Rows.Clear()
 
         Try
@@ -135,7 +136,7 @@ Public Class InventoryItem
 
                     Me.DataGridView1.Rows.Add(reader.Item("InvName"), reader.Item("InvType"), reader.Item("Department"),
                                               reader.Item("Vendor"), sPriceDisplayGrid, reader.Item("InvCost"),
-                                              reader.Item("OnHandQuantity"), reader.Item("Id"), reader.Item("InvUPC"))
+                                              reader.Item("OnHandQuantity"), reader.Item("Id"), reader.Item("InvUPC"), reader.Item("UniqueID"))
                 End While
             End Using
         Finally
@@ -164,13 +165,14 @@ Public Class InventoryItem
         Dim cmd As New SqlCommand, sSQL As String, sInvUPC As String, sUPC_Validation As String
 
         sInvUPC = ("" & DataGridView1.Item(8, DataGridView1.CurrentRow.Index).Value)
+        lblUniqueID.Text = ("" & DataGridView1.Item(9, DataGridView1.CurrentRow.Index).Value)
 
         sUPC_Validation = ("" & sInvUPC.Trim)
-        If sUPC_Validation.Length < 1 Then Exit Sub
+        If Val(lblUniqueID.Text) < 1 Then Exit Sub
 
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes FROM InventoryItems"
-        sSQL += " WHERE InvUPC = " & QTrim(sInvUPC.Trim)
+        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+        sSQL += " WHERE UniqueID = " & (lblUniqueID.Text.Trim)
 
         cmd.CommandText = sSQL
         cmd.Connection = sqlConnect
@@ -203,6 +205,8 @@ Public Class InventoryItem
                     Me.txtUPC.Text = reader.Item("InvUPC").ToString.Trim
                     Me.txtNotes.Text = reader.Item("InvNotes").ToString.Trim
                     Me.Changed = False   ' we haven't really changed data, just display/scatter
+
+                    Me.lblUniqueID.Text = reader.Item("UniqueID")
                     txtUPC.ReadOnly = True ' not allow new UPC
 
                 End While
@@ -289,6 +293,7 @@ Public Class InventoryItem
         Me.numItemNumber.Value = 0  '"Id")
         Me.txtUPC.Text = ""  '"InvUPC")
         Me.txtNotes.Text = ""  '"InvNotes")
+        Me.lblUniqueID.Text = "0"
         Me.Changed = False   ' we haven't really changed data, just new record
 
     End Sub
@@ -351,11 +356,11 @@ Public Class InventoryItem
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
-        If Not (txtUPC.Text = "") Then
+        If Not (lblUniqueID.Text = "0") Then
             sqlConnect.ConnectionString = sConnectionString
             sqlConnect.Open()
             Dim commandSQL As SqlCommand
-            sqlString = "DELETE FROM InventoryItems WHERE InvUPC = '" & Me.txtUPC.Text.Trim & "'"
+            sqlString = "DELETE FROM InventoryItems WHERE UniqueID = " & lblUniqueID.Text
             commandSQL = New SqlCommand(sqlString, sqlConnect)
 
             commandSQL.ExecuteNonQuery()

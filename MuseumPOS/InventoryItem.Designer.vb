@@ -60,6 +60,8 @@ Partial Class InventoryItem
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnActualDelete = New System.Windows.Forms.Button()
         Me.btnListSetup = New System.Windows.Forms.Button()
+        Me.UniqueID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lblUniqueID = New System.Windows.Forms.Label()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -282,7 +284,7 @@ Partial Class InventoryItem
         Me.DataGridView1.AllowUserToResizeColumns = False
         Me.DataGridView1.AllowUserToResizeRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC, Me.UniqueID})
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DataGridView1.Location = New System.Drawing.Point(655, 12)
         Me.DataGridView1.Name = "DataGridView1"
@@ -432,11 +434,28 @@ Partial Class InventoryItem
         Me.btnListSetup.Text = "Setup"
         Me.btnListSetup.UseVisualStyleBackColor = True
         '
+        'UniqueID
+        '
+        Me.UniqueID.HeaderText = "."
+        Me.UniqueID.MinimumWidth = 6
+        Me.UniqueID.Name = "UniqueID"
+        Me.UniqueID.Width = 125
+        '
+        'lblUniqueID
+        '
+        Me.lblUniqueID.AutoSize = True
+        Me.lblUniqueID.Location = New System.Drawing.Point(32, 12)
+        Me.lblUniqueID.Name = "lblUniqueID"
+        Me.lblUniqueID.Size = New System.Drawing.Size(16, 17)
+        Me.lblUniqueID.TabIndex = 31
+        Me.lblUniqueID.Text = "0"
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 633)
+        Me.Controls.Add(Me.lblUniqueID)
         Me.Controls.Add(Me.btnListSetup)
         Me.Controls.Add(Me.btnActualDelete)
         Me.Controls.Add(Me.btnDelete)
@@ -518,4 +537,6 @@ Partial Class InventoryItem
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnActualDelete As Button
     Friend WithEvents btnListSetup As Button
+    Friend WithEvents UniqueID As DataGridViewTextBoxColumn
+    Friend WithEvents lblUniqueID As Label
 End Class
