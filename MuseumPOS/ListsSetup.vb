@@ -1,4 +1,5 @@
 ﻿
+
 Imports System.Data.SqlClient
 Imports System.Data.SqlDbType
 
@@ -29,6 +30,7 @@ Public Class ListsSetup
         Dim reader As SqlDataReader
         Dim previousConnectionState As ConnectionState = sqlConnect.State
         Me.DataGridView1.Rows.Clear()
+
 
         Try
             If sqlConnect.State = ConnectionState.Closed Then
@@ -150,18 +152,26 @@ Public Class ListsSetup
     End Sub
 
     Private Sub btnCancelChanges_Click(sender As Object, e As EventArgs) Handles btnCancelChanges.Click
+        btnNew.Enabled = True
+        btnDelete.Visible = True
+        btnActualDelete.Visible = False
+        LockEditFields(False)
         Scatter()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         ' delete current row/record
         btnDelete.Visible = False ' hide this button
+        btnNew.Enabled = False
+        Me.Changed = True
+        LockEditFields(True)
         btnActualDelete.Visible = True ' make ACTUAL delete button visible (instead of 'are you sure Y/N?')
     End Sub
 
     Private Sub btnActualDelete_Click(sender As Object, e As EventArgs) Handles btnActualDelete.Click
         btnActualDelete.Visible = False
         btnDelete.Visible = True
+        LockEditFields(False)
 
 
         Dim sqlString As String, AlreadyInTable As Boolean = False
@@ -275,4 +285,14 @@ Public Class ListsSetup
     Private Sub cboType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboType.SelectedIndexChanged
         Me.Changed = True
     End Sub
+
+    Private Sub LockEditFields(ByVal bLockField As Boolean)
+        cboType.Enabled = Not bLockField
+        txtListValue.Enabled = Not bLockField
+        numListOrder.Enabled = Not bLockField
+        btnSave.Enabled = Not bLockField
+        btnNew.Enabled = Not bLockField
+        DataGridView1.Enabled = Not bLockField
+    End Sub
+
 End Class

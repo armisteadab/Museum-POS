@@ -298,6 +298,21 @@ Public Class InventoryItem
 
     End Sub
 
+    Private Sub LockEditFields(ByVal bLockField As Boolean)
+
+        Me.txtItemName.Enabled = Not bLockField
+        Me.cboType.Enabled = Not bLockField
+        Me.cboDepartment.Enabled = Not bLockField
+        Me.cboVendor.Enabled = Not bLockField
+        Me.numPrice.Enabled = Not bLockField
+        Me.numUnitCost.Enabled = Not bLockField
+        Me.numOnHandQuantity.Enabled = Not bLockField
+        Me.numItemNumber.Enabled = Not bLockField
+        Me.txtUPC.Enabled = Not bLockField
+        Me.txtNotes.Enabled = Not bLockField
+        DataGridView1.Enabled = Not bLockField
+
+    End Sub
     Private Sub btnAllowUPCChange_Click(sender As Object, e As EventArgs) Handles btnAllowUPCChange.Click
         Me.txtUPC.ReadOnly = Not (Me.txtUPC.ReadOnly) ' switch it
     End Sub
@@ -337,6 +352,9 @@ Public Class InventoryItem
     End Sub
 
     Private Sub btnCancelChanges_Click(sender As Object, e As EventArgs) Handles btnCancelChanges.Click
+        btnDelete.Visible = True ' hide this button
+        btnActualDelete.Visible = False ' make ACTUAL delete button visible (instead of 'are you sure Y/N?')
+        LockEditFields(False)
         Scatter()
     End Sub
 
@@ -344,6 +362,10 @@ Public Class InventoryItem
         ' delete current row/record
         btnDelete.Visible = False ' hide this button
         btnActualDelete.Visible = True ' make ACTUAL delete button visible (instead of 'are you sure Y/N?')
+        Me.Changed = True
+        btnNew.Enabled = False
+        btnSave.Enabled = False
+        LockEditFields(True)
     End Sub
 
     Private Sub btnActualDelete_Click(sender As Object, e As EventArgs) Handles btnActualDelete.Click
@@ -368,6 +390,7 @@ Public Class InventoryItem
 
         End If
 
+        LockEditFields(False)
         LoadGrid()
 
     End Sub

@@ -137,13 +137,14 @@ Partial Class ListsSetup
         '
         'btnActualDelete
         '
+        Me.btnActualDelete.BackColor = System.Drawing.Color.Red
         Me.btnActualDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnActualDelete.Location = New System.Drawing.Point(462, 286)
+        Me.btnActualDelete.Location = New System.Drawing.Point(462, 336)
         Me.btnActualDelete.Name = "btnActualDelete"
         Me.btnActualDelete.Size = New System.Drawing.Size(131, 44)
         Me.btnActualDelete.TabIndex = 35
         Me.btnActualDelete.Text = "Delete?"
-        Me.btnActualDelete.UseVisualStyleBackColor = True
+        Me.btnActualDelete.UseVisualStyleBackColor = False
         '
         'btnDelete
         '

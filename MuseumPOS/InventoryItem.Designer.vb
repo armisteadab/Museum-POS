@@ -62,6 +62,8 @@ Partial Class InventoryItem
         Me.btnListSetup = New System.Windows.Forms.Button()
         Me.UniqueID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblUniqueID = New System.Windows.Forms.Label()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -286,11 +288,11 @@ Partial Class InventoryItem
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC, Me.UniqueID})
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(655, 12)
+        Me.DataGridView1.Location = New System.Drawing.Point(655, 70)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(665, 609)
+        Me.DataGridView1.Size = New System.Drawing.Size(665, 551)
         Me.DataGridView1.TabIndex = 23
         '
         'InvName
@@ -416,13 +418,14 @@ Partial Class InventoryItem
         '
         'btnActualDelete
         '
+        Me.btnActualDelete.BackColor = System.Drawing.Color.Red
         Me.btnActualDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnActualDelete.Location = New System.Drawing.Point(487, 238)
+        Me.btnActualDelete.Location = New System.Drawing.Point(487, 294)
         Me.btnActualDelete.Name = "btnActualDelete"
         Me.btnActualDelete.Size = New System.Drawing.Size(131, 44)
         Me.btnActualDelete.TabIndex = 29
         Me.btnActualDelete.Text = "Delete?"
-        Me.btnActualDelete.UseVisualStyleBackColor = True
+        Me.btnActualDelete.UseVisualStyleBackColor = False
         '
         'btnListSetup
         '
@@ -450,11 +453,31 @@ Partial Class InventoryItem
         Me.lblUniqueID.TabIndex = 31
         Me.lblUniqueID.Text = "0"
         '
+        'btnSearch
+        '
+        Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearch.Location = New System.Drawing.Point(1180, 23)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(130, 40)
+        Me.btnSearch.TabIndex = 32
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(655, 23)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(510, 41)
+        Me.txtSearch.TabIndex = 33
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 633)
+        Me.Controls.Add(Me.txtSearch)
+        Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.lblUniqueID)
         Me.Controls.Add(Me.btnListSetup)
         Me.Controls.Add(Me.btnActualDelete)
@@ -539,4 +562,6 @@ Partial Class InventoryItem
     Friend WithEvents btnListSetup As Button
     Friend WithEvents UniqueID As DataGridViewTextBoxColumn
     Friend WithEvents lblUniqueID As Label
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents txtSearch As TextBox
 End Class
