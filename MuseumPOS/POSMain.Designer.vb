@@ -22,7 +22,8 @@ Partial Class POSMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.components = New System.ComponentModel.Container()
+        Me.txtEntry = New System.Windows.Forms.TextBox()
         Me.btnInventory = New System.Windows.Forms.Button()
         Me.btnAdult = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -41,16 +42,29 @@ Partial Class POSMain
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblReceiptNumber = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.InvName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvVendor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvOnHandQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UPC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UniqueID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'TextBox1
+        'txtEntry
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(427, 12)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(463, 34)
-        Me.TextBox1.TabIndex = 0
+        Me.txtEntry.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEntry.Location = New System.Drawing.Point(427, 12)
+        Me.txtEntry.Name = "txtEntry"
+        Me.txtEntry.Size = New System.Drawing.Size(463, 34)
+        Me.txtEntry.TabIndex = 0
         '
         'btnInventory
         '
@@ -225,11 +239,111 @@ Partial Class POSMain
         Me.lblReceiptNumber.TabIndex = 18
         Me.lblReceiptNumber.Text = "None"
         '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 500
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.AllowUserToAddRows = False
+        Me.DataGridView2.AllowUserToDeleteRows = False
+        Me.DataGridView2.AllowUserToOrderColumns = True
+        Me.DataGridView2.AllowUserToResizeColumns = False
+        Me.DataGridView2.AllowUserToResizeRows = False
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC, Me.UniqueID})
+        Me.DataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DataGridView2.Location = New System.Drawing.Point(504, 137)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.RowHeadersWidth = 51
+        Me.DataGridView2.RowTemplate.Height = 24
+        Me.DataGridView2.Size = New System.Drawing.Size(665, 551)
+        Me.DataGridView2.TabIndex = 24
+        Me.DataGridView2.Visible = False
+        '
+        'InvName
+        '
+        Me.InvName.HeaderText = "Item Name"
+        Me.InvName.MinimumWidth = 6
+        Me.InvName.Name = "InvName"
+        Me.InvName.Width = 225
+        '
+        'InvType
+        '
+        Me.InvType.HeaderText = "Type"
+        Me.InvType.MinimumWidth = 6
+        Me.InvType.Name = "InvType"
+        Me.InvType.Width = 125
+        '
+        'InvDepartment
+        '
+        Me.InvDepartment.HeaderText = "Dept"
+        Me.InvDepartment.MinimumWidth = 6
+        Me.InvDepartment.Name = "InvDepartment"
+        Me.InvDepartment.ReadOnly = True
+        Me.InvDepartment.Width = 125
+        '
+        'InvVendor
+        '
+        Me.InvVendor.HeaderText = "Vendor"
+        Me.InvVendor.MinimumWidth = 6
+        Me.InvVendor.Name = "InvVendor"
+        Me.InvVendor.ReadOnly = True
+        Me.InvVendor.Width = 125
+        '
+        'InvPrice
+        '
+        Me.InvPrice.HeaderText = "Price"
+        Me.InvPrice.MinimumWidth = 6
+        Me.InvPrice.Name = "InvPrice"
+        Me.InvPrice.ReadOnly = True
+        Me.InvPrice.Width = 125
+        '
+        'InvCost
+        '
+        Me.InvCost.HeaderText = "Cost/Unit"
+        Me.InvCost.MinimumWidth = 6
+        Me.InvCost.Name = "InvCost"
+        Me.InvCost.ReadOnly = True
+        Me.InvCost.Width = 125
+        '
+        'InvOnHandQuantity
+        '
+        Me.InvOnHandQuantity.HeaderText = "Qty"
+        Me.InvOnHandQuantity.MinimumWidth = 6
+        Me.InvOnHandQuantity.Name = "InvOnHandQuantity"
+        Me.InvOnHandQuantity.ReadOnly = True
+        Me.InvOnHandQuantity.Width = 125
+        '
+        'ID
+        '
+        Me.ID.HeaderText = "Item #"
+        Me.ID.MinimumWidth = 6
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 125
+        '
+        'UPC
+        '
+        Me.UPC.HeaderText = "UPC"
+        Me.UPC.MinimumWidth = 6
+        Me.UPC.Name = "UPC"
+        Me.UPC.Width = 125
+        '
+        'UniqueID
+        '
+        Me.UniqueID.HeaderText = "."
+        Me.UniqueID.MinimumWidth = 6
+        Me.UniqueID.Name = "UniqueID"
+        Me.UniqueID.Width = 125
+        '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1673, 825)
+        Me.Controls.Add(Me.DataGridView2)
         Me.Controls.Add(Me.lblReceiptNumber)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
@@ -244,16 +358,17 @@ Partial Class POSMain
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnAdult)
         Me.Controls.Add(Me.btnInventory)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtEntry)
         Me.Name = "POSMain"
         Me.Text = "POSMain"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtEntry As TextBox
     Friend WithEvents btnInventory As Button
     Friend WithEvents btnAdult As Button
     Friend WithEvents Button2 As Button
@@ -272,4 +387,16 @@ Partial Class POSMain
     Friend WithEvents colQTY As DataGridViewTextBoxColumn
     Friend WithEvents colPrice As DataGridViewTextBoxColumn
     Friend WithEvents colUPC As DataGridViewTextBoxColumn
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents InvName As DataGridViewTextBoxColumn
+    Friend WithEvents InvType As DataGridViewTextBoxColumn
+    Friend WithEvents InvDepartment As DataGridViewTextBoxColumn
+    Friend WithEvents InvVendor As DataGridViewTextBoxColumn
+    Friend WithEvents InvPrice As DataGridViewTextBoxColumn
+    Friend WithEvents InvCost As DataGridViewTextBoxColumn
+    Friend WithEvents InvOnHandQuantity As DataGridViewTextBoxColumn
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents UPC As DataGridViewTextBoxColumn
+    Friend WithEvents UniqueID As DataGridViewTextBoxColumn
 End Class
