@@ -97,7 +97,12 @@ Public Class POSMain
 
 
         End If
-        txtEntry.Focus()
+
+        If Not DataGridView2.Visible Then ' allow user to use keys to select item from search list
+            txtEntry.Focus()
+        Else
+            txtEntry.Enabled = False
+        End If
 
     End Sub
 
@@ -151,6 +156,7 @@ Public Class POSMain
 
         If DataGridView2.Rows.Count > 0 Then
             DataGridView2.Visible = True
+            DataGridView2.Focus()
             '       Me.DataGridView1.Rows.Remove(DataGridView1.Rows(DataGridView1.Rows.Count - 1))
         End If
 
@@ -160,5 +166,31 @@ Public Class POSMain
     Private Sub txtEntry_TextChanged(sender As Object, e As EventArgs) Handles txtEntry.TextChanged
         DataGridView2.Visible = False
         bSearchReady = True ' new search now possible
+    End Sub
+
+    Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
+        PickFromSearch()
+    End Sub
+
+    Private Sub PickFromSearch()
+
+        Dim sInvUPC$, sNameItem$, sPrice$
+
+        sInvUPC = ("" & DataGridView2.Item(8, DataGridView2.CurrentRow.Index).Value)
+        sNameItem = ("" & DataGridView2.Item(0, DataGridView2.CurrentRow.Index).Value)
+        sPrice = ("" & DataGridView2.Item(4, DataGridView2.CurrentRow.Index).Value)
+
+        Me.DataGridView1.Rows.Add(sNameItem.Trim, "0", sPrice, sInvUPC.Trim)
+        DataGridView2.Visible = False ' selection made, clear the area
+        txtEntry.Enabled = True
+
+
+    End Sub
+
+    Private Sub DataGridView2_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView2.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            PickFromSearch()
+
+        End If
     End Sub
 End Class
