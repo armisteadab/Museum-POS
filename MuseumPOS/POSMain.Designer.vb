@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class POSMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class POSMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.txtEntry = New System.Windows.Forms.TextBox()
@@ -62,6 +62,7 @@ Partial Class POSMain
         '
         Me.txtEntry.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEntry.Location = New System.Drawing.Point(427, 12)
+        Me.txtEntry.MaxLength = 12
         Me.txtEntry.Name = "txtEntry"
         Me.txtEntry.Size = New System.Drawing.Size(463, 34)
         Me.txtEntry.TabIndex = 0
@@ -242,7 +243,7 @@ Partial Class POSMain
         'Timer1
         '
         Me.Timer1.Enabled = True
-        Me.Timer1.Interval = 500
+        Me.Timer1.Interval = 700
         '
         'DataGridView2
         '

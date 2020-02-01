@@ -84,18 +84,18 @@ Public Class POSMain
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Dim sEntry As String
+        Dim sEntry As String, bIsNumeric As Boolean
 
         sEntry = txtEntry.Text.Trim
-        If sEntry.Length >= 3 Then
+        bIsNumeric = IsNumeric(sEntry)
+
+        If sEntry.Length >= 4 Then
             ' something to search for
-            If bSearchReady Then RunSearch()
+            If bSearchReady Then RunSearch(bIsNumeric)
             bSearchReady = False ' until more characters added to search, this is it
 
         Else
             DataGridView2.Visible = False
-
-
         End If
 
         If Not DataGridView2.Visible Then ' allow user to use keys to select item from search list
@@ -106,21 +106,28 @@ Public Class POSMain
 
     End Sub
 
-    Private Sub RunSearch()
+    Private Sub RunSearch(ByVal bIsNumeric As Boolean)
 
         Dim sqlConnect As New SqlConnection(), sSQL$
-        Dim sConnectionString As String
+        Dim sConnectionString As String, sSearchLikeValue$
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
-
+        sSearchLikeValue = QLike(txtEntry.Text)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
         sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
-        sSQL += " WHERE InvUPC LIKE " & QLike(txtEntry.Text)
-        sSQL += " OR InvName LIKE " & QLike(txtEntry.Text)
-        sSQL += " OR Id LIKE " & QLike(txtEntry.Text)
+
+        If Not bIsNumeric Then
+            sSQL += " WHERE InvName LIKE " & sSearchLikeValue
+        Else
+            sSQL += " WHERE InvUPC LIKE " & sSearchLikeValue
+            If sSearchLikeValue.Length < 12 Then
+                sSQL += " OR Id LIKE " & sSearchLikeValue
+            End If
+        End If
+
 
         cmd.CommandText = sSQL
         cmd.Connection = sqlConnect
@@ -166,6 +173,7 @@ Public Class POSMain
     Private Sub txtEntry_TextChanged(sender As Object, e As EventArgs) Handles txtEntry.TextChanged
         DataGridView2.Visible = False
         bSearchReady = True ' new search now possible
+
     End Sub
 
     Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
@@ -180,7 +188,7 @@ Public Class POSMain
         sNameItem = ("" & DataGridView2.Item(0, DataGridView2.CurrentRow.Index).Value)
         sPrice = ("" & DataGridView2.Item(4, DataGridView2.CurrentRow.Index).Value)
 
-        Me.DataGridView1.Rows.Add(sNameItem.Trim, "0", sPrice, sInvUPC.Trim)
+        Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim)
         DataGridView2.Visible = False ' selection made, clear the area
         txtEntry.Enabled = True
 
@@ -192,5 +200,30 @@ Public Class POSMain
             PickFromSearch()
 
         End If
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub numQuantityAdjust_Leave(sender As Object, e As EventArgs)
+
+        '        numQuantityAdjust.Visible = False
+
+    End Sub
+
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+
+        Dim nQuantity As Integer
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim fQuantity As New Quantity
+        nQuantity = ("" & DataGridView1.Item(1, e.RowIndex).Value)
+        fQuantity.numQuantityAdjust.Value = nQuantity
+        fQuantity.ShowDialog()
+        nQuantity = fQuantity.numQuantityAdjust.Value ' get value
+        fQuantity = Nothing
+        DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
+
     End Sub
 End Class
