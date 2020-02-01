@@ -84,19 +84,6 @@ Public Class POSMain
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Dim sEntry As String, bIsNumeric As Boolean
-
-        sEntry = txtEntry.Text.Trim
-        bIsNumeric = IsNumeric(sEntry)
-
-        If sEntry.Length >= 4 Then
-            ' something to search for
-            If bSearchReady Then RunSearch(bIsNumeric)
-            bSearchReady = False ' until more characters added to search, this is it
-
-        Else
-            DataGridView2.Visible = False
-        End If
 
         If Not DataGridView2.Visible Then ' allow user to use keys to select item from search list
             txtEntry.Focus()
@@ -106,6 +93,20 @@ Public Class POSMain
 
     End Sub
 
+    Private Sub DoSearch()
+        Dim sEntry As String, bIsNumeric As Boolean
+
+        sEntry = txtEntry.Text.Trim
+        bIsNumeric = IsNumeric(sEntry)
+
+        If sEntry.Length >= 4 Then
+            ' something to search for
+            RunSearch(bIsNumeric)
+        Else
+            DataGridView2.Visible = False
+        End If
+
+    End Sub
     Private Sub RunSearch(ByVal bIsNumeric As Boolean)
 
         Dim sqlConnect As New SqlConnection(), sSQL$
@@ -173,6 +174,9 @@ Public Class POSMain
     Private Sub txtEntry_TextChanged(sender As Object, e As EventArgs) Handles txtEntry.TextChanged
         DataGridView2.Visible = False
         bSearchReady = True ' new search now possible
+        If txtEntry.TextLength > 11 And IsNumeric(txtEntry.Text) Then ' complete UPC
+            DoSearch()
+        End If
 
     End Sub
 
@@ -198,6 +202,11 @@ Public Class POSMain
     Private Sub DataGridView2_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView2.KeyUp
         If e.KeyCode = Keys.Enter Then
             PickFromSearch()
+        End If
+
+        If e.KeyCode = Keys.Escape Then ' abandon this operation
+            DataGridView2.Visible = False ' selection not made, clear the area
+            txtEntry.Enabled = True
 
         End If
     End Sub
@@ -216,6 +225,7 @@ Public Class POSMain
 
         Dim nQuantity As Integer
         If e.RowIndex < 0 Then Exit Sub
+        If e.ColumnIndex <> 1 Then Exit Sub
 
         Dim fQuantity As New Quantity
         nQuantity = ("" & DataGridView1.Item(1, e.RowIndex).Value)
@@ -225,5 +235,22 @@ Public Class POSMain
         fQuantity = Nothing
         DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
 
+    End Sub
+
+    Private Sub DataGridView1_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyUp
+        If e.KeyCode = Keys.Delete Then
+            Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+        End If
+    End Sub
+
+    Private Sub txtEntry_KeyUp(sender As Object, e As KeyEventArgs) Handles txtEntry.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            DoSearch()
+        End If
+    End Sub
+
+    Private Sub DataGridView2_MouseLeave(sender As Object, e As EventArgs) Handles DataGridView2.MouseLeave
+        DataGridView2.Visible = False ' selection not made, clear the area
+        txtEntry.Enabled = True
     End Sub
 End Class
