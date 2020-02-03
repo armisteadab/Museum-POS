@@ -211,10 +211,6 @@ Public Class POSMain
         End If
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
     Private Sub numQuantityAdjust_Leave(sender As Object, e As EventArgs)
 
         '        numQuantityAdjust.Visible = False
@@ -234,7 +230,7 @@ Public Class POSMain
         nQuantity = fQuantity.numQuantityAdjust.Value ' get value
         fQuantity = Nothing
         DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
-
+        GridTotals()
     End Sub
 
     Private Sub DataGridView1_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyUp
@@ -284,5 +280,32 @@ Public Class POSMain
         txtEntry.Text = StrDup(12, "5")  '""
         RunSearch(True)
 
+    End Sub
+
+    Private Sub GridTotals()
+        Dim sQuantity As String, sPrice As String, nQuantity As Integer, nPrice As Double
+        Dim nRowsToSum As Integer, nRow As Integer
+        Dim nTotal As Double
+
+        nRowsToSum = (DataGridView1.Rows.Count - 1)
+
+        For nRow = 0 To nRowsToSum
+            sPrice = ("" & DataGridView1.Item(2, nRow).Value)
+            sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
+            nPrice = Val(sPrice)
+            nQuantity = Int(Val(sQuantity))
+            nTotal += (nPrice * nQuantity)
+        Next
+
+
+        lblReceiptTotal.Text = (Format(nTotal, "####0.00"))
+    End Sub
+
+    Private Sub DataGridView1_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DataGridView1.RowsAdded
+        GridTotals()
+    End Sub
+
+    Private Sub DataGridView1_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles DataGridView1.RowsRemoved
+        GridTotals()
     End Sub
 End Class

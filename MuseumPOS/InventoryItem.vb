@@ -464,11 +464,11 @@ Public Class InventoryItem
         sEntry = txtSearch.Text.Trim
         bIsNumeric = IsNumeric(sEntry)
 
-        RunSearch(bIsNumeric)
+        RunSearch()
 
     End Sub
 
-    Private Sub RunSearch(ByVal bIsNumeric As Boolean)
+    Private Sub RunSearch()
 
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String, sSearchLikeValue$
@@ -481,13 +481,10 @@ Public Class InventoryItem
         cmd.CommandType = CommandType.Text
         sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
 
-        If Not bIsNumeric Then
-            sSQL += " WHERE InvName LIKE " & sSearchLikeValue
-        Else
-            sSQL += " WHERE InvUPC LIKE " & sSearchLikeValue
-            If sSearchLikeValue.Length < 12 Then
-                sSQL += " OR Id LIKE " & sSearchLikeValue
-            End If
+        sSQL += " WHERE InvName LIKE " & sSearchLikeValue
+        sSQL += " OR InvUPC LIKE " & sSearchLikeValue
+        If sSearchLikeValue.Length < 12 Then
+            sSQL += " OR Id LIKE " & sSearchLikeValue
         End If
 
         LoadGrid(sSQL) ' run LoadGrid() but with SQL parameter
@@ -498,12 +495,11 @@ Public Class InventoryItem
     End Sub
 
     Private Sub txtSearch_KeyUp(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyUp
-        Dim sEntry As String, bIsNumeric As Boolean
+        Dim sEntry As String
 
         If e.KeyCode <> Keys.Enter Then Exit Sub
         sEntry = txtSearch.Text.Trim
-        bIsNumeric = IsNumeric(sEntry)
 
-        RunSearch(bIsNumeric)
+        RunSearch()
     End Sub
 End Class
