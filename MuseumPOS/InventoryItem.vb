@@ -103,7 +103,7 @@ Public Class InventoryItem
         LoadGrid()
     End Sub
 
-    Private Sub LoadGrid()
+    Private Sub LoadGrid(Optional ByVal parSQL$ = "")
 
         Dim sqlConnect As New SqlConnection()
 
@@ -113,7 +113,13 @@ Public Class InventoryItem
 
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+
+        If parSQL$ = "" Then
+            cmd.CommandText = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+        Else
+            cmd.CommandText = parSQL
+        End If
+
         cmd.Connection = sqlConnect
         ' Create a SqlParameter for each parameter in the stored procedure.
 
@@ -452,4 +458,52 @@ Public Class InventoryItem
 
     End Sub
 
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim sEntry As String, bIsNumeric As Boolean
+
+        sEntry = txtSearch.Text.Trim
+        bIsNumeric = IsNumeric(sEntry)
+
+        RunSearch(bIsNumeric)
+
+    End Sub
+
+    Private Sub RunSearch(ByVal bIsNumeric As Boolean)
+
+        Dim sqlConnect As New SqlConnection(), sSQL$
+        Dim sConnectionString As String, sSearchLikeValue$
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        sSearchLikeValue = QLike(txtSearch.Text)
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+
+        If Not bIsNumeric Then
+            sSQL += " WHERE InvName LIKE " & sSearchLikeValue
+        Else
+            sSQL += " WHERE InvUPC LIKE " & sSearchLikeValue
+            If sSearchLikeValue.Length < 12 Then
+                sSQL += " OR Id LIKE " & sSearchLikeValue
+            End If
+        End If
+
+        LoadGrid(sSQL) ' run LoadGrid() but with SQL parameter
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
+
+    Private Sub txtSearch_KeyUp(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyUp
+        Dim sEntry As String, bIsNumeric As Boolean
+
+        If e.KeyCode <> Keys.Enter Then Exit Sub
+        sEntry = txtSearch.Text.Trim
+        bIsNumeric = IsNumeric(sEntry)
+
+        RunSearch(bIsNumeric)
+    End Sub
 End Class

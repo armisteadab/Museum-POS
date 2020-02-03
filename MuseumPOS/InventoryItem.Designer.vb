@@ -53,6 +53,7 @@ Partial Class InventoryItem
         Me.InvOnHandQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UPC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UniqueID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblChanged = New System.Windows.Forms.Label()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnAllowUPCChange = New System.Windows.Forms.Button()
@@ -60,7 +61,6 @@ Partial Class InventoryItem
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnActualDelete = New System.Windows.Forms.Button()
         Me.btnListSetup = New System.Windows.Forms.Button()
-        Me.UniqueID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblUniqueID = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -364,6 +364,13 @@ Partial Class InventoryItem
         Me.UPC.Name = "UPC"
         Me.UPC.Width = 125
         '
+        'UniqueID
+        '
+        Me.UniqueID.HeaderText = "."
+        Me.UniqueID.MinimumWidth = 6
+        Me.UniqueID.Name = "UniqueID"
+        Me.UniqueID.Width = 125
+        '
         'lblChanged
         '
         Me.lblChanged.AutoSize = True
@@ -436,13 +443,6 @@ Partial Class InventoryItem
         Me.btnListSetup.TabIndex = 30
         Me.btnListSetup.Text = "Setup"
         Me.btnListSetup.UseVisualStyleBackColor = True
-        '
-        'UniqueID
-        '
-        Me.UniqueID.HeaderText = "."
-        Me.UniqueID.MinimumWidth = 6
-        Me.UniqueID.Name = "UniqueID"
-        Me.UniqueID.Width = 125
         '
         'lblUniqueID
         '

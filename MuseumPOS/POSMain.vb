@@ -253,4 +253,36 @@ Public Class POSMain
         DataGridView2.Visible = False ' selection not made, clear the area
         txtEntry.Enabled = True
     End Sub
+
+    Private Sub btnAdult_Click(sender As Object, e As EventArgs) Handles btnAdult.Click
+
+        txtEntry.Text = StrDup(12, "1")  '"111111111111"
+        RunSearch(True)
+
+    End Sub
+
+    Private Sub btnChild_Click(sender As Object, e As EventArgs) Handles btnChild.Click
+
+        txtEntry.Text = StrDup(12, "2")  '""
+        RunSearch(True)
+
+    End Sub
+
+    Private Sub btnAAAMilAdult_Click(sender As Object, e As EventArgs) Handles btnAAAMilAdult.Click
+
+        txtEntry.Text = StrDup(12, "3")  '""
+        RunSearch(True)
+    End Sub
+
+    Private Sub btnAdultGroup_Click(sender As Object, e As EventArgs) Handles btnAdultGroup.Click
+        txtEntry.Text = StrDup(12, "4")  '""
+        RunSearch(True)
+
+    End Sub
+
+    Private Sub btnChildGroup_Click(sender As Object, e As EventArgs) Handles btnChildGroup.Click
+        txtEntry.Text = StrDup(12, "5")  '""
+        RunSearch(True)
+
+    End Sub
 End Class
