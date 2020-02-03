@@ -32,12 +32,12 @@ Public Class InventoryItem
         Dim commandSQL1 As SqlCommand
 
         If Not AlreadyInTable Then
-            sqlString = "INSERT INTO InventoryItems(Id, InvUPC, InvName, InvNotes, InvType, InvCost, OnHandQuantity, Vendor, InvPrice, Department) "
+            sqlString = "INSERT INTO InventoryItems(Id, InvUPC, InvName, InvNotes, InvType, InvCost, OnHandQuantity, Vendor, InvPrice, Department, TaxRate) "
             sqlString += " VALUES ("
             sqlString = sqlString & (numItemNumber.Value.ToString) & "," & QTrim(txtUPC.Text) & "," & QTrim(txtItemName.Text) & ","
             sqlString = sqlString & QTrim(txtNotes.Text) & "," & QTrim(cboType.Text) & "," & numUnitCost.Value.ToString & ","
             sqlString = sqlString & numOnHandQuantity.Value & "," & QTrim(cboVendor.Text) & "," & numPrice.Value.ToString
-            sqlString = sqlString & "," & QTrim(cboDepartment.Text) & ")"
+            sqlString = sqlString & "," & QTrim(cboDepartment.Text) & ", " & nTaxRate.Value.ToString.Trim & ")"
             Try
 
                 sqlConnect1.Open()
@@ -65,6 +65,7 @@ Public Class InventoryItem
             sqlString += " InvPrice = " & numPrice.Value.ToString & ","
             sqlString += " Department = " & QTrim(cboDepartment.Text) & ","
             sqlString += " InvNotes = " & QTrim(txtNotes.Text) & ", "
+            sqlString += " TaxRate = " & nTaxRate.Value.ToString & ", "
             sqlString += "Id =" & numItemNumber.Value
             sqlString += " WHERE UniqueID = " & (lblUniqueID.Text)
 
@@ -115,7 +116,7 @@ Public Class InventoryItem
         cmd.CommandType = CommandType.Text
 
         If parSQL$ = "" Then
-            cmd.CommandText = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+            cmd.CommandText = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, TaxRate, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID, TaxRate FROM InventoryItems"
         Else
             cmd.CommandText = parSQL
         End If
@@ -142,7 +143,7 @@ Public Class InventoryItem
 
                     Me.DataGridView1.Rows.Add(reader.Item("InvName"), reader.Item("InvType"), reader.Item("Department"),
                                               reader.Item("Vendor"), sPriceDisplayGrid, reader.Item("InvCost"),
-                                              reader.Item("OnHandQuantity"), reader.Item("Id"), reader.Item("InvUPC"), reader.Item("UniqueID"))
+                                              reader.Item("OnHandQuantity"), reader.Item("Id"), reader.Item("InvUPC"), reader.Item("UniqueID"), reader.Item("TaxRate"))
                 End While
             End Using
         Finally
@@ -177,7 +178,7 @@ Public Class InventoryItem
         If Val(lblUniqueID.Text) < 1 Then Exit Sub
 
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID, TaxRate FROM InventoryItems"
         sSQL += " WHERE UniqueID = " & (lblUniqueID.Text.Trim)
 
         cmd.CommandText = sSQL
@@ -210,6 +211,12 @@ Public Class InventoryItem
                     Me.numItemNumber.Value = reader.Item("Id")
                     Me.txtUPC.Text = reader.Item("InvUPC").ToString.Trim
                     Me.txtNotes.Text = reader.Item("InvNotes").ToString.Trim
+                    If Not IsDBNull(reader.Item("TaxRate")) Then
+                        Me.nTaxRate.Value = reader.Item("TaxRate")
+                    Else
+                        Me.nTaxRate.Value = 0
+                    End If
+
                     Me.Changed = False   ' we haven't really changed data, just display/scatter
 
                     Me.lblUniqueID.Text = reader.Item("UniqueID")
@@ -301,6 +308,7 @@ Public Class InventoryItem
         Me.txtNotes.Text = ""  '"InvNotes")
         Me.lblUniqueID.Text = "0"
         Me.Changed = False   ' we haven't really changed data, just new record
+        Me.nTaxRate.Value = 0.00
 
     End Sub
 
@@ -316,6 +324,7 @@ Public Class InventoryItem
         Me.numItemNumber.Enabled = Not bLockField
         Me.txtUPC.Enabled = Not bLockField
         Me.txtNotes.Enabled = Not bLockField
+        nTaxRate.Enabled = Not bLockField
         DataGridView1.Enabled = Not bLockField
 
     End Sub
@@ -479,7 +488,7 @@ Public Class InventoryItem
         sSearchLikeValue = QLike(txtSearch.Text)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, TaxRate, InvNotes, UniqueID FROM InventoryItems"
 
         sSQL += " WHERE InvName LIKE " & sSearchLikeValue
         sSQL += " OR InvUPC LIKE " & sSearchLikeValue
@@ -501,5 +510,10 @@ Public Class InventoryItem
         sEntry = txtSearch.Text.Trim
 
         RunSearch()
+    End Sub
+
+    Private Sub nTaxRate_ValueChanged(sender As Object, e As EventArgs) Handles nTaxRate.ValueChanged
+        Me.Changed = True
+
     End Sub
 End Class

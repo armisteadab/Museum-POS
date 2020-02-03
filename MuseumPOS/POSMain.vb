@@ -118,7 +118,7 @@ Public Class POSMain
         sSearchLikeValue = QLike(txtEntry.Text)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID FROM InventoryItems"
+        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID, TaxRate FROM InventoryItems"
 
         If Not bIsNumeric Then
             sSQL += " WHERE InvName LIKE " & sSearchLikeValue
@@ -137,6 +137,7 @@ Public Class POSMain
         Dim reader As SqlDataReader
         Dim previousConnectionState As ConnectionState = sqlConnect.State
         Dim nPriceDisplayGrid As Double, sPriceDisplayGrid As String
+        Dim nTaxRate As Double
 
         Me.DataGridView2.Rows.Clear()
 
@@ -151,9 +152,14 @@ Public Class POSMain
                     nPriceDisplayGrid = reader.Item("InvPrice")
                     sPriceDisplayGrid = Strings.FormatNumber(reader.Item("InvPrice"), 2)
 
+                    If Not IsDBNull(reader.Item("TaxRate")) Then
+                        nTaxRate = reader.Item("TaxRate")
+                    Else
+                        nTaxRate = 0
+                    End If
                     Me.DataGridView2.Rows.Add(reader.Item("InvName"), reader.Item("InvType"), reader.Item("Department"),
                                               reader.Item("Vendor"), sPriceDisplayGrid, reader.Item("InvCost"),
-                                              reader.Item("OnHandQuantity"), reader.Item("Id"), reader.Item("InvUPC"), reader.Item("UniqueID"))
+                                              reader.Item("OnHandQuantity"), reader.Item("Id"), reader.Item("InvUPC"), reader.Item("UniqueID"), nTaxRate)
                 End While
             End Using
         Finally
@@ -186,13 +192,14 @@ Public Class POSMain
 
     Private Sub PickFromSearch()
 
-        Dim sInvUPC$, sNameItem$, sPrice$
+        Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
 
         sInvUPC = ("" & DataGridView2.Item(8, DataGridView2.CurrentRow.Index).Value)
         sNameItem = ("" & DataGridView2.Item(0, DataGridView2.CurrentRow.Index).Value)
         sPrice = ("" & DataGridView2.Item(4, DataGridView2.CurrentRow.Index).Value)
+        sTaxRate = ("" & DataGridView2.Item(10, DataGridView2.CurrentRow.Index).Value)
 
-        Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim)
+        Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
         DataGridView2.Visible = False ' selection made, clear the area
         txtEntry.Enabled = True
 
@@ -221,16 +228,21 @@ Public Class POSMain
 
         Dim nQuantity As Integer
         If e.RowIndex < 0 Then Exit Sub
-        If e.ColumnIndex <> 1 Then Exit Sub
+        If e.ColumnIndex = 1 Then
 
-        Dim fQuantity As New Quantity
-        nQuantity = ("" & DataGridView1.Item(1, e.RowIndex).Value)
-        fQuantity.numQuantityAdjust.Value = nQuantity
-        fQuantity.ShowDialog()
-        nQuantity = fQuantity.numQuantityAdjust.Value ' get value
-        fQuantity = Nothing
-        DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
-        GridTotals()
+            Dim fQuantity As New Quantity
+            nQuantity = ("" & DataGridView1.Item(1, e.RowIndex).Value)
+            fQuantity.numQuantityAdjust.Value = nQuantity
+            fQuantity.ShowDialog()
+            nQuantity = fQuantity.numQuantityAdjust.Value ' get value
+            fQuantity = Nothing
+            DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
+            GridTotals()
+        End If
+
+        If e.ColumnIndex = 5 Then
+            Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+        End If
     End Sub
 
     Private Sub DataGridView1_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyUp
@@ -285,16 +297,25 @@ Public Class POSMain
     Private Sub GridTotals()
         Dim sQuantity As String, sPrice As String, nQuantity As Integer, nPrice As Double
         Dim nRowsToSum As Integer, nRow As Integer
-        Dim nTotal As Double
+        Dim nTotal As Double, nTaxRate As Double
+
+        If DataGridView1.Rows.Count < 1 Then
+            lblReceiptTotal.Text = "0.00"
+            Exit Sub
+        End If
+
+        If IsDBNull(DataGridView1.Item(2, nRow).Value) Then Exit Sub
 
         nRowsToSum = (DataGridView1.Rows.Count - 1)
-
+        nTaxRate = (DataGridView1.Item(4, nRow).Value)
+        nTaxRate = nTaxRate / 100
         For nRow = 0 To nRowsToSum
             sPrice = ("" & DataGridView1.Item(2, nRow).Value)
             sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
             nPrice = Val(sPrice)
             nQuantity = Int(Val(sQuantity))
             nTotal += (nPrice * nQuantity)
+            nTotal += (nTotal * nTaxRate)
         Next
 
 
@@ -308,4 +329,5 @@ Public Class POSMain
     Private Sub DataGridView1_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles DataGridView1.RowsRemoved
         GridTotals()
     End Sub
+
 End Class

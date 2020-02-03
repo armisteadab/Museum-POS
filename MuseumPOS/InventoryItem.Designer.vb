@@ -64,11 +64,14 @@ Partial Class InventoryItem
         Me.lblUniqueID = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.nTaxRate = New System.Windows.Forms.NumericUpDown()
+        Me.Label11 = New System.Windows.Forms.Label()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numItemNumber, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nTaxRate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -271,7 +274,7 @@ Partial Class InventoryItem
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(214, 485)
+        Me.btnSave.Location = New System.Drawing.Point(214, 551)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(192, 70)
         Me.btnSave.TabIndex = 22
@@ -386,7 +389,7 @@ Partial Class InventoryItem
         'btnNew
         '
         Me.btnNew.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNew.Location = New System.Drawing.Point(37, 485)
+        Me.btnNew.Location = New System.Drawing.Point(37, 551)
         Me.btnNew.Name = "btnNew"
         Me.btnNew.Size = New System.Drawing.Size(169, 70)
         Me.btnNew.TabIndex = 25
@@ -406,7 +409,7 @@ Partial Class InventoryItem
         'btnCancelChanges
         '
         Me.btnCancelChanges.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancelChanges.Location = New System.Drawing.Point(412, 485)
+        Me.btnCancelChanges.Location = New System.Drawing.Point(412, 551)
         Me.btnCancelChanges.Name = "btnCancelChanges"
         Me.btnCancelChanges.Size = New System.Drawing.Size(190, 70)
         Me.btnCancelChanges.TabIndex = 27
@@ -471,11 +474,32 @@ Partial Class InventoryItem
         Me.txtSearch.Size = New System.Drawing.Size(510, 41)
         Me.txtSearch.TabIndex = 33
         '
+        'nTaxRate
+        '
+        Me.nTaxRate.DecimalPlaces = 2
+        Me.nTaxRate.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nTaxRate.Location = New System.Drawing.Point(201, 484)
+        Me.nTaxRate.Name = "nTaxRate"
+        Me.nTaxRate.Size = New System.Drawing.Size(120, 34)
+        Me.nTaxRate.TabIndex = 20
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(32, 486)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(137, 29)
+        Me.Label11.TabIndex = 34
+        Me.Label11.Text = "Tax Rate %"
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1493, 633)
+        Me.ClientSize = New System.Drawing.Size(1493, 689)
+        Me.Controls.Add(Me.nTaxRate)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.lblUniqueID)
@@ -516,6 +540,7 @@ Partial Class InventoryItem
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numItemNumber, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nTaxRate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -564,4 +589,6 @@ Partial Class InventoryItem
     Friend WithEvents lblUniqueID As Label
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtSearch As TextBox
+    Friend WithEvents nTaxRate As NumericUpDown
+    Friend WithEvents Label11 As Label
 End Class
