@@ -226,23 +226,37 @@ Public Class POSMain
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
 
-        Dim nQuantity As Integer
+        Dim nQuantity As Integer, nPriceModify As Double
         If e.RowIndex < 0 Then Exit Sub
-        If e.ColumnIndex = 1 Then
 
-            Dim fQuantity As New Quantity
-            nQuantity = ("" & DataGridView1.Item(1, e.RowIndex).Value)
-            fQuantity.numQuantityAdjust.Value = nQuantity
-            fQuantity.ShowDialog()
-            nQuantity = fQuantity.numQuantityAdjust.Value ' get value
-            fQuantity = Nothing
-            DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
-            GridTotals()
-        End If
+        Select Case e.ColumnIndex
 
-        If e.ColumnIndex = 5 Then
-            Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
-        End If
+            Case 1
+
+                Dim fQuantity As New Quantity
+                nQuantity = ("" & DataGridView1.Item(1, e.RowIndex).Value)
+                fQuantity.numQuantityAdjust.Value = nQuantity
+                fQuantity.ShowDialog()
+                nQuantity = fQuantity.numQuantityAdjust.Value ' get value
+                fQuantity = Nothing
+                DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
+                GridTotals()
+
+            Case 2
+
+                Dim fPriceModify As New PriceModify
+                nPriceModify = ("" & DataGridView1.Item(2, e.RowIndex).Value)
+                fPriceModify.numPriceModify.Value = nPriceModify
+                fPriceModify.ShowDialog()
+                nPriceModify = fPriceModify.numPriceModify.Value ' get value
+                fPriceModify = Nothing
+                DataGridView1.Item(2, e.RowIndex).Value = (nPriceModify)
+                GridTotals()
+
+            Case 5
+                Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+        End Select
+
     End Sub
 
     Private Sub DataGridView1_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyUp

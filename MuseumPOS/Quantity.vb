@@ -8,4 +8,8 @@
             Me.Close()
         End If
     End Sub
+
+    Private Sub numQuantityAdjust_ValueChanged(sender As Object, e As EventArgs) Handles numQuantityAdjust.ValueChanged
+
+    End Sub
 End Class
