@@ -250,7 +250,7 @@ Public Class POSMain
                 fPriceModify.ShowDialog()
                 nPriceModify = fPriceModify.numPriceModify.Value ' get value
                 fPriceModify = Nothing
-                DataGridView1.Item(2, e.RowIndex).Value = (nPriceModify)
+                DataGridView1.Item(2, e.RowIndex).Value = Format(nPriceModify, "###0.00")
                 GridTotals()
 
             Case 5
@@ -353,7 +353,4 @@ Public Class POSMain
         DataGridView1.Width = (Me.Width - DataGridView1.Left) - 25
     End Sub
 
-    Private Sub lblReceiptTotal_Click(sender As Object, e As EventArgs) Handles lblReceiptTotal.Click
-
-    End Sub
 End Class

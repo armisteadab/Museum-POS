@@ -31,7 +31,7 @@ Partial Class PriceModify
         '
         Me.numPriceModify.DecimalPlaces = 2
         Me.numPriceModify.Font = New System.Drawing.Font("Microsoft Sans Serif", 66.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.numPriceModify.Increment = New Decimal(New Integer() {1, 0, 0, 196608})
+        Me.numPriceModify.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.numPriceModify.Location = New System.Drawing.Point(13, 13)
         Me.numPriceModify.Name = "numPriceModify"
         Me.numPriceModify.Size = New System.Drawing.Size(680, 132)
