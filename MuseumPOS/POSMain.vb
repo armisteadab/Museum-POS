@@ -301,6 +301,7 @@ Public Class POSMain
 
         If DataGridView1.Rows.Count < 1 Then
             lblReceiptTotal.Text = "0.00"
+            btnDone.Enabled = False
             Exit Sub
         End If
 
@@ -320,6 +321,10 @@ Public Class POSMain
 
 
         lblReceiptTotal.Text = (Format(nTotal, "####0.00"))
+
+        If nTotal = 0 Then ' there are rows and they end up at zero (payment made)
+            btnDone.Enabled = True
+        End If
     End Sub
 
     Private Sub DataGridView1_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DataGridView1.RowsAdded
@@ -330,4 +335,11 @@ Public Class POSMain
         GridTotals()
     End Sub
 
+    Private Sub POSMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        DataGridView1.Width = (Me.Width - DataGridView1.Left) - 25
+    End Sub
+
+    Private Sub lblReceiptTotal_Click(sender As Object, e As EventArgs) Handles lblReceiptTotal.Click
+
+    End Sub
 End Class
