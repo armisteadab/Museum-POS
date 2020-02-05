@@ -201,6 +201,7 @@ Public Class POSMain
 
         Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
         DataGridView2.Visible = False ' selection made, clear the area
+        txtEntry.Text = ""  ' clear
         txtEntry.Enabled = True
 
 
