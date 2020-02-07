@@ -247,7 +247,7 @@ Public Class POSMain
 
                 Dim fPriceModify As New PriceModify
                 nPriceModify = ("" & DataGridView1.Item(2, e.RowIndex).Value)
-                fPriceModify.numPriceModify.Value = nPriceModify
+                fPriceModify.OriginalPrice = nPriceModify
                 fPriceModify.ShowDialog()
                 nPriceModify = fPriceModify.numPriceModify.Value ' get value
                 fPriceModify = Nothing
@@ -354,4 +354,7 @@ Public Class POSMain
         DataGridView1.Width = (Me.Width - DataGridView1.Left) - 25
     End Sub
 
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
 End Class
