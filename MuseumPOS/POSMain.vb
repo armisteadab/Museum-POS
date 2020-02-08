@@ -79,7 +79,20 @@ Public Class POSMain
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         Dim oPos As New POS(1)
+        oPos.CashierID = "1"
+        oPos.CurrencyISO = 840
+        oPos.Language = "English"
         oPos.Connect()
+
+        If Not oPos.IsConnected Then
+            Exit Sub
+        End If
+
+        If oPos.Sale(199).Success Then
+            MsgBox("success")
+        End If
+
+        oPos.Disonnect()
 
     End Sub
 
