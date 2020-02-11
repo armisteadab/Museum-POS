@@ -145,6 +145,12 @@
     <Compile Include="POSMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TaxAdjust.Designer.vb">
+      <DependentUpon>TaxAdjust.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TaxAdjust.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PriceModify.resx">
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POSMain.resx">
       <DependentUpon>POSMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaxAdjust.resx">
+      <DependentUpon>TaxAdjust.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

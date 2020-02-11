@@ -9,9 +9,6 @@
         End If
     End Sub
 
-    Private Sub numQuantityAdjust_ValueChanged(sender As Object, e As EventArgs) Handles numQuantityAdjust.ValueChanged
-
-    End Sub
 
     Private Sub Quantity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         numQuantityAdjust.Select(0, numQuantityAdjust.Text.Length)

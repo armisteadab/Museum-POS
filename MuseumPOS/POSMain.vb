@@ -241,6 +241,7 @@ Public Class POSMain
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
 
         Dim nQuantity As Integer, nPriceModify As Double
+        Dim nTaxAdjust As Double
         If e.RowIndex < 0 Then Exit Sub
 
         Select Case e.ColumnIndex
@@ -265,6 +266,17 @@ Public Class POSMain
                 nPriceModify = fPriceModify.numPriceModify.Value ' get value
                 fPriceModify = Nothing
                 DataGridView1.Item(2, e.RowIndex).Value = Format(nPriceModify, "###0.00")
+                GridTotals()
+
+            Case 4
+
+                Dim fTaxAdjust As New TaxAdjust
+                nTaxAdjust = ("" & DataGridView1.Item(4, e.RowIndex).Value)
+                fTaxAdjust.numTaxRate.Value = (nTaxAdjust)
+                fTaxAdjust.ShowDialog()
+                nTaxAdjust = fTaxAdjust.numTaxRate.Value ' get value
+                fTaxAdjust = Nothing
+                DataGridView1.Item(4, e.RowIndex).Value = Format(nTaxAdjust, "###0.00")
                 GridTotals()
 
             Case 5
@@ -369,5 +381,67 @@ Public Class POSMain
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
+    End Sub
+
+    Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
+        Dim sqlString As String, AlreadyInTable As Boolean = False
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        Dim sqlConnect1 As New SqlConnection(sConnectionString)
+        Dim commandSQL1 As SqlCommand
+
+        Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
+        Dim nRow As Integer, sQuantity As String
+        Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
+        Dim nRowFinal As Integer
+
+        nRowFinal = DataGridView1.Rows.Count - 1
+
+        If nRowFinal < 0 Then Exit Sub
+
+        For nRow = 0 To nRowFinal
+            sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
+            sNameItem = ("" & DataGridView1.Item(0, nRow).Value)
+            sPrice = ("" & DataGridView1.Item(2, nRow).Value)
+            sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
+            sTaxRate = ("" & DataGridView1.Item(4, nRow).Value)
+
+            'convert some values to numerics for taxed amount calc
+            nTaxRate = CDbl(sTaxRate)
+            nPrice = CDbl(sPrice)
+            nTaxRate = nTaxRate / 100
+            nTaxedAmount = (nPrice * nTaxRate)
+
+            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity) "
+            sqlString += " VALUES ("
+            sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
+            sqlString = sqlString & "99" & "," & sQuantity
+            sqlString = sqlString & ")"
+
+            Try
+
+                sqlConnect1.Open()
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+                'commandSQL1.CommandType = CommandType.Text
+                commandSQL1.ExecuteNonQuery()
+                commandSQL1.Dispose()
+                sqlConnect1.Close()
+
+            Catch ex As ArgumentException
+                MsgBox("" & ex.Message)
+
+            Finally
+
+            End Try
+            Debug.Print(sqlString)
+        Next nRow
+
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        btnDone.Enabled = True
     End Sub
 End Class
