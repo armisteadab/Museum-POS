@@ -169,13 +169,12 @@ Public Class POSMain
             End If
         End Try
 
-        If DataGridView2.Rows.Count > 1 Then
-            DataGridView2.Visible = True
-            DataGridView2.Focus()
-            '       Me.DataGridView1.Rows.Remove(DataGridView1.Rows(DataGridView1.Rows.Count - 1))
-        ElseIf DataGridView2.Rows.Count = 1 Then
+        If DataGridView2.Rows.Count = 1 And txtEntry.TextLength = 12 Then
             PickFIRSTFromSearch()
             DataGridView2.Visible = False
+        ElseIf DataGridView2.Rows.Count > 0 Then
+            DataGridView2.Visible = True
+            DataGridView2.Focus()
         End If
 
 
