@@ -337,7 +337,7 @@ Public Class POSMain
     Private Sub GridTotals()
         Dim sQuantity As String, sPrice As String, nQuantity As Integer, nPrice As Double
         Dim nRowsToSum As Integer, nRow As Integer
-        Dim nTotal As Double, nTaxRate As Double
+        Dim nTotal As Double, nTaxRate As Double, nItemTotal As Double
 
         If DataGridView1.Rows.Count < 1 Then
             lblReceiptTotal.Text = "0.00"
@@ -347,16 +347,18 @@ Public Class POSMain
 
         If IsDBNull(DataGridView1.Item(2, nRow).Value) Then Exit Sub
 
+        nTotal = 0
         nRowsToSum = (DataGridView1.Rows.Count - 1)
-        nTaxRate = (DataGridView1.Item(4, nRow).Value)
-        nTaxRate = nTaxRate / 100
         For nRow = 0 To nRowsToSum
+            nTaxRate = (DataGridView1.Item(4, nRow).Value)
+            nTaxRate = nTaxRate / 100
             sPrice = ("" & DataGridView1.Item(2, nRow).Value)
             sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
             nPrice = Val(sPrice)
             nQuantity = Int(Val(sQuantity))
-            nTotal += (nPrice * nQuantity)
-            nTotal += (nTotal * nTaxRate)
+            nItemTotal = (nPrice * nQuantity)
+            nItemTotal += (nItemTotal * nTaxRate)
+            nTotal += (nItemTotal)
         Next
 
 
@@ -377,10 +379,6 @@ Public Class POSMain
 
     Private Sub POSMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         DataGridView1.Width = (Me.Width - DataGridView1.Left) - 25
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
     End Sub
 
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
@@ -418,7 +416,7 @@ Public Class POSMain
             sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity) "
             sqlString += " VALUES ("
             sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
-            sqlString = sqlString & "99" & "," & sQuantity
+            sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
             sqlString = sqlString & ")"
 
             Try
@@ -438,6 +436,8 @@ Public Class POSMain
             End Try
             Debug.Print(sqlString)
         Next nRow
+
+        Me.ReceiptNumber = (Me.ReceiptNumber + 1)
 
     End Sub
 
