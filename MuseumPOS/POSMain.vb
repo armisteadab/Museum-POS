@@ -97,7 +97,7 @@ Public Class POSMain
         sEntry = txtEntry.Text.Trim
         bIsNumeric = IsNumeric(sEntry)
 
-        If sEntry.Length >= 4 Then
+        If sEntry.Length >= 2 Then
             ' something to search for
             RunSearch(bIsNumeric)
         Else
