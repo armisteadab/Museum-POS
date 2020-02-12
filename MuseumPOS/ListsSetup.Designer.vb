@@ -253,6 +253,7 @@ Partial Class ListsSetup
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Name = "ListsSetup"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ListsSetup"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numListOrder, System.ComponentModel.ISupportInitialize).EndInit()

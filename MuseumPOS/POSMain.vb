@@ -110,9 +110,12 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String, sSearchLikeValue$
 
+        If txtEntry.Text.Trim.Length = 0 Then Exit Sub
+
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
+
         sSearchLikeValue = QLike(txtEntry.Text)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
@@ -166,10 +169,13 @@ Public Class POSMain
             End If
         End Try
 
-        If DataGridView2.Rows.Count > 0 Then
+        If DataGridView2.Rows.Count > 1 Then
             DataGridView2.Visible = True
             DataGridView2.Focus()
             '       Me.DataGridView1.Rows.Remove(DataGridView1.Rows(DataGridView1.Rows.Count - 1))
+        ElseIf DataGridView2.Rows.Count = 1 Then
+            PickFIRSTFromSearch()
+            DataGridView2.Visible = False
         End If
 
 
@@ -196,6 +202,23 @@ Public Class POSMain
         sNameItem = ("" & DataGridView2.Item(0, DataGridView2.CurrentRow.Index).Value)
         sPrice = ("" & DataGridView2.Item(4, DataGridView2.CurrentRow.Index).Value)
         sTaxRate = ("" & DataGridView2.Item(10, DataGridView2.CurrentRow.Index).Value)
+
+        Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
+        DataGridView2.Visible = False ' selection made, clear the area
+        txtEntry.Text = ""  ' clear
+        txtEntry.Enabled = True
+
+
+    End Sub
+
+    Private Sub PickFIRSTFromSearch()
+
+        Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
+
+        sInvUPC = ("" & DataGridView2.Item(8, 0).Value)
+        sNameItem = ("" & DataGridView2.Item(0, 0).Value)
+        sPrice = ("" & DataGridView2.Item(4, 0).Value)
+        sTaxRate = ("" & DataGridView2.Item(10, 0).Value)
 
         Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
         DataGridView2.Visible = False ' selection made, clear the area

@@ -292,6 +292,7 @@ Public Class InventoryItem
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         ClearValues()
         txtUPC.ReadOnly = False ' allow new UPC
+        txtUPC.Focus()
     End Sub
 
     Private Sub ClearValues()
@@ -308,7 +309,7 @@ Public Class InventoryItem
         Me.txtNotes.Text = ""  '"InvNotes")
         Me.lblUniqueID.Text = "0"
         Me.Changed = False   ' we haven't really changed data, just new record
-        Me.nTaxRate.Value = 0.00
+        Me.nTaxRate.Value = 6.0   ' 6% default tax rate
 
     End Sub
 
@@ -515,5 +516,9 @@ Public Class InventoryItem
     Private Sub nTaxRate_ValueChanged(sender As Object, e As EventArgs) Handles nTaxRate.ValueChanged
         Me.Changed = True
 
+    End Sub
+
+    Private Sub numItemNumber_KeyUp(sender As Object, e As KeyEventArgs) Handles numItemNumber.KeyUp
+        Me.Changed = True
     End Sub
 End Class
