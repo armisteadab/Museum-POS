@@ -6,7 +6,7 @@
 
     Public Function QLike(ByVal sPar As String) As String
         sPar = "" & sPar
-        Return "'" & sPar.Trim & "%'"
+        Return "'%" & sPar.Trim & "%'"
     End Function
 
 End Module
