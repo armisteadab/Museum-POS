@@ -399,7 +399,7 @@ Public Class POSMain
         End If
 
         If DataGridView1.Rows.Count < 1 Then
-            MsgBox("Full Payment Required")
+            MsgBox("Nothing to Print")
             Exit Sub
         End If
 
@@ -452,6 +452,7 @@ Public Class POSMain
             Debug.Print(sqlString)
         Next nRow
 
+        DataGridView1.Rows.Clear()
         Me.ReceiptNumber = (Me.ReceiptNumber + 1)
 
     End Sub
