@@ -4,6 +4,7 @@ Public Class POSMain
     Dim nReceiptNumber As Integer
     Private nReceiptCurrent As Integer
     Private bSearchReady As Boolean
+    Private nSumPriceItems As Double
 
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
         Dim fInventoryItem As New InventoryItem
@@ -368,12 +369,9 @@ Public Class POSMain
             nTotal += (nItemTotal)
         Next
 
-
+        nSumPriceItems = (nTotal)
         lblReceiptTotal.Text = (Format(nTotal, "####0.00"))
 
-        If nTotal = 0 Then ' there are rows and they end up at zero (payment made)
-            btnDone.Enabled = True
-        End If
     End Sub
 
     Private Sub DataGridView1_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DataGridView1.RowsAdded
@@ -394,6 +392,16 @@ Public Class POSMain
         Dim sConnectionString As String
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        If nSumPriceItems <> 0 Then ' there are rows and they end up at zero (payment made)
+            MsgBox("Full Payment Required")
+            Exit Sub
+        End If
+
+        If DataGridView1.Rows.Count < 1 Then
+            MsgBox("Full Payment Required")
+            Exit Sub
+        End If
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
@@ -449,6 +457,11 @@ Public Class POSMain
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        btnDone.Enabled = True
+
+        Dim fCashPay As New CashPay
+        fCashPay.CashAmount = (nSumPriceItems)
+        fCashPay.ShowDialog()
+        MsgBox(fCashPay.CashAmount.ToString)
+        fCashPay = Nothing
     End Sub
 End Class
