@@ -457,11 +457,20 @@ Public Class POSMain
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-
+        Dim nCashAmount As Double
         Dim fCashPay As New CashPay
         fCashPay.CashAmount = (nSumPriceItems)
         fCashPay.ShowDialog()
-        MsgBox(fCashPay.CashAmount.ToString)
+        'MsgBox(Format(fCashPay.CashAmount, "###0.00"))
+        nCashAmount = (fCashPay.CashAmount)
+        nCashAmount = (nCashAmount * -1)
+        PaymentToGrid("", "CASH", Format(nCashAmount, "###0.00"), "0")
         fCashPay = Nothing
+    End Sub
+
+    Private Sub PaymentToGrid(ByVal sInvUPC$, ByVal sNameItem$, ByVal sPrice$, ByVal sTaxRate$)
+
+        Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
+
     End Sub
 End Class
