@@ -369,7 +369,7 @@ Public Class POSMain
             nTotal += (nItemTotal)
         Next
 
-        nSumPriceItems = (nTotal)
+        nSumPriceItems = (Format(nTotal, "####0.00").Trim)
         lblReceiptTotal.Text = (Format(nTotal, "####0.00"))
 
     End Sub
@@ -471,6 +471,8 @@ Public Class POSMain
     Private Sub PaymentToGrid(ByVal sInvUPC$, ByVal sNameItem$, ByVal sPrice$, ByVal sTaxRate$)
 
         Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
+        nSumPriceItems = 0
+        GridTotals()
 
     End Sub
 End Class
