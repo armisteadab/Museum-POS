@@ -65,6 +65,13 @@ Partial Class POSMain
         Me.UniqueID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TaxRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblReceiptTotal = New System.Windows.Forms.Label()
+        Me.btnPreviousReceipt = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.btnNextReceipt = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -280,24 +287,25 @@ Partial Class POSMain
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(933, 13)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(1048, 12)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(72, 17)
+        Me.Label1.Size = New System.Drawing.Size(121, 29)
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "Receipt #:"
         '
         'lblReceiptNumber
         '
         Me.lblReceiptNumber.AutoSize = True
-        Me.lblReceiptNumber.Location = New System.Drawing.Point(1011, 13)
+        Me.lblReceiptNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblReceiptNumber.Location = New System.Drawing.Point(1175, 12)
         Me.lblReceiptNumber.Name = "lblReceiptNumber"
-        Me.lblReceiptNumber.Size = New System.Drawing.Size(42, 17)
+        Me.lblReceiptNumber.Size = New System.Drawing.Size(83, 32)
         Me.lblReceiptNumber.TabIndex = 18
         Me.lblReceiptNumber.Text = "None"
         '
         'Timer1
         '
-        Me.Timer1.Enabled = True
         Me.Timer1.Interval = 2000
         '
         'DataGridView2
@@ -436,11 +444,76 @@ Partial Class POSMain
         Me.lblReceiptTotal.Text = "0.00"
         Me.lblReceiptTotal.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
+        'btnPreviousReceipt
+        '
+        Me.btnPreviousReceipt.Location = New System.Drawing.Point(953, 7)
+        Me.btnPreviousReceipt.Name = "btnPreviousReceipt"
+        Me.btnPreviousReceipt.Size = New System.Drawing.Size(89, 34)
+        Me.btnPreviousReceipt.TabIndex = 26
+        Me.btnPreviousReceipt.Text = "<<Prev"
+        Me.btnPreviousReceipt.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(175, 583)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox1.TabIndex = 27
+        Me.TextBox1.Text = "COM5"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(175, 611)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox2.TabIndex = 28
+        Me.TextBox2.Text = "9600"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(175, 640)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox3.TabIndex = 29
+        Me.TextBox3.Text = "English"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(175, 668)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox4.TabIndex = 30
+        Me.TextBox4.Text = "0"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(175, 697)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox5.TabIndex = 31
+        Me.TextBox5.Text = "840"
+        '
+        'btnNextReceipt
+        '
+        Me.btnNextReceipt.Location = New System.Drawing.Point(1264, 10)
+        Me.btnNextReceipt.Name = "btnNextReceipt"
+        Me.btnNextReceipt.Size = New System.Drawing.Size(89, 34)
+        Me.btnNextReceipt.TabIndex = 32
+        Me.btnNextReceipt.Text = "Next >>"
+        Me.btnNextReceipt.UseVisualStyleBackColor = True
+        '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1860, 935)
+        Me.Controls.Add(Me.btnNextReceipt)
+        Me.Controls.Add(Me.TextBox5)
+        Me.Controls.Add(Me.TextBox4)
+        Me.Controls.Add(Me.TextBox3)
+        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.btnPreviousReceipt)
         Me.Controls.Add(Me.lblReceiptTotal)
         Me.Controls.Add(Me.DataGridView2)
         Me.Controls.Add(Me.lblReceiptNumber)
@@ -503,4 +576,11 @@ Partial Class POSMain
     Friend WithEvents colUPC As DataGridViewTextBoxColumn
     Friend WithEvents colTaxRate As DataGridViewTextBoxColumn
     Friend WithEvents colDELETE As DataGridViewTextBoxColumn
+    Friend WithEvents btnPreviousReceipt As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents btnNextReceipt As Button
 End Class

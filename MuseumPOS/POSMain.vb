@@ -1,5 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports IngenicoPOS
+Imports System.IO
+
 Public Class POSMain
     Dim nReceiptNumber As Integer
     Private nReceiptCurrent As Integer
@@ -39,7 +41,7 @@ Public Class POSMain
         End If
         reader = cmd.ExecuteReader()
 
-            If reader.HasRows Then
+        If reader.HasRows Then
             reader.Read()
             nReceiptCurrent = 0 + reader.Item("MaxID")
         End If
@@ -64,21 +66,34 @@ Public Class POSMain
     End Property
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Dim oPos As New POS(1)
-        oPos.CashierID = "1"
-        oPos.CurrencyISO = 840
-        oPos.Language = "English"
-        oPos.Connect()
+        Dim oPos As New POS(TextBox1.Text.Trim, Val(TextBox2.Text.Trim))
 
-        If Not oPos.IsConnected Then
-            Exit Sub
+        Dim oECRMessage As New ECRMessage
+        Dim oPOSMessage As New POSMessage
+
+        oPos.CashierID = Val(TextBox4.Text.Trim)
+        oPos.CurrencyISO = Val(textbox5.text.trim) '840
+        oPos.Language = TextBox3.Text.Trim
+        oPos.NextTransactionNo = (nReceiptCurrent)
+
+        If oPos.Connect() Then
+
+            If Not oPos.IsConnected Then
+                MsgBox("ingenico connect fail 2")
+                MsgBox("ingenico connect fail 2")
+                ' Exit Sub
+            End If
+
+            'If oPos.Sale(0).Success Then
+            ' MsgBox("success sale")
+            ' End If
+
+            oPos.Disonnect()
+        Else
+            MsgBox("ingenico connect fail 1")
         End If
 
-        If oPos.Sale(199).Success Then
-            MsgBox("success")
-        End If
-
-        oPos.Disonnect()
+        oPos = Nothing
 
     End Sub
 
@@ -358,7 +373,7 @@ Public Class POSMain
         nTotal = 0
         nRowsToSum = (DataGridView1.Rows.Count - 1)
         For nRow = 0 To nRowsToSum
-            nTaxRate = (DataGridView1.Item(4, nRow).Value)
+            nTaxRate = CDbl("0" & DataGridView1.Item(4, nRow).Value)
             nTaxRate = nTaxRate / 100
             sPrice = ("" & DataGridView1.Item(2, nRow).Value)
             sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
@@ -393,7 +408,7 @@ Public Class POSMain
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
-        If nSumPriceItems <> 0 Then ' there are rows and they end up at zero (payment made)
+        If nSumPriceItems > 0 Then ' there are rows and they end up at zero (payment made)
             MsgBox("Full Payment Required")
             Exit Sub
         End If
@@ -401,6 +416,10 @@ Public Class POSMain
         If DataGridView1.Rows.Count < 1 Then
             MsgBox("Nothing to Print")
             Exit Sub
+        End If
+
+        If nSumPriceItems < 0 Then ' there are rows and they end up at zero (payment made)
+            MsgBox("Change: " & lblReceiptTotal.Text.Replace("-", ""))
         End If
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -415,6 +434,8 @@ Public Class POSMain
 
         If nRowFinal < 0 Then Exit Sub
 
+        ' put the items/payments into receipt, organized by receipt #
+
         For nRow = 0 To nRowFinal
             sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
             sNameItem = ("" & DataGridView1.Item(0, nRow).Value)
@@ -428,11 +449,11 @@ Public Class POSMain
             nTaxRate = nTaxRate / 100
             nTaxedAmount = (nPrice * nTaxRate)
 
-            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity) "
+            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate) "
             sqlString += " VALUES ("
             sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
             sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
-            sqlString = sqlString & ")"
+            sqlString = sqlString & "," & sTaxRate & ")"
 
             Try
 
@@ -462,18 +483,98 @@ Public Class POSMain
         Dim fCashPay As New CashPay
         fCashPay.CashAmount = (nSumPriceItems)
         fCashPay.ShowDialog()
-        'MsgBox(Format(fCashPay.CashAmount, "###0.00"))
         nCashAmount = (fCashPay.CashAmount)
-        nCashAmount = (nCashAmount * -1)
-        PaymentToGrid("", "CASH", Format(nCashAmount, "###0.00"), "0")
+        If nCashAmount > 0 Then
+            nCashAmount = (nCashAmount * -1)
+            LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0")
+        End If
         fCashPay = Nothing
     End Sub
 
-    Private Sub PaymentToGrid(ByVal sInvUPC$, ByVal sNameItem$, ByVal sPrice$, ByVal sTaxRate$)
+    Private Sub LoadRowToGrid(ByVal sInvUPC$, ByVal sNameItem$, ByVal sPrice$, ByVal sTaxRate$)
 
         Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
         nSumPriceItems = 0
         GridTotals()
+
+    End Sub
+
+    Private Sub LoadSavedReceipt(ByVal nReceiptToLoad As Integer)
+
+        Dim sqlConnect As New SqlConnection(), sSQL$
+        Dim sConnectionString As String, sSearchLikeValue$
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+
+        sSearchLikeValue = QLike(txtEntry.Text)
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+        sSQL = "SELECT a.UPC, a.ReceiptID ,b.InvName, a.Price, a.paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate FROM Receipt a"
+        sSQL += " LEFT JOIN InventoryItems b ON a.UPC = b.InvUPC WHERE a.ReceiptID = " & nReceiptToLoad
+
+        cmd.CommandText = sSQL
+        cmd.Connection = sqlConnect
+        ' Create a SqlParameter for each parameter in the stored procedure.
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+        Dim nPriceDisplayGrid As Double, sPriceDisplayGrid As String
+        Dim nTaxRate As Double, sItemName As String
+
+        Me.DataGridView1.Rows.Clear()
+
+        Try
+            If sqlConnect.State = ConnectionState.Closed Then
+                sqlConnect.Open()
+            End If
+            reader = cmd.ExecuteReader()
+            Using reader
+                While reader.Read
+                    ' Process SprocResults datareader here.
+                    nPriceDisplayGrid = reader.Item("Price")
+                    sPriceDisplayGrid = Strings.FormatNumber(reader.Item("Price"), 2)
+
+                    If Not IsDBNull(reader.Item("TaxRate")) Then
+                        nTaxRate = reader.Item("TaxRate")
+                    Else
+                        nTaxRate = 0
+                    End If
+
+                    If Not IsDBNull(reader.Item("InvName")) Then
+                        sItemName = reader.Item("InvName")
+                    Else
+                        sItemName = ""
+                    End If
+                    LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString)
+                End While
+
+                nSumPriceItems = (nSumPriceItems * -1)
+                If nSumPriceItems <> 0 Then ' some change to show
+                    LoadRowToGrid("", "CHANGE", Format(nSumPriceItems, "###0.00"), "")
+                End If
+
+
+            End Using
+        Finally
+            If previousConnectionState = ConnectionState.Closed Then
+                sqlConnect.Close()
+            End If
+        End Try
+
+    End Sub
+
+    Private Sub btnPreviousReceipt_Click(sender As Object, e As EventArgs) Handles btnPreviousReceipt.Click
+        nReceiptCurrent += -1
+        Me.ReceiptNumber = nReceiptCurrent
+        LoadSavedReceipt(nReceiptCurrent)
+    End Sub
+
+    Private Sub btnNextReceipt_Click(sender As Object, e As EventArgs) Handles btnNextReceipt.Click
+        nReceiptCurrent += 1
+        Me.ReceiptNumber = nReceiptCurrent
+        LoadSavedReceipt(nReceiptCurrent)
 
     End Sub
 End Class
