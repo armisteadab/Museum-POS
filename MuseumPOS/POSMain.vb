@@ -5,6 +5,7 @@ Imports System.IO
 Public Class POSMain
     Dim nReceiptNumber As Integer
     Private nReceiptCurrent As Integer
+    Private nReceiptLatest As Integer ' highest #
     Private bSearchReady As Boolean
     Private nSumPriceItems As Double
 
@@ -47,6 +48,7 @@ Public Class POSMain
         End If
 
         nReceiptCurrent += 1
+        nReceiptLatest = (nReceiptCurrent)
         Me.ReceiptNumber = (nReceiptCurrent)
         reader.Close()
 
@@ -475,6 +477,7 @@ Public Class POSMain
 
         DataGridView1.Rows.Clear()
         Me.ReceiptNumber = (Me.ReceiptNumber + 1)
+        nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
 
     End Sub
 
@@ -566,12 +569,24 @@ Public Class POSMain
     End Sub
 
     Private Sub btnPreviousReceipt_Click(sender As Object, e As EventArgs) Handles btnPreviousReceipt.Click
+
+        If nReceiptLatest = 1 Then
+            Exit Sub
+        End If
+        If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
+            MsgBox("You need to resolve this open receipt before going to other receipts")
+            Exit Sub
+        End If
         nReceiptCurrent += -1
         Me.ReceiptNumber = nReceiptCurrent
         LoadSavedReceipt(nReceiptCurrent)
     End Sub
 
     Private Sub btnNextReceipt_Click(sender As Object, e As EventArgs) Handles btnNextReceipt.Click
+        If nReceiptLatest = nReceiptCurrent Then ' no going into future
+            Exit Sub
+        End If
+
         nReceiptCurrent += 1
         Me.ReceiptNumber = nReceiptCurrent
         LoadSavedReceipt(nReceiptCurrent)
