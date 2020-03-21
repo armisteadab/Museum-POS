@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports IngenicoPOS
+Imports Ingenico
 Imports System.IO
 
 Public Class POSMain
@@ -18,6 +19,7 @@ Public Class POSMain
 
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewReceiptID()
+
     End Sub
 
     Private Sub NewReceiptID()
@@ -69,30 +71,50 @@ Public Class POSMain
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         Dim oPos As New POS(TextBox1.Text.Trim, Val(TextBox2.Text.Trim))
-
         Dim oECRMessage As New ECRMessage
         Dim oPOSMessage As New POSMessage
+        Dim xSaleResult As SaleResult
+        Dim nPOSSaleTotal As Long
 
-        oPos.CashierID = Val(TextBox4.Text.Trim)
-        oPos.CurrencyISO = Val(textbox5.text.trim) '840
-        oPos.Language = TextBox3.Text.Trim
-        oPos.NextTransactionNo = (nReceiptCurrent)
+        nPOSSaleTotal = (nSumPriceItems)
+        nPOSSaleTotal = (1223)
+
+        oPos.POSPrints = True
 
         If oPos.Connect() Then
 
+            oPos.CashierID = Val(TextBox4.Text.Trim)
+            oPos.CurrencyISO = Val(TextBox5.Text.Trim) '840
+            oPos.Language = TextBox3.Text.Trim
+            oPos.NextTransactionNo = (nReceiptCurrent)
+
+            ' oECRMessage.CashierID = oPos.CashierID
+            'oECRMessage.TerminalID = 98
+            ' oECRMessage.TransactionAmount = Val(lblReceiptTotal.Text)
+            'oECRMessage.POSPrints = True
+            'oECRMessage.CurrencyISO = oPos.CurrencyISO
+
+            'MsgBox("oECRMessage: " + oECRMessage.Message)
+
             If Not oPos.IsConnected Then
-                MsgBox("ingenico connect fail 2")
-                MsgBox("ingenico connect fail 2")
-                ' Exit Sub
+                MsgBox("ingenico iPP320 NOT Connected: 2")
+                Exit Sub
+            Else
+                MsgBox("oPOSMessage.CardDataSource: " & oPOSMessage.CardDataSource)
+                MsgBox("oPOSMessage.TransactionAmount: " & oPOSMessage.TransactionAmount)
+                MsgBox("oPOSMessage.TransactionDate: " & oPOSMessage.TransactionDate)
+                MsgBox("oPOSMessage.TransactionType: " & oPOSMessage.TransactionType)
             End If
 
-            'If oPos.Sale(0).Success Then
-            ' MsgBox("success sale")
-            ' End If
+            xSaleResult = oPos.Sale(nPOSSaleTotal)
+            If xSaleResult.Success Then
+                '          If oPos.Sale((nPOSSaleTotal)).Success Then
+                MsgBox("success sale")
+            End If
 
             oPos.Disonnect()
         Else
-            MsgBox("ingenico connect fail 1")
+            MsgBox("ingenico iPP320 NOT Connected: 1")
         End If
 
         oPos = Nothing
@@ -590,6 +612,16 @@ Public Class POSMain
         nReceiptCurrent += 1
         Me.ReceiptNumber = nReceiptCurrent
         LoadSavedReceipt(nReceiptCurrent)
+
+    End Sub
+
+    Private Sub SerialPort1_DataReceived(sender As Object, e As Ports.SerialDataReceivedEventArgs) Handles SerialPort1.DataReceived
+        Debug.Print(SerialPort1.ReadExisting)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        SerialPort1.Open()
+        Debug.Print(SerialPort1.ReadExisting)
 
     End Sub
 End Class
