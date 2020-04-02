@@ -13,6 +13,21 @@ Public Class SwipeBluePay
     End Property
     Private Sub SwipeBluePay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TextBox1.Text = ("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
+
+        'load testing info
+
+        TextBoxFirstName.Text = "Bob"
+        TextBoxLastName.Text = "Tester"
+        TextBoxAddr1.Text = "123 Test St."
+        TextBoxAddr2.Text = "Apt #500"
+        TextBoxCity.Text = "Testville"
+        cboState.Text = "IL"
+        TextBoxZIP.Text = "54321"
+        cboCountry.Text = "USA"
+        TextBoxPhone.Text = "123-123-12345"
+        TextBoxEmail.Text = "test@bluepay.com"
+
+
         Label1.Text = ""
     End Sub
 
@@ -30,16 +45,16 @@ Public Class SwipeBluePay
         )
 
         payment.setCustomerInformation(
-            firstName:="Bob",
-    lastName:="Tester",
-    address1:="123 Test St.",
-    address2:="Apt #500",
-    city:="Testville",
-    state:="IL",
-    zipCode:="54321",
-    country:="USA",
-    phone:="123-123-12345",
-    email:="test@bluepay.com"
+            firstName:=TextBoxFirstName.Text.Trim,
+    lastName:=TextBoxLastName.Text.Trim,
+    address1:=TextBoxAddr1.Text.Trim,
+    address2:=TextBoxAddr2.Text.Trim,
+    city:=TextBoxCity.Text.Trim,
+    state:=cboState.Text.Trim,
+    zipCode:=TextBoxZIP.Text.Trim,
+    country:=cboCountry.Text.Trim,
+    phone:=TextBoxPhone.Text.Trim,
+    email:=TextBoxEmail.Text.Trim
         )
 
         ' Set payment information for a swiped credit card transaction
@@ -65,5 +80,9 @@ Public Class SwipeBluePay
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Me.Close()
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
     End Sub
 End Class
