@@ -70,16 +70,30 @@ Public Class POSMain
     End Property
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Dim oPos As New POS(TextBox1.Text.Trim, Val(TextBox2.Text.Trim))
-        Dim oECRMessage As New ECRMessage
+        Dim fSwipe As New SwipeBluePay
+        fSwipe.SaleAmount = (Me.lblReceiptTotal.Text.Trim)
+        fSwipe.ShowDialog()
+        fSwipe = Nothing
+
+    End Sub
+    Private Sub Bxutton9_Click(sender As Object, e As EventArgs)
+        Dim oPos As New POS(TextBox1.Text.Trim) ', Val(TextBox2.Text.Trim))
+
+        ' Dim oECRMessage As New ECRMessage
         Dim oPOSMessage As New POSMessage
-        Dim xSaleResult As SaleResult
         Dim nPOSSaleTotal As Long
 
         nPOSSaleTotal = (nSumPriceItems)
-        nPOSSaleTotal = (1223)
+        nPOSSaleTotal = 12345
 
         oPos.POSPrints = True
+        ' oECRMessage.TransactionType = Consts.TransactionType.INITIALIZATION
+        ' oECRMessage.CashierID = oPos.CashierID
+        ' oECRMessage.TerminalID = 83813886
+        ' oECRMessage.TransactionAmount = 12345   'Val(lblReceiptTotal.Text)
+        ' oECRMessage.POSPrints = True
+        ' oECRMessage.CurrencyISO = oPos.CurrencyISO
+
 
         If oPos.Connect() Then
 
@@ -88,28 +102,28 @@ Public Class POSMain
             oPos.Language = TextBox3.Text.Trim
             oPos.NextTransactionNo = (nReceiptCurrent)
 
-            ' oECRMessage.CashierID = oPos.CashierID
-            'oECRMessage.TerminalID = 98
-            ' oECRMessage.TransactionAmount = Val(lblReceiptTotal.Text)
-            'oECRMessage.POSPrints = True
-            'oECRMessage.CurrencyISO = oPos.CurrencyISO
 
-            'MsgBox("oECRMessage: " + oECRMessage.Message)
+
+            ' MsgBox("oECRMessage: " + oECRMessage.Message)
 
             If Not oPos.IsConnected Then
                 MsgBox("ingenico iPP320 NOT Connected: 2")
                 Exit Sub
             Else
-                MsgBox("oPOSMessage.CardDataSource: " & oPOSMessage.CardDataSource)
-                MsgBox("oPOSMessage.TransactionAmount: " & oPOSMessage.TransactionAmount)
-                MsgBox("oPOSMessage.TransactionDate: " & oPOSMessage.TransactionDate)
-                MsgBox("oPOSMessage.TransactionType: " & oPOSMessage.TransactionType)
+                '                MsgBox("oPOSMessage.CardDataSource: " & oPOSMessage.CardDataSource)
+                '                MsgBox("oPOSMessage.TransactionAmount: " & oPOSMessage.TransactionAmount)
+                '                MsgBox("oPOSMessage.TransactionDate: " & oPOSMessage.TransactionDate)
+                '                MsgBox("oPOSMessage.TransactionType: " & oPOSMessage.TransactionType)
             End If
 
+            Dim bSaleSuccess As Boolean
+            Dim xSaleResult As SaleResult
             xSaleResult = oPos.Sale(nPOSSaleTotal)
             If xSaleResult.Success Then
                 '          If oPos.Sale((nPOSSaleTotal)).Success Then
                 MsgBox("success sale")
+            Else
+                MsgBox("FAIL")
             End If
 
             oPos.Disonnect()
@@ -615,13 +629,4 @@ Public Class POSMain
 
     End Sub
 
-    Private Sub SerialPort1_DataReceived(sender As Object, e As Ports.SerialDataReceivedEventArgs) Handles SerialPort1.DataReceived
-        Debug.Print(SerialPort1.ReadExisting)
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        SerialPort1.Open()
-        Debug.Print(SerialPort1.ReadExisting)
-
-    End Sub
 End Class
