@@ -70,9 +70,17 @@ Public Class POSMain
     End Property
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        If nSumPriceItems = 0 Then Exit Sub
+
         Dim fSwipe As New SwipeBluePay
+
         fSwipe.SaleAmount = (Me.lblReceiptTotal.Text.Trim)
         fSwipe.ShowDialog()
+        If fSwipe.CardWorked Then
+            LoadRowToGrid("Auth:" + fSwipe.AuthorizationCode, "CARD", Me.lblReceiptTotal.Text.Trim, "0")
+            lblReceiptTotal.Text = "0.00"
+        End If
+
         fSwipe = Nothing
 
     End Sub
@@ -316,7 +324,6 @@ Public Class POSMain
                 nQuantity = fQuantity.numQuantityAdjust.Value ' get value
                 fQuantity = Nothing
                 DataGridView1.Item(1, e.RowIndex).Value = (nQuantity)
-                GridTotals()
 
             Case 2
 
@@ -327,7 +334,6 @@ Public Class POSMain
                 nPriceModify = fPriceModify.numPriceModify.Value ' get value
                 fPriceModify = Nothing
                 DataGridView1.Item(2, e.RowIndex).Value = Format(nPriceModify, "###0.00")
-                GridTotals()
 
             Case 4
 
@@ -338,17 +344,18 @@ Public Class POSMain
                 nTaxAdjust = fTaxAdjust.numTaxRate.Value ' get value
                 fTaxAdjust = Nothing
                 DataGridView1.Item(4, e.RowIndex).Value = Format(nTaxAdjust, "###0.00")
-                GridTotals()
 
             Case 5
                 Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
         End Select
+        GridTotals()
 
     End Sub
 
     Private Sub DataGridView1_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyUp
         If e.KeyCode = Keys.Delete Then
             Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+            GridTotals()
         End If
     End Sub
 
@@ -403,6 +410,7 @@ Public Class POSMain
         If DataGridView1.Rows.Count < 1 Then
             lblReceiptTotal.Text = "0.00"
             btnDone.Enabled = False
+            nSumPriceItems = 0
             Exit Sub
         End If
 
@@ -519,7 +527,10 @@ Public Class POSMain
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Dim nCashAmount As Double
+        If nSumPriceItems = 0 Then Exit Sub
+
         Dim fCashPay As New CashPay
+
         fCashPay.CashAmount = (nSumPriceItems)
         fCashPay.ShowDialog()
         nCashAmount = (fCashPay.CashAmount)

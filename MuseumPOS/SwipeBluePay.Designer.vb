@@ -297,6 +297,7 @@ Partial Class SwipeBluePay
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.btnRunCard)
+        Me.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
