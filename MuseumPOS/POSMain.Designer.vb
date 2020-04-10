@@ -73,6 +73,7 @@ Partial Class POSMain
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.btnNextReceipt = New System.Windows.Forms.Button()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
+        Me.btnManagerMode = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -89,7 +90,7 @@ Partial Class POSMain
         'btnInventory
         '
         Me.btnInventory.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInventory.Location = New System.Drawing.Point(1630, 7)
+        Me.btnInventory.Location = New System.Drawing.Point(1702, 7)
         Me.btnInventory.Name = "btnInventory"
         Me.btnInventory.Size = New System.Drawing.Size(131, 39)
         Me.btnInventory.TabIndex = 2
@@ -507,11 +508,21 @@ Partial Class POSMain
         '
         Me.SerialPort1.PortName = "COM5"
         '
+        'btnManagerMode
+        '
+        Me.btnManagerMode.Location = New System.Drawing.Point(1539, 7)
+        Me.btnManagerMode.Name = "btnManagerMode"
+        Me.btnManagerMode.Size = New System.Drawing.Size(157, 39)
+        Me.btnManagerMode.TabIndex = 33
+        Me.btnManagerMode.Text = "Manager Mode OFF"
+        Me.btnManagerMode.UseVisualStyleBackColor = True
+        '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1860, 935)
+        Me.Controls.Add(Me.btnManagerMode)
         Me.Controls.Add(Me.btnNextReceipt)
         Me.Controls.Add(Me.TextBox5)
         Me.Controls.Add(Me.TextBox4)
@@ -589,4 +600,5 @@ Partial Class POSMain
     Friend WithEvents TextBox5 As TextBox
     Friend WithEvents btnNextReceipt As Button
     Friend WithEvents SerialPort1 As IO.Ports.SerialPort
+    Friend WithEvents btnManagerMode As Button
 End Class

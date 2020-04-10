@@ -9,7 +9,7 @@ Public Class POSMain
     Private nReceiptLatest As Integer ' highest #
     Private bSearchReady As Boolean
     Private nSumPriceItems As Double
-    Private bReceiptMarkedPaid As Boolean
+    Private bReceiptMarkedPaid As Boolean, bManagerMode As Boolean
 
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
         Dim fInventoryItem As New InventoryItem
@@ -59,6 +59,19 @@ Public Class POSMain
 
     End Sub
 
+    Public Property ManagerMode() As Boolean
+        Get
+            Return bManagerMode
+        End Get
+        Set(ByVal value As Boolean)
+            bManagerMode = (value)
+            If bManagerMode Then
+                btnManagerMode.Text = "Manager Mode ON"
+            Else
+                btnManagerMode.Text = "Manager Mode OFF"
+            End If
+        End Set
+    End Property
     Public Property ReceiptNumber() As Integer
         Get
             Return nReceiptNumber
@@ -330,6 +343,13 @@ Public Class POSMain
 
         Dim sPayType As String, sInvUPC As String, nRow As Integer
 
+        If nReceiptCurrent <> nReceiptLatest Then
+            If Not Me.ManagerMode Then
+                MsgBox("Manager Access Needed")
+                Exit Sub
+            End If
+        End If
+
         Select Case e.ColumnIndex
 
             Case 1
@@ -491,8 +511,8 @@ Public Class POSMain
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         If nReceiptCurrent <> nReceiptLatest Then
-            If Strings.Trim(InputBox("Manager Code", "Manager Code Needed")) <> "wno139b" Then
-                MsgBox("INCORRECT PASSWORD")
+            If Not Me.managermode Then
+                MsgBox("Manager Access Needed")
                 Exit Sub
             End If
         End If
@@ -711,6 +731,25 @@ Public Class POSMain
         nReceiptCurrent += -1
         Me.ReceiptNumber = nReceiptCurrent
         LoadSavedReceipt(nReceiptCurrent)
+    End Sub
+
+    Private Sub btnManagerMode_Click(sender As Object, e As EventArgs) Handles btnManagerMode.Click
+
+        If Me.ManagerMode Then ' on? then just turn if off
+            Me.ManagerMode = False
+            Exit Sub
+        End If
+
+        Me.ManagerMode = False ' false until password checked
+        Dim fManagerPassword As New ManagerPassword
+        With fManagerPassword
+            .ShowDialog()
+            If .CorrectPassword Then
+                Me.ManagerMode = True
+            End If
+        End With
+        fManagerPassword = Nothing
+
     End Sub
 
     Private Sub btnNextReceipt_Click(sender As Object, e As EventArgs) Handles btnNextReceipt.Click
