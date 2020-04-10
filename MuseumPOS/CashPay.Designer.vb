@@ -39,6 +39,7 @@ Partial Class CashPay
         Me.NumericUpDown1.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NumericUpDown1.Location = New System.Drawing.Point(208, 29)
         Me.NumericUpDown1.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {99, 0, 0, -2147483648})
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(368, 98)
         Me.NumericUpDown1.TabIndex = 0

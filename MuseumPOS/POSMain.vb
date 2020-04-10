@@ -9,6 +9,7 @@ Public Class POSMain
     Private nReceiptLatest As Integer ' highest #
     Private bSearchReady As Boolean
     Private nSumPriceItems As Double
+    Private bReceiptMarkedPaid As Boolean
 
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
         Dim fInventoryItem As New InventoryItem
@@ -77,13 +78,27 @@ Public Class POSMain
         fSwipe.SaleAmount = (Me.lblReceiptTotal.Text.Trim)
         fSwipe.ShowDialog()
         If fSwipe.CardWorked Then
-            LoadRowToGrid("Auth:" + fSwipe.AuthorizationCode, "CARD", Me.lblReceiptTotal.Text.Trim, "0")
-            lblReceiptTotal.Text = "0.00"
+            LoadRowToGrid(fSwipe.TransactionID, fSwipe.CardType + Space(1) + fSwipe.Last4 + Space(1) + "Auth:" + fSwipe.AuthorizationCode, "-" + Me.lblReceiptTotal.Text.Trim, "0")
+            GridTotals()
         End If
 
         fSwipe = Nothing
 
     End Sub
+    Private Function RefundCC(ByVal sTotal As String, ByVal sTransID As String) As Boolean
+
+        Dim fSwipe As New SwipeBluePay
+        Dim bRefunded As Boolean
+
+        fSwipe.SaleAmount = sTotal
+        fSwipe.TransactionID = sTransID
+        fSwipe.ShowDialog()
+        bRefunded = (fSwipe.CardWorked)
+
+        fSwipe = Nothing
+        Return bRefunded
+
+    End Function
     Private Sub Bxutton9_Click(sender As Object, e As EventArgs)
         Dim oPos As New POS(TextBox1.Text.Trim) ', Val(TextBox2.Text.Trim))
 
@@ -313,6 +328,8 @@ Public Class POSMain
         Dim nTaxAdjust As Double
         If e.RowIndex < 0 Then Exit Sub
 
+        Dim sPayType As String, sInvUPC As String, nRow As Integer
+
         Select Case e.ColumnIndex
 
             Case 1
@@ -346,7 +363,26 @@ Public Class POSMain
                 DataGridView1.Item(4, e.RowIndex).Value = Format(nTaxAdjust, "###0.00")
 
             Case 5
-                Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+                ' deletion - is it a payment?
+                nPriceModify = ("" & DataGridView1.Item(2, e.RowIndex).Value)
+                If nPriceModify < 0 Then ' a payment?
+                    sPayType = DataGridView1.Item(0, e.RowIndex).Value
+
+                    If sPayType.Trim = "CASH" Then
+                        ' open the cash drawer
+                        MsgBox("CASH REFUND " & nPriceModify.ToString.Trim.Replace("-", ""))
+                        Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+                    Else
+                        nRow = Me.DataGridView1.CurrentRow.Index
+                        sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
+                        ' we need to run a refund thru the card service
+                        If RefundCC(nPriceModify.ToString, sInvUPC) Then
+                            Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+                        End If
+                    End If
+                Else ' not a payment
+                    Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
+                End If
         End Select
         GridTotals()
 
@@ -454,6 +490,13 @@ Public Class POSMain
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
+        If nReceiptCurrent <> nReceiptLatest Then
+            If Strings.Trim(InputBox("Manager Code", "Manager Code Needed")) <> "wno139b" Then
+                MsgBox("INCORRECT PASSWORD")
+                Exit Sub
+            End If
+        End If
+
         If nSumPriceItems > 0 Then ' there are rows and they end up at zero (payment made)
             MsgBox("Full Payment Required")
             Exit Sub
@@ -482,6 +525,8 @@ Public Class POSMain
 
         ' put the items/payments into receipt, organized by receipt #
 
+        DeleteOldReceipt(Me.ReceiptNumber)  ' clear old data if this is an edit
+
         For nRow = 0 To nRowFinal
             sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
             sNameItem = ("" & DataGridView1.Item(0, nRow).Value)
@@ -495,11 +540,11 @@ Public Class POSMain
             nTaxRate = nTaxRate / 100
             nTaxedAmount = (nPrice * nTaxRate)
 
-            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate) "
+            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description) "
             sqlString += " VALUES ("
             sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
             sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
-            sqlString = sqlString & "," & sTaxRate & ")"
+            sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ")"
 
             Try
 
@@ -525,6 +570,38 @@ Public Class POSMain
 
     End Sub
 
+    Private Sub DeleteOldReceipt(ByVal nReceiptDelete As Integer)
+        Dim commandSQL1 As SqlCommand
+        Dim sConnectionString As String
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sqlString As String, AlreadyInTable As Boolean = False
+        Dim sqlConnect As New SqlConnection()
+        Dim sqlConnect1 As New SqlConnection(sConnectionString)
+
+
+        sqlString = "DELETE FROM Receipt WHERE ReceiptID = " & nReceiptDelete
+
+        Try
+
+            sqlConnect1.Open()
+            commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+            'commandSQL1.CommandType = CommandType.Text
+            commandSQL1.ExecuteNonQuery()
+            commandSQL1.Dispose()
+            sqlConnect1.Close()
+
+        Catch ex As ArgumentException
+            MsgBox("" & ex.Message)
+
+        Finally
+
+        End Try
+        Debug.Print(sqlString)
+
+
+    End Sub
+
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Dim nCashAmount As Double
         If nSumPriceItems = 0 Then Exit Sub
@@ -534,7 +611,7 @@ Public Class POSMain
         fCashPay.CashAmount = (nSumPriceItems)
         fCashPay.ShowDialog()
         nCashAmount = (fCashPay.CashAmount)
-        If nCashAmount > 0 Then
+        If nCashAmount <> 0 Then
             nCashAmount = (nCashAmount * -1)
             LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0")
         End If
@@ -561,7 +638,7 @@ Public Class POSMain
         sSearchLikeValue = QLike(txtEntry.Text)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT a.UPC, a.ReceiptID ,b.InvName, a.Price, a.paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate FROM Receipt a"
+        sSQL = "SELECT a.UPC, a.ReceiptID ,a.Description, b.InvName, a.Price, a.paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate FROM Receipt a"
         sSQL += " LEFT JOIN InventoryItems b ON a.UPC = b.InvUPC WHERE a.ReceiptID = " & nReceiptToLoad
 
         cmd.CommandText = sSQL
@@ -594,8 +671,15 @@ Public Class POSMain
 
                     If Not IsDBNull(reader.Item("InvName")) Then
                         sItemName = reader.Item("InvName")
+                        If String.IsNullOrEmpty(sItemName) Then
+                            sItemName = reader.Item("Description")
+                        End If
                     Else
-                        sItemName = ""
+                        If Not IsDBNull(reader.Item("Description")) Then
+                            sItemName = reader.Item("Description")
+                        Else
+                            sItemName = ""
+                        End If
                     End If
                     LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString)
                 End While
