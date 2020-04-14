@@ -10,7 +10,7 @@ Public Class POSMain
     Private bSearchReady As Boolean
     Private nSumPriceItems As Double
     Private bReceiptMarkedPaid As Boolean, bManagerMode As Boolean
-
+    Const sReceiptPath As String = "C:\Users\armis\Documents\receipt.txt"
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
         Dim fInventoryItem As New InventoryItem
         fInventoryItem.ShowDialog()
@@ -506,7 +506,7 @@ Public Class POSMain
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
-        Dim sConnectionString As String
+        Dim sConnectionString As String, sPrinterStr As String
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
@@ -538,6 +538,7 @@ Public Class POSMain
         Dim nRow As Integer, sQuantity As String
         Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
         Dim nRowFinal As Integer
+        Dim oFile = My.Computer.FileSystem.OpenTextFileWriter(sReceiptPath, True)
 
         nRowFinal = DataGridView1.Rows.Count - 1
 
@@ -566,6 +567,13 @@ Public Class POSMain
             sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
             sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ")"
 
+            sPrinterStr = ""
+            sPrinterStr = sPrinterStr & (sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
+            sPrinterStr = sPrinterStr & Me.ReceiptNumber & "," & sQuantity
+            sPrinterStr = sPrinterStr & "," & sTaxRate & "," & (sNameItem) & ")"
+
+            oFile.WriteLine(sPrinterStr)
+
             Try
 
                 sqlConnect1.Open()
@@ -587,6 +595,12 @@ Public Class POSMain
         DataGridView1.Rows.Clear()
         Me.ReceiptNumber = (Me.ReceiptNumber + 1)
         nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
+        oFile.Close()
+
+        Dim oDialog As New PrintDialog
+        oDialog.PrintToFile = False
+        oDialog.PrinterSettings.PrintFileName = sReceiptPath
+        oDialog.ShowDialog()
 
     End Sub
 
@@ -750,6 +764,14 @@ Public Class POSMain
         End With
         fManagerPassword = Nothing
 
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim oFile = My.Computer.FileSystem.OpenTextFileWriter("C:\Users\armis\Documents\receipt.txt", True)
+        oFile.WriteLine("dljlfasddkja444444444444444")
+        oFile.Close()
+
+        'C:\Users\armis\Documents
     End Sub
 
     Private Sub btnNextReceipt_Click(sender As Object, e As EventArgs) Handles btnNextReceipt.Click
