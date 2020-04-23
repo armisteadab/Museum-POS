@@ -2,6 +2,9 @@
 Imports IngenicoPOS
 Imports Ingenico
 Imports System.IO
+Imports Microsoft.Reporting
+Imports MuseumPOS.My
+Imports Microsoft.Reporting.WinForms
 
 Public Class POSMain
     Dim nReceiptNumber As Integer
@@ -21,6 +24,8 @@ Public Class POSMain
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewReceiptID()
 
+        Me.ReportViewer1.RefreshReport()
+        Me.ReportViewer1.RefreshReport()
     End Sub
 
     Private Sub NewReceiptID()
@@ -112,64 +117,6 @@ Public Class POSMain
         Return bRefunded
 
     End Function
-    Private Sub Bxutton9_Click(sender As Object, e As EventArgs)
-        Dim oPos As New POS(TextBox1.Text.Trim) ', Val(TextBox2.Text.Trim))
-
-        ' Dim oECRMessage As New ECRMessage
-        Dim oPOSMessage As New POSMessage
-        Dim nPOSSaleTotal As Long
-
-        nPOSSaleTotal = (nSumPriceItems)
-        nPOSSaleTotal = 12345
-
-        oPos.POSPrints = True
-        ' oECRMessage.TransactionType = Consts.TransactionType.INITIALIZATION
-        ' oECRMessage.CashierID = oPos.CashierID
-        ' oECRMessage.TerminalID = 83813886
-        ' oECRMessage.TransactionAmount = 12345   'Val(lblReceiptTotal.Text)
-        ' oECRMessage.POSPrints = True
-        ' oECRMessage.CurrencyISO = oPos.CurrencyISO
-
-
-        If oPos.Connect() Then
-
-            oPos.CashierID = Val(TextBox4.Text.Trim)
-            oPos.CurrencyISO = Val(TextBox5.Text.Trim) '840
-            oPos.Language = TextBox3.Text.Trim
-            oPos.NextTransactionNo = (nReceiptCurrent)
-
-
-
-            ' MsgBox("oECRMessage: " + oECRMessage.Message)
-
-            If Not oPos.IsConnected Then
-                MsgBox("ingenico iPP320 NOT Connected: 2")
-                Exit Sub
-            Else
-                '                MsgBox("oPOSMessage.CardDataSource: " & oPOSMessage.CardDataSource)
-                '                MsgBox("oPOSMessage.TransactionAmount: " & oPOSMessage.TransactionAmount)
-                '                MsgBox("oPOSMessage.TransactionDate: " & oPOSMessage.TransactionDate)
-                '                MsgBox("oPOSMessage.TransactionType: " & oPOSMessage.TransactionType)
-            End If
-
-            Dim bSaleSuccess As Boolean
-            Dim xSaleResult As SaleResult
-            xSaleResult = oPos.Sale(nPOSSaleTotal)
-            If xSaleResult.Success Then
-                '          If oPos.Sale((nPOSSaleTotal)).Success Then
-                MsgBox("success sale")
-            Else
-                MsgBox("FAIL")
-            End If
-
-            oPos.Disonnect()
-        Else
-            MsgBox("ingenico iPP320 NOT Connected: 1")
-        End If
-
-        oPos = Nothing
-
-    End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
@@ -465,7 +412,7 @@ Public Class POSMain
 
         If DataGridView1.Rows.Count < 1 Then
             lblReceiptTotal.Text = "0.00"
-            btnDone.Enabled = False
+            '           btnDone.Enabled = False
             nSumPriceItems = 0
             Exit Sub
         End If
@@ -511,7 +458,7 @@ Public Class POSMain
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         If nReceiptCurrent <> nReceiptLatest Then
-            If Not Me.managermode Then
+            If Not Me.ManagerMode Then
                 MsgBox("Manager Access Needed")
                 Exit Sub
             End If
@@ -534,12 +481,14 @@ Public Class POSMain
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
 
+        Dim rpt As New Microsoft.Reporting.WinForms.ReportViewerDesigner
+
+
         Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
         Dim nRow As Integer, sQuantity As String
         Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
         Dim nRowFinal As Integer
         Dim oFile = My.Computer.FileSystem.OpenTextFileWriter(sReceiptPath, True)
-
         nRowFinal = DataGridView1.Rows.Count - 1
 
         If nRowFinal < 0 Then Exit Sub
@@ -601,6 +550,9 @@ Public Class POSMain
         oDialog.PrintToFile = False
         oDialog.PrinterSettings.PrintFileName = sReceiptPath
         oDialog.ShowDialog()
+
+
+
 
     End Sub
 
@@ -766,12 +718,20 @@ Public Class POSMain
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Dim oFile = My.Computer.FileSystem.OpenTextFileWriter("C:\Users\armis\Documents\receipt.txt", True)
         oFile.WriteLine("dljlfasddkja444444444444444")
         oFile.Close()
 
         'C:\Users\armis\Documents
+    End Sub
+
+    Private Sub ReportViewer1_Load(sender As Object, e As EventArgs) Handles ReportViewer1.Load
+
+
+        ReportSetup()
+
+
     End Sub
 
     Private Sub btnNextReceipt_Click(sender As Object, e As EventArgs) Handles btnNextReceipt.Click
@@ -784,5 +744,20 @@ Public Class POSMain
         LoadSavedReceipt(nReceiptCurrent)
 
     End Sub
+
+    Private Sub ReportSetup()
+        Dim ds As New WinForms.ReportDataSource
+
+        ds.Name = "Receipt"
+        ds.Value = "Receipt" '"DataSource1.rds"
+
+        ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
+        ReportViewer1.LocalReport.DataSources.Add(ds)
+        ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\Receipt.rdl"
+
+        Dim rParam As New WinForms.ReportParameter("rID", "27")
+        ReportViewer1.LocalReport.SetParameters(rParam)
+    End Sub
+
 
 End Class
