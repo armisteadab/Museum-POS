@@ -6,6 +6,7 @@ Imports Microsoft.Reporting
 Imports MuseumPOS.My
 Imports Microsoft.Reporting.WinForms
 Imports System.Drawing.Printing
+Imports System.Xml
 
 Public Class POSMain
     Dim nReceiptNumber As Integer
@@ -97,7 +98,7 @@ Public Class POSMain
         fSwipe.SaleAmount = (Me.lblReceiptTotal.Text.Trim)
         fSwipe.ShowDialog()
         If fSwipe.CardWorked Then
-            LoadRowToGrid(fSwipe.TransactionID, fSwipe.CardType + Space(1) + fSwipe.Last4 + Space(1) + "Auth:" + fSwipe.AuthorizationCode, "-" + Me.lblReceiptTotal.Text.Trim, "0")
+            LoadRowToGrid(fSwipe.TransactionID, fSwipe.CardType + Space(1) + fSwipe.Last4 + Space(1) + "Auth:" + fSwipe.AuthorizationCode, "-" + Me.lblReceiptTotal.Text.Trim, "0", "1")
             GridTotals()
         End If
 
@@ -455,7 +456,7 @@ Public Class POSMain
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
-        Dim sConnectionString As String, sPrinterStr As String
+        Dim sConnectionString As String
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
@@ -511,17 +512,12 @@ Public Class POSMain
             nTaxRate = nTaxRate / 100
             nTaxedAmount = (nPrice * nTaxRate)
 
-            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description) "
+            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime) "
             sqlString += " VALUES ("
             sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
             sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
-            sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ")"
-
-            sPrinterStr = ""
-            sPrinterStr = sPrinterStr & (sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
-            sPrinterStr = sPrinterStr & Me.ReceiptNumber & "," & sQuantity
-            sPrinterStr = sPrinterStr & "," & sTaxRate & "," & (sNameItem) & ")"
-
+            sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
+            sqlString = sqlString & " AS datetime))"
 
             Try
 
@@ -602,14 +598,15 @@ Public Class POSMain
         nCashAmount = (fCashPay.CashAmount)
         If nCashAmount <> 0 Then
             nCashAmount = (nCashAmount * -1)
-            LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0")
+            LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1")
         End If
         fCashPay = Nothing
     End Sub
 
-    Private Sub LoadRowToGrid(ByVal sInvUPC$, ByVal sNameItem$, ByVal sPrice$, ByVal sTaxRate$)
+    Private Sub LoadRowToGrid(ByVal sInvUPC As String, ByVal sNameItem As String,
+                              ByVal sPrice As String, ByVal sTaxRate As String, ByVal sQuantity As String)
 
-        Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
+        Me.DataGridView1.Rows.Add(sNameItem.Trim, sQuantity.ToString, sPrice, sInvUPC.Trim, sTaxRate)
         nSumPriceItems = 0
         GridTotals()
 
@@ -670,12 +667,12 @@ Public Class POSMain
                             sItemName = ""
                         End If
                     End If
-                    LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString)
+                    LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString, reader.Item("Quantity").ToString)
                 End While
 
                 nSumPriceItems = (nSumPriceItems * -1)
                 If nSumPriceItems <> 0 Then ' some change to show
-                    LoadRowToGrid("", "CHANGE", Format(nSumPriceItems, "###0.00"), "")
+                    LoadRowToGrid("", "CHANGE", Format(nSumPriceItems, "###0.00"), "", "1")
                 End If
 
 
