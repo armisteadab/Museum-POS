@@ -84,7 +84,7 @@ Public Class POSMain
         Set(ByVal value As Integer)
             lblReceiptNumber.Text = value.ToString.Trim
             nReceiptNumber = (value)
-
+            ReceiptShow(nReceiptNumber)
         End Set
     End Property
 
@@ -448,6 +448,7 @@ Public Class POSMain
 
     Private Sub POSMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         DataGridView1.Width = (Me.Width - DataGridView1.Left) - 25
+        ReportViewer1.Height = (Me.Height - ReportViewer1.Top) - 35
     End Sub
 
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
@@ -728,10 +729,6 @@ Public Class POSMain
 
     Private Sub ReportViewer1_Load(sender As Object, e As EventArgs) Handles ReportViewer1.Load
 
-
-        ReportSetup()
-
-
     End Sub
 
     Private Sub btnNextReceipt_Click(sender As Object, e As EventArgs) Handles btnNextReceipt.Click
@@ -745,18 +742,61 @@ Public Class POSMain
 
     End Sub
 
-    Private Sub ReportSetup()
-        Dim ds As New WinForms.ReportDataSource
+    Private Sub ReceiptShow(ByVal sReceiptToShow As String)
+        Dim receiptDataSource As New WinForms.ReportDataSource
+        Dim dataset As New DataSet("Receipt")
 
-        ds.Name = "Receipt"
-        ds.Value = "Receipt" '"DataSource1.rds"
+        GetReceiptDataSet(sReceiptToShow, dataset)
+
+        receiptDataSource.Name = "Receipt"
+        receiptDataSource.Value = dataset.Tables("Receipt")
 
         ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
-        ReportViewer1.LocalReport.DataSources.Add(ds)
+        ReportViewer1.LocalReport.DataSources.Clear()
+        ReportViewer1.LocalReport.DataSources.Add(receiptDataSource)
         ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\Receipt.rdl"
 
-        Dim rParam As New WinForms.ReportParameter("rID", "27")
+        Dim rParam As New WinForms.ReportParameter
+        rParam.Values.Clear()
+        rParam.Name = "rID"
+        rParam.Values.Add(sReceiptToShow)
         ReportViewer1.LocalReport.SetParameters(rParam)
+
+        ReportViewer1.RefreshReport()
+
+    End Sub
+
+    Private Sub GetReceiptDataSet(ByVal parReceiptID As String,
+                               ByRef parDataSet As DataSet)
+
+        Dim sqlConnect As New SqlConnection(), sSQL$
+        Dim sConnectionString As String
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+
+        sSQL = "SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate"
+        sSQL += " FROM Receipt AS a LEFT OUTER JOIN"
+        sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
+        '        sSQL += " WHERE (a.ReceiptID = " + parReceiptID + ")"
+        sSQL += " WHERE (a.ReceiptID = @rID)"
+
+
+        Using connection As New SqlConnection(sConnectionString)
+
+            Dim command As New SqlCommand(sSQL, connection)
+
+            Dim parameter As New SqlParameter("rID",
+                parReceiptID)
+            command.Parameters.Add(parameter)
+
+            Dim ReceiptAdapter As New SqlDataAdapter(command)
+
+            ReceiptAdapter.Fill(parDataSet, "Receipt")
+
+        End Using
+
     End Sub
 
 
