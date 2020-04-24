@@ -5,6 +5,7 @@ Imports System.IO
 Imports Microsoft.Reporting
 Imports MuseumPOS.My
 Imports Microsoft.Reporting.WinForms
+Imports System.Drawing.Printing
 
 Public Class POSMain
     Dim nReceiptNumber As Integer
@@ -482,14 +483,11 @@ Public Class POSMain
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
 
-        Dim rpt As New Microsoft.Reporting.WinForms.ReportViewerDesigner
-
 
         Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
         Dim nRow As Integer, sQuantity As String
         Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
         Dim nRowFinal As Integer
-        Dim oFile = My.Computer.FileSystem.OpenTextFileWriter(sReceiptPath, True)
         nRowFinal = DataGridView1.Rows.Count - 1
 
         If nRowFinal < 0 Then Exit Sub
@@ -522,7 +520,6 @@ Public Class POSMain
             sPrinterStr = sPrinterStr & Me.ReceiptNumber & "," & sQuantity
             sPrinterStr = sPrinterStr & "," & sTaxRate & "," & (sNameItem) & ")"
 
-            oFile.WriteLine(sPrinterStr)
 
             Try
 
@@ -543,17 +540,19 @@ Public Class POSMain
         Next nRow
 
         DataGridView1.Rows.Clear()
+
+
         Me.ReceiptNumber = (Me.ReceiptNumber + 1)
         nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
-        oFile.Close()
 
-        Dim oDialog As New PrintDialog
-        oDialog.PrintToFile = False
-        oDialog.PrinterSettings.PrintFileName = sReceiptPath
-        oDialog.ShowDialog()
+        Dim sReceiptPrint As String
+        sReceiptPrint = (Me.ReceiptNumber - 1)
 
-
-
+        ReceiptShow(sReceiptPrint)
+        While ReportViewer1.CurrentStatus.InCancelableOperation
+            Application.DoEvents()
+        End While
+        ReportViewer1.PrintDialog()
 
     End Sub
 
