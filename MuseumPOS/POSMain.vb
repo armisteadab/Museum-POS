@@ -502,7 +502,9 @@ Public Class POSMain
             sPrice = ("" & DataGridView1.Item(2, nRow).Value)
             sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
             sTaxRate = ("" & DataGridView1.Item(4, nRow).Value)
-
+            If sTaxRate.ToString.Trim = "" Then
+                sTaxRate = "0"
+            End If
             'convert some values to numerics for taxed amount calc
             nTaxRate = CDbl(sTaxRate)
             nPrice = CDbl(sPrice)
@@ -544,6 +546,7 @@ Public Class POSMain
 
         Me.ReceiptNumber = (Me.ReceiptNumber + 1)
         nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
+        nReceiptCurrent = nReceiptLatest
 
         Dim sReceiptPrint As String
         sReceiptPrint = (Me.ReceiptNumber - 1)
@@ -553,7 +556,7 @@ Public Class POSMain
             Application.DoEvents()
         End While
         ReportViewer1.PrintDialog()
-
+        ReceiptShow(nReceiptLatest.ToString.Trim)
     End Sub
 
     Private Sub DeleteOldReceipt(ByVal nReceiptDelete As Integer)
