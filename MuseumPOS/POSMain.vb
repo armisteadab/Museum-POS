@@ -17,6 +17,12 @@ Public Class POSMain
     Private bReceiptMarkedPaid As Boolean, bManagerMode As Boolean
     Const sReceiptPath As String = "C:\Users\armis\Documents\receipt.txt"
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
+
+        If Not Me.ManagerMode Then ' on? then just turn if off
+            MsgBox("You need Manager's Access to Use this Function")
+            Exit Sub
+        End If
+
         Dim fInventoryItem As New InventoryItem
         fInventoryItem.ShowDialog()
         fInventoryItem = Nothing
@@ -229,17 +235,17 @@ Public Class POSMain
     End Sub
 
     Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
-        PickFromSearch()
+        PickFromSearch(e.RowIndex)
     End Sub
 
-    Private Sub PickFromSearch()
+    Private Sub PickFromSearch(ByVal parIndex As Integer)
 
         Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
 
-        sInvUPC = ("" & DataGridView2.Item(8, DataGridView2.CurrentRow.Index).Value)
-        sNameItem = ("" & DataGridView2.Item(0, DataGridView2.CurrentRow.Index).Value)
-        sPrice = ("" & DataGridView2.Item(4, DataGridView2.CurrentRow.Index).Value)
-        sTaxRate = ("" & DataGridView2.Item(10, DataGridView2.CurrentRow.Index).Value)
+        sInvUPC = ("" & DataGridView2.Item(8, parIndex).Value)
+        sNameItem = ("" & DataGridView2.Item(0, parIndex).Value)
+        sPrice = ("" & DataGridView2.Item(4, parIndex).Value)
+        sTaxRate = ("" & DataGridView2.Item(10, parIndex).Value)
 
         Me.DataGridView1.Rows.Add(sNameItem.Trim, "1", sPrice, sInvUPC.Trim, sTaxRate)
         DataGridView2.Visible = False ' selection made, clear the area
@@ -267,15 +273,7 @@ Public Class POSMain
     End Sub
 
     Private Sub DataGridView2_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView2.KeyUp
-        If e.KeyCode = Keys.Enter Then
-            PickFromSearch()
-        End If
 
-        If e.KeyCode = Keys.Escape Then ' abandon this operation
-            DataGridView2.Visible = False ' selection not made, clear the area
-            txtEntry.Enabled = True
-
-        End If
     End Sub
 
     Private Sub numQuantityAdjust_Leave(sender As Object, e As EventArgs)
@@ -762,6 +760,19 @@ Public Class POSMain
         ReportViewer1.LocalReport.SetParameters(rParam)
 
         ReportViewer1.RefreshReport()
+
+    End Sub
+
+    Private Sub DataGridView2_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView2.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            PickFromSearch(DataGridView2.CurrentRow.Index)
+        End If
+
+        If e.KeyCode = Keys.Escape Then ' abandon this operation
+            DataGridView2.Visible = False ' selection not made, clear the area
+            txtEntry.Enabled = True
+
+        End If
 
     End Sub
 
