@@ -284,8 +284,8 @@ Public Class POSMain
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
 
-        Dim nQuantity As Integer, nPriceModify As Double
-        Dim nTaxAdjust As Double
+        Dim nQuantity As Integer, nPriceModify As Double, nPriceModify_Absolute As Double
+        Dim nTaxAdjust As Double, sPriceModify As String
         If e.RowIndex < 0 Then Exit Sub
 
         Dim sPayType As String, sInvUPC As String, nRow As Integer
@@ -337,7 +337,9 @@ Public Class POSMain
 
                     If sPayType.Trim = "CASH" Then
                         ' open the cash drawer
-                        BigMsgBox("CASH REFUND " & nPriceModify.ToString.Trim.Replace("-", ""))
+                        nPriceModify_Absolute = Math.Abs(nPriceModify) ' remove the negative
+                        sPriceModify = String.Format("{0,-10:C}", nPriceModify_Absolute)
+                        BigMsgBox("CASH REFUND " & sPriceModify)
                         Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
                     Else
                         nRow = Me.DataGridView1.CurrentRow.Index
@@ -773,6 +775,48 @@ Public Class POSMain
             txtEntry.Enabled = True
 
         End If
+
+    End Sub
+
+    'clear all button
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        If nReceiptCurrent <> nReceiptLatest Then
+            BigMsgBox("Not Current Receipt")
+            Exit Sub
+        End If
+
+        Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
+        Dim nRow As Integer, sQuantity As String
+        Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
+        Dim nRowFinal As Integer
+        nRowFinal = DataGridView1.Rows.Count - 1
+
+        If nRowFinal < 0 Then Exit Sub
+
+        For nRow = 0 To nRowFinal
+            sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
+            sNameItem = ("" & DataGridView1.Item(0, nRow).Value)
+            sPrice = ("" & DataGridView1.Item(2, nRow).Value)
+            sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
+            sTaxRate = ("" & DataGridView1.Item(4, nRow).Value)
+            If sTaxRate.ToString.Trim = "" Then
+                sTaxRate = "0"
+            End If
+            'convert some values to numerics for taxed amount calc
+            nTaxRate = CDbl(sTaxRate)
+            nPrice = CDbl(sPrice)
+            nTaxRate = nTaxRate / 100
+            nTaxedAmount = (nPrice * nTaxRate)
+
+            If nPrice < 0 Then
+                BigMsgBox("Cannot Clear Receipt with Payments")
+                Exit Sub
+            End If
+
+
+        Next nRow
+
+        DataGridView1.Rows.Clear()
 
     End Sub
 
