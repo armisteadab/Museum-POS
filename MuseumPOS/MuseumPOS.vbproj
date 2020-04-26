@@ -148,6 +148,12 @@
     <Compile Include="CashPay.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialog1.Designer.vb">
+      <DependentUpon>Dialog1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReportReceipt.Designer.vb">
       <DependentUpon>ReportReceipt.vb</DependentUpon>
     </Compile>
@@ -233,6 +239,9 @@
   <ItemGroup>
     <EmbeddedResource Include="CashPay.resx">
       <DependentUpon>CashPay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog1.resx">
+      <DependentUpon>Dialog1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportReceipt.resx">
       <DependentUpon>ReportReceipt.vb</DependentUpon>

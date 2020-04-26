@@ -19,7 +19,7 @@ Public Class POSMain
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
 
         If Not Me.ManagerMode Then ' on? then just turn if off
-            MsgBox("You need Manager's Access to Use this Function")
+            BigMsgBox("You need Manager's Access to Use this Function")
             Exit Sub
         End If
 
@@ -292,7 +292,7 @@ Public Class POSMain
 
         If nReceiptCurrent <> nReceiptLatest Then
             If Not Me.ManagerMode Then
-                MsgBox("Manager Access Needed")
+                BigMsgBox("Manager Access Needed")
                 Exit Sub
             End If
         End If
@@ -337,7 +337,7 @@ Public Class POSMain
 
                     If sPayType.Trim = "CASH" Then
                         ' open the cash drawer
-                        MsgBox("CASH REFUND " & nPriceModify.ToString.Trim.Replace("-", ""))
+                        BigMsgBox("CASH REFUND " & nPriceModify.ToString.Trim.Replace("-", ""))
                         Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
                     Else
                         nRow = Me.DataGridView1.CurrentRow.Index
@@ -460,23 +460,23 @@ Public Class POSMain
 
         If nReceiptCurrent <> nReceiptLatest Then
             If Not Me.ManagerMode Then
-                MsgBox("Manager Access Needed")
+                BigMsgBox("Manager Access Needed")
                 Exit Sub
             End If
         End If
 
         If nSumPriceItems > 0 Then ' there are rows and they end up at zero (payment made)
-            MsgBox("Full Payment Required")
+            BigMsgBox("Full Payment Required")
             Exit Sub
         End If
 
         If DataGridView1.Rows.Count < 1 Then
-            MsgBox("Nothing to Print")
+            BigMsgBox("Nothing to Print")
             Exit Sub
         End If
 
         If nSumPriceItems < 0 Then ' there are rows and they end up at zero (payment made)
-            MsgBox("Change: " & lblReceiptTotal.Text.Replace("-", ""))
+            BigMsgBox("Change: " & lblReceiptTotal.Text.Replace("-", ""))
         End If
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -527,7 +527,7 @@ Public Class POSMain
                 sqlConnect1.Close()
 
             Catch ex As ArgumentException
-                MsgBox("" & ex.Message)
+                BigMsgBox("" & ex.Message)
 
             Finally
 
@@ -575,7 +575,7 @@ Public Class POSMain
             sqlConnect1.Close()
 
         Catch ex As ArgumentException
-            MsgBox("" & ex.Message)
+            BigMsgBox("" & ex.Message)
 
         Finally
 
@@ -689,7 +689,7 @@ Public Class POSMain
             Exit Sub
         End If
         If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
-            MsgBox("You need to resolve this open receipt before going to other receipts")
+            BigMsgBox("You need to resolve this open receipt before going to other receipts")
             Exit Sub
         End If
         nReceiptCurrent += -1

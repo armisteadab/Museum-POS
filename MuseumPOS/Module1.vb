@@ -9,4 +9,13 @@
         Return "'%" & sPar.Trim & "%'"
     End Function
 
+    Public Sub BigMsgBox(ByVal sMessage As String)
+        Dim fMessage As New Dialog1
+
+        fMessage.TextBox1.Text = "" & sMessage
+        fMessage.ShowDialog()
+        fMessage = Nothing
+
+    End Sub
+
 End Module
