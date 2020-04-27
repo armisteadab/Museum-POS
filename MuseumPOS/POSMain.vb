@@ -339,7 +339,7 @@ Public Class POSMain
                         ' open the cash drawer
                         nPriceModify_Absolute = Math.Abs(nPriceModify) ' remove the negative
                         sPriceModify = String.Format("{0,-10:C}", nPriceModify_Absolute)
-                        BigMsgBox("CASH REFUND " & sPriceModify)
+                        BigMsgBox("CASH REFUND " & sPriceModify & " Minus Change")
                         Me.DataGridView1.Rows.Remove(Me.DataGridView1.CurrentRow)
                     Else
                         nRow = Me.DataGridView1.CurrentRow.Index
@@ -587,20 +587,35 @@ Public Class POSMain
 
     End Sub
 
+    'CASH
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Dim nCashAmount As Double
-        If nSumPriceItems = 0 Then Exit Sub
+        If nSumPriceItems > 0 Then ' a sum to deal with?
 
-        Dim fCashPay As New CashPay
+            Dim fCashPay As New CashPay
 
-        fCashPay.CashAmount = (nSumPriceItems)
-        fCashPay.ShowDialog()
-        nCashAmount = (fCashPay.CashAmount)
-        If nCashAmount <> 0 Then
-            nCashAmount = (nCashAmount * -1)
-            LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1")
+            fCashPay.CashAmount = (nSumPriceItems)
+            fCashPay.ShowDialog()
+            nCashAmount = (fCashPay.CashAmount)
+            If nCashAmount <> 0 Then
+                nCashAmount = (nCashAmount * -1)
+                LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1")
+            End If
+            fCashPay = Nothing
+
+        Else ' possible cash refund
+            Dim fCashPay As New CashPay
+            ' don't bother to send the sum to the cash payment form
+            fCashPay.ShowDialog()
+            nCashAmount = (fCashPay.CashAmount)
+            If nCashAmount <> 0 Then
+                nCashAmount = (nCashAmount * -1)
+                LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1")
+            End If
+            fCashPay = Nothing
+
         End If
-        fCashPay = Nothing
+
     End Sub
 
     Private Sub LoadRowToGrid(ByVal sInvUPC As String, ByVal sNameItem As String,
@@ -781,7 +796,7 @@ Public Class POSMain
     'clear all button
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         If nReceiptCurrent <> nReceiptLatest Then
-            BigMsgBox("Not Current Receipt")
+            BigMsgBox("You Can Only Clear Latest Unpaid Receipt")
             Exit Sub
         End If
 
@@ -817,6 +832,17 @@ Public Class POSMain
         Next nRow
 
         DataGridView1.Rows.Clear()
+
+    End Sub
+
+    Private Sub btnGo2LatestReceipt_Click(sender As Object, e As EventArgs) Handles btnGo2LatestReceipt.Click
+        If nReceiptLatest = nReceiptCurrent Then ' already there
+            Exit Sub
+        End If
+
+        nReceiptCurrent = nReceiptLatest
+        Me.ReceiptNumber = nReceiptCurrent
+        LoadSavedReceipt(nReceiptCurrent)
 
     End Sub
 

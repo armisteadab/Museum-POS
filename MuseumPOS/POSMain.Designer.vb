@@ -71,6 +71,7 @@ Partial Class POSMain
         Me.btnManagerMode = New System.Windows.Forms.Button()
         Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnGo2LatestReceipt = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -491,17 +492,27 @@ Partial Class POSMain
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(1120, 792)
+        Me.Label2.Location = New System.Drawing.Point(1120, 788)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(98, 29)
         Me.Label2.TabIndex = 35
         Me.Label2.Text = "TOTAL:"
+        '
+        'btnGo2LatestReceipt
+        '
+        Me.btnGo2LatestReceipt.Location = New System.Drawing.Point(1359, 10)
+        Me.btnGo2LatestReceipt.Name = "btnGo2LatestReceipt"
+        Me.btnGo2LatestReceipt.Size = New System.Drawing.Size(89, 34)
+        Me.btnGo2LatestReceipt.TabIndex = 36
+        Me.btnGo2LatestReceipt.Text = "Last>>"
+        Me.btnGo2LatestReceipt.UseVisualStyleBackColor = True
         '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1860, 935)
+        Me.Controls.Add(Me.btnGo2LatestReceipt)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ReportViewer1)
         Me.Controls.Add(Me.btnManagerMode)
@@ -575,4 +586,5 @@ Partial Class POSMain
     Friend WithEvents btnManagerMode As Button
     Friend WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
     Friend WithEvents Label2 As Label
+    Friend WithEvents btnGo2LatestReceipt As Button
 End Class
