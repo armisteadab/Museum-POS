@@ -172,6 +172,12 @@
     <Compile Include="ReceiptView.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ReportsMenu.Designer.vb">
+      <DependentUpon>ReportsMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SwipeBluePay.Designer.vb">
       <DependentUpon>SwipeBluePay.vb</DependentUpon>
     </Compile>
@@ -272,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReceiptView.resx">
       <DependentUpon>ReceiptView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsMenu.resx">
+      <DependentUpon>ReportsMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SwipeBluePay.resx">
       <DependentUpon>SwipeBluePay.vb</DependentUpon>

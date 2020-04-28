@@ -539,10 +539,13 @@ Public Class POSMain
 
         DataGridView1.Rows.Clear()
 
-
-        Me.ReceiptNumber = (Me.ReceiptNumber + 1)
-        nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
-        nReceiptCurrent = nReceiptLatest
+        If Me.ReceiptNumber = nReceiptLatest Then
+            Me.ReceiptNumber = (Me.ReceiptNumber + 1)
+            nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
+            nReceiptCurrent = nReceiptLatest
+        Else
+            Me.ReceiptNumber = (nReceiptLatest) ' done changing old receipt- go to latest
+        End If
 
         Dim sReceiptPrint As String
         sReceiptPrint = (Me.ReceiptNumber - 1)
@@ -844,6 +847,12 @@ Public Class POSMain
         Me.ReceiptNumber = nReceiptCurrent
         LoadSavedReceipt(nReceiptCurrent)
 
+    End Sub
+
+    Private Sub btnReportMenu_Click(sender As Object, e As EventArgs) Handles btnReportMenu.Click
+        Dim fReportsMenu As New ReportsMenu
+        fReportsMenu.ShowDialog()
+        fReportsMenu = Nothing
     End Sub
 
     Private Sub GetReceiptDataSet(ByVal parReceiptID As String,
