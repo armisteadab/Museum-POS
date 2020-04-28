@@ -59,8 +59,11 @@ Public Class POSMain
         reader = cmd.ExecuteReader()
 
         If reader.HasRows Then
+            On Error Resume Next
+
             reader.Read()
             nReceiptCurrent = 0 + reader.Item("MaxID")
+
         End If
 
         nReceiptCurrent += 1
@@ -512,12 +515,12 @@ Public Class POSMain
             nTaxRate = nTaxRate / 100
             nTaxedAmount = (nPrice * nTaxRate)
 
-            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime) "
+            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
             sqlString += " VALUES ("
             sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
             sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
             sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
-            sqlString = sqlString & " AS datetime))"
+            sqlString = sqlString & " AS datetime), " & QTrim(Now) & ")"
 
             Try
 
