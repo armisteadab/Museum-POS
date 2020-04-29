@@ -35,7 +35,7 @@ Public Class ReportReceipt
 
         sReportTitle = ""
         If sReportType = "RANGE" Then
-            sReportTitle = "From " & DateTimePicker_Start.Value.ToShortDateString.Trim & "To" & DateTimePicker_End.Value.ToShortDateString.Trim
+            sReportTitle = "From " & DateTimePicker_Start.Value.ToShortDateString.Trim & " To " & DateTimePicker_End.Value.ToShortDateString.Trim
         End If
 
         If sReportType = "SINGLE" Then
@@ -59,7 +59,7 @@ Public Class ReportReceipt
         sqlConnect.ConnectionString = sConnectionString
 
         sSQL = "SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate, a.ReceiptDateTime"
-        sSQL += " FROM Receipt AS a LEFT OUTER JOIN"
+        sSQL += " FROM Receipt AS a INNER JOIN"
         sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
 
         If sReportType = "RANGE" Then
@@ -69,8 +69,9 @@ Public Class ReportReceipt
         If sReportType = "SINGLE" Then
             sSQL += " WHERE a.ReceiptDate = " + QTrim(DateTimePickerSingle.Value.ToShortDateString)
         End If
+        '        sSQL += " AND "
 
-        '   sSQL += " WHERE a.ReceiptDateTime = @rDateTime"
+        sSQL += " ORDER BY a.ReceiptDateTime"
         Debug.Print(sSQL)
 
         Using connection As New SqlConnection(sConnectionString)
