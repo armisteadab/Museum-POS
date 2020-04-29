@@ -326,8 +326,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>0.52333in</Top>
-            <Left>2.87777in</Left>
+            <Top>0.50945in</Top>
+            <Left>3.54721in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>3</ZIndex>
@@ -359,8 +359,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>0.52333in</Top>
-            <Left>3.91944in</Left>
+            <Top>0.50945in</Top>
+            <Left>4.38055in</Left>
             <Height>0.25in</Height>
             <Width>0.89722in</Width>
             <ZIndex>4</ZIndex>
@@ -392,8 +392,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>0.52333in</Top>
-            <Left>4.88611in</Left>
+            <Top>0.50945in</Top>
+            <Left>5.55555in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>5</ZIndex>

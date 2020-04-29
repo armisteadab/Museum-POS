@@ -32,7 +32,7 @@ Partial Class ReportsMenu
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Cancel_Button.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel_Button.Location = New System.Drawing.Point(872, 418)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(134, 88)
         Me.Cancel_Button.TabIndex = 1
@@ -45,7 +45,7 @@ Partial Class ReportsMenu
         Me.btnTodayReceipts.Name = "btnTodayReceipts"
         Me.btnTodayReceipts.Size = New System.Drawing.Size(261, 55)
         Me.btnTodayReceipts.TabIndex = 1
-        Me.btnTodayReceipts.Text = "Today's Receipts"
+        Me.btnTodayReceipts.Text = "Sales"
         Me.btnTodayReceipts.UseVisualStyleBackColor = True
         '
         'ReportsMenu
@@ -57,13 +57,13 @@ Partial Class ReportsMenu
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.btnTodayReceipts)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "ReportsMenu"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "ReportsMenu"
+        Me.Text = "Reports Menu"
         Me.ResumeLayout(False)
 
     End Sub

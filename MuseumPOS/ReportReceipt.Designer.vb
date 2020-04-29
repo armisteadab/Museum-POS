@@ -149,7 +149,7 @@ Partial Class ReportReceipt
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ReportViewer1)
         Me.Name = "ReportReceipt"
-        Me.Text = "Receipt Report"
+        Me.Text = "Sales Report"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
