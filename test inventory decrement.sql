@@ -1,0 +1,1 @@
+﻿UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity - 2) WHERE Id = 1219

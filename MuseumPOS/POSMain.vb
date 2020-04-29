@@ -537,7 +537,28 @@ Public Class POSMain
             Finally
 
             End Try
-            Debug.Print(sqlString)
+
+            ' remove sold items from inventory
+            sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity - " & sQuantity & ")"
+            sqlString = sqlString & " WHERE InvUPC = " & QTrim(sInvUPC)
+
+            Try
+
+                sqlConnect1.Open()
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+                commandSQL1.ExecuteNonQuery()
+                commandSQL1.Dispose()
+                sqlConnect1.Close()
+
+            Catch ex As ArgumentException
+                BigMsgBox("" & ex.Message)
+
+            Finally
+
+            End Try
+
+
+
         Next nRow
 
         DataGridView1.Rows.Clear()
@@ -559,7 +580,8 @@ Public Class POSMain
         End While
         ReportViewer1.PrintDialog()
         ReceiptShow(nReceiptLatest.ToString.Trim)
-    End Sub
+    
+End Sub
 
     Private Sub DeleteOldReceipt(ByVal nReceiptDelete As Integer)
         Dim commandSQL1 As SqlCommand
