@@ -54,6 +54,7 @@
   <ItemGroup>
     <Report Include="Receipt.rdl" />
     <Report Include="Report1.rdl" />
+    <Report Include="ReportInventory.rdl" />
     <Report Include="ReportReceipt.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

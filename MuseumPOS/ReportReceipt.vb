@@ -58,7 +58,7 @@ Public Class ReportReceipt
 
         sqlConnect.ConnectionString = sConnectionString
 
-        sSQL = "SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate, a.ReceiptDateTime"
+        sSQL = "SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.ReceiptDateTime, a.Quantity, a.TaxRate, a.ReceiptDateTime"
         sSQL += " FROM Receipt AS a INNER JOIN"
         sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
 

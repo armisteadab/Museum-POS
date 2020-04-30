@@ -73,6 +73,7 @@ Partial Class POSMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnGo2LatestReceipt = New System.Windows.Forms.Button()
         Me.btnReportMenu = New System.Windows.Forms.Button()
+        Me.btnReturn = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -278,7 +279,7 @@ Partial Class POSMain
         'btnDone
         '
         Me.btnDone.Font = New System.Drawing.Font("Constantia", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDone.Location = New System.Drawing.Point(1248, 836)
+        Me.btnDone.Location = New System.Drawing.Point(1382, 836)
         Me.btnDone.Name = "btnDone"
         Me.btnDone.Size = New System.Drawing.Size(211, 87)
         Me.btnDone.TabIndex = 16
@@ -518,11 +519,22 @@ Partial Class POSMain
         Me.btnReportMenu.Text = "Reports"
         Me.btnReportMenu.UseVisualStyleBackColor = True
         '
+        'btnReturn
+        '
+        Me.btnReturn.Font = New System.Drawing.Font("Constantia", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReturn.Location = New System.Drawing.Point(1125, 836)
+        Me.btnReturn.Name = "btnReturn"
+        Me.btnReturn.Size = New System.Drawing.Size(199, 87)
+        Me.btnReturn.TabIndex = 38
+        Me.btnReturn.Text = "RETURN"
+        Me.btnReturn.UseVisualStyleBackColor = True
+        '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1924, 935)
+        Me.Controls.Add(Me.btnReturn)
         Me.Controls.Add(Me.btnReportMenu)
         Me.Controls.Add(Me.btnGo2LatestReceipt)
         Me.Controls.Add(Me.Label2)
@@ -600,4 +612,5 @@ Partial Class POSMain
     Friend WithEvents Label2 As Label
     Friend WithEvents btnGo2LatestReceipt As Button
     Friend WithEvents btnReportMenu As Button
+    Friend WithEvents btnReturn As Button
 End Class
