@@ -46,6 +46,7 @@ Partial Class SwipeBluePay
         Me.TextBoxPhone = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBoxEmail = New System.Windows.Forms.TextBox()
+        Me.btnManualEntry = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnRunCard
@@ -268,11 +269,22 @@ Partial Class SwipeBluePay
         Me.TextBoxEmail.Size = New System.Drawing.Size(609, 41)
         Me.TextBoxEmail.TabIndex = 23
         '
+        'btnManualEntry
+        '
+        Me.btnManualEntry.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnManualEntry.Location = New System.Drawing.Point(957, 180)
+        Me.btnManualEntry.Name = "btnManualEntry"
+        Me.btnManualEntry.Size = New System.Drawing.Size(169, 109)
+        Me.btnManualEntry.TabIndex = 25
+        Me.btnManualEntry.Text = "Manual Entry"
+        Me.btnManualEntry.UseVisualStyleBackColor = True
+        '
         'SwipeBluePay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1155, 554)
+        Me.Controls.Add(Me.btnManualEntry)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TextBoxEmail)
         Me.Controls.Add(Me.Label10)
@@ -333,4 +345,5 @@ Partial Class SwipeBluePay
     Friend WithEvents TextBoxPhone As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBoxEmail As TextBox
+    Friend WithEvents btnManualEntry As Button
 End Class

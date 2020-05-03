@@ -733,6 +733,9 @@ End Sub
         If nReceiptLatest = 1 Then
             Exit Sub
         End If
+        If Me.ReceiptNumber = 1 Then
+            Exit Sub
+        End If
         If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
             BigMsgBox("You need to resolve this open receipt before going to other receipts")
             Exit Sub
@@ -881,118 +884,6 @@ End Sub
     End Sub
 
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
-        Dim sqlString As String, AlreadyInTable As Boolean = False
-        Dim sqlConnect As New SqlConnection()
-        Dim sConnectionString As String
-
-        Exit Sub 'vvvvvvv
-
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
-
-        If nReceiptCurrent <> nReceiptLatest Then
-            If Not Me.ManagerMode Then
-                BigMsgBox("Manager Access Needed")
-                Exit Sub
-            End If
-        End If
-
-
-        Dim sqlConnect1 As New SqlConnection(sConnectionString)
-        Dim commandSQL1 As SqlCommand
-
-
-        Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
-        Dim nRow As Integer, sQuantity As String
-        Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
-        Dim nRowFinal As Integer
-        nRowFinal = DataGridView1.Rows.Count - 1
-
-        If nRowFinal < 0 Then Exit Sub
-
-        ' put the items/payments into receipt, organized by receipt #
-
-        DeleteOldReceipt(Me.ReceiptNumber)  ' clear old data if this is an edit
-
-        For nRow = 0 To nRowFinal
-            sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
-            sNameItem = ("" & DataGridView1.Item(0, nRow).Value)
-            sPrice = ("" & DataGridView1.Item(2, nRow).Value)
-            sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
-            sTaxRate = ("" & DataGridView1.Item(4, nRow).Value)
-            If sTaxRate.ToString.Trim = "" Then
-                sTaxRate = "0"
-            End If
-            'convert some values to numerics for taxed amount calc
-            nTaxRate = CDbl(sTaxRate)
-            nPrice = CDbl(sPrice)
-            nTaxRate = nTaxRate / 100
-            nTaxedAmount = (nPrice * nTaxRate)
-
-            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
-            sqlString += " VALUES ("
-            sqlString = sqlString & QTrim(sInvUPC) & ", -" & (sPrice) & ", -" & (sPrice) & ", -" & nTaxedAmount.ToString & ","
-            sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
-            sqlString = sqlString & "," & sTaxRate & ", 'RETURN', cast(" & QTrim(Now)
-            sqlString = sqlString & " AS datetime), " & QTrim(Now) & ")"
-
-            Try
-
-                sqlConnect1.Open()
-                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
-                'commandSQL1.CommandType = CommandType.Text
-                commandSQL1.ExecuteNonQuery()
-                commandSQL1.Dispose()
-                sqlConnect1.Close()
-
-            Catch ex As ArgumentException
-                BigMsgBox("" & ex.Message)
-
-            Finally
-
-            End Try
-
-            ' remove sold items from inventory
-            sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity - " & sQuantity & ")"
-            sqlString = sqlString & " WHERE InvUPC = " & QTrim(sInvUPC)
-
-            Try
-
-                sqlConnect1.Open()
-                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
-                commandSQL1.ExecuteNonQuery()
-                commandSQL1.Dispose()
-                sqlConnect1.Close()
-
-            Catch ex As ArgumentException
-                BigMsgBox("" & ex.Message)
-
-            Finally
-
-            End Try
-
-
-
-        Next nRow
-
-        DataGridView1.Rows.Clear()
-
-        If Me.ReceiptNumber = nReceiptLatest Then
-            Me.ReceiptNumber = (Me.ReceiptNumber + 1)
-            nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
-            nReceiptCurrent = nReceiptLatest
-        Else
-            Me.ReceiptNumber = (nReceiptLatest) ' done changing old receipt- go to latest
-        End If
-
-        Dim sReceiptPrint As String
-        sReceiptPrint = (Me.ReceiptNumber - 1)
-
-        ReceiptShow(sReceiptPrint)
-        While ReportViewer1.CurrentStatus.InCancelableOperation
-            Application.DoEvents()
-        End While
-        ReportViewer1.PrintDialog()
-        ReceiptShow(nReceiptLatest.ToString.Trim)
 
     End Sub
 

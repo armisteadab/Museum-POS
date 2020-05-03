@@ -154,6 +154,12 @@
     <Compile Include="Dialog1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ManualEntryBluePay.Designer.vb">
+      <DependentUpon>ManualEntryBluePay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManualEntryBluePay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReportReceipt.Designer.vb">
       <DependentUpon>ReportReceipt.vb</DependentUpon>
     </Compile>
@@ -248,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog1.resx">
       <DependentUpon>Dialog1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManualEntryBluePay.resx">
+      <DependentUpon>ManualEntryBluePay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportReceipt.resx">
       <DependentUpon>ReportReceipt.vb</DependentUpon>

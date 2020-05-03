@@ -489,6 +489,7 @@ Namespace BPVB
             Me.transType = "REFUND"
             Me.masterID = masterID
             Me.api = "bp10emu"
+
         End Sub
 
         ''' <summary>

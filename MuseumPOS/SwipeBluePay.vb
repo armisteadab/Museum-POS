@@ -2,13 +2,16 @@
 Imports MuseumPOS.BPVB
 
 Public Class SwipeBluePay
-    Private sSaleAmount As String
+    Private sSaleAmount As String, nSaleAmount As Double
     Private bSuccess As Boolean
     Private sAuthorizationCode As String
     Private sCardType As String
     Private sLast4 As String
     Private sTransactionID As String
     Private bRefunding As Boolean
+    Private sManualCC As String
+    Private sManualCCExp As String
+    Private sManualCVV2 As String
 
     Public Property TransactionID() As String
         Get
@@ -36,6 +39,8 @@ Public Class SwipeBluePay
         End Get
         Set(ByVal value As String)
             sSaleAmount = value
+            nSaleAmount = CDbl(sSaleAmount)
+
         End Set
     End Property
 
@@ -97,6 +102,7 @@ Public Class SwipeBluePay
         Dim secretKey As String = "P7KKNNCTELSV12VWSNQ8OAZAXX/IKI4X"
         'Dim secretKey As String = "100868017210"
         Dim mode As String = "TEST"
+        Dim sRefundAmount As String
 
         Dim payment As BluePay = New BluePay(
             accountID,
@@ -117,16 +123,24 @@ Public Class SwipeBluePay
      TextBoxEmail.Text.Trim
         )
 
-        ' Set payment information for a swiped credit card transaction
-        ' payment.swipe("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
-        payment.swipe(TextBox1.Text)
-        '        payment.sale(amount sSaleAmount)
+        If Not TextBox1.Text.Trim = "" Then
+
+            ' Set payment information for a swiped credit card transaction
+            ' payment.swipe("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
+            payment.swipe(TextBox1.Text)
+            '        payment.sale(amount sSaleAmount)
+        Else
+            payment.setCCInformation(sManualCC, sManualCCExp, sManualCVV2)
+        End If
+
         payment.sale(sSaleAmount)
 
         If Not bRefunding Then
             payment.process()
         Else
-            payment.refund(sTransactionID)
+            nSaleAmount = nSaleAmount * -1
+            sRefundAmount = nSaleAmount.ToString
+            payment.refund(sTransactionID, sRefundAmount)
         End If
 
         btnRunCard.Enabled = False ' you did it- don't need to do it again
@@ -151,6 +165,7 @@ Public Class SwipeBluePay
             sAuthorizationCode = payment.getAuthCode().Trim
             Label1.Text = ("Authorization Code: " + sAuthorizationCode)
             bSuccess = True ' tell the main form
+            SaveCCAuthInfo(sAuthorizationCode, sTransactionID)
 
         Else
             Label1.Text = ("Transaction Error: " + payment.getMessage())
@@ -167,7 +182,23 @@ Public Class SwipeBluePay
         Me.Close()
     End Sub
 
+    Private Sub btnManualEntry_Click(sender As Object, e As EventArgs) Handles btnManualEntry.Click
+
+        Dim fManualEntry As New ManualEntryBluePay
+        fManualEntry.ShowDialog()
+
+        With fManualEntry
+            sManualCC = .ManualCC
+            sManualCCExp = .ManualCExp
+            sManualCVV2 = .ManualCVV2
+        End With
+
+        fManualEntry = Nothing
+    End Sub
+
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
 
     End Sub
+
+
 End Class
