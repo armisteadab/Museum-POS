@@ -521,7 +521,7 @@ Partial Class POSMain
         '
         'btnReturn
         '
-        Me.btnReturn.Font = New System.Drawing.Font("Constantia", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReturn.Font = New System.Drawing.Font("Constantia", 22.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReturn.Location = New System.Drawing.Point(1125, 836)
         Me.btnReturn.Name = "btnReturn"
         Me.btnReturn.Size = New System.Drawing.Size(199, 87)

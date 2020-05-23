@@ -75,34 +75,6 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox4">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Receipt</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Top>1.13112in</Top>
-            <Height>0.25in</Height>
-            <Width>0.58333in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Tablix Name="Tablix1">
             <TablixBody>
               <TablixColumns>
@@ -235,7 +207,6 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             <Top>1.45056in</Top>
             <Height>0.25in</Height>
             <Width>2.74167in</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -276,7 +247,7 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Height>0.425in</Height>
             <Width>2.60833in</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -305,7 +276,7 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             <Top>1.77in</Top>
             <Height>0.25in</Height>
             <Width>0.83333in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -321,7 +292,7 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             <Left>0.63889in</Left>
             <Height>0in</Height>
             <Width>2.10278in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -344,10 +315,10 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>1.13112in</Top>
-            <Left>0.63889in</Left>
+            <Left>0.90277in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -365,13 +336,42 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             <Top>0.49444in</Top>
             <Height>0.63668in</Height>
             <Width>2.60833in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Image>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!title.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>1.15889in</Top>
+            <Height>0.25in</Height>
+            <Width>0.83333in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>2.53611in</Height>
         <Style />
@@ -388,7 +388,19 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
   <ReportParameters>
     <ReportParameter Name="rID">
       <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
       <Prompt>r ID</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="title">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>Receipt</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Title</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
@@ -400,6 +412,11 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>rID</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>title</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

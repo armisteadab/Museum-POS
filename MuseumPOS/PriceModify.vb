@@ -1,4 +1,6 @@
-﻿Public Class PriceModify
+﻿Imports Ingenico.Connect.Sdk.Domain.Payment.Definitions
+
+Public Class PriceModify
     Dim nOriginalPrice As Double
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
         Me.Close()
@@ -34,7 +36,7 @@
             Return nOriginalPrice
         End Get
         Set(ByVal value As Double)
-            nOriginalPrice = value
+            nOriginalPrice = Math.Abs(value)
             numPriceModify.Value = nOriginalPrice
         End Set
     End Property

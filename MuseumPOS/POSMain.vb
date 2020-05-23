@@ -13,7 +13,7 @@ Public Class POSMain
     Private nReceiptCurrent As Integer
     Private nReceiptLatest As Integer ' highest #
     Private bSearchReady As Boolean
-    Private nSumPriceItems As Double
+    Private nSumPriceItems As Double, LatestReturnNumber As Integer
     Private bReceiptMarkedPaid As Boolean, bManagerMode As Boolean
     Const sReceiptPath As String = "C:\Users\armis\Documents\receipt.txt"
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
@@ -457,6 +457,9 @@ Public Class POSMain
     End Sub
 
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
+        FireReceipt(False)
+    End Sub
+    Private Sub FireReceipt(ByVal bIsReturn As Boolean)
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String
@@ -470,7 +473,7 @@ Public Class POSMain
             End If
         End If
 
-        If nSumPriceItems > 0 Then ' there are rows and they end up at zero (payment made)
+        If nSumPriceItems > 0 And (Not bIsReturn) Then ' there are rows and they end up at zero (payment made)
             BigMsgBox("Full Payment Required")
             Exit Sub
         End If
@@ -481,12 +484,15 @@ Public Class POSMain
         End If
 
         If nSumPriceItems < 0 Then ' there are rows and they end up at zero (payment made)
-            BigMsgBox("Change: " & lblReceiptTotal.Text.Replace("-", ""))
+            If bIsReturn Then
+                BigMsgBox("Return to Customer: " & lblReceiptTotal.Text.Replace("-", ""))
+            Else
+                BigMsgBox("Change: " & lblReceiptTotal.Text.Replace("-", ""))
+            End If
         End If
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
-
 
         Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
         Dim nRow As Integer, sQuantity As String
@@ -499,6 +505,9 @@ Public Class POSMain
         ' put the items/payments into receipt, organized by receipt #
 
         DeleteOldReceipt(Me.ReceiptNumber)  ' clear old data if this is an edit
+
+        LatestReturnNumber = GetLatestReturnNumber()
+
 
         For nRow = 0 To nRowFinal
             sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
@@ -515,12 +524,21 @@ Public Class POSMain
             nTaxRate = nTaxRate / 100
             nTaxedAmount = (nPrice * nTaxRate)
 
-            sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
-            sqlString += " VALUES ("
-            sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
-            sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
-            sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
-            sqlString = sqlString & " AS datetime), " & QTrim(Now) & ")"
+            If Not bIsReturn Then
+                sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
+                sqlString += " VALUES ("
+                sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
+                sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
+                sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
+                sqlString = sqlString & " AS datetime), " & QTrim(Now) & ")"
+            Else
+                sqlString = "INSERT INTO Returns(UPC, Price, Paid, TaxPaid, ReturnID, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
+                sqlString += " VALUES ("
+                sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
+                sqlString = sqlString & LatestReturnNumber & "," & Me.ReceiptNumber & "," & sQuantity
+                sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
+                sqlString = sqlString & " AS datetime), " & QTrim(Now) & ")"
+            End If
 
             Try
 
@@ -538,8 +556,14 @@ Public Class POSMain
 
             End Try
 
-            ' remove sold items from inventory
-            sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity - " & sQuantity & ")"
+            If Not bIsReturn Then
+                ' remove sold items from inventory
+                sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity - " & sQuantity & ")"
+            Else
+                'return item to inventory
+                sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity + " & sQuantity & ")"
+            End If
+
             sqlString = sqlString & " WHERE InvUPC = " & QTrim(sInvUPC)
 
             Try
@@ -563,7 +587,8 @@ Public Class POSMain
 
         DataGridView1.Rows.Clear()
 
-        If Me.ReceiptNumber = nReceiptLatest Then
+        If Not bIsReturn Then
+            If Me.ReceiptNumber = nReceiptLatest Then
             Me.ReceiptNumber = (Me.ReceiptNumber + 1)
             nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
             nReceiptCurrent = nReceiptLatest
@@ -578,10 +603,11 @@ Public Class POSMain
         While ReportViewer1.CurrentStatus.InCancelableOperation
             Application.DoEvents()
         End While
-        ReportViewer1.PrintDialog()
-        ReceiptShow(nReceiptLatest.ToString.Trim)
-    
-End Sub
+            ReportViewer1.PrintDialog()
+            ReceiptShow(nReceiptLatest.ToString.Trim)
+        End If
+
+    End Sub
 
     Private Sub DeleteOldReceipt(ByVal nReceiptDelete As Integer)
         Dim commandSQL1 As SqlCommand
@@ -805,7 +831,12 @@ End Sub
         rParam.Values.Clear()
         rParam.Name = "rID"
         rParam.Values.Add(sReceiptToShow)
+        Dim rParam2 As New WinForms.ReportParameter
+        rParam2.Name = "title"
+        rParam2.Values.Add("Receipt")
+
         ReportViewer1.LocalReport.SetParameters(rParam)
+        ReportViewer1.LocalReport.SetParameters(rParam2)
 
         ReportViewer1.RefreshReport()
 
@@ -885,6 +916,9 @@ End Sub
 
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
+        FireReceipt(True)
+        ReturnShow(LatestReturnNumber)
+
     End Sub
 
     Private Sub GetReceiptDataSet(ByVal parReceiptID As String,
@@ -917,6 +951,103 @@ End Sub
             ReceiptAdapter.Fill(parDataSet, "Receipt")
 
         End Using
+
+    End Sub
+
+
+    Private Sub GetReturnDataSet(ByVal parReceiptID As String,
+                               ByRef parDataSet As DataSet)
+
+        Dim sqlConnect As New SqlConnection(), sSQL$
+        Dim sConnectionString As String
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+
+        sSQL = "SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate"
+        sSQL += " FROM Returns AS a LEFT OUTER JOIN"
+        sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
+        '        sSQL += " WHERE (a.ReceiptID = " + parReceiptID + ")"
+        sSQL += " WHERE (a.ReturnID = @rID)"
+
+
+        Using connection As New SqlConnection(sConnectionString)
+
+            Dim command As New SqlCommand(sSQL, connection)
+
+            Dim parameter As New SqlParameter("rID",
+                parReceiptID)
+            command.Parameters.Add(parameter)
+
+            Dim ReceiptAdapter As New SqlDataAdapter(command)
+
+            ReceiptAdapter.Fill(parDataSet, "Receipt")
+
+        End Using
+
+    End Sub
+    Private Function GetLatestReturnNumber() As Integer
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim nReturnCurrent As Integer, nReturnLatest As Integer
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "SELECT Max(ReturnID) as MaxID, Count(ReturnID) as CountID from Returns"
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        If reader.HasRows Then
+            On Error Resume Next
+
+            reader.Read()
+            nReturnCurrent = 0 + reader.Item("MaxID")
+
+        End If
+
+        nReturnCurrent += 1
+        nReturnLatest = (nReturnCurrent)
+        reader.Close()
+
+        sqlConnect.Close()
+
+        Return (nReturnCurrent)
+    End Function
+
+    Private Sub ReturnShow(ByVal sReturnToShow As String)
+        Dim ReturnDataSource As New WinForms.ReportDataSource
+        Dim dataset As New DataSet("Receipt")
+
+        GetReturnDataSet(sReturnToShow, dataset)
+
+        ReturnDataSource.Name = "Receipt"
+        ReturnDataSource.Value = dataset.Tables("Receipt")
+
+        ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
+        ReportViewer1.LocalReport.DataSources.Clear()
+        ReportViewer1.LocalReport.DataSources.Add(ReturnDataSource)
+        ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\Receipt.rdl"
+
+        Dim rParam As New WinForms.ReportParameter
+        rParam.Values.Clear()
+        rParam.Name = "title"
+        rParam.Values.Add("RETURN")
+        ReportViewer1.LocalReport.SetParameters(rParam)
+
+        ReportViewer1.RefreshReport()
 
     End Sub
 
