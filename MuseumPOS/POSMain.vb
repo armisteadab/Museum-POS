@@ -16,6 +16,8 @@ Public Class POSMain
     Private nSumPriceItems As Double, LatestReturnNumber As Integer
     Private bReceiptMarkedPaid As Boolean, bManagerMode As Boolean
     Const sReceiptPath As String = "C:\Users\armis\Documents\receipt.txt"
+    Private btxtReceiptNumber_EnterKeyPressed As Boolean
+    Private sInitial_txtReceiptNumber As String
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
 
         If Not Me.ManagerMode Then ' on? then just turn if off
@@ -93,7 +95,7 @@ Public Class POSMain
             Return nReceiptNumber
         End Get
         Set(ByVal value As Integer)
-            lblReceiptNumber.Text = value.ToString.Trim
+            txtReceiptNumber.Text = value.ToString.Trim
             nReceiptNumber = (value)
             ReceiptShow(nReceiptNumber)
         End Set
@@ -473,9 +475,16 @@ Public Class POSMain
             End If
         End If
 
-        If nSumPriceItems > 0 And (Not bIsReturn) Then ' there are rows and they end up at zero (payment made)
-            BigMsgBox("Full Payment Required")
-            Exit Sub
+        If nSumPriceItems > 0 Then ' there are rows and they end up at zero (payment made)
+            If Not bIsReturn Then
+                BigMsgBox("Full Payment Required")
+                Exit Sub
+            End If
+        Else
+            If bIsReturn Then
+                BigMsgBox("Manually Return Payment First")
+                Exit Sub
+            End If
         End If
 
         If DataGridView1.Rows.Count < 1 Then
@@ -589,25 +598,29 @@ Public Class POSMain
 
         If Not bIsReturn Then
             If Me.ReceiptNumber = nReceiptLatest Then
-            Me.ReceiptNumber = (Me.ReceiptNumber + 1)
-            nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
-            nReceiptCurrent = nReceiptLatest
-        Else
-            Me.ReceiptNumber = (nReceiptLatest) ' done changing old receipt- go to latest
-        End If
+                Me.ReceiptNumber = (Me.ReceiptNumber + 1)
+                nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
+                nReceiptCurrent = nReceiptLatest
+            Else
+                Me.ReceiptNumber = (nReceiptLatest) ' done changing old receipt- go to latest
+            End If
 
-        Dim sReceiptPrint As String
-        sReceiptPrint = (Me.ReceiptNumber - 1)
+            Dim sReceiptPrint As String
+            sReceiptPrint = (Me.ReceiptNumber - 1)
 
-        ReceiptShow(sReceiptPrint)
-        While ReportViewer1.CurrentStatus.InCancelableOperation
-            Application.DoEvents()
-        End While
+            ReceiptShow(sReceiptPrint)
+            While ReportViewer1.CurrentStatus.InCancelableOperation
+                    Application.DoEvents()
+            End While
+
             ReportViewer1.PrintDialog()
             ReceiptShow(nReceiptLatest.ToString.Trim)
-        End If
 
-    End Sub
+        Else
+            ReturnShow(LatestReturnNumber)
+            End If
+
+       End Sub
 
     Private Sub DeleteOldReceipt(ByVal nReceiptDelete As Integer)
         Dim commandSQL1 As SqlCommand
@@ -915,9 +928,13 @@ Public Class POSMain
     End Sub
 
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
+        If Not Me.ManagerMode Then
+            BigMsgBox("Manager Access Needed")
+            Exit Sub
+        End If
 
         FireReceipt(True)
-        ReturnShow(LatestReturnNumber)
+
 
     End Sub
 
@@ -987,6 +1004,45 @@ Public Class POSMain
         End Using
 
     End Sub
+
+    Private Sub txtReceiptNumber_KeyUp(sender As Object, e As KeyEventArgs) Handles txtReceiptNumber.KeyUp
+        If e.KeyCode <> Keys.Enter Then
+            Exit Sub
+        End If
+
+        btxtReceiptNumber_EnterKeyPressed = True ' indicate this so that we can undo changes if we lose focus w/out enter key pressed
+
+        If Val(txtReceiptNumber.Text) < 1 Then
+            Exit Sub
+        End If
+
+        If Val(txtReceiptNumber.Text) > nReceiptLatest Then ' no going into future
+            txtReceiptNumber.Text = (sInitial_txtReceiptNumber) ' restore original value
+            Exit Sub
+        End If
+
+        If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
+            BigMsgBox("You need to resolve this open receipt before going to other receipts")
+            Exit Sub
+        End If
+
+        nReceiptCurrent = Int(Val(txtReceiptNumber.Text))
+        Me.ReceiptNumber = nReceiptCurrent
+        LoadSavedReceipt(nReceiptCurrent)
+
+    End Sub
+
+    Private Sub txtReceiptNumber_Enter(sender As Object, e As EventArgs) Handles txtReceiptNumber.Enter
+        sInitial_txtReceiptNumber = ("" & txtReceiptNumber.Text)
+    End Sub
+
+    Private Sub txtReceiptNumber_Leave(sender As Object, e As EventArgs) Handles txtReceiptNumber.Leave
+        If Not btxtReceiptNumber_EnterKeyPressed Then ' leaving w possible changes, but no enter key pressed
+            txtReceiptNumber.Text = ("" & sInitial_txtReceiptNumber)
+        End If
+        btxtReceiptNumber_EnterKeyPressed = False ' set back to default value
+    End Sub
+
     Private Function GetLatestReturnNumber() As Integer
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String
