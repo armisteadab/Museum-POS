@@ -36,8 +36,8 @@ Module Module1
         Dim sqlConnect As New SqlConnection()
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
 
-        sqlString = "INSERT INTO CCAuth(AuthCode, TransactionID) VALUES ("
-        sqlString += QTrim(sAuthorizationCode) + "," + QTrim(sTransactionID) + ")"
+        sqlString = "INSERT INTO CCAuth(AuthCode, TransactionID, AuthDateTime) VALUES ("
+        sqlString += QTrim(sAuthorizationCode) + "," + QTrim(sTransactionID) + ", CURRENT_TIMESTAMP)"
 
         Try
 
