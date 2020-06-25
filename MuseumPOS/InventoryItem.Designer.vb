@@ -258,6 +258,7 @@ Partial Class InventoryItem
         Me.numOnHandQuantity.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numOnHandQuantity.Location = New System.Drawing.Point(237, 392)
         Me.numOnHandQuantity.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.numOnHandQuantity.Minimum = New Decimal(New Integer() {45, 0, 0, -2147483648})
         Me.numOnHandQuantity.Name = "numOnHandQuantity"
         Me.numOnHandQuantity.Size = New System.Drawing.Size(120, 34)
         Me.numOnHandQuantity.TabIndex = 18
