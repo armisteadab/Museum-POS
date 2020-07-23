@@ -472,7 +472,7 @@ Partial Class POSMain
         Me.ReportViewer1.Font = New System.Drawing.Font("Segoe UI", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ReportViewer1.LocalReport.DisplayName = "Receipt"
         Me.ReportViewer1.LocalReport.EnableExternalImages = True
-        Me.ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\Report1.rdl"
+        Me.ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\Receipt.rdl"
         Me.ReportViewer1.Location = New System.Drawing.Point(12, 537)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.ServerReport.BearerToken = Nothing

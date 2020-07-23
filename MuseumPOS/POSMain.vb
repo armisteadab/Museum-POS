@@ -41,8 +41,8 @@ Public Class POSMain
     Private Sub NewReceiptID()
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String
-
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        'Release\
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -162,7 +162,7 @@ Public Class POSMain
 
         If txtEntry.Text.Trim.Length = 0 Then Exit Sub
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -466,7 +466,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         If nReceiptCurrent <> nReceiptLatest Then
             If Not Me.ManagerMode Then
@@ -610,7 +610,7 @@ Public Class POSMain
 
             ReceiptShow(sReceiptPrint)
             While ReportViewer1.CurrentStatus.InCancelableOperation
-                    Application.DoEvents()
+                Application.DoEvents()
             End While
 
             ReportViewer1.PrintDialog()
@@ -618,15 +618,15 @@ Public Class POSMain
 
         Else
             ReturnShow(LatestReturnNumber)
-            End If
+        End If
 
-       End Sub
+    End Sub
 
     Private Sub DeleteOldReceipt(ByVal nReceiptDelete As Integer)
         Dim commandSQL1 As SqlCommand
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -699,7 +699,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String, sSearchLikeValue$
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -838,7 +838,7 @@ Public Class POSMain
         ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
         ReportViewer1.LocalReport.DataSources.Clear()
         ReportViewer1.LocalReport.DataSources.Add(receiptDataSource)
-        ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\Receipt.rdl"
+        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\Receipt.rdl"
 
         Dim rParam As New WinForms.ReportParameter
         rParam.Values.Clear()
@@ -944,7 +944,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -978,7 +978,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -1048,7 +1048,7 @@ Public Class POSMain
         Dim sConnectionString As String, sqlString As String
         Dim nReturnCurrent As Integer, nReturnLatest As Integer
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -1095,7 +1095,7 @@ Public Class POSMain
         ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
         ReportViewer1.LocalReport.DataSources.Clear()
         ReportViewer1.LocalReport.DataSources.Add(ReturnDataSource)
-        ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\Receipt.rdl"
+        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\Receipt.rdl"
 
         Dim rParam As New WinForms.ReportParameter
         rParam.Values.Clear()

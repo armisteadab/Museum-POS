@@ -72,36 +72,23 @@ Public Class SwipeBluePay
     End Property
 
     Private Sub SwipeBluePay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TextBox1.Text = ("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
+        TextBox1.Text = "" '
+        '("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
 
         'load testing info
 
 
         Label1.Text = ""
-        Exit Sub
-
-        TextBoxFirstName.Text = "Bob"
-        TextBoxLastName.Text = "Tester"
-        TextBoxAddr1.Text = "123 Test St."
-        TextBoxAddr2.Text = "Apt #500"
-        TextBoxCity.Text = "Testville"
-        cboState.Text = "IL"
-        TextBoxZIP.Text = "54321"
-        cboCountry.Text = "USA"
-        TextBoxPhone.Text = "123-123-12345"
-        TextBoxEmail.Text = "test@bluepay.com"
 
     End Sub
 
 
     Private Sub btnRunCard_Click(sender As Object, e As EventArgs) Handles btnRunCard.Click
 
-        '        Dim accountID As String = "100868017210"  ' 100868017209
-        Dim accountID As String = "100868017209"
+        Dim accountID As String = "100917175390"
         'Dim accountID As String = "DEMO-ROADSANDRAILS"
-        Dim secretKey As String = "P7KKNNCTELSV12VWSNQ8OAZAXX/IKI4X"
-        'Dim secretKey As String = "100868017210"
-        Dim mode As String = "TEST"
+        Dim secretKey As String = "OE9WGXEY1XOBL1F0RTIWHR31PJR6B1OM"
+        Dim mode As String = "LIVE" '"TEST"
         Dim sRefundAmount As String
 
         Dim payment As BluePay = New BluePay(
@@ -110,26 +97,25 @@ Public Class SwipeBluePay
             mode
         )
 
-        payment.setCustomerInformation(
-             TextBoxFirstName.Text.Trim,
-     TextBoxLastName.Text.Trim,
-     TextBoxAddr1.Text.Trim,
-     TextBoxAddr2.Text.Trim,
-     TextBoxCity.Text.Trim,
-     cboState.Text.Trim,
-     TextBoxZIP.Text.Trim,
-     cboCountry.Text.Trim,
-     TextBoxPhone.Text.Trim,
-     TextBoxEmail.Text.Trim
-        )
 
         If Not TextBox1.Text.Trim = "" Then
 
             ' Set payment information for a swiped credit card transaction
-            ' payment.swipe("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
             payment.swipe(TextBox1.Text)
             '        payment.sale(amount sSaleAmount)
         Else
+            payment.setCustomerInformation(
+             TextBoxFirstName.Text.Trim,
+             TextBoxLastName.Text.Trim,
+             TextBoxAddr1.Text.Trim,
+             TextBoxAddr2.Text.Trim,
+             TextBoxCity.Text.Trim,
+             cboState.Text.Trim,
+             TextBoxZIP.Text.Trim,
+             cboCountry.Text.Trim,
+             TextBoxPhone.Text.Trim,
+             TextBoxEmail.Text.Trim
+                )
             payment.setCCInformation(sManualCC, sManualCCExp, sManualCVV2)
         End If
 
@@ -166,6 +152,7 @@ Public Class SwipeBluePay
             Label1.Text = ("Authorization Code: " + sAuthorizationCode)
             bSuccess = True ' tell the main form
             SaveCCAuthInfo(sAuthorizationCode, sTransactionID)
+            Me.Close()
 
         Else
             Label1.Text = ("Transaction Error: " + payment.getMessage())

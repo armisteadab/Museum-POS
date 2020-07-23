@@ -31,7 +31,7 @@ Module Module1
         Dim commandSQL1 As SqlCommand
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -63,7 +63,7 @@ Module Module1
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String, sReturnValue As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand

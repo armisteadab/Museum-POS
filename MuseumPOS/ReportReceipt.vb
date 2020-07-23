@@ -27,7 +27,8 @@ Public Class ReportReceipt
         ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
         ReportViewer1.LocalReport.DataSources.Clear()
         ReportViewer1.LocalReport.DataSources.Add(receiptDataSource)
-        ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\ReportReceipt.rdl"
+        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ReportReceipt.rdl"
+        ' "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\ReportReceipt.rdl"
 
         Dim rParam As New WinForms.ReportParameter
         rParam.Values.Clear()
@@ -54,7 +55,7 @@ Public Class ReportReceipt
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
 

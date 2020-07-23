@@ -40,7 +40,7 @@ Partial Class ReportReceipt
         '
         Me.ReportViewer1.LocalReport.DisplayName = "ReportReceipt"
         Me.ReportViewer1.LocalReport.EnableExternalImages = True
-        Me.ReportViewer1.LocalReport.ReportPath = "C:\Users\armis\source\repos\MuseumPOS\Museum POS\Report MuseumPOS\ReportReceipt.r" &
+        Me.ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ReportReceipt.r" &
     "dl"
         Me.ReportViewer1.Location = New System.Drawing.Point(460, 12)
         Me.ReportViewer1.Name = "ReportViewer1"
