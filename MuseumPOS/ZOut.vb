@@ -50,7 +50,7 @@ Public Class ZOut
         rParam3.Values.Clear()
         rParam3.Name = "SumCards"
 
-        sSumCards = "sum cards"
+        sSumCards = Format(GetSumByDatePayType("CARD", Date.Today.ToShortDateString), "####0.00")
 
         rParam3.Values.Add(sSumCards)
         ReportViewer1.LocalReport.SetParameters(rParam3)
@@ -60,7 +60,7 @@ Public Class ZOut
         rParam4.Values.Clear()
         rParam4.Name = "SumChecks"
 
-        sSumChecks = "sum checks"
+        sSumChecks = Format(GetSumByDatePayType("CHECK", Date.Today.ToShortDateString), "####0.00")
 
         rParam4.Values.Add(sSumChecks)
         ReportViewer1.LocalReport.SetParameters(rParam4)
@@ -71,7 +71,7 @@ Public Class ZOut
         rParam5.Values.Clear()
         rParam5.Name = "TotalSales"
 
-        sTotalSales = "sum sales"
+        sTotalSales = Format(GetSumByDatePayType("", Date.Today.ToShortDateString), "####0.00")
 
         rParam5.Values.Add(sTotalSales)
         ReportViewer1.LocalReport.SetParameters(rParam5)
@@ -91,7 +91,7 @@ Public Class ZOut
 
         sSQL = "SELECT ABS(SUM(Paid)) FROM Receipt"
         sSQL += " WHERE ReceiptDate = " + QTrim(Date.Today.ToShortDateString)
-        sSQL += " AND UPC = 'CASH'"
+        sSQL += " AND PayType = 'CARD' GROUP BY CardType"
         Debug.Print(sSQL)
 
         Using connection As New SqlConnection(sConnectionString)
@@ -112,11 +112,10 @@ Public Class ZOut
 
     Private Sub ZOut_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ZOutShow()
+        lblZDone.Visible = True
     End Sub
 
     Private Sub ZOut_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        '        Me.ReportViewer1.Height = (Me.Height - ReportViewer1.Top) - 40
-        '        Me.ReportViewer1.Width = (Me.Width - ReportViewer1.Left) - 20
     End Sub
 
 End Class
