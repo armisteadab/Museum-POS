@@ -1,0 +1,1 @@
+﻿select count(upc) as allofem from Receipt

@@ -260,6 +260,12 @@
     <Compile Include="TaxAdjust.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ZOut.Designer.vb">
+      <DependentUpon>ZOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ZOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CashPay.resx">
@@ -309,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaxAdjust.resx">
       <DependentUpon>TaxAdjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZOut.resx">
+      <DependentUpon>ZOut.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

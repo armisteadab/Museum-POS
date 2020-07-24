@@ -109,7 +109,7 @@ Public Class POSMain
         fSwipe.SaleAmount = (Me.lblReceiptTotal.Text.Trim)
         fSwipe.ShowDialog()
         If fSwipe.CardWorked Then
-            LoadRowToGrid(fSwipe.TransactionID, fSwipe.CardType + Space(1) + fSwipe.Last4 + Space(1) + "Auth:" + fSwipe.AuthorizationCode, "-" + Me.lblReceiptTotal.Text.Trim, "0", "1")
+            LoadRowToGrid(fSwipe.TransactionID, fSwipe.CardType + Space(1) + fSwipe.Last4 + Space(1) + "Auth:" + fSwipe.AuthorizationCode, "-" + Me.lblReceiptTotal.Text.Trim, "0", "1", "CARD", fSwipe.CardType.Trim.ToUpper)
             GridTotals()
         End If
 
@@ -506,6 +506,7 @@ Public Class POSMain
         Dim sInvUPC$, sNameItem$, sPrice$, sTaxRate$
         Dim nRow As Integer, sQuantity As String
         Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
+        Dim sPayType As String = "", sCardType As String = ""
         Dim nRowFinal As Integer
         nRowFinal = DataGridView1.Rows.Count - 1
 
@@ -524,6 +525,9 @@ Public Class POSMain
             sPrice = ("" & DataGridView1.Item(2, nRow).Value)
             sQuantity = ("" & DataGridView1.Item(1, nRow).Value)
             sTaxRate = ("" & DataGridView1.Item(4, nRow).Value)
+            sPayType = ("" & DataGridView1.Item(5, nRow).Value)
+            sCardType = ("" & DataGridView1.Item(6, nRow).Value)
+
             If sTaxRate.ToString.Trim = "" Then
                 sTaxRate = "0"
             End If
@@ -534,19 +538,22 @@ Public Class POSMain
             nTaxedAmount = (nPrice * nTaxRate)
 
             If Not bIsReturn Then
-                sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
+                sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate, PayType, CardType) "
                 sqlString += " VALUES ("
                 sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
                 sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
                 sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
-                sqlString = sqlString & " AS datetime), " & QTrim(Now) & ")"
+                sqlString = sqlString & " AS datetime), " & QTrim(Now)
+                sqlString = sqlString & ", " & QTrim(sPayType) & "," & QTrim(sCardType)
+                sqlString = sqlString & ")"
             Else
                 sqlString = "INSERT INTO Returns(UPC, Price, Paid, TaxPaid, ReturnID, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
                 sqlString += " VALUES ("
                 sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
                 sqlString = sqlString & LatestReturnNumber & "," & Me.ReceiptNumber & "," & sQuantity
                 sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
-                sqlString = sqlString & " AS datetime), " & QTrim(Now) & ")"
+                sqlString = sqlString & " AS datetime), " & QTrim(Now)
+                sqlString = sqlString & ")"
             End If
 
             Try
@@ -666,7 +673,7 @@ Public Class POSMain
             nCashAmount = (fCashPay.CashAmount)
             If nCashAmount <> 0 Then
                 nCashAmount = (nCashAmount * -1)
-                LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1")
+                LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1", "CASH", "")
             End If
             fCashPay = Nothing
 
@@ -677,7 +684,7 @@ Public Class POSMain
             nCashAmount = (fCashPay.CashAmount)
             If nCashAmount <> 0 Then
                 nCashAmount = (nCashAmount * -1)
-                LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1")
+                LoadRowToGrid("CASH", "CASH", Format(nCashAmount, "###0.00"), "0", "1", "CASH", "")
             End If
             fCashPay = Nothing
 
@@ -686,9 +693,15 @@ Public Class POSMain
     End Sub
 
     Private Sub LoadRowToGrid(ByVal sInvUPC As String, ByVal sNameItem As String,
-                              ByVal sPrice As String, ByVal sTaxRate As String, ByVal sQuantity As String)
+                              ByVal sPrice As String, ByVal sTaxRate As String, ByVal sQuantity As String,
+                              Optional ByVal sPayType As String = "", Optional ByVal sCardType As String = "")
 
-        Me.DataGridView1.Rows.Add(sNameItem.Trim, sQuantity.ToString, sPrice, sInvUPC.Trim, sTaxRate)
+        If sPayType = "" Then
+            Me.DataGridView1.Rows.Add(sNameItem.Trim, sQuantity.ToString, sPrice, sInvUPC.Trim, sTaxRate)
+        Else
+            Me.DataGridView1.Rows.Add(sNameItem.Trim, sQuantity.ToString, sPrice, sInvUPC.Trim, sTaxRate, sPayType, sCardType)
+        End If
+
         nSumPriceItems = 0
         GridTotals()
 
@@ -706,7 +719,7 @@ Public Class POSMain
         sSearchLikeValue = QLike(txtEntry.Text)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT a.UPC, a.ReceiptID ,a.Description, b.InvName, a.Price, a.paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate FROM Receipt a"
+        sSQL = "SELECT a.UPC, a.ReceiptID ,a.Description, b.InvName, a.Price, a.paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate, a.PayType, a.CardType FROM Receipt a"
         sSQL += " LEFT JOIN InventoryItems b ON a.UPC = b.InvUPC WHERE a.ReceiptID = " & nReceiptToLoad
 
         cmd.CommandText = sSQL
@@ -749,7 +762,7 @@ Public Class POSMain
                             sItemName = ""
                         End If
                     End If
-                    LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString, reader.Item("Quantity").ToString)
+                    LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString, reader.Item("Quantity").ToString, reader.Item("PayType"), reader.Item("CardType"))
                 End While
 
                 nSumPriceItems = (nSumPriceItems * -1)
@@ -1041,6 +1054,19 @@ Public Class POSMain
             txtReceiptNumber.Text = ("" & sInitial_txtReceiptNumber)
         End If
         btxtReceiptNumber_EnterKeyPressed = False ' set back to default value
+    End Sub
+
+    Private Sub btnZOut_Click(sender As Object, e As EventArgs) Handles btnZOut.Click
+
+        If Not Me.ManagerMode Then ' on? then just turn if off
+            '    BigMsgBox("You need Manager's Access to Use this Function")
+            '    Exit Sub
+        End If
+
+        Dim fZout As New ZOut
+        fZout.ShowDialog()
+        fZout = Nothing
+
     End Sub
 
     Private Function GetLatestReturnNumber() As Integer

@@ -1,0 +1,122 @@
+﻿Imports System.Data.SqlClient
+Imports IngenicoPOS
+Imports Ingenico
+Imports System.IO
+Imports Microsoft.Reporting
+Imports MuseumPOS.My
+Imports Microsoft.Reporting.WinForms
+Imports System.Drawing.Printing
+
+Public Class ZOut
+
+    Private Sub ZOutShow()
+        Dim receiptDataSource As New WinForms.ReportDataSource
+        Dim dataset As New DataSet("Receipt")
+        Dim sReportTitle As String, sSumCash As String, sSumChecks As String, sSumCards As String, sTotalSales As String
+
+        GetZOutDataSet(dataset)
+
+        receiptDataSource.Name = "Receipt"
+        receiptDataSource.Value = dataset.Tables("Receipt")
+
+        ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
+        ReportViewer1.LocalReport.DataSources.Clear()
+        ReportViewer1.LocalReport.DataSources.Add(receiptDataSource)
+        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ZOut.rdl"
+
+        Dim rParam As New WinForms.ReportParameter
+        rParam.Values.Clear()
+        rParam.Name = "ReportTitleText"
+
+        sReportTitle = ""
+
+        sReportTitle = Date.Today.ToShortDateString.Trim
+
+        rParam.Values.Add(sReportTitle)
+        ReportViewer1.LocalReport.SetParameters(rParam)
+
+        ' sum cash
+        Dim rParam2 As New WinForms.ReportParameter
+        rParam2.Values.Clear()
+        rParam2.Name = "SumCash"
+
+        sSumCash = Format(GetSumByDatePayType("CASH", Date.Today.ToShortDateString), "####0.00")
+
+        rParam2.Values.Add(sSumCash)
+        ReportViewer1.LocalReport.SetParameters(rParam2)
+
+        ' sum credit cards
+        Dim rParam3 As New WinForms.ReportParameter
+        rParam3.Values.Clear()
+        rParam3.Name = "SumCards"
+
+        sSumCards = "sum cards"
+
+        rParam3.Values.Add(sSumCards)
+        ReportViewer1.LocalReport.SetParameters(rParam3)
+
+        ' sum checks
+        Dim rParam4 As New WinForms.ReportParameter
+        rParam4.Values.Clear()
+        rParam4.Name = "SumChecks"
+
+        sSumChecks = "sum checks"
+
+        rParam4.Values.Add(sSumChecks)
+        ReportViewer1.LocalReport.SetParameters(rParam4)
+
+
+        ' sum total sales
+        Dim rParam5 As New WinForms.ReportParameter
+        rParam5.Values.Clear()
+        rParam5.Name = "TotalSales"
+
+        sTotalSales = "sum sales"
+
+        rParam5.Values.Add(sTotalSales)
+        ReportViewer1.LocalReport.SetParameters(rParam5)
+
+        ReportViewer1.RefreshReport()
+
+    End Sub
+
+    Private Sub GetZOutDataSet(ByRef parDataSet As DataSet)
+
+        Dim sqlConnect As New SqlConnection(), sSQL$
+        Dim sConnectionString As String
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+
+        sSQL = "SELECT ABS(SUM(Paid)) FROM Receipt"
+        sSQL += " WHERE ReceiptDate = " + QTrim(Date.Today.ToShortDateString)
+        sSQL += " AND UPC = 'CASH'"
+        Debug.Print(sSQL)
+
+        Using connection As New SqlConnection(sConnectionString)
+
+            Dim command As New SqlCommand(sSQL, connection)
+
+            Dim parameter As New SqlParameter("rDateTime",
+                        Date.Today.ToShortDateString)
+            command.Parameters.Add(parameter)
+
+            Dim ReceiptAdapter As New SqlDataAdapter(command)
+
+            ReceiptAdapter.Fill(parDataSet, "Receipt")
+
+        End Using
+
+    End Sub
+
+    Private Sub ZOut_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ZOutShow()
+    End Sub
+
+    Private Sub ZOut_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        '        Me.ReportViewer1.Height = (Me.Height - ReportViewer1.Top) - 40
+        '        Me.ReportViewer1.Width = (Me.Width - ReportViewer1.Left) - 20
+    End Sub
+
+End Class

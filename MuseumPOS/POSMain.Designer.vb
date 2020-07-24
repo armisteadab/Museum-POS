@@ -23,13 +23,13 @@ Partial Class POSMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtEntry = New System.Windows.Forms.TextBox()
         Me.btnInventory = New System.Windows.Forms.Button()
         Me.btnAdult = New System.Windows.Forms.Button()
@@ -37,12 +37,6 @@ Partial Class POSMain
         Me.btnAAAMilAdult = New System.Windows.Forms.Button()
         Me.btnAdultGroup = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.colItem = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colQTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colUPC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colTaxRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDELETE = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnChildGroup = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
@@ -74,6 +68,15 @@ Partial Class POSMain
         Me.btnReportMenu = New System.Windows.Forms.Button()
         Me.btnReturn = New System.Windows.Forms.Button()
         Me.txtReceiptNumber = New System.Windows.Forms.TextBox()
+        Me.btnZOut = New System.Windows.Forms.Button()
+        Me.colItem = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colQTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colUPC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colTaxRate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PayType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CardType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDELETE = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -141,90 +144,39 @@ Partial Class POSMain
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colItem, Me.colQTY, Me.colPrice, Me.colUPC, Me.colTaxRate, Me.colDELETE})
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle10
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colItem, Me.colQTY, Me.colPrice, Me.colUPC, Me.colTaxRate, Me.PayType, Me.CardType, Me.colDELETE})
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.Location = New System.Drawing.Point(424, 56)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.RowTemplate.Height = 24
         Me.DataGridView1.Size = New System.Drawing.Size(1409, 725)
         Me.DataGridView1.TabIndex = 7
-        '
-        'colItem
-        '
-        Me.colItem.HeaderText = "Item"
-        Me.colItem.MinimumWidth = 6
-        Me.colItem.Name = "colItem"
-        Me.colItem.ReadOnly = True
-        Me.colItem.Width = 400
-        '
-        'colQTY
-        '
-        Me.colQTY.HeaderText = "QTY"
-        Me.colQTY.MinimumWidth = 6
-        Me.colQTY.Name = "colQTY"
-        Me.colQTY.ReadOnly = True
-        Me.colQTY.Width = 125
-        '
-        'colPrice
-        '
-        Me.colPrice.HeaderText = "Price"
-        Me.colPrice.MinimumWidth = 6
-        Me.colPrice.Name = "colPrice"
-        Me.colPrice.ReadOnly = True
-        Me.colPrice.Width = 125
-        '
-        'colUPC
-        '
-        Me.colUPC.HeaderText = "UPC"
-        Me.colUPC.MinimumWidth = 6
-        Me.colUPC.Name = "colUPC"
-        Me.colUPC.ReadOnly = True
-        Me.colUPC.Width = 125
-        '
-        'colTaxRate
-        '
-        Me.colTaxRate.HeaderText = "Tax%"
-        Me.colTaxRate.MinimumWidth = 6
-        Me.colTaxRate.Name = "colTaxRate"
-        Me.colTaxRate.ReadOnly = True
-        Me.colTaxRate.Width = 125
-        '
-        'colDELETE
-        '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.LightGray
-        DataGridViewCellStyle9.NullValue = "delete"
-        Me.colDELETE.DefaultCellStyle = DataGridViewCellStyle9
-        Me.colDELETE.HeaderText = ""
-        Me.colDELETE.MinimumWidth = 6
-        Me.colDELETE.Name = "colDELETE"
-        Me.colDELETE.ReadOnly = True
-        Me.colDELETE.Width = 125
         '
         'btnChildGroup
         '
@@ -307,35 +259,35 @@ Partial Class POSMain
         Me.DataGridView2.AllowUserToOrderColumns = True
         Me.DataGridView2.AllowUserToResizeColumns = False
         Me.DataGridView2.AllowUserToResizeRows = False
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC, Me.UniqueID, Me.TaxRate})
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DataGridView2.Location = New System.Drawing.Point(504, 137)
         Me.DataGridView2.Name = "DataGridView2"
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridView2.RowHeadersWidth = 51
         Me.DataGridView2.RowTemplate.Height = 24
         Me.DataGridView2.Size = New System.Drawing.Size(1039, 551)
@@ -528,11 +480,88 @@ Partial Class POSMain
         Me.txtReceiptNumber.TabIndex = 39
         Me.txtReceiptNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'btnZOut
+        '
+        Me.btnZOut.Location = New System.Drawing.Point(1795, 836)
+        Me.btnZOut.Name = "btnZOut"
+        Me.btnZOut.Size = New System.Drawing.Size(117, 50)
+        Me.btnZOut.TabIndex = 40
+        Me.btnZOut.Text = "Z Out"
+        Me.btnZOut.UseVisualStyleBackColor = True
+        '
+        'colItem
+        '
+        Me.colItem.HeaderText = "Item"
+        Me.colItem.MinimumWidth = 6
+        Me.colItem.Name = "colItem"
+        Me.colItem.ReadOnly = True
+        Me.colItem.Width = 400
+        '
+        'colQTY
+        '
+        Me.colQTY.HeaderText = "QTY"
+        Me.colQTY.MinimumWidth = 6
+        Me.colQTY.Name = "colQTY"
+        Me.colQTY.ReadOnly = True
+        Me.colQTY.Width = 125
+        '
+        'colPrice
+        '
+        Me.colPrice.HeaderText = "Price"
+        Me.colPrice.MinimumWidth = 6
+        Me.colPrice.Name = "colPrice"
+        Me.colPrice.ReadOnly = True
+        Me.colPrice.Width = 125
+        '
+        'colUPC
+        '
+        Me.colUPC.HeaderText = "UPC"
+        Me.colUPC.MinimumWidth = 6
+        Me.colUPC.Name = "colUPC"
+        Me.colUPC.ReadOnly = True
+        Me.colUPC.Width = 125
+        '
+        'colTaxRate
+        '
+        Me.colTaxRate.HeaderText = "Tax%"
+        Me.colTaxRate.MinimumWidth = 6
+        Me.colTaxRate.Name = "colTaxRate"
+        Me.colTaxRate.ReadOnly = True
+        Me.colTaxRate.Width = 125
+        '
+        'PayType
+        '
+        Me.PayType.HeaderText = "PayType"
+        Me.PayType.MinimumWidth = 6
+        Me.PayType.Name = "PayType"
+        Me.PayType.ReadOnly = True
+        Me.PayType.Width = 125
+        '
+        'CardType
+        '
+        Me.CardType.HeaderText = "CardType"
+        Me.CardType.MinimumWidth = 6
+        Me.CardType.Name = "CardType"
+        Me.CardType.ReadOnly = True
+        Me.CardType.Width = 125
+        '
+        'colDELETE
+        '
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray
+        DataGridViewCellStyle2.NullValue = "delete"
+        Me.colDELETE.DefaultCellStyle = DataGridViewCellStyle2
+        Me.colDELETE.HeaderText = ""
+        Me.colDELETE.MinimumWidth = 6
+        Me.colDELETE.Name = "colDELETE"
+        Me.colDELETE.ReadOnly = True
+        Me.colDELETE.Width = 125
+        '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1924, 935)
+        Me.Controls.Add(Me.btnZOut)
         Me.Controls.Add(Me.txtReceiptNumber)
         Me.Controls.Add(Me.btnReturn)
         Me.Controls.Add(Me.btnReportMenu)
@@ -596,12 +625,6 @@ Partial Class POSMain
     Friend WithEvents UPC As DataGridViewTextBoxColumn
     Friend WithEvents UniqueID As DataGridViewTextBoxColumn
     Friend WithEvents TaxRate As DataGridViewTextBoxColumn
-    Friend WithEvents colItem As DataGridViewTextBoxColumn
-    Friend WithEvents colQTY As DataGridViewTextBoxColumn
-    Friend WithEvents colPrice As DataGridViewTextBoxColumn
-    Friend WithEvents colUPC As DataGridViewTextBoxColumn
-    Friend WithEvents colTaxRate As DataGridViewTextBoxColumn
-    Friend WithEvents colDELETE As DataGridViewTextBoxColumn
     Friend WithEvents btnPreviousReceipt As Button
     Friend WithEvents btnNextReceipt As Button
     Friend WithEvents SerialPort1 As IO.Ports.SerialPort
@@ -612,4 +635,13 @@ Partial Class POSMain
     Friend WithEvents btnReportMenu As Button
     Friend WithEvents btnReturn As Button
     Friend WithEvents txtReceiptNumber As TextBox
+    Friend WithEvents btnZOut As Button
+    Friend WithEvents colItem As DataGridViewTextBoxColumn
+    Friend WithEvents colQTY As DataGridViewTextBoxColumn
+    Friend WithEvents colPrice As DataGridViewTextBoxColumn
+    Friend WithEvents colUPC As DataGridViewTextBoxColumn
+    Friend WithEvents colTaxRate As DataGridViewTextBoxColumn
+    Friend WithEvents PayType As DataGridViewTextBoxColumn
+    Friend WithEvents CardType As DataGridViewTextBoxColumn
+    Friend WithEvents colDELETE As DataGridViewTextBoxColumn
 End Class

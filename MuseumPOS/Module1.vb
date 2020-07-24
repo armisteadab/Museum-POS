@@ -92,6 +92,47 @@ Module Module1
         reader.Close()
 
         sqlConnect.Close()
-
+        Return sReturnValue
     End Function
+
+    Public Function GetSumByDatePayType(ByVal sPayType As String, ByVal sDate As String) As Double
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sSQL As String, nReturnValue As Double
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sSQL = "SELECT SUM(Paid) as SumReturn FROM Receipt"
+        sSQL += " WHERE ReceiptDate = " + QTrim(sDate) 'Date.Today.ToShortDateString
+        sSQL += " AND PayType = " + QTrim(sPayType)
+        cmd.CommandText = sSQL
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        nReturnValue = 0
+        If reader.HasRows Then
+            On Error Resume Next
+
+            reader.Read()
+            nReturnValue = (0 + CDbl(reader.Item("SumReturn").ToString))
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+        Return nReturnValue
+    End Function
+
+
 End Module
