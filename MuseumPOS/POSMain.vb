@@ -334,7 +334,7 @@ Public Class POSMain
                 fTaxAdjust = Nothing
                 DataGridView1.Item(4, e.RowIndex).Value = Format(nTaxAdjust, "###0.00")
 
-            Case 5
+            Case 7
                 ' deletion - is it a payment?
                 nPriceModify = ("" & DataGridView1.Item(2, e.RowIndex).Value)
                 If nPriceModify < 0 Then ' a payment?
@@ -762,7 +762,7 @@ Public Class POSMain
                             sItemName = ""
                         End If
                     End If
-                    LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString, reader.Item("Quantity").ToString, reader.Item("PayType"), reader.Item("CardType"))
+                    LoadRowToGrid(reader.Item("UPC"), sItemName, sPriceDisplayGrid, nTaxRate.ToString, reader.Item("Quantity").ToString, reader.Item("PayType").ToString, reader.Item("CardType").ToString)
                 End While
 
                 nSumPriceItems = (nSumPriceItems * -1)
@@ -1066,6 +1066,10 @@ Public Class POSMain
         Dim fZout As New ZOut
         fZout.ShowDialog()
         fZout = Nothing
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
 

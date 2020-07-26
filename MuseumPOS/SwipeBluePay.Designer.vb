@@ -22,6 +22,7 @@ Partial Class SwipeBluePay
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnRunCard = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -47,6 +48,7 @@ Partial Class SwipeBluePay
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBoxEmail = New System.Windows.Forms.TextBox()
         Me.btnManualEntry = New System.Windows.Forms.Button()
+        Me.TimerCloseAfterSuccess = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'btnRunCard
@@ -279,6 +281,10 @@ Partial Class SwipeBluePay
         Me.btnManualEntry.Text = "Manual Entry"
         Me.btnManualEntry.UseVisualStyleBackColor = True
         '
+        'TimerCloseAfterSuccess
+        '
+        Me.TimerCloseAfterSuccess.Interval = 1000
+        '
         'SwipeBluePay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -346,4 +352,5 @@ Partial Class SwipeBluePay
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBoxEmail As TextBox
     Friend WithEvents btnManualEntry As Button
+    Friend WithEvents TimerCloseAfterSuccess As Timer
 End Class

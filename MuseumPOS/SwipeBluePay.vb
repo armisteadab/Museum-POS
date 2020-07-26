@@ -152,8 +152,7 @@ Public Class SwipeBluePay
             Label1.Text = ("Authorization Code: " + sAuthorizationCode)
             bSuccess = True ' tell the main form
             SaveCCAuthInfo(sAuthorizationCode, sTransactionID)
-            Me.Close()
-
+            TimerCloseAfterSuccess.Enabled = True ' enable close timer
         Else
             Label1.Text = ("Transaction Error: " + payment.getMessage())
             btnRunCard.Enabled = True
@@ -181,6 +180,10 @@ Public Class SwipeBluePay
         End With
 
         fManualEntry = Nothing
+    End Sub
+
+    Private Sub TimerCloseAfterSuccess_Tick(sender As Object, e As EventArgs) Handles TimerCloseAfterSuccess.Tick
+        Me.Close()
     End Sub
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click

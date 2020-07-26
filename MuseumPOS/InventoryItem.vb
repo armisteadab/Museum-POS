@@ -166,6 +166,11 @@ Public Class InventoryItem
 
     Private Sub Scatter()
 
+        If DataGridView1.Rows.Count < 1 Then
+            Me.Close()
+            Exit Sub
+        End If
+
         Dim sqlConnect As New SqlConnection()
         sqlConnect.ConnectionString = sConnectionString
 
