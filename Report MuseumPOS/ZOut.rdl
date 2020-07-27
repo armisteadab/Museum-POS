@@ -17,56 +17,19 @@
     <DataSet Name="Receipt">
       <Query>
         <DataSourceName>MuseumPOS</DataSourceName>
-        <CommandText>SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate, a.ReceiptDateTime, a.PayType, a.CardType
-FROM     Receipt AS a LEFT OUTER JOIN
-                  InventoryItems AS b ON a.UPC = b.InvUPC
-ORDER BY a.ReceiptID</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@rDateTime">
+            <Value>=Parameters!rDateTime.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT CardType, ABS(SUM(Paid)) as TotalCards
+FROM     Receipt
+WHERE  (PayType = 'CARD')
+AND ReceiptDate  = @rDateTime
+GROUP BY CardType</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="UPC">
-          <DataField>UPC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ReceiptID">
-          <DataField>ReceiptID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InvName">
-          <DataField>InvName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Price">
-          <DataField>Price</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Paid">
-          <DataField>Paid</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="InvUPC">
-          <DataField>InvUPC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TaxPaid">
-          <DataField>TaxPaid</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="TaxRate">
-          <DataField>TaxRate</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="ReceiptDateTime">
-          <DataField>ReceiptDateTime</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
         <Field Name="PayType">
           <DataField>PayType</DataField>
           <rd:UserDefined>true</rd:UserDefined>
@@ -74,6 +37,10 @@ ORDER BY a.ReceiptID</CommandText>
         <Field Name="CardType">
           <DataField>CardType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalCards">
+          <DataField>TotalCards</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -438,7 +405,7 @@ ORDER BY a.ReceiptID</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox22">
+                        <Textbox Name="Textbox18">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -454,7 +421,7 @@ ORDER BY a.ReceiptID</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox22</rd:DefaultName>
+                          <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -507,14 +474,14 @@ ORDER BY a.ReceiptID</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Paid">
+                        <Textbox Name="TotalCards">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Paid.Value</Value>
+                                  <Value>=Fields!TotalCards.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
@@ -523,7 +490,7 @@ ORDER BY a.ReceiptID</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Paid</rd:DefaultName>
+                          <rd:DefaultName>TotalCards</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -745,6 +712,10 @@ ORDER BY a.ReceiptID</CommandText>
       <DataType>String</DataType>
       <Prompt>SumChecks</Prompt>
     </ReportParameter>
+    <ReportParameter Name="rDateTime">
+      <DataType>DateTime</DataType>
+      <Prompt>rDateTime</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -775,6 +746,11 @@ ORDER BY a.ReceiptID</CommandText>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>SumChecks</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>rDateTime</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

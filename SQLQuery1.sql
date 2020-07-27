@@ -1,1 +1,1 @@
-﻿select count(upc) as allofem from Receipt
+﻿SELECT SUM(Paid) as SumReturn FROM Receipt WHERE ReceiptDate = '7/25/2020' AND PayType = 'CASH'

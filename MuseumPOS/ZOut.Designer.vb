@@ -22,9 +22,11 @@ Partial Class ZOut
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblZDone = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'ReportViewer1
@@ -60,6 +62,11 @@ Partial Class ZOut
         Me.lblZDone.Text = "DONE"
         Me.lblZDone.Visible = False
         '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
+        '
         'ZOut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -77,4 +84,5 @@ Partial Class ZOut
     Friend WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
     Friend WithEvents Label1 As Label
     Friend WithEvents lblZDone As Label
+    Friend WithEvents Timer1 As Timer
 End Class
