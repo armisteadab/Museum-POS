@@ -1,0 +1,1 @@
+﻿select * from inventoryitems where invtype = 'NonInventory'

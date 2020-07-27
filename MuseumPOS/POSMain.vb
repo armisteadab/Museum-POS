@@ -382,33 +382,31 @@ Public Class POSMain
 
     Private Sub btnAdult_Click(sender As Object, e As EventArgs) Handles btnAdult.Click
 
-        txtEntry.Text = StrDup(12, "1")  '"111111111111"
-        RunSearch(True)
+        'txtEntry.Text = "111111111111"
+        'RunSearch(True)
+        Me.DataGridView1.Rows.Add("ADULT TICKET", "1", "10.00", "111111111111", "0")
 
     End Sub
 
     Private Sub btnChild_Click(sender As Object, e As EventArgs) Handles btnChild.Click
 
-        txtEntry.Text = StrDup(12, "2")  '""
-        RunSearch(True)
+        Me.DataGridView1.Rows.Add("CHILD TICKET", "1", "5.00", "222222222222", "0")
 
     End Sub
 
     Private Sub btnAAAMilAdult_Click(sender As Object, e As EventArgs) Handles btnAAAMilAdult.Click
 
-        txtEntry.Text = StrDup(12, "3")  '""
-        RunSearch(True)
+        Me.DataGridView1.Rows.Add("AAA/MIL Adult", "1", "9.00", "333333333333", "0")
     End Sub
 
     Private Sub btnAdultGroup_Click(sender As Object, e As EventArgs) Handles btnAdultGroup.Click
-        txtEntry.Text = StrDup(12, "4")  '""
-        RunSearch(True)
+
+        Me.DataGridView1.Rows.Add("Adult GROUP", "1", "8.00", "444444444444", "0")
 
     End Sub
 
     Private Sub btnChildGroup_Click(sender As Object, e As EventArgs) Handles btnChildGroup.Click
-        txtEntry.Text = StrDup(12, "5")  '""
-        RunSearch(True)
+        Me.DataGridView1.Rows.Add("Child GROUP", "1", "4.00", "555555555555", "0")
 
     End Sub
 
