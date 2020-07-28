@@ -1071,6 +1071,13 @@ Public Class POSMain
 
     End Sub
 
+    Private Sub btnAttend_Click(sender As Object, e As EventArgs) Handles btnAttend.Click
+        Dim fAttend As New Attendance
+        fAttend.ShowDialog()
+        fAttend = Nothing
+
+    End Sub
+
     Private Function GetLatestReturnNumber() As Integer
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String

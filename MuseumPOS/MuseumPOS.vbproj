@@ -154,6 +154,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attendance.Designer.vb">
+      <DependentUpon>Attendance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Attendance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BluePay.vb" />
     <Compile Include="CashPay.Designer.vb">
       <DependentUpon>CashPay.vb</DependentUpon>
@@ -268,6 +274,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Attendance.resx">
+      <DependentUpon>Attendance.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CashPay.resx">
       <DependentUpon>CashPay.vb</DependentUpon>
     </EmbeddedResource>
