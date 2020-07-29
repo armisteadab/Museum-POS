@@ -53,8 +53,8 @@
     <DataSource Include="DataSource1.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="Attendance.rdl" />
     <Report Include="Receipt.rdl" />
-    <Report Include="Report1.rdl" />
     <Report Include="ReportInventory.rdl" />
     <Report Include="ReportReceipt.rdl" />
     <Report Include="ZOut.rdl" />

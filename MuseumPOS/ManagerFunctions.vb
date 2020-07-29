@@ -41,7 +41,7 @@ Public Class ManagerFunctions
         End Try
 
 
-        BigMsgBox("done")
+        BigMsgBox("Done")
 
     End Sub
 End Class

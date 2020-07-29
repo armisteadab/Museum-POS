@@ -26,4 +26,10 @@ Public Class ReportsMenu
 
     End Sub
 
+    Private Sub btnAttendReport_Click(sender As Object, e As EventArgs) Handles btnAttendReport.Click
+        Dim fAttend As New AttendReport
+        fAttend.ShowDialog()
+        fAttend = Nothing
+
+    End Sub
 End Class

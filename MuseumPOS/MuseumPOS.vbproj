@@ -160,6 +160,12 @@
     <Compile Include="Attendance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AttendReport.Designer.vb">
+      <DependentUpon>AttendReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AttendReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BluePay.vb" />
     <Compile Include="CashPay.Designer.vb">
       <DependentUpon>CashPay.vb</DependentUpon>
@@ -282,6 +288,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Attendance.resx">
       <DependentUpon>Attendance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AttendReport.resx">
+      <DependentUpon>AttendReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CashPay.resx">
       <DependentUpon>CashPay.vb</DependentUpon>

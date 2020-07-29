@@ -25,6 +25,7 @@ Partial Class ReportsMenu
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.btnTodayReceipts = New System.Windows.Forms.Button()
         Me.btnZOut = New System.Windows.Forms.Button()
+        Me.btnAttendReport = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Cancel_Button
@@ -59,12 +60,23 @@ Partial Class ReportsMenu
         Me.btnZOut.Text = "ZOut"
         Me.btnZOut.UseVisualStyleBackColor = True
         '
+        'btnAttendReport
+        '
+        Me.btnAttendReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAttendReport.Location = New System.Drawing.Point(12, 141)
+        Me.btnAttendReport.Name = "btnAttendReport"
+        Me.btnAttendReport.Size = New System.Drawing.Size(261, 59)
+        Me.btnAttendReport.TabIndex = 3
+        Me.btnAttendReport.Text = "Attendance"
+        Me.btnAttendReport.UseVisualStyleBackColor = True
+        '
         'ReportsMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
         Me.ClientSize = New System.Drawing.Size(1019, 519)
+        Me.Controls.Add(Me.btnAttendReport)
         Me.Controls.Add(Me.btnZOut)
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.btnTodayReceipts)
@@ -82,4 +94,5 @@ Partial Class ReportsMenu
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button
     Friend WithEvents btnTodayReceipts As Button
     Friend WithEvents btnZOut As Button
+    Friend WithEvents btnAttendReport As Button
 End Class
