@@ -17,4 +17,13 @@ Public Class ReportsMenu
         fReport.ShowDialog()
         fReport = Nothing
     End Sub
+
+    Private Sub btnZOut_Click(sender As Object, e As EventArgs) Handles btnZOut.Click
+
+        Dim fZout As New ZOut
+        fZout.ShowDialog()
+        fZout = Nothing
+
+    End Sub
+
 End Class

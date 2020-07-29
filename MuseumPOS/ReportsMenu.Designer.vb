@@ -24,6 +24,7 @@ Partial Class ReportsMenu
     Private Sub InitializeComponent()
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.btnTodayReceipts = New System.Windows.Forms.Button()
+        Me.btnZOut = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Cancel_Button
@@ -48,12 +49,23 @@ Partial Class ReportsMenu
         Me.btnTodayReceipts.Text = "Sales"
         Me.btnTodayReceipts.UseVisualStyleBackColor = True
         '
+        'btnZOut
+        '
+        Me.btnZOut.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnZOut.Location = New System.Drawing.Point(12, 84)
+        Me.btnZOut.Name = "btnZOut"
+        Me.btnZOut.Size = New System.Drawing.Size(261, 51)
+        Me.btnZOut.TabIndex = 2
+        Me.btnZOut.Text = "ZOut"
+        Me.btnZOut.UseVisualStyleBackColor = True
+        '
         'ReportsMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
         Me.ClientSize = New System.Drawing.Size(1019, 519)
+        Me.Controls.Add(Me.btnZOut)
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.btnTodayReceipts)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -69,4 +81,5 @@ Partial Class ReportsMenu
     End Sub
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button
     Friend WithEvents btnTodayReceipts As Button
+    Friend WithEvents btnZOut As Button
 End Class

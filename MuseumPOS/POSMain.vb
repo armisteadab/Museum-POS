@@ -18,18 +18,6 @@ Public Class POSMain
     Const sReceiptPath As String = "C:\Users\armis\Documents\receipt.txt"
     Private btxtReceiptNumber_EnterKeyPressed As Boolean
     Private sInitial_txtReceiptNumber As String
-    Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
-
-        If Not Me.ManagerMode Then ' on? then just turn if off
-            BigMsgBox("You need Manager's Access to Use this Function")
-            Exit Sub
-        End If
-
-        Dim fInventoryItem As New InventoryItem
-        fInventoryItem.ShowDialog()
-        fInventoryItem = Nothing
-
-    End Sub
 
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewReceiptID()
@@ -88,6 +76,7 @@ Public Class POSMain
             Else
                 btnManagerMode.Text = "Manager Mode OFF"
             End If
+            btnManagerFunctions.Visible = bManagerMode
         End Set
     End Property
     Public Property ReceiptNumber() As Integer
@@ -1054,19 +1043,6 @@ Public Class POSMain
         btxtReceiptNumber_EnterKeyPressed = False ' set back to default value
     End Sub
 
-    Private Sub btnZOut_Click(sender As Object, e As EventArgs) Handles btnZOut.Click
-
-        If Not Me.ManagerMode Then ' on? then just turn if off
-            '    BigMsgBox("You need Manager's Access to Use this Function")
-            '    Exit Sub
-        End If
-
-        Dim fZout As New ZOut
-        fZout.ShowDialog()
-        fZout = Nothing
-
-    End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
@@ -1075,6 +1051,13 @@ Public Class POSMain
         Dim fAttend As New Attendance
         fAttend.ShowDialog()
         fAttend = Nothing
+
+    End Sub
+
+    Private Sub btnManagerFunctions_Click(sender As Object, e As EventArgs) Handles btnManagerFunctions.Click
+        Dim fMgrFunc As New ManagerFunctions
+        fMgrFunc.ShowDialog()
+        fMgrFunc = Nothing
 
     End Sub
 
