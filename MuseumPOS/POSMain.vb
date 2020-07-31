@@ -7,6 +7,8 @@ Imports MuseumPOS.My
 Imports Microsoft.Reporting.WinForms
 Imports System.Drawing.Printing
 Imports System.Xml
+Imports Microsoft.VisualBasic.CompilerServices
+Imports System.Threading
 
 Public Class POSMain
     Dim nReceiptNumber As Integer
@@ -21,7 +23,6 @@ Public Class POSMain
 
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewReceiptID()
-
         Me.ReportViewer1.RefreshReport()
         Me.ReportViewer1.RefreshReport()
     End Sub

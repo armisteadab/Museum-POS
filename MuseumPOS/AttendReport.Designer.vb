@@ -32,6 +32,7 @@ Partial Class AttendReport
         Me.DateTimePicker_End = New System.Windows.Forms.DateTimePicker()
         Me.DateTimePicker_Start = New System.Windows.Forms.DateTimePicker()
         Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
+        Me.chkIncomplete = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -139,11 +140,23 @@ Partial Class AttendReport
         Me.ReportViewer1.Size = New System.Drawing.Size(687, 517)
         Me.ReportViewer1.TabIndex = 8
         '
+        'chkIncomplete
+        '
+        Me.chkIncomplete.AutoSize = True
+        Me.chkIncomplete.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkIncomplete.Location = New System.Drawing.Point(47, 503)
+        Me.chkIncomplete.Name = "chkIncomplete"
+        Me.chkIncomplete.Size = New System.Drawing.Size(305, 36)
+        Me.chkIncomplete.TabIndex = 6
+        Me.chkIncomplete.Text = "Include Incompletes?"
+        Me.chkIncomplete.UseVisualStyleBackColor = True
+        '
         'AttendReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1192, 564)
+        Me.Controls.Add(Me.chkIncomplete)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ReportViewer1)
@@ -154,6 +167,7 @@ Partial Class AttendReport
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -167,4 +181,5 @@ Partial Class AttendReport
     Friend WithEvents DateTimePicker_End As DateTimePicker
     Friend WithEvents DateTimePicker_Start As DateTimePicker
     Friend WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents chkIncomplete As CheckBox
 End Class

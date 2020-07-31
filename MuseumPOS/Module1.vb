@@ -7,6 +7,8 @@ Imports MuseumPOS.My
 Imports Microsoft.Reporting.WinForms
 Imports System.Drawing.Printing
 Imports System.Xml
+Imports Microsoft.VisualBasic.CompilerServices
+
 Module Module1
     Public Function QTrim(ByVal sPar As String) As String
         sPar = "" & sPar

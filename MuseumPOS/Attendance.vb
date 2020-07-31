@@ -70,7 +70,7 @@ Public Class Attendance
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
-        sTimeNOW = Now.ToLocalTime.ToString.Trim ' get the local time 
+        sTimeNOW = Now.ToString.Trim
         If Not AlreadyInTable Then ' checking in
 
             sqlString = "INSERT INTO Attendance(Id, Worker, TimeIN, TimeENCODED) "

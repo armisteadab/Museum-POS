@@ -361,7 +361,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=DateDiff("hh",Fields!TimeIN.Value,Fields!TimeOUT.Value)</Value>
+                                  <Value>=DateDiff("n",Fields!TimeIN.Value,Fields!TimeOUT.Value)/60</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
@@ -515,7 +515,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

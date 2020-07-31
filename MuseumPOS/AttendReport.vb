@@ -61,15 +61,18 @@ Public Class AttendReport
         sSQL = "SELECT Worker, TimeIN, TimeOUt FROM Attendance"
 
         If sReportType = "RANGE" Then
-            sSQL += " WHERE TimeIN BETWEEN " + QTrim(Me.DateTimePicker_Start.Value.ToShortDateString + " 12:00AM") + " AND " + QTrim(Me.DateTimePicker_End.Value.ToShortDateString + " 12:00PM")
+            sSQL += " WHERE TimeIN BETWEEN " + QTrim(Me.DateTimePicker_Start.Value.ToShortDateString + " 12:00AM") + " AND " + QTrim(DateAdd("d", 1, Me.DateTimePicker_End.Value).ToShortDateString + " 12:00PM")
         End If
 
         If sReportType = "SINGLE" Then
-            sSQL += " WHERE TimeIN BETWEEN " + QTrim(Me.DateTimePickerSingle.Value.ToShortDateString + " 12:00AM") + " AND " + QTrim(Me.DateTimePickerSingle.Value.ToShortDateString + " 12:00PM")
+            sSQL += " WHERE TimeIN BETWEEN " + QTrim(Me.DateTimePickerSingle.Value.ToShortDateString + " 12:00AM") + " AND " + QTrim(DateAdd("d", 1, Me.DateTimePickerSingle.Value).ToShortDateString + " 12:00PM")
         End If
-        '        sSQL += " AND "
 
-        sSQL += " ORDER BY TimeIN"
+        If Not chkIncomplete.Checked Then
+            sSQL += " AND isnull(TimeOUT,'') <> ''" ' no incomplete checkout
+        End If
+
+        sSQL += " ORDER BY Worker, TimeIN"
         Debug.Print(sSQL)
 
         Using connection As New SqlConnection(sConnectionString)
