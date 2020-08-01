@@ -137,5 +137,49 @@ Module Module1
         Return (nReturnSum)
     End Function
 
+    Public Function GetSumTicketsByDate(ByVal sDate As String) As Double
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim nReturnSum As Double
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "SELECT SUM(a.Paid) as SumReturn, b.InvName FROM Receipt AS a INNER JOIN InventoryItems AS b"
+        sqlString += " ON a.UPC = b.InvUPC "
+        sqlString += "WHERE ReceiptDate = "
+        sqlString += QTrim(sDate)
+        sqlString += " AND b.Department = 'Tickets'"
+        sqlString += " GROUP BY b.InvName"
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        If reader.HasRows Then
+            On Error Resume Next
+
+            While reader.Read()
+                nReturnSum += (reader.Item("SumReturn"))
+            End While
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+        Return (nReturnSum)
+    End Function
+
 
 End Module

@@ -484,6 +484,7 @@ GROUP BY CardType</CommandText>
                                   <Value>=Fields!TotalCards.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
+                                    <Format>C2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>

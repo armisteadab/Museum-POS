@@ -21,7 +21,11 @@ Public Class POSMain
     Private btxtReceiptNumber_EnterKeyPressed As Boolean
     Private sInitial_txtReceiptNumber As String
 
+    Private Sub ShowTicketsSoldToday()
+        lblTicketSum.Text = Format(GetSumTicketsByDate(Today.ToShortDateString), "###0.00")
+    End Sub
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ShowTicketsSoldToday()
         NewReceiptID()
         Me.ReportViewer1.RefreshReport()
         Me.ReportViewer1.RefreshReport()
@@ -448,6 +452,7 @@ Public Class POSMain
 
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
         FireReceipt(False)
+        ShowTicketsSoldToday()
     End Sub
     Private Sub FireReceipt(ByVal bIsReturn As Boolean)
         Dim sqlString As String, AlreadyInTable As Boolean = False
@@ -1060,6 +1065,10 @@ Public Class POSMain
         fMgrFunc.ShowDialog()
         fMgrFunc = Nothing
 
+    End Sub
+
+    Private Sub lblTicketSum_Click(sender As Object, e As EventArgs) Handles lblTicketSum.Click
+        ShowTicketsSoldToday()
     End Sub
 
     Private Function GetLatestReturnNumber() As Integer

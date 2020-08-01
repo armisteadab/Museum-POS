@@ -364,6 +364,7 @@
                                   <Value>=DateDiff("n",Fields!TimeIN.Value,Fields!TimeOUT.Value)/60</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
+                                    <Format>N2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>

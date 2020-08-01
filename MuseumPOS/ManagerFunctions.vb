@@ -15,7 +15,7 @@ Public Class ManagerFunctions
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand, SQLstring As String
 
-        SQLstring = "CREATE TABLE [dbo].[Attendance2] ("
+        SQLstring = "CREATE TABLE [dbo].[Attendance] ("
         SQLstring += "[Id]          Int           Not NULL,"
         SqlString += " [Worker]      Int           NULL,"
         SqlString += " [TimeIN]      SMALLDATETIME NULL,"
