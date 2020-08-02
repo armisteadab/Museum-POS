@@ -44,4 +44,36 @@ Public Class ManagerFunctions
         BigMsgBox("Done")
 
     End Sub
+
+    Private Sub btnReceiptDelete_Click(sender As Object, e As EventArgs) Handles btnReceiptDelete.Click
+
+        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sqlConnect1 As New SqlConnection(sConnectionString)
+        Dim commandSQL1 As SqlCommand, SQLstring As String
+
+        SQLstring = "DELETE FROM Receipt WHERE ReceiptID = " + nReceiptDelete.Value.ToString.Trim
+
+        Try
+
+            sqlConnect1.Open()
+            commandSQL1 = New SqlCommand(SQLstring, sqlConnect1)
+            commandSQL1.ExecuteNonQuery()
+            commandSQL1.Dispose()
+            sqlConnect1.Close()
+
+            lblReceiptDeleted.Visible = True
+            Timer1.Enabled = True
+        Catch ex As ArgumentException
+            MsgBox("" & ex.Message)
+
+        Finally
+
+        End Try
+
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        lblReceiptDeleted.Visible = False
+        Timer1.Enabled = False
+    End Sub
 End Class

@@ -25,6 +25,7 @@ Public Class POSMain
         lblTicketSum.Text = Format(GetSumTicketsByDate(Today.ToShortDateString), "###0.00")
     End Sub
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblChange.Text = ""
         ShowTicketsSoldToday()
         NewReceiptID()
         Me.ReportViewer1.RefreshReport()
@@ -127,10 +128,13 @@ Public Class POSMain
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
+        lblChange.Text = ""
+        Timer1.Enabled = False
+
         If Not DataGridView2.Visible Then ' allow user to use keys to select item from search list
-            txtEntry.Focus()
+            '            txtEntry.Focus()
         Else
-            txtEntry.Enabled = False
+            '           txtEntry.Enabled = False
         End If
 
     End Sub
@@ -489,7 +493,10 @@ Public Class POSMain
             If bIsReturn Then
                 BigMsgBox("Return to Customer: " & lblReceiptTotal.Text.Replace("-", ""))
             Else
-                BigMsgBox("Change: " & lblReceiptTotal.Text.Replace("-", ""))
+                lblChange.Text = "Change: " & lblReceiptTotal.Text.Replace("-", "")
+                BigMsgBox(lblChange.Text)
+                Timer1.Enabled = True ' clear message within a few seconds
+
             End If
         End If
 
