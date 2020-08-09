@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Attendance.rdl" />
+    <Report Include="Category.rdl" />
     <Report Include="Receipt.rdl" />
     <Report Include="ReportInventory.rdl" />
     <Report Include="ReportReceipt.rdl" />

@@ -19,7 +19,7 @@ Public Class POSMain
     Private bReceiptMarkedPaid As Boolean, bManagerMode As Boolean
     Const sReceiptPath As String = "C:\Users\armis\Documents\receipt.txt"
     Private btxtReceiptNumber_EnterKeyPressed As Boolean
-    Private sInitial_txtReceiptNumber As String
+    Private sInitial_txtReceiptNumber As String, nManagerWarningCounter As Integer
 
     Private Sub ShowTicketsSoldToday()
         lblTicketSum.Text = Format(GetSumTicketsByDate(Today.ToShortDateString), "###0.00")
@@ -128,6 +128,7 @@ Public Class POSMain
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
+        nManagerWarningCounter = 0
         lblChange.Text = ""
         Timer1.Enabled = False
 
@@ -788,6 +789,14 @@ Public Class POSMain
         If Me.ReceiptNumber = 1 Then
             Exit Sub
         End If
+
+        If nReceiptCurrent < (nReceiptLatest - 3) And ManagerMode = False Then
+            nManagerWarningCounter += 1
+            If nManagerWarningCounter > 3 Then BigMsgBox("Manager Access Needed for Receipts Further than 4 Back")
+            Timer1.Enabled = True
+            Exit Sub ' no more than 4 back without manager function
+        End If
+
         If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
             BigMsgBox("You need to resolve this open receipt before going to other receipts")
             Exit Sub
