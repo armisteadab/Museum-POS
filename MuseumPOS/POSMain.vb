@@ -1028,17 +1028,25 @@ Public Class POSMain
     End Sub
 
     Private Sub txtReceiptNumber_KeyUp(sender As Object, e As KeyEventArgs) Handles txtReceiptNumber.KeyUp
+        Dim nTextBoxValue As Integer
+
         If e.KeyCode <> Keys.Enter Then
             Exit Sub
         End If
 
         btxtReceiptNumber_EnterKeyPressed = True ' indicate this so that we can undo changes if we lose focus w/out enter key pressed
+        nTextBoxValue = Val(txtReceiptNumber.Text)
+        If nTextBoxValue < (nReceiptLatest - 3) And ManagerMode = False Then
+            BigMsgBox("Manager Access Needed for Receipts Further than 4 Back")
+            txtReceiptNumber.Text = (sInitial_txtReceiptNumber) ' restore original value
+            Exit Sub ' no more than 4 back without manager function
+        End If
 
-        If Val(txtReceiptNumber.Text) < 1 Then
+        If nTextBoxValue < 1 Then
             Exit Sub
         End If
 
-        If Val(txtReceiptNumber.Text) > nReceiptLatest Then ' no going into future
+        If nTextBoxValue > nReceiptLatest Then ' no going into future
             txtReceiptNumber.Text = (sInitial_txtReceiptNumber) ' restore original value
             Exit Sub
         End If
@@ -1080,6 +1088,10 @@ Public Class POSMain
         Dim fMgrFunc As New ManagerFunctions
         fMgrFunc.ShowDialog()
         fMgrFunc = Nothing
+
+    End Sub
+
+    Private Sub txtReceiptNumber_TextChanged(sender As Object, e As EventArgs) Handles txtReceiptNumber.TextChanged
 
     End Sub
 
