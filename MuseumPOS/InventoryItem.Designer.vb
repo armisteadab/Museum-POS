@@ -66,6 +66,7 @@ Partial Class InventoryItem
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.nTaxRate = New System.Windows.Forms.NumericUpDown()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnLabel = New System.Windows.Forms.Button()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -494,11 +495,21 @@ Partial Class InventoryItem
         Me.Label11.TabIndex = 34
         Me.Label11.Text = "Tax Rate %"
         '
+        'btnLabel
+        '
+        Me.btnLabel.Location = New System.Drawing.Point(435, 456)
+        Me.btnLabel.Name = "btnLabel"
+        Me.btnLabel.Size = New System.Drawing.Size(128, 44)
+        Me.btnLabel.TabIndex = 35
+        Me.btnLabel.Text = "Button1"
+        Me.btnLabel.UseVisualStyleBackColor = True
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 689)
+        Me.Controls.Add(Me.btnLabel)
         Me.Controls.Add(Me.nTaxRate)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtSearch)
@@ -592,4 +603,5 @@ Partial Class InventoryItem
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents nTaxRate As NumericUpDown
     Friend WithEvents Label11 As Label
+    Friend WithEvents btnLabel As Button
 End Class

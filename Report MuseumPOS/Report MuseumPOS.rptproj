@@ -51,6 +51,7 @@
   </PropertyGroup>
   <ItemGroup>
     <DataSource Include="DataSource1.rds" />
+    <DataSource Include="MuseumPOS.rds" />
   </ItemGroup>
   <ItemGroup>
     <Report Include="Attendance.rdl" />

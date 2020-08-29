@@ -181,5 +181,43 @@ Module Module1
         Return (nReturnSum)
     End Function
 
+    Public Function GetMaxItemNumber() As Long
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim nReturnMAX As Long
 
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "SELECT MAX(Id) as MAXId FROM InventoryItems"
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        If reader.HasRows Then
+            On Error Resume Next
+
+            While reader.Read()
+                nReturnMAX += (reader.Item("MAXId"))
+            End While
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+        Return (nReturnMAX)
+
+    End Function
 End Module

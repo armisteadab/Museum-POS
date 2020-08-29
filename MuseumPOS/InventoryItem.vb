@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data.SqlDbType
-
+Imports Zebra.Sdk.Graphics.[Shared]
+Imports Zebra.Sdk.Printer
 
 Public Class InventoryItem
     Private ChangedValue As Boolean
@@ -296,6 +297,7 @@ Public Class InventoryItem
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         ClearValues()
+        numItemNumber.Value = GetMaxItemNumber()
         txtUPC.ReadOnly = False ' allow new UPC
         txtUPC.Focus()
     End Sub
@@ -408,6 +410,7 @@ Public Class InventoryItem
 
             commandSQL.ExecuteNonQuery()
             sqlConnect.Close()
+            BigMsgBox("Record Deleted")
 
         End If
 
@@ -424,6 +427,9 @@ Public Class InventoryItem
         Dim sListsSetup As New ListsSetup
         sListsSetup.ShowDialog()
         sListsSetup = Nothing
+        ' reload list values
+        LoadALLComboBoxes()
+
     End Sub
 
     Private Sub LoadALLComboBoxes()
@@ -525,5 +531,8 @@ Public Class InventoryItem
 
     Private Sub numItemNumber_KeyUp(sender As Object, e As KeyEventArgs) Handles numItemNumber.KeyUp
         Me.Changed = True
+    End Sub
+
+    Private Sub btnLabel_Click(sender As Object, e As EventArgs) Handles btnLabel.Click
     End Sub
 End Class
