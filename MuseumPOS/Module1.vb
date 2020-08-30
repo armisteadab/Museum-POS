@@ -181,6 +181,51 @@ Module Module1
         Return (nReturnSum)
     End Function
 
+    Public Function GetSumTimeAttendanceByDateRange(ByVal sDate1 As String, sDate2 As String) As Double
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim nReturnSum As Double, nRunningTotal As Long
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "SELECT Worker, TimeIN, TimeOUT "
+        sqlString += "FROM Attendance "
+        sqlString += "WHERE TimeIN >= " & QTrim(sDate1)
+        sqlString += " AND TimeOUT <= " & QTrim(sDate2)
+        sqlString += " ORDER BY Id"
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        If reader.HasRows Then
+            On Error Resume Next
+
+            While reader.Read()
+                nRunningTotal = (DateDiff("n", reader.Item("TimeIN"), reader.Item("TimeOUT")))
+                nReturnSum += nRunningTotal
+                reader.NextResult()
+            End While
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+        nReturnSum = (nReturnSum / 60)
+        Return (nReturnSum)
+    End Function
+
     Public Function GetMaxItemNumber() As Long
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String

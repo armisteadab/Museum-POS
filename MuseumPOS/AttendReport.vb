@@ -18,6 +18,7 @@ Public Class AttendReport
         Dim AttendDataSource As New WinForms.ReportDataSource
         Dim dataset As New DataSet("Attendance")
         Dim sReportTitle As String
+        Dim dTimeTotal As Double
 
         GetAttendDataSet(dataset, sReportType)
 
@@ -42,6 +43,8 @@ Public Class AttendReport
             sReportTitle = DateTimePickerSingle.Value.ToShortDateString.Trim
         End If
 
+        dTimeTotal = GetSumTimeAttendanceByDateRange(DateTimePicker_Start.Value.ToShortDateString.Trim, DateTimePicker_End.Value.ToShortDateString.Trim)
+        sReportTitle += (Space(1) + dTimeTotal.ToString)
         rParam.Values.Add(sReportTitle)
         ReportViewer1.LocalReport.SetParameters(rParam)
 

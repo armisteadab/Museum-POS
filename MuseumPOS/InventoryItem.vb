@@ -297,7 +297,7 @@ Public Class InventoryItem
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         ClearValues()
-        numItemNumber.Value = GetMaxItemNumber()
+        numItemNumber.Value = GetMaxItemNumber() + 1
         txtUPC.ReadOnly = False ' allow new UPC
         txtUPC.Focus()
     End Sub
