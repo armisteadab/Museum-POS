@@ -30,10 +30,6 @@ Public Class AttendReport
         ReportViewer1.LocalReport.DataSources.Add(AttendDataSource)
         ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\Attendance.rdl"
 
-        Dim rParam As New WinForms.ReportParameter
-        rParam.Values.Clear()
-        rParam.Name = "ReportTitleText"
-
         sReportTitle = ""
         If sReportType = "RANGE" Then
             sReportTitle = "From " & DateTimePicker_Start.Value.ToShortDateString.Trim & " To " & DateTimePicker_End.Value.ToShortDateString.Trim
@@ -43,10 +39,26 @@ Public Class AttendReport
             sReportTitle = DateTimePickerSingle.Value.ToShortDateString.Trim
         End If
 
-        dTimeTotal = GetSumTimeAttendanceByDateRange(DateTimePicker_Start.Value.ToShortDateString.Trim, DateTimePicker_End.Value.ToShortDateString.Trim)
-        sReportTitle += (Space(1) + dTimeTotal.ToString)
+        If txtWorker.Text.Trim = "" Then
+            ' no worker defined
+            dTimeTotal = GetSumTimeAttendanceByDateRange(DateTimePicker_Start.Value.ToShortDateString.Trim, DateTimePicker_End.Value.ToShortDateString.Trim)
+        Else
+            'specific worker
+            dTimeTotal = GetSumTimeAttendanceForWorkerByDateRange(txtWorker.Text, DateTimePicker_Start.Value.ToShortDateString.Trim, DateTimePicker_End.Value.ToShortDateString.Trim)
+        End If
+
+        dTimeTotal = dTimeTotal / 60
+        Dim rParam As New WinForms.ReportParameter
+        rParam.Values.Clear()
+        rParam.Name = "ReportTitleText"
         rParam.Values.Add(sReportTitle)
         ReportViewer1.LocalReport.SetParameters(rParam)
+
+        Dim rParam2 As New WinForms.ReportParameter
+        rParam2.Values.Clear()
+        rParam2.Name = "TimeTotal"
+        rParam2.Values.Add(Format(dTimeTotal, "###0.0"))
+        ReportViewer1.LocalReport.SetParameters(rParam2)
 
         ReportViewer1.RefreshReport()
 
@@ -69,6 +81,10 @@ Public Class AttendReport
 
         If sReportType = "SINGLE" Then
             sSQL += " WHERE TimeIN BETWEEN " + QTrim(Me.DateTimePickerSingle.Value.ToShortDateString + " 12:00AM") + " AND " + QTrim(DateAdd("d", 1, Me.DateTimePickerSingle.Value).ToShortDateString + " 12:00PM")
+        End If
+
+        If Not txtWorker.Text.Trim = "" Then
+            sSQL += " AND Worker = " + txtWorker.Text.Trim ' specific worker only
         End If
 
         If Not chkIncomplete.Checked Then

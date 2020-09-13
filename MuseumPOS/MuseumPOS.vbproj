@@ -248,6 +248,7 @@
     <Compile Include="ManualEntryBluePay.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Printer.vb" />
     <Compile Include="ReportReceipt.Designer.vb">
       <DependentUpon>ReportReceipt.vb</DependentUpon>
     </Compile>

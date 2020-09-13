@@ -33,6 +33,9 @@ Partial Class AttendReport
         Me.DateTimePicker_Start = New System.Windows.Forms.DateTimePicker()
         Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.chkIncomplete = New System.Windows.Forms.CheckBox()
+        Me.txtWorker = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -41,7 +44,7 @@ Partial Class AttendReport
         '
         Me.GroupBox2.Controls.Add(Me.btnSingleDateRunReport)
         Me.GroupBox2.Controls.Add(Me.DateTimePickerSingle)
-        Me.GroupBox2.Location = New System.Drawing.Point(30, 337)
+        Me.GroupBox2.Location = New System.Drawing.Point(30, 396)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(442, 134)
         Me.GroupBox2.TabIndex = 10
@@ -74,7 +77,7 @@ Partial Class AttendReport
         Me.GroupBox1.Controls.Add(Me.btnRunReport)
         Me.GroupBox1.Controls.Add(Me.DateTimePicker_End)
         Me.GroupBox1.Controls.Add(Me.DateTimePicker_Start)
-        Me.GroupBox1.Location = New System.Drawing.Point(30, 27)
+        Me.GroupBox1.Location = New System.Drawing.Point(30, 86)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(442, 304)
         Me.GroupBox1.TabIndex = 9
@@ -144,18 +147,48 @@ Partial Class AttendReport
         '
         Me.chkIncomplete.AutoSize = True
         Me.chkIncomplete.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkIncomplete.Location = New System.Drawing.Point(47, 503)
+        Me.chkIncomplete.Location = New System.Drawing.Point(47, 550)
         Me.chkIncomplete.Name = "chkIncomplete"
         Me.chkIncomplete.Size = New System.Drawing.Size(305, 36)
         Me.chkIncomplete.TabIndex = 6
         Me.chkIncomplete.Text = "Include Incompletes?"
         Me.chkIncomplete.UseVisualStyleBackColor = True
         '
+        'txtWorker
+        '
+        Me.txtWorker.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtWorker.Location = New System.Drawing.Point(150, 32)
+        Me.txtWorker.Name = "txtWorker"
+        Me.txtWorker.Size = New System.Drawing.Size(100, 38)
+        Me.txtWorker.TabIndex = 11
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(30, 35)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(113, 32)
+        Me.Label3.TabIndex = 12
+        Me.Label3.Text = "Worker:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(256, 35)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(182, 17)
+        Me.Label4.TabIndex = 13
+        Me.Label4.Text = "(leave blank for all workers)"
+        '
         'AttendReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1192, 564)
+        Me.ClientSize = New System.Drawing.Size(1191, 670)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.txtWorker)
         Me.Controls.Add(Me.chkIncomplete)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -182,4 +215,7 @@ Partial Class AttendReport
     Friend WithEvents DateTimePicker_Start As DateTimePicker
     Friend WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
     Friend WithEvents chkIncomplete As CheckBox
+    Friend WithEvents txtWorker As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
 End Class
