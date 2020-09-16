@@ -308,4 +308,46 @@ Module Module1
         Return (nReturnMAX)
 
     End Function
+
+    Public Sub LoadComboBox(ByVal sComboType$, parObject As ComboBox)
+
+        Dim sqlConnect As New SqlConnection(), sSQL$, sConnectionString$
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+        sSQL = "SELECT ListOrder, ListValue, ListType, Id FROM ListSetup"
+        sSQL += " WHERE ListType = " & QTrim(sComboType)
+        sSQL += " ORDER BY ListOrder, Id"
+
+        cmd.CommandText = sSQL
+        cmd.Connection = sqlConnect
+        ' Create a SqlParameter for each parameter in the stored procedure.
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        Try
+            If sqlConnect.State = ConnectionState.Closed Then
+                sqlConnect.Open()
+            End If
+            reader = cmd.ExecuteReader()
+            Using reader
+                While reader.Read
+                    ' Process SprocResults datareader here.
+                    parObject.Items.Add(reader.Item("ListValue").ToString.Trim)
+
+                End While
+            End Using
+        Finally
+            If previousConnectionState = ConnectionState.Closed Then
+                sqlConnect.Close()
+            End If
+        End Try
+
+    End Sub
+
 End Module

@@ -10,7 +10,12 @@ Imports System.Drawing.Printing
 Public Class ReportReceipt
     ' run Date Range report
     Private Sub btnRunReport_Click(sender As Object, e As EventArgs) Handles btnRunReport.Click
-        ReceiptShow("RANGE")
+        If DateTimePicker_Start.Value.ToShortDateString.Trim = DateTimePicker_End.Value.ToShortDateString.Trim Then
+            ReceiptShow("SINGLE")
+        Else
+            ReceiptShow("RANGE")
+        End If
+
     End Sub
 
 
@@ -18,6 +23,7 @@ Public Class ReportReceipt
         Dim receiptDataSource As New WinForms.ReportDataSource
         Dim dataset As New DataSet("Receipt")
         Dim sReportTitle As String
+
 
         GetReceiptDataSet(dataset, sReportType)
 
@@ -40,7 +46,7 @@ Public Class ReportReceipt
         End If
 
         If sReportType = "SINGLE" Then
-            sReportTitle = DateTimePickerSingle.Value.ToShortDateString.Trim
+            sReportTitle = DateTimePicker_Start.Value.ToShortDateString.Trim
         End If
 
         rParam.Values.Add(sReportTitle)
@@ -68,7 +74,7 @@ Public Class ReportReceipt
         End If
 
         If sReportType = "SINGLE" Then
-            sSQL += " WHERE a.ReceiptDate = " + QTrim(DateTimePickerSingle.Value.ToShortDateString)
+            sSQL += " WHERE a.ReceiptDate = " + QTrim(DateTimePicker_Start.Value.ToShortDateString)
         End If
         '        sSQL += " AND "
 
@@ -78,10 +84,6 @@ Public Class ReportReceipt
         Using connection As New SqlConnection(sConnectionString)
 
             Dim command As New SqlCommand(sSQL, connection)
-
-            '            Dim parameter As New SqlParameter("rDateTime",
-            '            Me.DateTimePicker_Start.Value.ToShortDateString)
-            '            command.Parameters.Add(parameter)
 
             Dim ReceiptAdapter As New SqlDataAdapter(command)
 
@@ -93,6 +95,10 @@ Public Class ReportReceipt
 
     Private Sub ReportReceipt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
+        LoadComboBox("INVTYPE", cboType)
+        LoadComboBox("VENDOR", cboVendor)
+        LoadComboBox("DEPT", cboDept)
+
     End Sub
 
     Private Sub ReportReceipt_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
@@ -100,8 +106,4 @@ Public Class ReportReceipt
         Me.ReportViewer1.Width = (Me.Width - ReportViewer1.Left) - 20
     End Sub
 
-    Private Sub btnSingleDateRunReport_Click(sender As Object, e As EventArgs) Handles btnSingleDateRunReport.Click
-        ReceiptShow("SINGLE")
-
-    End Sub
 End Class

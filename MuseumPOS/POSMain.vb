@@ -1097,22 +1097,7 @@ Public Class POSMain
     End Sub
 
     Private Sub btnDrawer_Click(sender As Object, e As EventArgs) Handles btnDrawer.Click
-        Printer.Print("DAVE")
-    End Sub
-    Private Sub XXXbtnDrawer_Click(sender As Object, e As EventArgs)
-        Dim streamToPrint As New StreamReader("c:\Release\opendrawer.txt")
-        Dim pd As New PrintDocument
-        pd.DocumentName = "opendrawer.txt"
-        pd.Print()
-        streamToPrint.Close()
-    End Sub
-
-    Private Sub PrintDocument1_BeginPrint(sender As Object, e As PrintEventArgs) Handles PrintDocument1.BeginPrint
-
-    End Sub
-
-    Private Sub PrintDocument1_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
-
+        Printer.CashDrawer()
     End Sub
 
     Private Sub lblTicketSum_Click(sender As Object, e As EventArgs) Handles lblTicketSum.Click

@@ -437,47 +437,6 @@ Public Class InventoryItem
         LoadComboBox("VENDOR", cboVendor)
         LoadComboBox("DEPT", cboDepartment)
     End Sub
-    Private Sub LoadComboBox(ByVal sComboType$, parObject As ComboBox)
-
-        Dim sqlConnect As New SqlConnection(), sSQL$
-
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
-
-        sqlConnect.ConnectionString = sConnectionString
-
-        Dim cmd As New SqlCommand
-        cmd.CommandType = CommandType.Text
-        sSQL = "SELECT ListOrder, ListValue, ListType, Id FROM ListSetup"
-        sSQL += " WHERE ListType = " & QTrim(sComboType)
-        sSQL += " ORDER BY ListOrder, Id"
-
-        cmd.CommandText = sSQL
-        cmd.Connection = sqlConnect
-        ' Create a SqlParameter for each parameter in the stored procedure.
-
-        Dim reader As SqlDataReader
-        Dim previousConnectionState As ConnectionState = sqlConnect.State
-        Me.DataGridView1.Rows.Clear()
-
-        Try
-            If sqlConnect.State = ConnectionState.Closed Then
-                sqlConnect.Open()
-            End If
-            reader = cmd.ExecuteReader()
-            Using reader
-                While reader.Read
-                    ' Process SprocResults datareader here.
-                    parObject.Items.Add(reader.Item("ListValue").ToString.Trim)
-
-                End While
-            End Using
-        Finally
-            If previousConnectionState = ConnectionState.Closed Then
-                sqlConnect.Close()
-            End If
-        End Try
-
-    End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Dim sEntry As String, bIsNumeric As Boolean

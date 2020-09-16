@@ -4,7 +4,7 @@
     Private Shared prn As Printing.PrintDocument
 
     Shared Sub New()
-        _myfont = New Font("Courier New",
+        _myfont = New Font("control",
                   8, FontStyle.Regular, GraphicsUnit.Point)
         prn = New Printing.PrintDocument
         AddHandler prn.PrintPage, AddressOf PrintPageHandler
@@ -15,9 +15,15 @@
             {Environment.NewLine}, StringSplitOptions.None)
 
         For Each line As String In linesarray
-            Lines.Enqueue(line)
+            ' Lines.Enqueue(line)
         Next
         prn.Print()
+    End Sub
+
+    Public Shared Sub CashDrawer()
+        '27,112,0,50,250 
+        'Print(Chr(27) + Chr(112) + Chr(0) + Chr(50) + Chr(250)) ' 27,112,0,50,250	
+        Print("x�2")
     End Sub
 
     Private Shared Sub PrintPageHandler(ByVal sender As Object,
