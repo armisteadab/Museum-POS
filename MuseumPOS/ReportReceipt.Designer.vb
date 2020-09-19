@@ -29,13 +29,15 @@ Partial Class ReportReceipt
         Me.DateTimePicker_End = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnSummary = New System.Windows.Forms.Button()
-        Me.cboDept = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cboVendor = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cboType = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cboDept = New System.Windows.Forms.ComboBox()
+        Me.btnSummary = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtSearchDescription = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -53,7 +55,7 @@ Partial Class ReportReceipt
         'btnRunReport
         '
         Me.btnRunReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRunReport.Location = New System.Drawing.Point(38, 559)
+        Me.btnRunReport.Location = New System.Drawing.Point(40, 588)
         Me.btnRunReport.Name = "btnRunReport"
         Me.btnRunReport.Size = New System.Drawing.Size(154, 45)
         Me.btnRunReport.TabIndex = 1
@@ -100,6 +102,8 @@ Partial Class ReportReceipt
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtSearchDescription)
+        Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.cboVendor)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -114,39 +118,29 @@ Partial Class ReportReceipt
         Me.GroupBox1.Controls.Add(Me.DateTimePicker_Start)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(442, 621)
+        Me.GroupBox1.Size = New System.Drawing.Size(442, 639)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Date Range"
         '
-        'btnSummary
+        'Label5
         '
-        Me.btnSummary.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSummary.Location = New System.Drawing.Point(209, 559)
-        Me.btnSummary.Name = "btnSummary"
-        Me.btnSummary.Size = New System.Drawing.Size(154, 45)
-        Me.btnSummary.TabIndex = 6
-        Me.btnSummary.Text = "Summary"
-        Me.btnSummary.UseVisualStyleBackColor = True
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(17, 403)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(115, 32)
+        Me.Label5.TabIndex = 12
+        Me.Label5.Text = "Vendor:"
         '
-        'cboDept
+        'cboVendor
         '
-        Me.cboDept.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboDept.FormattingEnabled = True
-        Me.cboDept.Location = New System.Drawing.Point(19, 255)
-        Me.cboDept.Name = "cboDept"
-        Me.cboDept.Size = New System.Drawing.Size(370, 39)
-        Me.cboDept.TabIndex = 7
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(17, 208)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(171, 32)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Department:"
+        Me.cboVendor.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboVendor.FormattingEnabled = True
+        Me.cboVendor.Location = New System.Drawing.Point(23, 447)
+        Me.cboVendor.Name = "cboVendor"
+        Me.cboVendor.Size = New System.Drawing.Size(370, 39)
+        Me.cboVendor.TabIndex = 11
         '
         'Label4
         '
@@ -167,24 +161,52 @@ Partial Class ReportReceipt
         Me.cboType.Size = New System.Drawing.Size(370, 39)
         Me.cboType.TabIndex = 9
         '
-        'Label5
+        'Label3
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(17, 403)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(115, 32)
-        Me.Label5.TabIndex = 12
-        Me.Label5.Text = "Vendor:"
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(17, 208)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(171, 32)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "Department:"
         '
-        'cboVendor
+        'cboDept
         '
-        Me.cboVendor.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboVendor.FormattingEnabled = True
-        Me.cboVendor.Location = New System.Drawing.Point(23, 447)
-        Me.cboVendor.Name = "cboVendor"
-        Me.cboVendor.Size = New System.Drawing.Size(370, 39)
-        Me.cboVendor.TabIndex = 11
+        Me.cboDept.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboDept.FormattingEnabled = True
+        Me.cboDept.Location = New System.Drawing.Point(19, 255)
+        Me.cboDept.Name = "cboDept"
+        Me.cboDept.Size = New System.Drawing.Size(370, 39)
+        Me.cboDept.TabIndex = 7
+        '
+        'btnSummary
+        '
+        Me.btnSummary.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSummary.Location = New System.Drawing.Point(211, 588)
+        Me.btnSummary.Name = "btnSummary"
+        Me.btnSummary.Size = New System.Drawing.Size(154, 45)
+        Me.btnSummary.TabIndex = 6
+        Me.btnSummary.Text = "Summary"
+        Me.btnSummary.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(23, 499)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(250, 32)
+        Me.Label6.TabIndex = 13
+        Me.Label6.Text = "Text in Description"
+        '
+        'txtSearchDescription
+        '
+        Me.txtSearchDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearchDescription.Location = New System.Drawing.Point(23, 534)
+        Me.txtSearchDescription.Name = "txtSearchDescription"
+        Me.txtSearchDescription.Size = New System.Drawing.Size(370, 38)
+        Me.txtSearchDescription.TabIndex = 14
         '
         'ReportReceipt
         '
@@ -215,4 +237,6 @@ Partial Class ReportReceipt
     Friend WithEvents cboType As ComboBox
     Friend WithEvents Label3 As Label
     Friend WithEvents cboDept As ComboBox
+    Friend WithEvents txtSearchDescription As TextBox
+    Friend WithEvents Label6 As Label
 End Class

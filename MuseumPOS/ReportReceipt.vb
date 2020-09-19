@@ -69,6 +69,11 @@ Public Class ReportReceipt
             sReportTitle += " Type: " + QTrim(cboType.Text.Trim)
         End If
 
+        If Not txtSearchDescription.Text.Trim = "" Then
+            sReportTitle += " Search: " + QTrim(txtSearchDescription.Text.Trim)
+
+        End If
+
         rParam.Values.Add(sReportTitle)
         ReportViewer1.LocalReport.SetParameters(rParam)
 
@@ -102,6 +107,10 @@ Public Class ReportReceipt
 
         If sReportType = "SINGLE" Then
             sSQL += " WHERE a.ReceiptDate = " + QTrim(DateTimePicker_Start.Value.ToShortDateString)
+        End If
+
+        If Not (txtSearchDescription.Text.Trim = "") Then
+            sSQL += " AND a.Description LIKE " + QLike(txtSearchDescription.Text.Trim)
         End If
 
         If Not cboDept.Text.Trim = "" Then
