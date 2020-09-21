@@ -79,9 +79,9 @@ Public Class POSMain
         Set(ByVal value As Boolean)
             bManagerMode = (value)
             If bManagerMode Then
-                btnManagerMode.Text = "Manager Mode ON"
+                btnManagerMode.Text = "Manager Mode is ON"
             Else
-                btnManagerMode.Text = "Manager Mode OFF"
+                btnManagerMode.Text = "Manager Mode is OFF"
             End If
             btnManagerFunctions.Visible = bManagerMode
         End Set
@@ -169,21 +169,20 @@ Public Class POSMain
         sSearchLikeValue = QLike(txtEntry.Text)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, InvNotes, UniqueID, TaxRate FROM InventoryItems"
 
         If Not bIsNumeric Then
-            sSQL += " WHERE InvName LIKE " & sSearchLikeValue
+            sSQL = "EXEC InventoryItemSearchByName " + sSearchLikeValue
+
         Else
-            sSQL += " WHERE InvUPC LIKE " & sSearchLikeValue
+            sSQL = "EXEC InventoryItemSearchByUPC " + sSearchLikeValue
             If sSearchLikeValue.Length < 12 Then
-                sSQL += " OR Id LIKE " & sSearchLikeValue
+                sSQL = "EXEC InventoryItemSearchByUPC_or_ID " + sSearchLikeValue
             End If
         End If
 
 
         cmd.CommandText = sSQL
         cmd.Connection = sqlConnect
-        ' Create a SqlParameter for each parameter in the stored procedure.
 
         Dim reader As SqlDataReader
         Dim previousConnectionState As ConnectionState = sqlConnect.State
@@ -382,8 +381,6 @@ Public Class POSMain
 
     Private Sub btnAdult_Click(sender As Object, e As EventArgs) Handles btnAdult.Click
 
-        'txtEntry.Text = "111111111111"
-        'RunSearch(True)
         Me.DataGridView1.Rows.Add("ADULT TICKET", "1", "10.00", "111111111111", "0")
 
     End Sub
@@ -577,15 +574,16 @@ Public Class POSMain
             If Not bIsReturn Then
                 ' remove sold items from inventory
                 sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity - " & sQuantity & ")"
+                sqlString += " WHERE InvType <> 'NonInventory'"
             Else
                 'return item to inventory
                 sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity + " & sQuantity & ")"
+                sqlString += " WHERE InvType <> 'NonInventory'"
             End If
 
-            sqlString = sqlString & " WHERE InvUPC = " & QTrim(sInvUPC)
+            sqlString += " AND InvUPC = " & QTrim(sInvUPC)
 
             Try
-
                 sqlConnect1.Open()
                 commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
                 commandSQL1.ExecuteNonQuery()

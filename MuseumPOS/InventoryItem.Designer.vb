@@ -66,7 +66,7 @@ Partial Class InventoryItem
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.nTaxRate = New System.Windows.Forms.NumericUpDown()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnLabel = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -257,7 +257,7 @@ Partial Class InventoryItem
         'numOnHandQuantity
         '
         Me.numOnHandQuantity.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.numOnHandQuantity.Location = New System.Drawing.Point(237, 392)
+        Me.numOnHandQuantity.Location = New System.Drawing.Point(242, 390)
         Me.numOnHandQuantity.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numOnHandQuantity.Minimum = New Decimal(New Integer() {45, 0, 0, -2147483648})
         Me.numOnHandQuantity.Name = "numOnHandQuantity"
@@ -495,21 +495,22 @@ Partial Class InventoryItem
         Me.Label11.TabIndex = 34
         Me.Label11.Text = "Tax Rate %"
         '
-        'btnLabel
+        'Label12
         '
-        Me.btnLabel.Location = New System.Drawing.Point(435, 456)
-        Me.btnLabel.Name = "btnLabel"
-        Me.btnLabel.Size = New System.Drawing.Size(128, 44)
-        Me.btnLabel.TabIndex = 35
-        Me.btnLabel.Text = "Button1"
-        Me.btnLabel.UseVisualStyleBackColor = True
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label12.Location = New System.Drawing.Point(237, 392)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(46, 29)
+        Me.Label12.TabIndex = 35
+        Me.Label12.Text = "n/a"
         '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 689)
-        Me.Controls.Add(Me.btnLabel)
         Me.Controls.Add(Me.nTaxRate)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtSearch)
@@ -544,6 +545,7 @@ Partial Class InventoryItem
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtUPC)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Label12)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "InventoryItem"
         Me.Text = "Inventory Item"
@@ -603,5 +605,5 @@ Partial Class InventoryItem
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents nTaxRate As NumericUpDown
     Friend WithEvents Label11 As Label
-    Friend WithEvents btnLabel As Button
+    Friend WithEvents Label12 As Label
 End Class

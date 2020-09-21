@@ -97,7 +97,7 @@ Partial Class POSMain
         'btnManagerFunctions
         '
         Me.btnManagerFunctions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnManagerFunctions.Location = New System.Drawing.Point(1861, 6)
+        Me.btnManagerFunctions.Location = New System.Drawing.Point(1878, 6)
         Me.btnManagerFunctions.Name = "btnManagerFunctions"
         Me.btnManagerFunctions.Size = New System.Drawing.Size(131, 37)
         Me.btnManagerFunctions.TabIndex = 2
@@ -498,9 +498,9 @@ Partial Class POSMain
         '
         Me.btnManagerMode.Location = New System.Drawing.Point(1434, 7)
         Me.btnManagerMode.Name = "btnManagerMode"
-        Me.btnManagerMode.Size = New System.Drawing.Size(157, 39)
+        Me.btnManagerMode.Size = New System.Drawing.Size(174, 39)
         Me.btnManagerMode.TabIndex = 33
-        Me.btnManagerMode.Text = "Manager Mode OFF"
+        Me.btnManagerMode.Text = "Manager Mode is OFF"
         Me.btnManagerMode.UseVisualStyleBackColor = True
         '
         'ReportViewer1
@@ -538,7 +538,7 @@ Partial Class POSMain
         'btnReportMenu
         '
         Me.btnReportMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!)
-        Me.btnReportMenu.Location = New System.Drawing.Point(1597, 6)
+        Me.btnReportMenu.Location = New System.Drawing.Point(1614, 6)
         Me.btnReportMenu.Name = "btnReportMenu"
         Me.btnReportMenu.Size = New System.Drawing.Size(110, 39)
         Me.btnReportMenu.TabIndex = 37
@@ -567,7 +567,7 @@ Partial Class POSMain
         'btnAttend
         '
         Me.btnAttend.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAttend.Location = New System.Drawing.Point(1713, 6)
+        Me.btnAttend.Location = New System.Drawing.Point(1730, 6)
         Me.btnAttend.Name = "btnAttend"
         Me.btnAttend.Size = New System.Drawing.Size(142, 38)
         Me.btnAttend.TabIndex = 41

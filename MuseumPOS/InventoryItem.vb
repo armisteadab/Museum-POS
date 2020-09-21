@@ -15,7 +15,7 @@ Public Class InventoryItem
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
-        If Not (txtUPC.Text = "") Then
+        If Not (txtUPC.Text.Trim = "") Then
             sqlConnect.ConnectionString = sConnectionString
             sqlConnect.Open()
             Dim commandSQL As SqlCommand
@@ -26,7 +26,8 @@ Public Class InventoryItem
             AlreadyInTable = reader.HasRows
             reader.Close()
             sqlConnect.Close()
-
+        Else
+            txtUPC.Text = "00" + numItemNumber.Value.ToString.Trim
         End If
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -213,9 +214,15 @@ Public Class InventoryItem
                     Me.cboVendor.Text = reader.Item("Vendor").ToString.Trim
                     Me.numPrice.Value = nPriceDisplayGrid
                     Me.numUnitCost.Value = reader.Item("InvCost")
-                    Me.numOnHandQuantity.Value = reader.Item("OnHandQuantity")
+                    If cboType.Text.ToUpper.Trim <> "NONINVENTORY" Then
+                        Me.numOnHandQuantity.Visible = True
+                        Me.numOnHandQuantity.Value = reader.Item("OnHandQuantity")
+                    Else
+                        Me.numOnHandQuantity.Visible = False
+                    End If
+
                     Me.numItemNumber.Value = reader.Item("Id")
-                    Me.txtUPC.Text = reader.Item("InvUPC").ToString.Trim
+                        Me.txtUPC.Text = reader.Item("InvUPC").ToString.Trim
                     Me.txtNotes.Text = reader.Item("InvNotes").ToString.Trim
                     If Not IsDBNull(reader.Item("TaxRate")) Then
                         Me.nTaxRate.Value = reader.Item("TaxRate")
@@ -492,6 +499,4 @@ Public Class InventoryItem
         Me.Changed = True
     End Sub
 
-    Private Sub btnLabel_Click(sender As Object, e As EventArgs) Handles btnLabel.Click
-    End Sub
 End Class
