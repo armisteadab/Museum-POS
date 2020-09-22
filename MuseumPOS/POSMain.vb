@@ -537,14 +537,14 @@ Public Class POSMain
             nTaxedAmount = (nPrice * nTaxRate)
 
             If Not bIsReturn Then
-                sqlString = "INSERT INTO Receipt(UPC, Price, Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate, PayType, CardType) "
-                sqlString += " VALUES ("
+
+                sqlString = "EXEC InsertReceipt "
                 sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
                 sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
-                sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
-                sqlString = sqlString & " AS datetime), " & QTrim(Now)
+                sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", " & QTrim(Now)
+                sqlString = sqlString & ", " & QTrim(Now)
                 sqlString = sqlString & ", " & QTrim(sPayType) & "," & QTrim(sCardType)
-                sqlString = sqlString & ")"
+
             Else
                 sqlString = "INSERT INTO Returns(UPC, Price, Paid, TaxPaid, ReturnID, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
                 sqlString += " VALUES ("
@@ -573,15 +573,14 @@ Public Class POSMain
 
             If Not bIsReturn Then
                 ' remove sold items from inventory
-                sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity - " & sQuantity & ")"
-                sqlString += " WHERE InvType <> 'NonInventory'"
+                sqlString = "EXEC UpdateQuantity " & QTrim(sInvUPC) & ", " & sQuantity
             Else
                 'return item to inventory
                 sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity + " & sQuantity & ")"
                 sqlString += " WHERE InvType <> 'NonInventory'"
+                sqlString += " AND InvUPC = " & QTrim(sInvUPC)
             End If
 
-            sqlString += " AND InvUPC = " & QTrim(sInvUPC)
 
             Try
                 sqlConnect1.Open()

@@ -18,8 +18,10 @@ Public Class Attendance
 
         sqlConnect.ConnectionString = sConnectionString
         sqlConnect.Open()
-        sqlString = "SELECT Id, Worker, TimeIN, TimeOUT, TimeENCODED from Attendance WHERE Worker = " & TextBox1.Text.Trim & " AND "
-        sqlString += "TimeOUT is null"
+        '        sqlString = "SELECT Id, Worker, TimeIN, TimeOUT, TimeENCODED from Attendance WHERE Worker = " & TextBox1.Text.Trim & " AND "
+        '       sqlString += "TimeOUT is null"
+
+        sqlString = "EXEC AttendanceAlreadyThere " & TextBox1.Text.Trim
         Dim commandSQL As New SqlCommand(sqlString, sqlConnect)
 
         Dim reader = commandSQL.ExecuteReader()
@@ -53,7 +55,7 @@ Public Class Attendance
 
         sqlConnect.ConnectionString = sConnectionString
         sqlConnect.Open()
-        sqlString = "SELECT Count(Id) as MaxID FROM Attendance " 'WHERE Worker = " & TextBox1.Text.Trim
+        sqlString = "EXEC AttendanceMaxID"
         Dim commandSQL As New SqlCommand(sqlString, sqlConnect)
 
         Dim reader = commandSQL.ExecuteReader()
