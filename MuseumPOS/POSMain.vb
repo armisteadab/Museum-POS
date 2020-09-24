@@ -381,29 +381,32 @@ Public Class POSMain
 
     Private Sub btnAdult_Click(sender As Object, e As EventArgs) Handles btnAdult.Click
 
-        Me.DataGridView1.Rows.Add("ADULT TICKET", "1", "10.00", "111111111111", "0")
+        txtEntry.Text = Strings.StrDup(12, "1")
+
+        '        Me.DataGridView1.Rows.Add("ADULT TICKET", "1", "10.00", "111111111111", "0")
 
     End Sub
 
     Private Sub btnChild_Click(sender As Object, e As EventArgs) Handles btnChild.Click
 
-        Me.DataGridView1.Rows.Add("CHILD TICKET", "1", "5.00", "222222222222", "0")
+        txtEntry.Text = Strings.StrDup(12, "2")
+        '        Me.DataGridView1.Rows.Add("CHILD TICKET", "1", "5.00", "222222222222", "0")
 
     End Sub
 
     Private Sub btnAAAMilAdult_Click(sender As Object, e As EventArgs) Handles btnAAAMilAdult.Click
-
-        Me.DataGridView1.Rows.Add("AAA/MIL Adult", "1", "9.00", "333333333333", "0")
+        txtEntry.Text = Strings.StrDup(12, "3")
+        'Me.DataGridView1.Rows.Add("AAA/MIL Adult", "1", "9.00", "333333333333", "0")
     End Sub
 
     Private Sub btnAdultGroup_Click(sender As Object, e As EventArgs) Handles btnAdultGroup.Click
 
-        Me.DataGridView1.Rows.Add("Adult GROUP", "1", "8.00", "444444444444", "0")
+        txtEntry.Text = Strings.StrDup(12, "4")
 
     End Sub
 
     Private Sub btnChildGroup_Click(sender As Object, e As EventArgs) Handles btnChildGroup.Click
-        Me.DataGridView1.Rows.Add("Child GROUP", "1", "4.00", "555555555555", "0")
+        txtEntry.Text = Strings.StrDup(12, "5")
 
     End Sub
 
@@ -462,7 +465,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB) \ MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         If nReceiptCurrent <> nReceiptLatest Then
             If Not Me.ManagerMode Then
