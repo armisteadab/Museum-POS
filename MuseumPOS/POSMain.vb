@@ -465,7 +465,8 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB) \ MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        '        sConnectionString = "Data Source=(LocalDB) \ MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         If nReceiptCurrent <> nReceiptLatest Then
             If Not Me.ManagerMode Then

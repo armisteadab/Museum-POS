@@ -124,6 +124,7 @@ Public Class ReportReceipt
         If Not cboType.Text.Trim = "" Then
             sSQL += " AND b.InvType = " + QTrim(cboType.Text.Trim)
         End If
+        sSQL += " AND a.UPC <> ''"
 
         If Not bSummary Then
             sSQL += " ORDER BY a.ReceiptDateTime"
