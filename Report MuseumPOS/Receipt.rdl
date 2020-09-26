@@ -160,7 +160,7 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Paid.Value*Fields!Quantity.Value</Value>
+                                  <Value>=(Fields!Paid.Value + Fields!TaxPaid.Value) *Fields!Quantity.Value</Value>
                                   <Style>
                                     <Format>'$'0.00;('$'0.00)</Format>
                                     <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
@@ -338,7 +338,7 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=sum(Fields!Paid.Value*Fields!Quantity.Value)</Value>
+                    <Value>=sum((Fields!Paid.Value + Fields!TaxPaid.Value) *Fields!Quantity.Value)</Value>
                     <Style>
                       <Format>'$'0.00;('$'0.00)</Format>
                       <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
@@ -368,7 +368,7 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
         <Height>2.53611in</Height>
         <Style />
       </Body>
-      <Width>7.12167in</Width>
+      <Width>2.98834in</Width>
       <Page>
         <PageWidth>4in</PageWidth>
         <TopMargin>0.25in</TopMargin>
