@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DataSource1">
+  <ConnectionProperties>
+    <Extension>OLEDB-MD</Extension>
+    <ConnectString>Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\MuseumPOS.mdf";Integrated Security=True;Connect Timeout=30</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>90e41f26-6639-44aa-8080-b2460b66d07c</DataSourceID>
+</RptDataSource>

@@ -1,1 +1,0 @@
-﻿UPDATE InventoryItems SET InvName = 'Dave', InvType = 'TOY', InvCost = 2.4000, OnHandQuantity = 23, Vendor = 'TOYSMITH', InvPrice = 11.99, Department = 'DIECAST', InvNotes = 'trying again', Id =100 WHERE InvUPC = '09808008080'

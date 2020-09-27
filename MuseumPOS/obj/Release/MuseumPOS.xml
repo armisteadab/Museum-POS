@@ -1,0 +1,613 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MuseumPOS
+</name>
+</assembly>
+<members>
+<member name="T:MuseumPOS.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MuseumPOS.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:MuseumPOS.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:MuseumPOS.BPVB.BluePay">
+ <summary>
+ This is the BluePayPayment object.
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setCustomerInformation(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Sets Customer Information
+ </summary>
+ <param name="firstName"></param>
+ <param name="lastName"></param>
+ <param name="addr1"></param>
+ <param name="addr2"></param>
+ <param name="city"></param>
+ <param name="state"></param>
+ <param name="zip"></param>
+ <param name="country"></param>
+ <param name="phone"></param>
+ <param name="email"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setCCInformation(System.String,System.String,System.String)">
+ <summary>
+ Sets Credit Card Information
+ </summary>
+ <param name="cardNum"></param>
+ <param name="cardExpire"></param>
+ <param name="cvv2"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.swipe(System.String)">
+ <summary>
+ Sets Swipe Information Using Either Both Track 1 2, Or Just Track 2
+ </summary>
+ <param name="swipe"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setACHInformation(System.String,System.String,System.String,System.String)">
+ <summary>
+ Sets ACH Information
+ </summary>
+ <param name="routingNum"></param>
+ <param name="accNum"></param>
+ <param name="accType"></param>
+ <param name="docType"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.addLevel2Information(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Adds information required for level 2 processing.
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.addLineItem(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Adds a line item for level 3 processing. Repeat method for each item up to 99 items.
+ For Canadian and AMEX processors, ensure required Level 2 information is present.
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setRebillingInformation(System.String,System.String,System.String,System.String)">
+ <summary>
+ Sets Rebilling Cycle Information
+ </summary>
+ <param name="rebAmount"></param>
+ <param name="rebFirstDate"></param>
+ <param name="rebExpr"></param>
+ <param name="rebCycles"></param>
+ <remarks>
+ To be used with other functions for Setting up a transaction
+ </remarks>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.updateRebillingInformation(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Updates Rebilling Cycle Information
+ </summary>
+ <param name="rebillID"></param>
+ <param name="rebNextDate"></param>
+ <param name="rebExpr"></param>
+ <param name="rebCycles"></param>
+ <param name="rebAmount"></param>
+ <param name="rebNextAmount"></param>
+ <param name="templateID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.cancelRebilling(System.String)">
+ <summary>
+ Cancels Rebilling Cycle
+ </summary>
+ <param name="rebillID"></param>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getRebillStatus(System.String)">
+ <summary>
+ Gets Rebilling Cycle's Status
+ </summary>
+ <param name="rebillID"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.sale(System.String)">
+ <summary>
+ Runs a Sale Transaction
+ </summary>
+ <param name="amount"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.saleTransactionID(System.String,System.String)">
+ <summary>
+ Runs a Sale Transaction
+ </summary>
+ <param name="amount"></param>
+ <param name="masterID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.saleCustomerToken(System.String,System.String)">
+ <summary>
+ Runs a Sale Transaction
+ </summary>
+ <param name="amount"></param>
+ <param name="customerToken"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.auth(System.String)">
+ <summary>
+ Runs an Auth Transaction
+ </summary>
+ <param name="amount"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.authTransactionID(System.String,System.String)">
+ <summary>
+ Runs an Auth Transaction
+ </summary>
+ <param name="amount"></param>
+ <param name="masterID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.authCustomerToken(System.String,System.String)">
+ <summary>
+ Runs an Auth Transaction
+ </summary>
+ <param name="amount"></param>
+ <param name="newCustomerToken"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.GetRandomString(System.Int32)">
+ <summary>
+ Creates a random alphanumeric string
+ </summary>
+ <param name="length"></param>
+ <param name="newCustomerToken"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.auth(System.String,System.String)">
+ <summary>
+ Runs an Auth Transaction
+ </summary>
+ <param name="amount"></param>
+ <param name="customerToken"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.update(System.String)">
+ <summary>
+ Updates a Transaction
+ </summary>
+ <param name="masterID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.update(System.String,System.String)">
+ <summary>
+ Updates a Transaction
+ </summary>
+ <param name="masterID"></param>
+ <param name="amount"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.refund(System.String)">
+ <summary>
+ Runs a Refund Transaction
+ </summary>
+ <param name="masterID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.refund(System.String,System.String)">
+ <summary>
+ Runs a Refund Transaction
+ </summary>
+ <param name="masterID"></param>
+ <param name="amount"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.capture(System.String)">
+ <summary>
+ Runs a Refund Transaction
+ </summary>
+ <param name="masterID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.capture(System.String,System.String)">
+ <summary>
+ Runs a Capture Transaction
+ </summary>
+ <param name="masterID"></param>
+ <param name="amount"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.void(System.String)">
+ <summary>
+ Runs a Void Transaction
+ </summary>
+ <param name="masterID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setCustomID1(System.String)">
+ <summary>
+ Sets Custom ID Field
+ </summary>
+ <param name="customID1"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setCustomID2(System.String)">
+ <summary>
+ Sets Custom ID2 Field
+ </summary>
+ <param name="customID2"></param>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setInvoiceID(System.String)">
+ <summary>
+ Sets Invoice ID Field
+ </summary>
+ <param name="invoiceID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setOrderID(System.String)">
+ <summary>
+ Sets Order ID Field
+ </summary>
+ <param name="orderID"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setAmountTip(System.String)">
+ <summary>
+ Sets Amount Tip Field
+ </summary>
+ <param name="amountTip"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setAmountTax(System.String)">
+ <summary>
+ Sets Amount Tax Field
+ </summary>
+ <param name="amountTax"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setAmountFood(System.String)">
+ <summary>
+ Sets Amount Food Field
+ </summary>
+ <param name="amountFood"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setAmountMisc(System.String)">
+ <summary>
+ Sets Amount Misc Field
+ </summary>
+ <param name="amountMisc"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setMemo(System.String)">
+ <summary>
+ Sets Memo Field
+ </summary>
+ <param name="memo"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setPhone(System.String)">
+ <summary>
+ Sets Phone Field
+ </summary>
+ <param name="phone"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setEmail(System.String)">
+ <summary>
+ Sets Email Field
+ </summary>
+ <param name="email"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setCompanyName(System.String)">
+ <summary>
+ Sets Company_Name Field
+ </summary>
+ <param name="companyName"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getSingleTransactionQuery(System.String,System.String,System.String,System.String)">
+ <summary>
+ Retrieve Single Transaction Data
+ </summary>
+ <param name="reportStartDate"></param>
+ <param name="reportEndDate"></param>
+ <param name="transactionID"></param>
+ <param name="excludeErrors"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getTransactionReport(System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Retrieve Transaction Data
+ </summary>
+ <param name="reportStartDate"></param>
+ <param name="reportEndDate"></param>
+ <param name="queryByHierarchy"></param>
+ <param name="doNotEscape"></param>
+ <param name="excludeErrors"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getSettledTransactionReport(System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Retrieves Settled Transactions 
+ </summary>
+ <param name="reportStartDate"></param>
+ <param name="reportEndDate"></param>
+ <param name="queryByHierarchy"></param>
+ <param name="doNotEscape"></param>
+ <param name="excludeErrors"></param>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.generateTPS(System.String,System.String)">
+ <summary>
+ Generates the TAMPER_PROOF_SEAL to used to validate each transaction
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.calcTPS">
+ <summary>
+ Calculates TAMPER_PROOF_SEAL for bp10emu API
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.calcReportTPS">
+ <summary>
+ Calculates TAMPER_PROOF_SEAL for stq and bpdailyreport2 API
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.calcRebillTPS">
+ <summary>
+ Calculates TAMPER_PROOF_SEAL for bp20rebadmin API
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setHashType(System.String)">
+ <summary>
+ Validates chosen hash type or returns default hash type
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setCardTypes">
+ <summary>
+ Sets the types of credit card images to use on the Simple Hosted Payment Form, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setReceiptTpsString">
+ <summary>
+ Sets the receipt Tamperproof Seal string, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setBp10emuTpsString">
+ <summary>
+ Sets the bp10emu string that will be used to create a Tamperproof Seal, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setShpfTpsString">
+ <summary>
+ Sets the Simple Hosted Payment Form string that will be used to create a Tamperproof Seal, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.setReceiptURL">
+ <summary>
+ Sets the receipt url or uses the remote url provided, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.addDefProtectedStatus(System.String)">
+ <summary>
+ Adds optional protected keys to a string, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.addStringProtectedStatus(System.String)">
+ <summary>
+ Adds optional protected values to a string, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.encodeURL(System.String)">
+ <summary>
+ Encodes a string into a URL, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.calcURLTps(System.String)">
+ <summary>
+ Generates a Tamperproof Seal for a url, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.calcURLResponse">
+ <summary>
+ Generates the final url for the Simple Hosted Payment Form, used in public string GenerateURL()
+ </summary>
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.isSuccessfulTransaction">
+ <summary>
+ Returns True if transaction was successful 
+ </summary>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getStatus">
+ <summary>
+ Returns STATUS from response
+ </summary>
+ 
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getTransID">
+ <summary>
+ Returns TRANS_ID from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getMessage">
+ <summary>
+ Returns MESSAGE from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getCVV2">
+ <summary>
+ Returns CVV2 from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getAVS">
+ <summary>
+ Returns AVS from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getAuthCode">
+ <summary>
+ Returns AUTH_CODE from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getRebillID">
+ <summary>
+ Returns REBID or rebill_id from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getCreationDate">
+ <summary>
+ Returns creation_date from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getNextDate">
+ <summary>
+ Returns next_date from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getLastDate">
+ <summary>
+ Returns last_date from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getSchedExpr">
+ <summary>
+ Returns sched_expr from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getCyclesRemain">
+ <summary>
+ Returns cycles_remain from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getRebillAmount">
+ <summary>
+ Returns reb_amount from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getNextAmount">
+ <summary>
+ Returns next_amount from response
+ </summary>
+
+</member>
+<member name="M:MuseumPOS.BPVB.BluePay.getCustomerToken">
+ <summary>
+ Returns cust_token from response
+ </summary>
+
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSet">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSet.InventoryItemsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSet.TableDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSet.InventoryItemsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSet.TableRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSet.InventoryItemsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSet.TableRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSetTableAdapters.InventoryItemsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSetTableAdapters.TableTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(MuseumPOS.MuseumPOSDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(MuseumPOS.MuseumPOSDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(MuseumPOS.MuseumPOSDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager.UpdateAll(MuseumPOS.MuseumPOSDataSet)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:MuseumPOS.MuseumPOSDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+</members>
+</doc>
