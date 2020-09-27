@@ -874,6 +874,7 @@ Public Class POSMain
 
         ReportViewer1.LocalReport.SetParameters(rParam)
         ReportViewer1.LocalReport.SetParameters(rParam2)
+        ReportViewer1.PrinterSettings.PrinterName = "CITIZEN CT-S310"
 
         ReportViewer1.RefreshReport()
 

@@ -38,6 +38,8 @@ Public Class ReportReceipt
         ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
         ReportViewer1.LocalReport.DataSources.Clear()
         ReportViewer1.LocalReport.DataSources.Add(receiptDataSource)
+        ReportViewer1.PrinterSettings.PrinterName = "HP7D48B1 (HP Office Jet Pro 8720)"
+
         If Not bSummary Then
             ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ReportReceipt.rdl"
         Else

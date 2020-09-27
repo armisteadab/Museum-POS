@@ -29,6 +29,8 @@ Partial Class ReportReceipt
         Me.DateTimePicker_End = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtSearchDescription = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cboVendor = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -36,8 +38,6 @@ Partial Class ReportReceipt
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboDept = New System.Windows.Forms.ComboBox()
         Me.btnSummary = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtSearchDescription = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -51,6 +51,7 @@ Partial Class ReportReceipt
         Me.ReportViewer1.ServerReport.BearerToken = Nothing
         Me.ReportViewer1.Size = New System.Drawing.Size(687, 517)
         Me.ReportViewer1.TabIndex = 0
+        Me.ReportViewer1.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.FullPage
         '
         'btnRunReport
         '
@@ -123,6 +124,24 @@ Partial Class ReportReceipt
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Date Range"
         '
+        'txtSearchDescription
+        '
+        Me.txtSearchDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearchDescription.Location = New System.Drawing.Point(23, 534)
+        Me.txtSearchDescription.Name = "txtSearchDescription"
+        Me.txtSearchDescription.Size = New System.Drawing.Size(370, 38)
+        Me.txtSearchDescription.TabIndex = 14
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(23, 499)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(250, 32)
+        Me.Label6.TabIndex = 13
+        Me.Label6.Text = "Text in Description"
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -189,24 +208,6 @@ Partial Class ReportReceipt
         Me.btnSummary.TabIndex = 6
         Me.btnSummary.Text = "Summary"
         Me.btnSummary.UseVisualStyleBackColor = True
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(23, 499)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(250, 32)
-        Me.Label6.TabIndex = 13
-        Me.Label6.Text = "Text in Description"
-        '
-        'txtSearchDescription
-        '
-        Me.txtSearchDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearchDescription.Location = New System.Drawing.Point(23, 534)
-        Me.txtSearchDescription.Name = "txtSearchDescription"
-        Me.txtSearchDescription.Size = New System.Drawing.Size(370, 38)
-        Me.txtSearchDescription.TabIndex = 14
         '
         'ReportReceipt
         '

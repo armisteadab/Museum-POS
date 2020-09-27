@@ -703,7 +703,9 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageWidth>4in</PageWidth>
+        <PageWidth>7.5in</PageWidth>
+        <InteractiveHeight>0in</InteractiveHeight>
+        <InteractiveWidth>0in</InteractiveWidth>
         <TopMargin>0.25in</TopMargin>
         <BottomMargin>1in</BottomMargin>
         <Style />
