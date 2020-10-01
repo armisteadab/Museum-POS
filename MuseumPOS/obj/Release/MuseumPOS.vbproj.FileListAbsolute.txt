@@ -141,3 +141,4 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\SdkApi.Co
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\SdkApi.Desktop.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\ZebraPrinterSdk.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbprojAssemblyReference.cache
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.CashDrawer.resources

@@ -76,4 +76,11 @@ Public Class ManagerFunctions
         lblReceiptDeleted.Visible = False
         Timer1.Enabled = False
     End Sub
+
+    Private Sub btnCashDrawer_Click(sender As Object, e As EventArgs) Handles btnCashDrawer.Click
+        Dim fCash As New CashDrawer
+        fCash.ShowDialog()
+        fCash = Nothing
+
+    End Sub
 End Class

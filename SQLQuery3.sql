@@ -1,0 +1,1 @@
+﻿INSERT INTO CASH (CashDate, CashIn) SELECT '9/30/2020' AS CashDate, CashIN AS CashOut FROM CASH WHERE CashDate = '9/29/2020';

@@ -29,6 +29,7 @@ Partial Class ManagerFunctions
         Me.nReceiptDelete = New System.Windows.Forms.NumericUpDown()
         Me.lblReceiptDeleted = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnCashDrawer = New System.Windows.Forms.Button()
         CType(Me.nReceiptDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -83,11 +84,21 @@ Partial Class ManagerFunctions
         '
         Me.Timer1.Interval = 5000
         '
+        'btnCashDrawer
+        '
+        Me.btnCashDrawer.Location = New System.Drawing.Point(12, 75)
+        Me.btnCashDrawer.Name = "btnCashDrawer"
+        Me.btnCashDrawer.Size = New System.Drawing.Size(152, 40)
+        Me.btnCashDrawer.TabIndex = 8
+        Me.btnCashDrawer.Text = "Cash Drawer Setup"
+        Me.btnCashDrawer.UseVisualStyleBackColor = True
+        '
         'ManagerFunctions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnCashDrawer)
         Me.Controls.Add(Me.lblReceiptDeleted)
         Me.Controls.Add(Me.nReceiptDelete)
         Me.Controls.Add(Me.btnReceiptDelete)
@@ -108,4 +119,5 @@ Partial Class ManagerFunctions
     Friend WithEvents nReceiptDelete As NumericUpDown
     Friend WithEvents lblReceiptDeleted As Label
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents btnCashDrawer As Button
 End Class

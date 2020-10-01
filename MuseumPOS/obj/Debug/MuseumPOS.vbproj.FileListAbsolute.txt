@@ -141,3 +141,4 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\FluentFTP.x
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\SdkApi.Core.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\SdkApi.Desktop.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\ZebraPrinterSdk.xml
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.CashDrawer.resources

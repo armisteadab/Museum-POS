@@ -1170,5 +1170,36 @@ Public Class POSMain
 
     End Sub
 
+    Private Sub Cash(ByVal dblCashIn As Double, ByVal dblCashOut As Double)
+        Dim sConnectionString As String, SQLString As String
+        Dim dblCashAmount As Double
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        Dim sqlConnect1 As New SqlConnection(sConnectionString)
+        Dim commandSQL1 As SqlCommand
+
+        dblCashAmount = (dblCashIn - dblCashOut)
+
+        SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####.0.00")
+
+        Try
+
+            sqlConnect1.Open()
+            commandSQL1 = New SqlCommand(SQLString, sqlConnect1)
+            'commandSQL1.CommandType = CommandType.Text
+            commandSQL1.ExecuteNonQuery()
+            commandSQL1.Dispose()
+            sqlConnect1.Close()
+
+        Catch ex As ArgumentException
+            BigMsgBox("" & ex.Message)
+
+        Finally
+
+        End Try
+
+    End Sub
+
 
 End Class
