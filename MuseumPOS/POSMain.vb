@@ -27,6 +27,7 @@ Public Class POSMain
     End Sub
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblChange.Text = ""
+        CashTillSetupForToday()
         ShowTicketsSoldToday()
         NewReceiptID()
         Me.ReportViewer1.RefreshReport()

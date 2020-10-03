@@ -79,7 +79,7 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.875in</Width>
+                  <Width>1.50277in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.25in</Width>
@@ -101,7 +101,9 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Description.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -131,7 +133,9 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Quantity.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -160,8 +164,9 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Paid.Value*Fields!Quantity.Value</Value>
+                                  <Value>=(Fields!Paid.Value + Fields!TaxPaid.Value) *Fields!Quantity.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <Format>'$'0.00;('$'0.00)</Format>
                                     <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                                   </Style>
@@ -204,49 +209,38 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             </TablixRowHierarchy>
             <NoRowsMessage>No Charges</NoRowsMessage>
             <DataSetName>Receipt</DataSetName>
-            <Top>1.45056in</Top>
+            <Top>0.46164in</Top>
+            <Left>0.16111in</Left>
             <Height>0.25in</Height>
-            <Width>2.74167in</Width>
+            <Width>2.36944in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <FontSize>8pt</FontSize>
             </Style>
           </Tablix>
-          <Textbox Name="Textbox1">
+          <Textbox Name="Textbox3">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Roads and Rails Museum</Value>
+                    <Value>=First(Fields!ReceiptID.Value, "Receipt")</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>200 N East St Frederick MD 21701</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Height>0.425in</Height>
-            <Width>2.60833in</Width>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.16998in</Top>
+            <Left>1.06388in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -258,50 +252,6 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox3">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!ReceiptID.Value, "Receipt")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>1.13112in</Top>
-            <Left>0.90277in</Left>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Image Name="Image1">
-            <Source>Embedded</Source>
-            <Value>ReceiptLogoDesign_crop_edited12</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.49444in</Top>
-            <Height>0.63668in</Height>
-            <Width>2.60833in</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="Textbox5">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -310,17 +260,20 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!title.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.15889in</Top>
+            <Top>0.16997in</Top>
+            <Left>0.16111in</Left>
             <Height>0.25in</Height>
             <Width>0.83333in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -338,8 +291,9 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=sum(Fields!Paid.Value*Fields!Quantity.Value)</Value>
+                    <Value>=sum((Fields!Paid.Value + Fields!TaxPaid.Value) *Fields!Quantity.Value)</Value>
                     <Style>
+                      <FontSize>8pt</FontSize>
                       <Format>'$'0.00;('$'0.00)</Format>
                       <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                     </Style>
@@ -349,11 +303,11 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.75612in</Top>
-            <Left>2.16333in</Left>
+            <Top>0.72553in</Top>
+            <Left>1.95221in</Left>
             <Height>0.25in</Height>
             <Width>0.57834in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -365,14 +319,87 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.53611in</Height>
+        <Height>1.15278in</Height>
         <Style />
       </Body>
-      <Width>7.12167in</Width>
+      <Width>2.64834in</Width>
       <Page>
-        <PageWidth>4in</PageWidth>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeader>
+          <Height>1.18112in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <ReportItems>
+            <Textbox Name="Textbox1">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Roads and Rails Museum</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>200 N East St Frederick MD 21701</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Left>0.19001in</Left>
+              <Height>0.50833in</Height>
+              <Width>2.45833in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="Image1">
+              <Source>Embedded</Source>
+              <Value>ReceiptLogoDesign_crop_edited12</Value>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.62777in</Top>
+              <Left>0.19001in</Left>
+              <Height>0.55335in</Height>
+              <Width>2.34054in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageHeight>5in</PageHeight>
+        <PageWidth>2.7in</PageWidth>
+        <InteractiveHeight>0in</InteractiveHeight>
+        <InteractiveWidth>0in</InteractiveWidth>
+        <ColumnSpacing>0.1in</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>

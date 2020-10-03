@@ -541,7 +541,7 @@ GROUP BY CardType</CommandText>
         <Height>2.66888in</Height>
         <Style />
       </Body>
-      <Width>7.64166in</Width>
+      <Width>7.31666in</Width>
       <Page>
         <PageHeader>
           <Height>0.66389in</Height>
@@ -683,7 +683,9 @@ GROUP BY CardType</CommandText>
             </Border>
           </Style>
         </PageHeader>
-        <PageWidth>4in</PageWidth>
+        <PageWidth>7.5in</PageWidth>
+        <InteractiveHeight>0in</InteractiveHeight>
+        <InteractiveWidth>0in</InteractiveWidth>
         <TopMargin>0.25in</TopMargin>
         <BottomMargin>1in</BottomMargin>
         <Style />

@@ -41,10 +41,6 @@ Public Class CashDrawer
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
-        If Not RecordThere() Then
-            CreateNewEntry()
-        End If
-
         sqlConnect.ConnectionString = sConnectionString
         sqlConnect.Open()
 
@@ -72,51 +68,4 @@ Public Class CashDrawer
 
     End Sub
 
-    Private Sub CreateNewEntry()
-        Dim sqlString As String
-        Dim sqlConnect As New SqlConnection(), commandSQL As SqlCommand
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
-
-        ' get yesterday's values
-        sqlString = "EXEC InsertCashTillSetupForToday " + QTrim(Date.Today.AddDays(-1).ToShortDateString.Trim) + ", " +
-                        QTrim(Today.ToShortDateString.Trim)
-
-        Try
-
-            sqlConnect.ConnectionString = sConnectionString
-            sqlConnect.Open()
-            commandSQL = New SqlCommand(sqlString, sqlConnect)
-            commandSQL.ExecuteNonQuery()
-            commandSQL.Dispose()
-
-            sqlString = "EXEC GetCurrentCashTill " & QTrim(Today.ToShortDateString.Trim)
-
-            commandSQL = New SqlCommand(sqlString, sqlConnect)
-
-            Dim reader = commandSQL.ExecuteReader()
-            If reader.HasRows Then
-                reader.Read()
-                NumericUpDown1.Value = (0 + reader.Item("CashIn"))
-                reader.Close()
-            Else
-                reader.Close()
-                sqlString = "INSERT INTO CASH (CashDate, CashIn, CashOut) VALUES (" + QTrim(Date.Today.ToShortDateString.Trim) + ", " +
-            "0,0)"
-
-                commandSQL = New SqlCommand(sqlString, sqlConnect)
-                commandSQL.ExecuteNonQuery()
-                commandSQL.Dispose()
-
-            End If
-
-            sqlConnect.Close()
-
-        Catch ex As ArgumentException
-            BigMsgBox("" & ex.Message)
-
-        Finally
-
-        End Try
-
-    End Sub
 End Class

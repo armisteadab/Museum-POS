@@ -249,7 +249,6 @@ ORDER BY a.ReceiptID</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -663,7 +662,6 @@ ORDER BY a.ReceiptID</CommandText>
             </Border>
           </Style>
         </PageHeader>
-        <PageWidth>4in</PageWidth>
         <TopMargin>0.25in</TopMargin>
         <BottomMargin>1in</BottomMargin>
         <Style />

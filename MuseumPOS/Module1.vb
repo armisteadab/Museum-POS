@@ -350,4 +350,62 @@ Module Module1
 
     End Sub
 
+    Public Sub CashTillSetupForToday()
+        Dim sqlString As String, sLastDate As String, dLastDate As Date
+        Dim sqlConnect As New SqlConnection(), commandSQL As SqlCommand
+        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        ' get previous values
+        sqlConnect.ConnectionString = sConnectionString
+        sqlString = "SELECT TOP 1 CashDate FROM CASH ORDER BY CashDate DESC"
+
+        commandSQL = New SqlCommand
+        commandSQL.Connection = sqlConnect
+        commandSQL.CommandText = sqlString
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+        sLastDate = Today.AddDays(-1).ToShortDateString.Trim
+        Try
+            If sqlConnect.State = ConnectionState.Closed Then
+                sqlConnect.Open()
+            End If
+            reader = commandSQL.ExecuteReader()
+            Using reader
+                While reader.Read
+                    dLastDate = reader.Item("CashDate")
+                    sLastDate = dLastDate.ToShortDateString.Trim
+                End While
+            End Using
+        Finally
+            If previousConnectionState = ConnectionState.Closed Then
+                sqlConnect.Close()
+            End If
+        End Try
+
+        If Today.ToShortDateString.Trim = sLastDate Then Exit Sub
+
+        ' get last cash drawer amount
+        sqlString = "EXEC InsertCashTillSetupForToday " + QTrim(sLastDate) + ", " +
+                        QTrim(Today.ToShortDateString.Trim)
+
+        Try
+
+            sqlConnect.ConnectionString = sConnectionString
+            sqlConnect.Open()
+            commandSQL = New SqlCommand(sqlString, sqlConnect)
+            commandSQL.ExecuteNonQuery()
+            commandSQL.Dispose()
+
+            sqlConnect.Close()
+
+        Catch ex As ArgumentException
+            BigMsgBox("" & ex.Message)
+
+        Finally
+
+        End Try
+    End Sub
+
+
 End Module

@@ -698,7 +698,7 @@ FROM     InventoryItems</CommandText>
             <Top>0.61611in</Top>
             <Left>0.33in</Left>
             <Height>0.5in</Height>
-            <Width>6.63943in</Width>
+            <Width>6.63945in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -852,7 +852,9 @@ FROM     InventoryItems</CommandText>
             </Border>
           </Style>
         </PageHeader>
-        <PageWidth>4in</PageWidth>
+        <PageWidth>7.5in</PageWidth>
+        <InteractiveHeight>0in</InteractiveHeight>
+        <InteractiveWidth>0in</InteractiveWidth>
         <TopMargin>0.25in</TopMargin>
         <BottomMargin>1in</BottomMargin>
         <Style />
