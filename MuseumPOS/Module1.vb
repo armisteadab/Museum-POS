@@ -280,7 +280,8 @@ Module Module1
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
 
-        sqlString = "SELECT MAX(Id) as MAXId FROM InventoryItems"
+        '        sqlString = "SELECT MAX(Id) as MAXId FROM InventoryItems"
+        sqlString = "SELECT TOP 1 Id as MAXId FROM InventoryItems ORDER BY Id DESC"
 
         cmd.CommandText = sqlString
         cmd.Connection = sqlConnect
@@ -383,7 +384,7 @@ Module Module1
             End If
         End Try
 
-        If Today.ToShortDateString.Trim = sLastDate Then Exit Sub
+        If Today.ToShortDateString.Trim = sLastDate Then Exit Sub ' already there
 
         ' get last cash drawer amount
         sqlString = "EXEC InsertCashTillSetupForToday " + QTrim(sLastDate) + ", " +

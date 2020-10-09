@@ -4,11 +4,10 @@ Imports System.Drawing.Text
 
 Public Class CashDrawer
     Dim AlreadyInTable As Boolean = False, recordID As String
-    Private Function RecordThere() As Boolean
+    Private Sub LoadCashAmount()
         Dim sqlString As String
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
-        Dim bReturn As Boolean
 
         sqlConnect.ConnectionString = sConnectionString
         sqlConnect.Open()
@@ -19,21 +18,23 @@ Public Class CashDrawer
 
         Dim reader = commandSQL.ExecuteReader()
         AlreadyInTable = reader.HasRows
-        bReturn = (AlreadyInTable)
 
         If AlreadyInTable Then
             reader.Read()
-            NumericUpDown1.Value = (0 + reader.Item("CashOut"))
+            NumericUpDown1.Value = CDbl("0" + reader.Item("CashOut").ToString.Trim)
             reader.Close()
         End If
 
         reader.Close()
         sqlConnect.Close()
-        RecordThere = (bReturn)
-    End Function
+    End Sub
 
     Private Sub CashDrawer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        BigMsgBox(IIf(RecordThere(), "yes", "no"))
+        LoadCashAmount()
+    End Sub
+
+    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -48,7 +49,6 @@ Public Class CashDrawer
         sqlString += ", CashOut = " & NumericUpDown1.Value.ToString.Trim
         sqlString += " WHERE CashDate = " & QTrim(Today.ToShortDateString.Trim)
         Dim commandSQL As New SqlCommand(sqlString, sqlConnect)
-
         Try
 
             commandSQL = New SqlCommand(sqlString, sqlConnect)
@@ -64,7 +64,6 @@ Public Class CashDrawer
         End Try
 
         Me.Close()
-        BigMsgBox(IIf(RecordThere(), "Record Created", "Record Creation FAIL"))
 
     End Sub
 

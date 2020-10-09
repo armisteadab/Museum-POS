@@ -36,7 +36,7 @@ Public Class ZOut
         rParam.Values.Clear()
         rParam.Name = "ReportTitleText"
 
-        sReportTitle = "ZOUT: "
+        sReportTitle = "End of Day: "
 
         sReportTitle += Date.Today.ToShortDateString.Trim
 

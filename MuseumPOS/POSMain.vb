@@ -10,6 +10,7 @@ Imports System.Xml
 Imports Microsoft.VisualBasic.CompilerServices
 Imports System.Threading
 Imports Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel
+Imports FluentFTP
 
 Public Class POSMain
     Dim nReceiptNumber As Integer
@@ -465,8 +466,8 @@ Public Class POSMain
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String
+        Dim nCashIn As Double, nCashOut As Double
 
-        '        sConnectionString = "Data Source=(LocalDB) \ MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         If nReceiptCurrent <> nReceiptLatest Then
@@ -498,10 +499,9 @@ Public Class POSMain
                 BigMsgBox("Return to Customer: " & lblReceiptTotal.Text.Replace("-", ""))
             Else
                 lblChange.Text = "Change: " & lblReceiptTotal.Text.Replace("-", "")
-                BigMsgBox(lblChange.Text)
-                Timer1.Enabled = True ' clear message within a few seconds
-
             End If
+            nCashOut = CDbl(lblReceiptTotal.Text.Trim)
+            nCashOut = nCashOut * -1
         End If
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -512,6 +512,7 @@ Public Class POSMain
         Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
         Dim sPayType As String = "", sCardType As String = ""
         Dim nRowFinal As Integer
+
         nRowFinal = DataGridView1.Rows.Count - 1
 
         If nRowFinal < 0 Then Exit Sub
@@ -521,7 +522,6 @@ Public Class POSMain
         DeleteOldReceipt(Me.ReceiptNumber)  ' clear old data if this is an edit
 
         LatestReturnNumber = GetLatestReturnNumber()
-
 
         For nRow = 0 To nRowFinal
             sInvUPC = ("" & DataGridView1.Item(3, nRow).Value)
@@ -549,6 +549,10 @@ Public Class POSMain
                 sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", " & QTrim(Now)
                 sqlString = sqlString & ", " & QTrim(Now)
                 sqlString = sqlString & ", " & QTrim(sPayType) & "," & QTrim(sCardType)
+
+                If sPayType.Trim.ToUpper = "CASH" Then
+                    nCashIn = (nPrice * -1)
+                End If
 
             Else
                 sqlString = "INSERT INTO Returns(UPC, Price, Paid, TaxPaid, ReturnID, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
@@ -601,8 +605,6 @@ Public Class POSMain
 
             End Try
 
-
-
         Next nRow
 
         DataGridView1.Rows.Clear()
@@ -626,8 +628,11 @@ Public Class POSMain
 
             ReportViewer1.PrintDialog()
             ReceiptShow(nReceiptLatest.ToString.Trim)
-
-        Else
+            CashDrawerSync(nCashIn, nCashOut)
+            If Not (lblChange.Text.IsBlank) Then
+                BigMsgBox(lblChange.Text)
+                Timer1.Enabled = True ' clear message within a few seconds
+            End If
             ReturnShow(LatestReturnNumber)
         End If
 
@@ -1171,7 +1176,7 @@ Public Class POSMain
 
     End Sub
 
-    Private Sub Cash(ByVal dblCashIn As Double, ByVal dblCashOut As Double)
+    Private Sub CashDrawerSync(ByVal dblCashIn As Double, ByVal dblCashOut As Double)
         Dim sConnectionString As String, SQLString As String
         Dim dblCashAmount As Double
 
@@ -1182,7 +1187,7 @@ Public Class POSMain
 
         dblCashAmount = (dblCashIn - dblCashOut)
 
-        SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####.0.00")
+        SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####.0.00") + ", " + QTrim(Today.ToShortDateString.Trim)
 
         Try
 
