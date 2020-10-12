@@ -22,6 +22,12 @@ Public Class POSMain
     Private btxtReceiptNumber_EnterKeyPressed As Boolean
     Private sInitial_txtReceiptNumber As String, nManagerWarningCounter As Integer
     Private sUPCButton(0 To 8) As String
+    '        Me.DataGridView1.Rows.Add("CHILD TICKET", "1", "5.00", "222222222222", "0")
+    Private sItemNameButton(0 To 8) As String
+    Private sItemPriceButton(0 To 8) As String
+    Private sItemTaxButton(0 To 8) As String
+
+
 
     Private Sub ShowTicketsSoldToday()
         lblTicketSum.Text = Format(GetSumTicketsByDate(Today.ToShortDateString), "###0.00")
@@ -383,30 +389,29 @@ Public Class POSMain
     End Sub
 
     Private Sub btnAdult_Click(sender As Object, e As EventArgs) Handles btnQuick1.Click
-        txtEntry.Text = sUPCButton(1)
+        Me.DataGridView1.Rows.Add(sItemNameButton(1), "1", sItemPriceButton(1), sUPCButton(1), sItemTaxButton(1))
 
     End Sub
 
     Private Sub btnChild_Click(sender As Object, e As EventArgs) Handles btnQuick2.Click
 
-        txtEntry.Text = Strings.StrDup(12, "2")
-        '        Me.DataGridView1.Rows.Add("CHILD TICKET", "1", "5.00", "222222222222", "0")
+        Me.DataGridView1.Rows.Add(sItemNameButton(2), "1", sItemPriceButton(2), sUPCButton(2), sItemTaxButton(2))
 
     End Sub
 
     Private Sub btnAAAMilAdult_Click(sender As Object, e As EventArgs) Handles btnQuick3.Click
-        txtEntry.Text = Strings.StrDup(12, "3")
+        Me.DataGridView1.Rows.Add(sItemNameButton(3), "1", sItemPriceButton(3), sUPCButton(3), sItemTaxButton(3))
         'Me.DataGridView1.Rows.Add("AAA/MIL Adult", "1", "9.00", "333333333333", "0")
     End Sub
 
     Private Sub btnAdultGroup_Click(sender As Object, e As EventArgs) Handles btnQuick5.Click
 
-        txtEntry.Text = Strings.StrDup(12, "4")
+        Me.DataGridView1.Rows.Add(sItemNameButton(5), "1", sItemPriceButton(5), sUPCButton(5), sItemTaxButton(5))
 
     End Sub
 
     Private Sub btnChildGroup_Click(sender As Object, e As EventArgs) Handles btnQuick6.Click
-        txtEntry.Text = Strings.StrDup(12, "5")
+        Me.DataGridView1.Rows.Add(sItemNameButton(6), "1", sItemPriceButton(6), sUPCButton(6), sItemTaxButton(6))
 
     End Sub
 
@@ -1151,7 +1156,7 @@ Public Class POSMain
     End Function
 
     Private Sub btnQuick4_Click(sender As Object, e As EventArgs) Handles btnQuick4.Click
-        txtEntry.Text = sUPCButton(4)
+        Me.DataGridView1.Rows.Add(sItemNameButton(4), "1", sItemPriceButton(4), sUPCButton(4), sItemTaxButton(4))
 
     End Sub
 
@@ -1212,7 +1217,7 @@ Public Class POSMain
 
     '    load customer configurable buttons
     Public Sub LoadButtonSetup()
-        Dim sqlConnect As New SqlConnection()
+        Dim sqlConnect As New SqlConnection(), dPrice As Double
         Dim sConnectionString As String, sqlString As String, nButton As Long
         'Release\
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
@@ -1245,6 +1250,13 @@ Public Class POSMain
             While reader.Read
                 nButton = 0 + reader.Item("ButtonNumber")
                 sUPCButton(nButton) = "" + reader.Item("ButtonUPC")
+                sItemNameButton(nButton) = "" + reader.Item("InvName")
+                If sItemNameButton(nButton).Trim <> "" Then
+                    dPrice = 0 + reader.Item("InvPrice")
+                    sItemPriceButton(nButton) = Format(dPrice, "###0.00")
+                    sItemTaxButton(nButton) = "" + reader.Item("TaxRate").ToString
+                End If
+
                 Select Case nButton
                     Case 1
                         btnQuick1.Text = reader.Item("ButtonText")
