@@ -10,7 +10,6 @@ Imports System.Xml
 Imports Microsoft.VisualBasic.CompilerServices
 Imports System.Threading
 Imports Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel
-Imports FluentFTP
 
 Public Class POSMain
     Dim nReceiptNumber As Integer
@@ -22,12 +21,14 @@ Public Class POSMain
     Const sReceiptPath As String = "C:\Users\armis\Documents\receipt.txt"
     Private btxtReceiptNumber_EnterKeyPressed As Boolean
     Private sInitial_txtReceiptNumber As String, nManagerWarningCounter As Integer
+    Private sUPCButton(0 To 8) As String
 
     Private Sub ShowTicketsSoldToday()
         lblTicketSum.Text = Format(GetSumTicketsByDate(Today.ToShortDateString), "###0.00")
     End Sub
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblChange.Text = ""
+        LoadButtonSetup()
         CashTillSetupForToday()
         ShowTicketsSoldToday()
         NewReceiptID()
@@ -381,33 +382,30 @@ Public Class POSMain
         txtEntry.Enabled = True
     End Sub
 
-    Private Sub btnAdult_Click(sender As Object, e As EventArgs) Handles btnAdult.Click
-
-        txtEntry.Text = Strings.StrDup(12, "1")
-
-        '        Me.DataGridView1.Rows.Add("ADULT TICKET", "1", "10.00", "111111111111", "0")
+    Private Sub btnAdult_Click(sender As Object, e As EventArgs) Handles btnQuick1.Click
+        txtEntry.Text = sUPCButton(1)
 
     End Sub
 
-    Private Sub btnChild_Click(sender As Object, e As EventArgs) Handles btnChild.Click
+    Private Sub btnChild_Click(sender As Object, e As EventArgs) Handles btnQuick2.Click
 
         txtEntry.Text = Strings.StrDup(12, "2")
         '        Me.DataGridView1.Rows.Add("CHILD TICKET", "1", "5.00", "222222222222", "0")
 
     End Sub
 
-    Private Sub btnAAAMilAdult_Click(sender As Object, e As EventArgs) Handles btnAAAMilAdult.Click
+    Private Sub btnAAAMilAdult_Click(sender As Object, e As EventArgs) Handles btnQuick3.Click
         txtEntry.Text = Strings.StrDup(12, "3")
         'Me.DataGridView1.Rows.Add("AAA/MIL Adult", "1", "9.00", "333333333333", "0")
     End Sub
 
-    Private Sub btnAdultGroup_Click(sender As Object, e As EventArgs) Handles btnAdultGroup.Click
+    Private Sub btnAdultGroup_Click(sender As Object, e As EventArgs) Handles btnQuick5.Click
 
         txtEntry.Text = Strings.StrDup(12, "4")
 
     End Sub
 
-    Private Sub btnChildGroup_Click(sender As Object, e As EventArgs) Handles btnChildGroup.Click
+    Private Sub btnChildGroup_Click(sender As Object, e As EventArgs) Handles btnQuick6.Click
         txtEntry.Text = Strings.StrDup(12, "5")
 
     End Sub
@@ -629,7 +627,7 @@ Public Class POSMain
             ReportViewer1.PrintDialog()
             ReceiptShow(nReceiptLatest.ToString.Trim)
             CashDrawerSync(nCashIn, nCashOut)
-            If Not (lblChange.Text.IsBlank) Then
+            If Not (lblChange.Text.Trim = "") Then
                 BigMsgBox(lblChange.Text)
                 Timer1.Enabled = True ' clear message within a few seconds
             End If
@@ -1152,6 +1150,11 @@ Public Class POSMain
         Return (nReturnCurrent)
     End Function
 
+    Private Sub btnQuick4_Click(sender As Object, e As EventArgs) Handles btnQuick4.Click
+        txtEntry.Text = sUPCButton(4)
+
+    End Sub
+
     Private Sub ReturnShow(ByVal sReturnToShow As String)
         Dim ReturnDataSource As New WinForms.ReportDataSource
         Dim dataset As New DataSet("Receipt")
@@ -1207,5 +1210,69 @@ Public Class POSMain
 
     End Sub
 
+    '    load customer configurable buttons
+    Public Sub LoadButtonSetup()
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String, nButton As Long
+        'Release\
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        btnQuick1.Visible = False
+        btnQuick2.Visible = False
+        btnQuick3.Visible = False
+        btnQuick4.Visible = False
+        btnQuick5.Visible = False
+        btnQuick6.Visible = False
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "EXEC GetButtons"
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        '        On Error Resume Next
+        Using reader
+            While reader.Read
+                nButton = 0 + reader.Item("ButtonNumber")
+                sUPCButton(nButton) = "" + reader.Item("ButtonUPC")
+                Select Case nButton
+                    Case 1
+                        btnQuick1.Text = reader.Item("ButtonText")
+                        btnQuick1.Visible = (btnQuick1.Text.Trim <> "")
+                    Case 2
+                        btnQuick2.Text = reader.Item("ButtonText")
+                        btnQuick2.Visible = (btnQuick2.Text.Trim <> "")
+                    Case 3
+                        btnQuick3.Text = reader.Item("ButtonText")
+                        btnQuick3.Visible = (btnQuick3.Text.Trim <> "")
+                    Case 4
+                        btnQuick4.Text = reader.Item("ButtonText")
+                        btnQuick4.Visible = (btnQuick4.Text.Trim <> "")
+                    Case 5
+                        btnQuick5.Text = reader.Item("ButtonText")
+                        btnQuick5.Visible = (btnQuick5.Text.Trim <> "")
+                    Case 6
+                        btnQuick6.Text = reader.Item("ButtonText")  'btnQuick6
+                        btnQuick6.Visible = (btnQuick6.Text.Trim <> "")
+                End Select
+            End While
+        End Using
+
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+    End Sub
 
 End Class

@@ -7,7 +7,6 @@ Public Class ManagerFunctions
         Dim fInventoryItem As New InventoryItem
         fInventoryItem.ShowDialog()
         fInventoryItem = Nothing
-
     End Sub
 
     Private Sub btnCreateTables_Click(sender As Object, e As EventArgs) Handles btnCreateTables.Click
@@ -15,14 +14,12 @@ Public Class ManagerFunctions
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand, SQLstring As String
 
-        SQLstring = "CREATE TABLE [dbo].[Attendance] ("
-        SQLstring += "[Id]          Int           Not NULL,"
-        SqlString += " [Worker]      Int           NULL,"
-        SqlString += " [TimeIN]      SMALLDATETIME NULL,"
-        SqlString += " [TimeOUT]     SMALLDATETIME NULL,"
-        SqlString += " [TimeEncoded] NCHAR(100)   NULL,"
-        SqlString += " PRIMARY KEY CLUSTERED ([Id] ASC)"
-        SqlString += ")"
+        SQLstring = "CREATE TABLE [dbo].[Buttons] ("
+        SQLstring += "[ButtonNumber] Int  NOT NULL, "
+        SQLstring += "[ButtonText]   VARCHAR (50) NULL, "
+        SQLstring += "[ButtonUPC]    VARCHAR (50) NULL, "
+        SQLstring += "[ButtonColor] VARCHAR(50) NULL, "
+        SQLstring += "PRIMARY KEY CLUSTERED ([ButtonNumber] ASC));"
 
         BigMsgBox(SqlString)
         Try
@@ -83,4 +80,5 @@ Public Class ManagerFunctions
         fCash = Nothing
 
     End Sub
+
 End Class

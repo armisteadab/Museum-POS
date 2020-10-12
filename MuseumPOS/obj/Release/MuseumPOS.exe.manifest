@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FluentFTP.dll" size="232960">
-      <assemblyIdentity name="FluentFTP" version="19.2.2.0" publicKeyToken="F4AF092B1D8DF44F" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FluentFTP.dll" size="315392">
+      <assemblyIdentity name="FluentFTP" version="32.4.6.0" publicKeyToken="F4AF092B1D8DF44F" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qRF33XjE+GTOEMvx+4qtY2gPeWWm73IE5CFOsyKjTic=</dsig:DigestValue>
+        <dsig:DigestValue>jN8+/iO92r+Tc8fHuaBTS9gjuSH9JPcSWiLktzGrcdE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1026,14 +1026,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuseumPOS.exe" size="293856">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuseumPOS.exe" size="300000">
       <assemblyIdentity name="MuseumPOS" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Xu0gPUx/zCc4xL6cWylEi7RDJdoR6wh4MB2+F4hfsxg=</dsig:DigestValue>
+        <dsig:DigestValue>VW+koGejt/8e1lYEnYsDfsYg0aEr0+M+NIw44hxYXiw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1181,13 +1181,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="MuseumPOS.exe.config" size="1646">
+  <file name="MuseumPOS.exe.config" size="1881">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>m8tm53CK8Ccc0WjzvxVdzMp40YWSzdB6piUvdudvLq4=</dsig:DigestValue>
+      <dsig:DigestValue>HlKTLcMfMRxeqYJ50L7GMMTe8NzTl6ahbjFwowVqlhA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MuseumPOS.mdf" size="8388608" writeableType="applicationData">
@@ -1196,7 +1196,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Uy7KNrdLXPNElCiboHWTB0uj7jHPIY7huOpiJX09LA8=</dsig:DigestValue>
+      <dsig:DigestValue>z2ckaL6Yy2ZEiSOrzioq6fSRxAb8DkaXOVg1nEGefUY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MuseumPOS_log.ldf" size="8388608" writeableType="applicationData">
@@ -1205,7 +1205,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>VTy+kjrCy0+QBTcRneKX0QDMfMA0C6oLKGt65cyw1Nk=</dsig:DigestValue>
+      <dsig:DigestValue>HoODppkMFt/xlMU+MuzS3L9LRBqPJWF8VEqjGAaIOBA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

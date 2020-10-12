@@ -67,6 +67,13 @@ Partial Class InventoryItem
         Me.nTaxRate = New System.Windows.Forms.NumericUpDown()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonNONE = New System.Windows.Forms.RadioButton()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -293,7 +300,7 @@ Partial Class InventoryItem
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC, Me.UniqueID})
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(655, 70)
+        Me.DataGridView1.Location = New System.Drawing.Point(645, 69)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.RowTemplate.Height = 24
@@ -421,7 +428,7 @@ Partial Class InventoryItem
         'btnDelete
         '
         Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.Location = New System.Drawing.Point(487, 238)
+        Me.btnDelete.Location = New System.Drawing.Point(491, 182)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(131, 44)
         Me.btnDelete.TabIndex = 28
@@ -432,7 +439,7 @@ Partial Class InventoryItem
         '
         Me.btnActualDelete.BackColor = System.Drawing.Color.Red
         Me.btnActualDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnActualDelete.Location = New System.Drawing.Point(487, 294)
+        Me.btnActualDelete.Location = New System.Drawing.Point(491, 238)
         Me.btnActualDelete.Name = "btnActualDelete"
         Me.btnActualDelete.Size = New System.Drawing.Size(131, 44)
         Me.btnActualDelete.TabIndex = 29
@@ -442,7 +449,7 @@ Partial Class InventoryItem
         'btnListSetup
         '
         Me.btnListSetup.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnListSetup.Location = New System.Drawing.Point(505, 382)
+        Me.btnListSetup.Location = New System.Drawing.Point(509, 290)
         Me.btnListSetup.Name = "btnListSetup"
         Me.btnListSetup.Size = New System.Drawing.Size(113, 39)
         Me.btnListSetup.TabIndex = 30
@@ -506,11 +513,90 @@ Partial Class InventoryItem
         Me.Label12.TabIndex = 35
         Me.Label12.Text = "n/a"
         '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(496, 350)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(122, 21)
+        Me.RadioButton1.TabIndex = 36
+        Me.RadioButton1.Text = "Quick Button 1"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(496, 377)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(122, 21)
+        Me.RadioButton2.TabIndex = 37
+        Me.RadioButton2.Text = "Quick Button 2"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(496, 404)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(122, 21)
+        Me.RadioButton3.TabIndex = 38
+        Me.RadioButton3.Text = "Quick Button 3"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'RadioButton4
+        '
+        Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Location = New System.Drawing.Point(496, 431)
+        Me.RadioButton4.Name = "RadioButton4"
+        Me.RadioButton4.Size = New System.Drawing.Size(122, 21)
+        Me.RadioButton4.TabIndex = 39
+        Me.RadioButton4.Text = "Quick Button 4"
+        Me.RadioButton4.UseVisualStyleBackColor = True
+        '
+        'RadioButton5
+        '
+        Me.RadioButton5.AutoSize = True
+        Me.RadioButton5.Location = New System.Drawing.Point(496, 460)
+        Me.RadioButton5.Name = "RadioButton5"
+        Me.RadioButton5.Size = New System.Drawing.Size(126, 21)
+        Me.RadioButton5.TabIndex = 40
+        Me.RadioButton5.Text = " Quick Button 5"
+        Me.RadioButton5.UseVisualStyleBackColor = True
+        '
+        'RadioButton6
+        '
+        Me.RadioButton6.AutoSize = True
+        Me.RadioButton6.Location = New System.Drawing.Point(496, 487)
+        Me.RadioButton6.Name = "RadioButton6"
+        Me.RadioButton6.Size = New System.Drawing.Size(122, 21)
+        Me.RadioButton6.TabIndex = 41
+        Me.RadioButton6.Text = "Quick Button 6"
+        Me.RadioButton6.UseVisualStyleBackColor = True
+        '
+        'RadioButtonNONE
+        '
+        Me.RadioButtonNONE.AutoSize = True
+        Me.RadioButtonNONE.Checked = True
+        Me.RadioButtonNONE.Location = New System.Drawing.Point(496, 513)
+        Me.RadioButtonNONE.Name = "RadioButtonNONE"
+        Me.RadioButtonNONE.Size = New System.Drawing.Size(63, 21)
+        Me.RadioButtonNONE.TabIndex = 42
+        Me.RadioButtonNONE.TabStop = True
+        Me.RadioButtonNONE.Text = "None"
+        Me.RadioButtonNONE.UseVisualStyleBackColor = True
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 689)
+        Me.Controls.Add(Me.RadioButtonNONE)
+        Me.Controls.Add(Me.RadioButton6)
+        Me.Controls.Add(Me.RadioButton5)
+        Me.Controls.Add(Me.RadioButton4)
+        Me.Controls.Add(Me.RadioButton3)
+        Me.Controls.Add(Me.RadioButton2)
+        Me.Controls.Add(Me.RadioButton1)
         Me.Controls.Add(Me.nTaxRate)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtSearch)
@@ -606,4 +692,11 @@ Partial Class InventoryItem
     Friend WithEvents nTaxRate As NumericUpDown
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents RadioButton5 As RadioButton
+    Friend WithEvents RadioButton6 As RadioButton
+    Friend WithEvents RadioButtonNONE As RadioButton
 End Class

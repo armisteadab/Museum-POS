@@ -1,7 +1,5 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data.SqlDbType
-Imports Zebra.Sdk.Graphics.[Shared]
-Imports Zebra.Sdk.Printer
 
 Public Class InventoryItem
     Private ChangedValue As Boolean
@@ -14,6 +12,7 @@ Public Class InventoryItem
         Dim sqlConnect As New SqlConnection()
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        POSMain.LoadButtonSetup()
 
         If Not (txtUPC.Text.Trim = "") Then
             sqlConnect.ConnectionString = sConnectionString
@@ -89,6 +88,7 @@ Public Class InventoryItem
             End Try
         End If
 
+        SaveQuickButtons()
         LoadGrid()
         Scatter()
         Me.Changed = False
@@ -230,6 +230,7 @@ Public Class InventoryItem
                         Me.nTaxRate.Value = 0
                     End If
 
+                    ScatterQuickButtons()
                     Me.Changed = False   ' we haven't really changed data, just display/scatter
 
                     Me.lblUniqueID.Text = reader.Item("UniqueID")
@@ -499,4 +500,163 @@ Public Class InventoryItem
         Me.Changed = True
     End Sub
 
+    Private Sub SaveQuickButtons()
+
+        Dim sqlString As String, AlreadyInTable As Boolean = False
+        Dim sqlConnect As New SqlConnection()
+        Dim nRadioButtonValue As Long
+
+        If RadioButton1.Checked Then nRadioButtonValue = 1
+        If RadioButton2.Checked Then nRadioButtonValue = 2
+        If RadioButton3.Checked Then nRadioButtonValue = 3
+        If RadioButton4.Checked Then nRadioButtonValue = 4
+        If RadioButton5.Checked Then nRadioButtonValue = 5
+        If RadioButton6.Checked Then nRadioButtonValue = 6
+        If RadioButtonNONE.Checked Then nRadioButtonValue = 0
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        If Not (txtUPC.Text.Trim = "") Then
+            sqlConnect.ConnectionString = sConnectionString
+            sqlConnect.Open()
+            Dim commandSQL As SqlCommand
+            sqlString = "SELECT ButtonNumber FROM Buttons WHERE ButtonNumber = " & nRadioButtonValue.ToString.Trim
+            commandSQL = New SqlCommand(sqlString, sqlConnect)
+
+            Dim reader = commandSQL.ExecuteReader()
+            AlreadyInTable = reader.HasRows
+            reader.Close()
+            sqlConnect.Close()
+        End If
+
+        Dim sqlConnect1 As New SqlConnection(sConnectionString)
+        Dim commandSQL1 As SqlCommand
+
+        If Not AlreadyInTable Then
+            If RadioButtonNONE.Checked Then
+                sqlString = "DELETE FROM Buttons WHERE ButtonUPC = " & QTrim(txtUPC.Text)
+            Else
+                sqlString = "INSERT INTO Buttons(ButtonUPC, ButtonText, ButtonNumber) VALUES ("
+                sqlString = sqlString & QTrim(txtUPC.Text) & "," & QTrim(txtNotes.Text) & "," & nRadioButtonValue & ")"
+            End If
+
+            Try
+
+                sqlConnect1.Open()
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+                'commandSQL1.CommandType = CommandType.Text
+                commandSQL1.ExecuteNonQuery()
+                commandSQL1.Dispose()
+                sqlConnect1.Close()
+
+            Catch ex As ArgumentException
+                MsgBox("" & ex.Message)
+
+            Finally
+
+            End Try
+            Debug.Print(sqlString)
+
+        Else 'update instead
+            'InvType, InvCost, InvPrice, Department,  OnHandQuantity, Vendor, InvNotes, Id) values ("
+            sqlString = "UPDATE Buttons SET ButtonText = " & QTrim(Me.txtNotes.Text.Trim) & ","
+            sqlString += " ButtonUPC = " & QTrim(txtUPC.Text.Trim)
+            sqlString += " WHERE ButtonNumber = " & nRadioButtonValue.ToString.Trim
+
+            Debug.Print(sqlString)
+
+            Try
+
+                sqlConnect1.Open()
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+                commandSQL1.ExecuteNonQuery()
+                commandSQL1.Dispose()
+                sqlConnect1.Close()
+
+            Catch ex As ArgumentException
+                MsgBox("" & ex.Message)
+
+            Finally
+
+            End Try
+        End If
+
+    End Sub
+
+
+    Private Sub ScatterQuickButtons()
+
+        RadioButtonNONE.Checked = True
+
+        Dim sqlString As String, AlreadyInTable As Boolean = False
+        Dim sqlConnect As New SqlConnection()
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        If Not (txtUPC.Text.Trim = "") Then
+            sqlConnect.ConnectionString = sConnectionString
+            sqlConnect.Open()
+            Dim commandSQL As SqlCommand
+            sqlString = "SELECT ButtonNumber FROM buttons WHERE ButtonUPC = '" & Me.txtUPC.Text.Trim & "'"
+            commandSQL = New SqlCommand(sqlString, sqlConnect)
+
+            Dim reader = commandSQL.ExecuteReader()
+            If reader.HasRows Then
+                reader.Read()
+
+                Select Case reader.Item("ButtonNumber")
+                    Case 1
+                        RadioButton1.Checked = True
+                    Case 2
+                        RadioButton2.Checked = True
+                    Case 3
+                        RadioButton3.Checked = True
+                    Case 4
+                        RadioButton4.Checked = True
+                    Case 5
+                        RadioButton5.Checked = True
+                    Case 6
+                        RadioButton6.Checked = True
+                End Select
+            End If
+
+            reader.Close()
+                sqlConnect.Close()
+            End If
+
+
+    End Sub
+
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
+        Me.Changed = True
+    End Sub
+
+    Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
+        Me.Changed = True
+    End Sub
+
+    Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
+        Me.Changed = True
+
+    End Sub
+
+    Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton4.CheckedChanged
+        Me.Changed = True
+
+    End Sub
+
+    Private Sub RadioButton5_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton5.CheckedChanged
+        Me.Changed = True
+
+    End Sub
+
+    Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton6.CheckedChanged
+        Me.Changed = True
+
+    End Sub
+
+    Private Sub RadioButtonNONE_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonNONE.CheckedChanged
+        Me.Changed = True
+
+    End Sub
 End Class

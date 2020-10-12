@@ -23,19 +23,19 @@ Partial Class POSMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtEntry = New System.Windows.Forms.TextBox()
         Me.btnManagerFunctions = New System.Windows.Forms.Button()
-        Me.btnAdult = New System.Windows.Forms.Button()
-        Me.btnChild = New System.Windows.Forms.Button()
-        Me.btnAAAMilAdult = New System.Windows.Forms.Button()
-        Me.btnAdultGroup = New System.Windows.Forms.Button()
+        Me.btnQuick1 = New System.Windows.Forms.Button()
+        Me.btnQuick2 = New System.Windows.Forms.Button()
+        Me.btnQuick3 = New System.Windows.Forms.Button()
+        Me.btnQuick5 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.colItem = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colQTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,7 +45,7 @@ Partial Class POSMain
         Me.PayType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CardType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colDELETE = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnChildGroup = New System.Windows.Forms.Button()
+        Me.btnQuick6 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
@@ -81,6 +81,7 @@ Partial Class POSMain
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblChange = New System.Windows.Forms.Label()
         Me.btnDrawer = New System.Windows.Forms.Button()
+        Me.btnQuick4 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -105,85 +106,85 @@ Partial Class POSMain
         Me.btnManagerFunctions.UseVisualStyleBackColor = True
         Me.btnManagerFunctions.Visible = False
         '
-        'btnAdult
+        'btnQuick1
         '
-        Me.btnAdult.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.btnAdult.Font = New System.Drawing.Font("Constantia", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdult.ForeColor = System.Drawing.Color.Yellow
-        Me.btnAdult.Location = New System.Drawing.Point(12, 58)
-        Me.btnAdult.Name = "btnAdult"
-        Me.btnAdult.Size = New System.Drawing.Size(193, 162)
-        Me.btnAdult.TabIndex = 3
-        Me.btnAdult.Text = "ADULT"
-        Me.btnAdult.UseVisualStyleBackColor = False
+        Me.btnQuick1.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.btnQuick1.Font = New System.Drawing.Font("Constantia", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuick1.ForeColor = System.Drawing.Color.Yellow
+        Me.btnQuick1.Location = New System.Drawing.Point(12, 58)
+        Me.btnQuick1.Name = "btnQuick1"
+        Me.btnQuick1.Size = New System.Drawing.Size(193, 162)
+        Me.btnQuick1.TabIndex = 3
+        Me.btnQuick1.Text = "ADULT"
+        Me.btnQuick1.UseVisualStyleBackColor = False
         '
-        'btnChild
+        'btnQuick2
         '
-        Me.btnChild.BackColor = System.Drawing.Color.Aqua
-        Me.btnChild.Font = New System.Drawing.Font("Constantia", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnChild.Location = New System.Drawing.Point(211, 58)
-        Me.btnChild.Name = "btnChild"
-        Me.btnChild.Size = New System.Drawing.Size(186, 162)
-        Me.btnChild.TabIndex = 4
-        Me.btnChild.Text = "CHILD"
-        Me.btnChild.UseVisualStyleBackColor = False
+        Me.btnQuick2.BackColor = System.Drawing.Color.Aqua
+        Me.btnQuick2.Font = New System.Drawing.Font("Constantia", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuick2.Location = New System.Drawing.Point(211, 58)
+        Me.btnQuick2.Name = "btnQuick2"
+        Me.btnQuick2.Size = New System.Drawing.Size(186, 162)
+        Me.btnQuick2.TabIndex = 4
+        Me.btnQuick2.Text = "CHILD"
+        Me.btnQuick2.UseVisualStyleBackColor = False
         '
-        'btnAAAMilAdult
+        'btnQuick3
         '
-        Me.btnAAAMilAdult.BackColor = System.Drawing.Color.Green
-        Me.btnAAAMilAdult.Font = New System.Drawing.Font("Constantia", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAAAMilAdult.ForeColor = System.Drawing.Color.Coral
-        Me.btnAAAMilAdult.Location = New System.Drawing.Point(12, 226)
-        Me.btnAAAMilAdult.Name = "btnAAAMilAdult"
-        Me.btnAAAMilAdult.Size = New System.Drawing.Size(193, 146)
-        Me.btnAAAMilAdult.TabIndex = 5
-        Me.btnAAAMilAdult.Text = "ADULT" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "AAA/MIL"
-        Me.btnAAAMilAdult.UseVisualStyleBackColor = False
+        Me.btnQuick3.BackColor = System.Drawing.Color.Green
+        Me.btnQuick3.Font = New System.Drawing.Font("Constantia", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuick3.ForeColor = System.Drawing.Color.Coral
+        Me.btnQuick3.Location = New System.Drawing.Point(12, 226)
+        Me.btnQuick3.Name = "btnQuick3"
+        Me.btnQuick3.Size = New System.Drawing.Size(193, 146)
+        Me.btnQuick3.TabIndex = 5
+        Me.btnQuick3.Text = "ADULT" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "AAA/MIL"
+        Me.btnQuick3.UseVisualStyleBackColor = False
         '
-        'btnAdultGroup
+        'btnQuick5
         '
-        Me.btnAdultGroup.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnAdultGroup.Font = New System.Drawing.Font("Constantia", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdultGroup.Location = New System.Drawing.Point(12, 378)
-        Me.btnAdultGroup.Name = "btnAdultGroup"
-        Me.btnAdultGroup.Size = New System.Drawing.Size(193, 153)
-        Me.btnAdultGroup.TabIndex = 6
-        Me.btnAdultGroup.Text = "ADULT" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GROUP"
-        Me.btnAdultGroup.UseVisualStyleBackColor = False
+        Me.btnQuick5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnQuick5.Font = New System.Drawing.Font("Constantia", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuick5.Location = New System.Drawing.Point(12, 378)
+        Me.btnQuick5.Name = "btnQuick5"
+        Me.btnQuick5.Size = New System.Drawing.Size(193, 153)
+        Me.btnQuick5.TabIndex = 6
+        Me.btnQuick5.Text = "ADULT" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GROUP"
+        Me.btnQuick5.UseVisualStyleBackColor = False
         '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colItem, Me.colQTY, Me.colPrice, Me.colUPC, Me.colTaxRate, Me.PayType, Me.CardType, Me.colDELETE})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridView1.Location = New System.Drawing.Point(424, 56)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.RowTemplate.Height = 24
         Me.DataGridView1.Size = New System.Drawing.Size(1409, 725)
@@ -249,24 +250,24 @@ Partial Class POSMain
         '
         'colDELETE
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray
-        DataGridViewCellStyle2.NullValue = "delete"
-        Me.colDELETE.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.LightGray
+        DataGridViewCellStyle9.NullValue = "delete"
+        Me.colDELETE.DefaultCellStyle = DataGridViewCellStyle9
         Me.colDELETE.HeaderText = ""
         Me.colDELETE.MinimumWidth = 6
         Me.colDELETE.Name = "colDELETE"
         Me.colDELETE.ReadOnly = True
         Me.colDELETE.Width = 125
         '
-        'btnChildGroup
+        'btnQuick6
         '
-        Me.btnChildGroup.Font = New System.Drawing.Font("Constantia", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnChildGroup.Location = New System.Drawing.Point(211, 378)
-        Me.btnChildGroup.Name = "btnChildGroup"
-        Me.btnChildGroup.Size = New System.Drawing.Size(186, 153)
-        Me.btnChildGroup.TabIndex = 8
-        Me.btnChildGroup.Text = "CHILD" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GROUP" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.btnChildGroup.UseVisualStyleBackColor = True
+        Me.btnQuick6.Font = New System.Drawing.Font("Constantia", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuick6.Location = New System.Drawing.Point(211, 378)
+        Me.btnQuick6.Name = "btnQuick6"
+        Me.btnQuick6.Size = New System.Drawing.Size(186, 153)
+        Me.btnQuick6.TabIndex = 8
+        Me.btnQuick6.Text = "CHILD" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GROUP" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.btnQuick6.UseVisualStyleBackColor = True
         '
         'Button9
         '
@@ -343,35 +344,35 @@ Partial Class POSMain
         Me.DataGridView2.AllowUserToOrderColumns = True
         Me.DataGridView2.AllowUserToResizeColumns = False
         Me.DataGridView2.AllowUserToResizeRows = False
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.InvName, Me.InvType, Me.InvDepartment, Me.InvVendor, Me.InvPrice, Me.InvCost, Me.InvOnHandQuantity, Me.ID, Me.UPC, Me.UniqueID, Me.TaxRate})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DataGridView2.Location = New System.Drawing.Point(504, 137)
         Me.DataGridView2.Name = "DataGridView2"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.DataGridView2.RowHeadersWidth = 51
         Me.DataGridView2.RowTemplate.Height = 24
         Me.DataGridView2.Size = New System.Drawing.Size(1039, 551)
@@ -615,11 +616,25 @@ Partial Class POSMain
         Me.btnDrawer.Text = "Open Drawer"
         Me.btnDrawer.UseVisualStyleBackColor = False
         '
+        'btnQuick4
+        '
+        Me.btnQuick4.BackColor = System.Drawing.Color.Gold
+        Me.btnQuick4.Font = New System.Drawing.Font("Constantia", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuick4.ForeColor = System.Drawing.Color.Brown
+        Me.btnQuick4.Location = New System.Drawing.Point(211, 226)
+        Me.btnQuick4.Name = "btnQuick4"
+        Me.btnQuick4.Size = New System.Drawing.Size(186, 146)
+        Me.btnQuick4.TabIndex = 46
+        Me.btnQuick4.Text = "button 4 text"
+        Me.btnQuick4.UseVisualStyleBackColor = False
+        Me.btnQuick4.Visible = False
+        '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1924, 935)
+        Me.Controls.Add(Me.btnQuick4)
         Me.Controls.Add(Me.btnDrawer)
         Me.Controls.Add(Me.lblChange)
         Me.Controls.Add(Me.Label3)
@@ -642,12 +657,12 @@ Partial Class POSMain
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button9)
-        Me.Controls.Add(Me.btnChildGroup)
+        Me.Controls.Add(Me.btnQuick6)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.btnAdultGroup)
-        Me.Controls.Add(Me.btnAAAMilAdult)
-        Me.Controls.Add(Me.btnChild)
-        Me.Controls.Add(Me.btnAdult)
+        Me.Controls.Add(Me.btnQuick5)
+        Me.Controls.Add(Me.btnQuick3)
+        Me.Controls.Add(Me.btnQuick2)
+        Me.Controls.Add(Me.btnQuick1)
         Me.Controls.Add(Me.btnManagerFunctions)
         Me.Controls.Add(Me.txtEntry)
         Me.Name = "POSMain"
@@ -662,12 +677,12 @@ Partial Class POSMain
 
     Friend WithEvents txtEntry As TextBox
     Friend WithEvents btnManagerFunctions As Button
-    Friend WithEvents btnAdult As Button
-    Friend WithEvents btnChild As Button
-    Friend WithEvents btnAAAMilAdult As Button
-    Friend WithEvents btnAdultGroup As Button
+    Friend WithEvents btnQuick1 As Button
+    Friend WithEvents btnQuick2 As Button
+    Friend WithEvents btnQuick3 As Button
+    Friend WithEvents btnQuick5 As Button
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents btnChildGroup As Button
+    Friend WithEvents btnQuick6 As Button
     Friend WithEvents Button9 As Button
     Friend WithEvents Button10 As Button
     Friend WithEvents Button11 As Button
@@ -711,4 +726,5 @@ Partial Class POSMain
     Friend WithEvents Label3 As Label
     Friend WithEvents lblChange As Label
     Friend WithEvents btnDrawer As Button
+    Friend WithEvents btnQuick4 As Button
 End Class
