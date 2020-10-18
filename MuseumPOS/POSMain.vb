@@ -22,7 +22,6 @@ Public Class POSMain
     Private btxtReceiptNumber_EnterKeyPressed As Boolean
     Private sInitial_txtReceiptNumber As String, nManagerWarningCounter As Integer
     Private sUPCButton(0 To 8) As String
-    '        Me.DataGridView1.Rows.Add("CHILD TICKET", "1", "5.00", "222222222222", "0")
     Private sItemNameButton(0 To 8) As String
     Private sItemPriceButton(0 To 8) As String
     Private sItemTaxButton(0 To 8) As String

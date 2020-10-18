@@ -5,6 +5,7 @@ Public Class InventoryItem
     Private ChangedValue As Boolean
     'button1 = btnSave
     Dim sConnectionString As String
+    Private bRadioButtonChanged As Boolean
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnSave.Click
 
@@ -12,7 +13,6 @@ Public Class InventoryItem
         Dim sqlConnect As New SqlConnection()
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
-        POSMain.LoadButtonSetup()
 
         If Not (txtUPC.Text.Trim = "") Then
             sqlConnect.ConnectionString = sConnectionString
@@ -88,7 +88,11 @@ Public Class InventoryItem
             End Try
         End If
 
-        SaveQuickButtons()
+        If Me.RadioButtonChanged Then
+            SaveQuickButtons()
+            POSMain.LoadButtonSetup()
+        End If
+
         LoadGrid()
         Scatter()
         Me.Changed = False
@@ -250,6 +254,14 @@ Public Class InventoryItem
         Me.Changed = True
     End Sub
 
+    Public Property RadioButtonChanged() As Boolean
+        Get
+            Return bRadioButtonChanged
+        End Get
+        Set(ByVal value As Boolean)
+            bRadioButtonChanged = value
+        End Set
+    End Property
     Public Property Changed() As Boolean
         Get
             Return ChangedValue
@@ -261,6 +273,9 @@ Public Class InventoryItem
             btnNew.Enabled = Not ChangedValue
             btnSave.Enabled = ChangedValue
             btnCancelChanges.Enabled = ChangedValue
+            If ChangedValue = False Then ' turn off but never on from here
+                Me.RadioButtonChanged = False
+            End If
         End Set
     End Property
 
@@ -629,34 +644,41 @@ Public Class InventoryItem
 
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
         Me.Changed = True
+        Me.RadioButtonChanged = True
     End Sub
 
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
         Me.Changed = True
+        Me.RadioButtonChanged = True
     End Sub
 
     Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
         Me.Changed = True
+        Me.RadioButtonChanged = True
 
     End Sub
 
     Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton4.CheckedChanged
         Me.Changed = True
+        Me.RadioButtonChanged = True
 
     End Sub
 
     Private Sub RadioButton5_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton5.CheckedChanged
         Me.Changed = True
+        Me.RadioButtonChanged = True
 
     End Sub
 
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton6.CheckedChanged
         Me.Changed = True
+        Me.RadioButtonChanged = True
 
     End Sub
 
     Private Sub RadioButtonNONE_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonNONE.CheckedChanged
         Me.Changed = True
+        Me.RadioButtonChanged = True
 
     End Sub
 End Class
