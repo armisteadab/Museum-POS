@@ -124,6 +124,9 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="NetBarcode, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetBarcode.1.1.0\lib\netstandard2.0\NetBarcode.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -155,6 +158,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.4.5.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Ports, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Ports.4.6.0\lib\net461\System.IO.Ports.dll</HintPath>
     </Reference>
@@ -240,6 +246,12 @@
       <DependentUpon>Dialog1.vb</DependentUpon>
     </Compile>
     <Compile Include="Dialog1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryLabelPrint.Designer.vb">
+      <DependentUpon>InventoryLabelPrint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryLabelPrint.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ManagerFunctions.Designer.vb">
@@ -364,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog1.resx">
       <DependentUpon>Dialog1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryLabelPrint.resx">
+      <DependentUpon>InventoryLabelPrint.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerFunctions.resx">
       <DependentUpon>ManagerFunctions.vb</DependentUpon>

@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="MuseumPOS.exe.manifest" size="71975">
+    <dependentAssembly dependencyType="install" codebase="MuseumPOS.exe.manifest" size="73307">
       <assemblyIdentity name="MuseumPOS.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+TBk5dtNGWAphkfIaA/Qtd8lLDzF5yfUdhkpfRYAq2E=</dsig:DigestValue>
+        <dsig:DigestValue>1Fd/DEp2cFy4VlniJHvaZjUWFnisjo+4OPr1tjd/3jE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

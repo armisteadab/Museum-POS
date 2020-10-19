@@ -1026,14 +1026,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuseumPOS.exe" size="317920">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuseumPOS.exe" size="320992">
       <assemblyIdentity name="MuseumPOS" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>r5KZAIPoO7y8MRUloMb3lykmGC9uOTxzfmV6h57AbFs=</dsig:DigestValue>
+        <dsig:DigestValue>3q8n/kPmunjLv9F9sZ6ckPYgRhyTMQ0d2IQR4ogDUCA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NetBarcode.dll" size="49664">
+      <assemblyIdentity name="NetBarcode" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>mBE9k/jr4xyTlpzvpLic385wdMXmCnoZ1/Q77tQxSy4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1134,6 +1146,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Drawing.Common.dll" size="51344">
+      <assemblyIdentity name="System.Drawing.Common" version="4.0.0.0" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>c46LVD6OrGQYmj+7D2fOBYqfAKWPK+W1SaFEP4OCRoE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.IO.Ports.dll" size="29560">
       <assemblyIdentity name="System.IO.Ports" version="4.0.2.0" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -1196,7 +1220,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>TmLHMR/fAW0LoMRMi/bqqqParQ44kvXE6Y44E02EyB8=</dsig:DigestValue>
+      <dsig:DigestValue>3pU8fQlycxzDCjvM2ddZ2WyNWtRdbi8nsbeiGmGemP8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MuseumPOS_log.ldf" size="8388608" writeableType="applicationData">
@@ -1205,7 +1229,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>kMOzcoevoGTlZ9IiQzFW17cwXgiAbDabRAcD5OkkGzY=</dsig:DigestValue>
+      <dsig:DigestValue>EQec+3D3vkmaJOZSJPDTQ8k3UbdPI3g0+efrcg6yxN8=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -681,4 +681,10 @@ Public Class InventoryItem
         Me.RadioButtonChanged = True
 
     End Sub
+
+    Private Sub btnLabel_Click(sender As Object, e As EventArgs) Handles btnLabel.Click
+        Dim fItemLabel As New InventoryLabelPrint
+        fItemLabel.UPC = txtUPC.Text.Trim
+        fItemLabel.ShowDialog()
+    End Sub
 End Class

@@ -74,6 +74,7 @@ Partial Class InventoryItem
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.RadioButton6 = New System.Windows.Forms.RadioButton()
         Me.RadioButtonNONE = New System.Windows.Forms.RadioButton()
+        Me.btnLabel = New System.Windows.Forms.Button()
         CType(Me.numPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numOnHandQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -585,11 +586,22 @@ Partial Class InventoryItem
         Me.RadioButtonNONE.Text = "None"
         Me.RadioButtonNONE.UseVisualStyleBackColor = True
         '
+        'btnLabel
+        '
+        Me.btnLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLabel.Location = New System.Drawing.Point(343, 434)
+        Me.btnLabel.Name = "btnLabel"
+        Me.btnLabel.Size = New System.Drawing.Size(98, 49)
+        Me.btnLabel.TabIndex = 43
+        Me.btnLabel.Text = "Label"
+        Me.btnLabel.UseVisualStyleBackColor = True
+        '
         'InventoryItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1493, 689)
+        Me.Controls.Add(Me.btnLabel)
         Me.Controls.Add(Me.RadioButtonNONE)
         Me.Controls.Add(Me.RadioButton6)
         Me.Controls.Add(Me.RadioButton5)
@@ -699,4 +711,5 @@ Partial Class InventoryItem
     Friend WithEvents RadioButton5 As RadioButton
     Friend WithEvents RadioButton6 As RadioButton
     Friend WithEvents RadioButtonNONE As RadioButton
+    Friend WithEvents btnLabel As Button
 End Class

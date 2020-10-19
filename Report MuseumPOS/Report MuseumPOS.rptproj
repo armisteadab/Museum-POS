@@ -56,6 +56,7 @@
   <ItemGroup>
     <Report Include="Attendance.rdl" />
     <Report Include="Category.rdl" />
+    <Report Include="ItemLabel.rdl" />
     <Report Include="OpenDrawer.rdl" />
     <Report Include="Receipt.rdl" />
     <Report Include="ReportInventory.rdl" />

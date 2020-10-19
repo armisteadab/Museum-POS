@@ -142,3 +142,7 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\SdkApi.Core
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\SdkApi.Desktop.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\ZebraPrinterSdk.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.CashDrawer.resources
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\NetBarcode.dll
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\System.Drawing.Common.dll
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\NetBarcode.xml
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.InventoryLabelPrint.resources
