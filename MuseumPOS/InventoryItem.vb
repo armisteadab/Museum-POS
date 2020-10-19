@@ -25,9 +25,12 @@ Public Class InventoryItem
             AlreadyInTable = reader.HasRows
             reader.Close()
             sqlConnect.Close()
-        Else
-            txtUPC.Text = "00" + numItemNumber.Value.ToString.Trim
+        Else ' create a default UPC for barcode
+            Dim sBC_Formatted$
+            sBC_Formatted = "000000000000" + numItemNumber.Value.ToString.Trim
+            txtUPC.Text = Strings.Right(sBC_Formatted, 12)
         End If
+
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
@@ -683,6 +686,7 @@ Public Class InventoryItem
     End Sub
 
     Private Sub btnLabel_Click(sender As Object, e As EventArgs) Handles btnLabel.Click
+
         Dim fItemLabel As New InventoryLabelPrint
         fItemLabel.UPC = txtUPC.Text.Trim
         fItemLabel.ShowDialog()

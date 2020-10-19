@@ -589,7 +589,7 @@ Partial Class InventoryItem
         'btnLabel
         '
         Me.btnLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLabel.Location = New System.Drawing.Point(343, 434)
+        Me.btnLabel.Location = New System.Drawing.Point(363, 460)
         Me.btnLabel.Name = "btnLabel"
         Me.btnLabel.Size = New System.Drawing.Size(98, 49)
         Me.btnLabel.TabIndex = 43

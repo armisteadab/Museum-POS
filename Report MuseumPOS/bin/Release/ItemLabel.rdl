@@ -42,11 +42,11 @@
           <Image Name="Image1">
             <Source>External</Source>
             <Value>=("file:" + Parameters!BarCodeImage.Value)</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.00833in</Top>
-            <Left>0.00332in</Left>
-            <Height>0.80014in</Height>
-            <Width>1.775in</Width>
+            <Sizing>Fit</Sizing>
+            <Top>0.08056in</Top>
+            <Left>0.90055in</Left>
+            <Height>0.34736in</Height>
+            <Width>0.98111in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -54,23 +54,28 @@
             </Style>
           </Image>
           <Textbox Name="InvPrice">
-            <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>=Fields!InvName.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>InvPrice</rd:DefaultName>
-            <Top>0.84458in</Top>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
+            <Top>0.4557in</Top>
+            <Left>0.90055in</Left>
+            <Height>0.16944in</Height>
+            <Width>0.98111in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -83,24 +88,28 @@
             </Style>
           </Textbox>
           <Textbox Name="InvPrice1">
-            <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>=Fields!InvPrice.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>C2</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>InvPrice1</rd:DefaultName>
-            <Top>0.83625in</Top>
-            <Left>1.01389in</Left>
-            <Height>0.25in</Height>
-            <Width>0.76444in</Width>
+            <Top>0.63903in</Top>
+            <Left>0.90055in</Left>
+            <Height>0.22487in</Height>
+            <Width>0.98111in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -113,10 +122,10 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>1.13334in</Height>
+        <Height>1.16667in</Height>
         <Style />
       </Body>
-      <Width>1.89667in</Width>
+      <Width>2.19667in</Width>
       <Page>
         <PageHeader>
           <Height>0.01042in</Height>
