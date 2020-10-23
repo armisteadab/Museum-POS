@@ -14,7 +14,7 @@ Imports System.Threading
 Imports Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel
 
 Public Class InventoryLabelPrint
-    Public sUPC As String
+    Public sUPC As String, nTypeOfLabel As Integer
     Private Sub InventoryLabelPrint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.ReportViewer1.RefreshReport()
     End Sub
@@ -61,7 +61,12 @@ Public Class InventoryLabelPrint
         ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
         ReportViewer1.LocalReport.DataSources.Clear()
         ReportViewer1.LocalReport.DataSources.Add(PriceTagDataSource)
-        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ItemLabel.rdl"
+        Select Case nTypeOfLabel
+            Case 2
+                ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\NoBarcodeLabel.rdl"
+            Case Else
+                ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ItemLabel.rdl"
+        End Select
         ReportViewer1.LocalReport.EnableExternalImages = True
         Dim rParam As New WinForms.ReportParameter
         rParam.Values.Clear()
@@ -100,5 +105,18 @@ Public Class InventoryLabelPrint
 
     Private Sub ReportViewer1_Load(sender As Object, e As EventArgs) Handles ReportViewer1.Load
 
+    End Sub
+
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
+        ChangeTypeOfLabel()
+    End Sub
+
+    Private Sub ChangeTypeOfLabel()
+        nTypeOfLabel = IIf(RadioButton1.Checked, 1, 2)
+        PriceTagShow()
+    End Sub
+
+    Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
+        ChangeTypeOfLabel()
     End Sub
 End Class

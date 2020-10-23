@@ -14,6 +14,13 @@ Public Class InventoryItem
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
+        If txtUPC.Text.Trim.Length < 10 Then
+            Dim sBC_Formatted$
+            sBC_Formatted = "000000000000" + numItemNumber.Value.ToString.Trim
+            txtUPC.Text = Strings.Right(sBC_Formatted, 12)
+        End If
+
+
         If Not (txtUPC.Text.Trim = "") Then
             sqlConnect.ConnectionString = sConnectionString
             sqlConnect.Open()
@@ -25,10 +32,6 @@ Public Class InventoryItem
             AlreadyInTable = reader.HasRows
             reader.Close()
             sqlConnect.Close()
-        Else ' create a default UPC for barcode
-            Dim sBC_Formatted$
-            sBC_Formatted = "000000000000" + numItemNumber.Value.ToString.Trim
-            txtUPC.Text = Strings.Right(sBC_Formatted, 12)
         End If
 
 
@@ -380,6 +383,13 @@ Public Class InventoryItem
     End Sub
 
     Private Sub numItemNumber_Validated(sender As Object, e As EventArgs) Handles numItemNumber.Validated
+        ' create a default UPC for barcode
+        If txtUPC.Text.Trim = "" Then
+            Dim sBC_Formatted$
+            sBC_Formatted = "000000000000" + numItemNumber.Value.ToString.Trim
+            txtUPC.Text = Strings.Right(sBC_Formatted, 12)
+        End If
+
         Me.Changed = True
     End Sub
 

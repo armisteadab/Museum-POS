@@ -178,16 +178,7 @@ Public Class POSMain
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
 
-        If Not bIsNumeric Then
-            sSQL = "EXEC InventoryItemSearchByName " + sSearchLikeValue
-
-        Else
-            sSQL = "EXEC InventoryItemSearchByUPC " + sSearchLikeValue
-            If sSearchLikeValue.Length < 12 Then
-                sSQL = "EXEC InventoryItemSearchByUPC_or_ID " + sSearchLikeValue
-            End If
-        End If
-
+        sSQL = "EXEC InventoryItemSearchByName " + sSearchLikeValue
 
         cmd.CommandText = sSQL
         cmd.Connection = sqlConnect

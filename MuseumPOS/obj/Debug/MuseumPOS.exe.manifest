@@ -1033,7 +1033,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3q8n/kPmunjLv9F9sZ6ckPYgRhyTMQ0d2IQR4ogDUCA=</dsig:DigestValue>
+        <dsig:DigestValue>iSZ8hjXSA5q5pt3EQAuqtzHLd5mI68mn0bJwtnRzBuw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1220,7 +1220,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>3pU8fQlycxzDCjvM2ddZ2WyNWtRdbi8nsbeiGmGemP8=</dsig:DigestValue>
+      <dsig:DigestValue>h4usIBqP1+I35J0yJqlcGyN+TnPgDOFPdlbGFdDbO0o=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MuseumPOS_log.ldf" size="8388608" writeableType="applicationData">
@@ -1229,7 +1229,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>EQec+3D3vkmaJOZSJPDTQ8k3UbdPI3g0+efrcg6yxN8=</dsig:DigestValue>
+      <dsig:DigestValue>AJdVypZ23wRV7S9yGYkO53dyOlzcOxdifmdOc/qpiQ0=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
