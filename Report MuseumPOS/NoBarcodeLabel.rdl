@@ -47,7 +47,6 @@
                   <TextRun>
                     <Value>=Fields!InvName.Value</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -80,14 +79,15 @@
                   <TextRun>
                     <Value>=Fields!InvPrice.Value</Value>
                     <Style>
-                      <FontSize>15pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontFamily>Bahnschrift SemiBold Condensed</FontFamily>
+                      <FontSize>23pt</FontSize>
+                      <FontWeight>Thin</FontWeight>
                       <Format>C2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Right</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
