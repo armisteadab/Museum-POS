@@ -67,6 +67,7 @@ Partial Class InventoryLabelPrint
         Me.Controls.Add(Me.ReportViewer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "InventoryLabelPrint"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "InventoryLabelPrint"
         Me.ResumeLayout(False)
         Me.PerformLayout()

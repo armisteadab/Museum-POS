@@ -58,9 +58,9 @@
             </Paragraphs>
             <rd:DefaultName>InvPrice</rd:DefaultName>
             <Top>0.11403in</Top>
-            <Left>0.90055in</Left>
+            <Left>0.75888in</Left>
             <Height>0.23055in</Height>
-            <Width>0.98111in</Width>
+            <Width>1.12278in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -93,9 +93,9 @@
             </Paragraphs>
             <rd:DefaultName>InvPrice1</rd:DefaultName>
             <Top>0.41403in</Top>
-            <Left>0.90055in</Left>
+            <Left>0.75888in</Left>
             <Height>0.44987in</Height>
-            <Width>0.98111in</Width>
+            <Width>1.12278in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>

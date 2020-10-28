@@ -6,8 +6,13 @@ Public Class InventoryItem
     'button1 = btnSave
     Dim sConnectionString As String
     Private bRadioButtonChanged As Boolean
-
+    Dim bNewItemBeingAdded As Boolean ' adding a new item?
+    Dim sUPC_SaveValue As String ' for UPC changes to existing items
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnSave.Click
+
+        Dim bNewItemBeingAdded_LOCAL As Boolean ' a place to keep this value so we can clear the form-wide value without delay
+        bNewItemBeingAdded_LOCAL = (bNewItemBeingAdded)
+        bNewItemBeingAdded = False  ' set this flag OFF
 
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
@@ -20,20 +25,22 @@ Public Class InventoryItem
             txtUPC.Text = Strings.Right(sBC_Formatted, 12)
         End If
 
+        If Not bNewItemBeingAdded_LOCAL Then ' we didn't push the NEW button
+            If Not (txtUPC.Text.Trim = "") Then
+                sqlConnect.ConnectionString = sConnectionString
+                sqlConnect.Open()
+                Dim commandSQL As SqlCommand
+                sqlString = "SELECT InvUPC from InventoryItems WHERE InvUPC = '" & sUPC_SaveValue & "'"
+                commandSQL = New SqlCommand(sqlString, sqlConnect)
 
-        If Not (txtUPC.Text.Trim = "") Then
-            sqlConnect.ConnectionString = sConnectionString
-            sqlConnect.Open()
-            Dim commandSQL As SqlCommand
-            sqlString = "SELECT InvUPC from InventoryItems WHERE InvUPC = '" & Me.txtUPC.Text.Trim & "'"
-            commandSQL = New SqlCommand(sqlString, sqlConnect)
-
-            Dim reader = commandSQL.ExecuteReader()
-            AlreadyInTable = reader.HasRows
-            reader.Close()
-            sqlConnect.Close()
+                Dim reader = commandSQL.ExecuteReader()
+                AlreadyInTable = reader.HasRows
+                reader.Close()
+                sqlConnect.Close()
+            End If
+        Else
+            AlreadyInTable = False
         End If
-
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
@@ -66,6 +73,7 @@ Public Class InventoryItem
             'InvType, InvCost, InvPrice, Department,  OnHandQuantity, Vendor, InvNotes, Id) values ("
             sqlString = "UPDATE InventoryItems SET InvName = " & QTrim(txtItemName.Text) & ","
             sqlString += " InvType = " & QTrim(cboType.Text) & ","
+            sqlString += " InvUPC = " & QTrim(txtUPC.Text) & ","
             sqlString += " InvCost = " & numUnitCost.Value.ToString & ","
             sqlString += " OnHandQuantity = " & numOnHandQuantity.Value & ","
             sqlString += " Vendor = " & QTrim(cboVendor.Text) & ","
@@ -178,6 +186,8 @@ Public Class InventoryItem
 
     Private Sub Scatter()
 
+        bNewItemBeingAdded = False
+
         If DataGridView1.Rows.Count < 1 Then
             Me.Close()
             Exit Sub
@@ -245,7 +255,7 @@ Public Class InventoryItem
 
                     Me.lblUniqueID.Text = reader.Item("UniqueID")
                     txtUPC.ReadOnly = True ' not allow new UPC
-
+                    sUPC_SaveValue = txtUPC.Text
                 End While
             End Using
         Finally
@@ -329,6 +339,7 @@ Public Class InventoryItem
         numItemNumber.Value = GetMaxItemNumber() + 1
         txtUPC.ReadOnly = False ' allow new UPC
         txtUPC.Focus()
+        bNewItemBeingAdded = True
     End Sub
 
     Private Sub ClearValues()
