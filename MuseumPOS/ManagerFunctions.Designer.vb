@@ -30,6 +30,7 @@ Partial Class ManagerFunctions
         Me.lblReceiptDeleted = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnCashDrawer = New System.Windows.Forms.Button()
+        Me.btnPostReconnect = New System.Windows.Forms.Button()
         CType(Me.nReceiptDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -93,11 +94,21 @@ Partial Class ManagerFunctions
         Me.btnCashDrawer.Text = "Cash Drawer Setup"
         Me.btnCashDrawer.UseVisualStyleBackColor = True
         '
+        'btnPostReconnect
+        '
+        Me.btnPostReconnect.Location = New System.Drawing.Point(12, 263)
+        Me.btnPostReconnect.Name = "btnPostReconnect"
+        Me.btnPostReconnect.Size = New System.Drawing.Size(234, 44)
+        Me.btnPostReconnect.TabIndex = 9
+        Me.btnPostReconnect.Text = "Reconnect Posts Where UPCs Have Changed"
+        Me.btnPostReconnect.UseVisualStyleBackColor = True
+        '
         'ManagerFunctions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnPostReconnect)
         Me.Controls.Add(Me.btnCashDrawer)
         Me.Controls.Add(Me.lblReceiptDeleted)
         Me.Controls.Add(Me.nReceiptDelete)
@@ -120,4 +131,5 @@ Partial Class ManagerFunctions
     Friend WithEvents lblReceiptDeleted As Label
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnCashDrawer As Button
+    Friend WithEvents btnPostReconnect As Button
 End Class

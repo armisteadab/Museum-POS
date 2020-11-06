@@ -81,4 +81,7 @@ Public Class ManagerFunctions
 
     End Sub
 
+    Private Sub btnPostReconnect_Click(sender As Object, e As EventArgs) Handles btnPostReconnect.Click
+        ReConnectUPCsInReceipts()
+    End Sub
 End Class

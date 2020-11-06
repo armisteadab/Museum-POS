@@ -408,5 +408,144 @@ Module Module1
         End Try
     End Sub
 
+    Public Sub ReConnectUPCsInReceipts()
+        ' re-connects broken links between tables
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim sNewUPC As String
+        Dim sItemNumber As String
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, B.Id from receipt "
+        sqlString += "AS a LEFT OUTER JOIN InventoryItems AS b ON a.UPC = b.InvUPC"
+        sqlString += " WHERE a.Paid > 0 ORDER BY b.InvUPC  "
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+        Dim sInvUPC As String, sUPCinPost As String, sID As String
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        If reader.HasRows Then
+            On Error Resume Next
+
+            While reader.Read()
+                sInvUPC = ("" + reader.Item("InvUPC").ToString.Trim)
+                sUPCinPost = ("" + reader.Item("UPC").ToString.Trim)
+                If sInvUPC.Trim <> "" Then
+                    Exit While
+                End If
+                sItemNumber = sUPCinPost.Substring(2) ' skip 1st 2
+                sNewUPC = GetUPCByItemNumber(sItemNumber)
+                sNewUPC = sNewUPC.Trim
+                sUPCinPost = sUPCinPost.Trim
+
+                If sNewUPC.Trim <> "" Then
+                    UpdateReceiptUPC(sNewUPC, sUPCinPost)
+                End If
+            End While
+        Else
+            BigMsgBox("All Posts Linked. No Problems Found.")
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+
+    End Sub
+
+    Public Function GetUPCByItemNumber(ByVal parItemNumber As String) As String
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim sReturnUPC As String
+
+        sReturnUPC = ""
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "select a.Id, a.InvUPC FROM InventoryItems a WHERE a.Id = " + parItemNumber
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        If reader.HasRows Then
+            On Error Resume Next
+
+            While reader.Read()
+                sReturnUPC = (reader.Item("InvUPC"))
+            End While
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+        Return sReturnUPC
+
+    End Function
+
+
+
+    Public Function UpdateReceiptUPC(ByVal sNewUPC As String, ByVal sOldUPC As String) As Long
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim nReturnMAX As Long
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "UPDATE Receipt SET UPC = " + QTrim(sNewUPC) + " WHERE UPC = " + QTrim(sOldUPC)
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+        Try
+
+            sqlConnect.Open()
+            cmd = New SqlCommand(sqlString, sqlConnect)
+            'commandSQL1.CommandType = CommandType.Text
+            cmd.ExecuteNonQuery()
+            cmd.Dispose()
+            sqlConnect.Close()
+
+        Catch ex As ArgumentException
+            BigMsgBox("" & ex.Message)
+
+        Finally
+
+        End Try
+        Debug.Print(sqlString)
+
+
+        Return (nReturnMAX)
+
+    End Function
+
 
 End Module

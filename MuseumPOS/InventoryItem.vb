@@ -189,7 +189,6 @@ Public Class InventoryItem
         bNewItemBeingAdded = False
 
         If DataGridView1.Rows.Count < 1 Then
-            Me.Close()
             Exit Sub
         End If
 
