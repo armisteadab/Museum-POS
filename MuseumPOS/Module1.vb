@@ -547,5 +547,51 @@ Module Module1
 
     End Function
 
+    Public Function GetItemPriceNameByUPC(ByVal pUPC As String) As String
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim sReturnString As String
+
+
+        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand, nPrice As Double
+        cmd.CommandType = CommandType.Text
+
+        '        sqlString = "SELECT MAX(Id) as MAXId FROM InventoryItems"
+        sqlString = "SELECT InvName, InvPrice  FROM InventoryItems WHERE InvUPC = " + QTrim(pUPC)
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+        sReturnString = ""
+        If reader.HasRows Then
+            On Error Resume Next
+
+            While reader.Read()
+                sReturnString += (reader.Item("InvName"))
+                sReturnString += Chr(10) + Chr(13)
+                nPrice = (reader.Item("InvPrice"))
+                sReturnString += String.Format("{0,-10:C}", nPrice)
+
+            End While
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+        Return (sReturnString)
+
+    End Function
+
 
 End Module

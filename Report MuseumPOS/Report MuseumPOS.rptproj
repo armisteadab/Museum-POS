@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Attendance.rdl" />
+    <Report Include="BigLabel.rdl" />
     <Report Include="Category.rdl" />
     <Report Include="ItemLabel.rdl" />
     <Report Include="NoBarcodeLabel.rdl" />

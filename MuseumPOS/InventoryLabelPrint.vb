@@ -64,6 +64,8 @@ Public Class InventoryLabelPrint
         Select Case nTypeOfLabel
             Case 2
                 ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\NoBarcodeLabel.rdl"
+            Case 3
+                ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\BigLabel.rdl"
             Case Else
                 ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ItemLabel.rdl"
         End Select
@@ -74,7 +76,11 @@ Public Class InventoryLabelPrint
         rParam.Values.Add("c:\release\barcode1.jpeg")
         ReportViewer1.LocalReport.SetParameters(rParam)
 
-        ReportViewer1.PrinterSettings.PrinterName = "ZDesigner LP 2824 Plus (ZPL)"
+        If nTypeOfLabel = 3 Then
+            ReportViewer1.PrinterSettings.PrinterName = "HP7D48B1 (HP Office Jet Pro 8720)"
+        Else
+            ReportViewer1.PrinterSettings.PrinterName = "ZDesigner LP 2824 Plus (ZPL)"
+        end if
 
         ReportViewer1.RefreshReport()
 
@@ -112,8 +118,21 @@ Public Class InventoryLabelPrint
     End Sub
 
     Private Sub ChangeTypeOfLabel()
-        nTypeOfLabel = IIf(RadioButton1.Checked, 1, 2)
+        nTypeOfLabel = 1 ' default
+        If RadioButton1.Checked = True Then
+            nTypeOfLabel = 1
+        End If
+        If RadioButton2.Checked = True Then
+            nTypeOfLabel = 2
+        End If
+        If RadioButton3.Checked = True Then
+            nTypeOfLabel = 3
+        End If
         PriceTagShow()
+    End Sub
+
+    Private Sub btnTagInfo2Clipboard_Click(sender As Object, e As EventArgs) Handles btnTagInfo2Clipboard.Click
+        Clipboard.SetText("" + GetItemPriceNameByUPC(sUPC))
     End Sub
 
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged

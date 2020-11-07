@@ -25,6 +25,8 @@ Partial Class InventoryLabelPrint
         Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.btnTagInfo2Clipboard = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ReportViewer1
@@ -57,11 +59,33 @@ Partial Class InventoryLabelPrint
         Me.RadioButton2.Text = "Price Only"
         Me.RadioButton2.UseVisualStyleBackColor = True
         '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(204, 13)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(117, 21)
+        Me.RadioButton3.TabIndex = 3
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "Big Price Sign"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'btnTagInfo2Clipboard
+        '
+        Me.btnTagInfo2Clipboard.Location = New System.Drawing.Point(527, 11)
+        Me.btnTagInfo2Clipboard.Name = "btnTagInfo2Clipboard"
+        Me.btnTagInfo2Clipboard.Size = New System.Drawing.Size(227, 43)
+        Me.btnTagInfo2Clipboard.TabIndex = 4
+        Me.btnTagInfo2Clipboard.Text = "Put Tag Info Into Clipboard"
+        Me.btnTagInfo2Clipboard.UseVisualStyleBackColor = True
+        '
         'InventoryLabelPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(792, 450)
+        Me.Controls.Add(Me.btnTagInfo2Clipboard)
+        Me.Controls.Add(Me.RadioButton3)
         Me.Controls.Add(Me.RadioButton2)
         Me.Controls.Add(Me.RadioButton1)
         Me.Controls.Add(Me.ReportViewer1)
@@ -77,4 +101,6 @@ Partial Class InventoryLabelPrint
     Friend WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents btnTagInfo2Clipboard As Button
 End Class
