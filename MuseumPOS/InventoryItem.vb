@@ -711,4 +711,11 @@ Public Class InventoryItem
         fItemLabel.UPC = txtUPC.Text.Trim
         fItemLabel.ShowDialog()
     End Sub
+
+    Private Sub InventoryItem_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
+        If e.Button = MouseButtons.Right Then
+            Clipboard.SetText("" + txtItemName.Text.Trim + vbCrLf + String.Format("{0,-10:C}", numPrice.Value))
+
+        End If
+    End Sub
 End Class

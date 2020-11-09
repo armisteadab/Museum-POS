@@ -1026,14 +1026,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuseumPOS.exe" size="309216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuseumPOS.exe" size="310240">
       <assemblyIdentity name="MuseumPOS" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rH/7iIAcRnl66Kvnadj9mA8LFBxzmFnPwQCW/gCvS4Q=</dsig:DigestValue>
+        <dsig:DigestValue>OI82bEo2ysATvozaqIbQISJsX4en4i9yj9sWFvP5CQk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

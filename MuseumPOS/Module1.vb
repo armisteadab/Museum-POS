@@ -420,6 +420,7 @@ Module Module1
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
+        Dim bFixedRecords As Boolean, nFixedRecords As Long
 
         sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, B.Id from receipt "
         sqlString += "AS a LEFT OUTER JOIN InventoryItems AS b ON a.UPC = b.InvUPC"
@@ -453,10 +454,17 @@ Module Module1
 
                 If sNewUPC.Trim <> "" Then
                     UpdateReceiptUPC(sNewUPC, sUPCinPost)
+                    bFixedRecords = True
+                    nFixedRecords += 1
                 End If
             End While
         Else
-            BigMsgBox("All Posts Linked. No Problems Found.")
+        End If
+
+        If Not bFixedRecords Then
+            BigMsgBox("No Unlinked Records Found.")
+        Else
+            BigMsgBox(nFixedRecords.ToString.Trim + " Posts Linked.")
         End If
 
         reader.Close()
@@ -559,7 +567,6 @@ Module Module1
         Dim cmd As New SqlCommand, nPrice As Double
         cmd.CommandType = CommandType.Text
 
-        '        sqlString = "SELECT MAX(Id) as MAXId FROM InventoryItems"
         sqlString = "SELECT InvName, InvPrice  FROM InventoryItems WHERE InvUPC = " + QTrim(pUPC)
 
         cmd.CommandText = sqlString
