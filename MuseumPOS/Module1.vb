@@ -408,12 +408,15 @@ Module Module1
         End Try
     End Sub
 
-    Public Sub ReConnectUPCsInReceipts()
-        ' re-connects broken links between tables
+    Public Sub ReConnectUPCsInReceipts(Optional ByVal parID As String = "")
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String
         Dim sNewUPC As String
-        Dim sItemNumber As String
+        Dim sItemNumber As String, sID As String = ""
+
+        If parID.Length > 0 Then
+            sID = (parID)
+        End If
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
@@ -422,16 +425,20 @@ Module Module1
         cmd.CommandType = CommandType.Text
         Dim bFixedRecords As Boolean, nFixedRecords As Long
 
-        sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, B.Id from receipt "
+        sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, b.Id from receipt "
         sqlString += "AS a LEFT OUTER JOIN InventoryItems AS b ON a.UPC = b.InvUPC"
-        sqlString += " WHERE a.Paid > 0 ORDER BY b.InvUPC  "
+        If sID.Trim <> "" Then
+            sqlString += " WHERE b.Id = " + sID
+        End If
+
+        sqlString += " ORDER BY b.InvUPC  "
 
         cmd.CommandText = sqlString
         cmd.Connection = sqlConnect
 
         Dim reader As SqlDataReader
         Dim previousConnectionState As ConnectionState = sqlConnect.State
-        Dim sInvUPC As String, sUPCinPost As String, sID As String
+        Dim sInvUPC As String, sUPCinPost As String
 
         If sqlConnect.State = ConnectionState.Closed Then
             sqlConnect.Open()
@@ -444,18 +451,18 @@ Module Module1
             While reader.Read()
                 sInvUPC = ("" + reader.Item("InvUPC").ToString.Trim)
                 sUPCinPost = ("" + reader.Item("UPC").ToString.Trim)
-                If sInvUPC.Trim <> "" Then
-                    Exit While
-                End If
-                sItemNumber = sUPCinPost.Substring(2) ' skip 1st 2
-                sNewUPC = GetUPCByItemNumber(sItemNumber)
+                sItemNumber = ("" + reader.Item("Id").ToString.Trim)
+
+                If sItemNumber.Trim <> "" Then
+                    sNewUPC = GetUPCByItemNumber(sItemNumber)
                 sNewUPC = sNewUPC.Trim
                 sUPCinPost = sUPCinPost.Trim
 
-                If sNewUPC.Trim <> "" Then
-                    UpdateReceiptUPC(sNewUPC, sUPCinPost)
-                    bFixedRecords = True
-                    nFixedRecords += 1
+                    If sNewUPC.Trim <> "" Then
+                        UpdateReceiptUPC(sNewUPC, sUPCinPost)
+                        bFixedRecords = True
+                        nFixedRecords += 1
+                    End If
                 End If
             End While
         Else

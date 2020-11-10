@@ -460,6 +460,8 @@ Public Class InventoryItem
 
         End If
 
+        '   ReConnectUPCsInReceipts(numItemNumber.Value.ToString.Trim) ' reconnect any broken links
+
         LockEditFields(False)
         LoadGrid()
 
