@@ -31,6 +31,7 @@ Partial Class ManagerFunctions
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnCashDrawer = New System.Windows.Forms.Button()
         Me.btnPostReconnect = New System.Windows.Forms.Button()
+        Me.lblReconnectInProcess = New System.Windows.Forms.Label()
         CType(Me.nReceiptDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -103,11 +104,23 @@ Partial Class ManagerFunctions
         Me.btnPostReconnect.Text = "Reconnect Posts Where UPCs Have Changed"
         Me.btnPostReconnect.UseVisualStyleBackColor = True
         '
+        'lblReconnectInProcess
+        '
+        Me.lblReconnectInProcess.AutoSize = True
+        Me.lblReconnectInProcess.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblReconnectInProcess.Location = New System.Drawing.Point(268, 264)
+        Me.lblReconnectInProcess.Name = "lblReconnectInProcess"
+        Me.lblReconnectInProcess.Size = New System.Drawing.Size(171, 32)
+        Me.lblReconnectInProcess.TabIndex = 11
+        Me.lblReconnectInProcess.Text = "In Process..."
+        Me.lblReconnectInProcess.Visible = False
+        '
         'ManagerFunctions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.lblReconnectInProcess)
         Me.Controls.Add(Me.btnPostReconnect)
         Me.Controls.Add(Me.btnCashDrawer)
         Me.Controls.Add(Me.lblReceiptDeleted)
@@ -132,4 +145,5 @@ Partial Class ManagerFunctions
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnCashDrawer As Button
     Friend WithEvents btnPostReconnect As Button
+    Friend WithEvents lblReconnectInProcess As Label
 End Class

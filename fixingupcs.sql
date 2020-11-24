@@ -1,0 +1,1 @@
+﻿select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, a.Id, a.Description from receipt AS a LEFT JOIN InventoryItems AS b ON a.Description = b.InvName WHERE a.Paid > 0 AND a.UPC <> b.InvUPC AND LEN(a.UPC) < 7 ORDER BY a.Id 

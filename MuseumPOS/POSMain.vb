@@ -972,10 +972,9 @@ Public Class POSMain
 
         sqlConnect.ConnectionString = sConnectionString
 
-        sSQL = "SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate"
-        sSQL += " FROM Receipt AS a LEFT OUTER JOIN"
+        sSQL = "SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate,"
+        sSQL += " a.ReceiptDate, a.ReceiptDateTime FROM Receipt AS a LEFT OUTER JOIN"
         sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
-        '        sSQL += " WHERE (a.ReceiptID = " + parReceiptID + ")"
         sSQL += " WHERE (a.ReceiptID = @rID)"
 
 

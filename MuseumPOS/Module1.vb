@@ -408,15 +408,33 @@ Module Module1
         End Try
     End Sub
 
-    Public Sub ReConnectUPCsInReceipts(Optional ByVal parID As String = "")
+    Public Sub ReConnectUPCsInReceipts()
+        Dim sqlString$
+
+        sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, b.Id from receipt "
+        sqlString += "AS a LEFT OUTER JOIN InventoryItems AS b ON a.UPC = b.InvUPC"
+        sqlString += " ORDER BY b.InvUPC  "
+
+        Dim nFixedRecords As Long
+        nFixedRecords = ReConnectUPCsBySQL(sqlString)
+
+        sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, a.Id, a.Description from receipt AS a LEFT JOIN InventoryItems AS b ON a.Description = b.InvName WHERE a.Paid > 0 AND a.UPC <> b.InvUPC AND LEN(a.UPC) < 7 ORDER BY a.Id  "
+
+        nFixedRecords = nFixedRecords + (ReConnectUPCsBySQL(sqlString))
+
+        If Not (nFixedRecords > 0) Then
+            BigMsgBox("No Unlinked Records Found.")
+        Else
+            BigMsgBox(nFixedRecords.ToString.Trim + " Posts Linked.")
+        End If
+
+
+    End Sub
+    Public Function ReConnectUPCsBySQL(Optional ByVal sqlString As String = "") As Long
         Dim sqlConnect As New SqlConnection()
-        Dim sConnectionString As String, sqlString As String
+        Dim sConnectionString As String
         Dim sNewUPC As String
         Dim sItemNumber As String, sID As String = ""
-
-        If parID.Length > 0 Then
-            sID = (parID)
-        End If
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
@@ -424,14 +442,6 @@ Module Module1
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
         Dim bFixedRecords As Boolean, nFixedRecords As Long
-
-        sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, b.Id from receipt "
-        sqlString += "AS a LEFT OUTER JOIN InventoryItems AS b ON a.UPC = b.InvUPC"
-        If sID.Trim <> "" Then
-            sqlString += " WHERE b.Id = " + sID
-        End If
-
-        sqlString += " ORDER BY b.InvUPC  "
 
         cmd.CommandText = sqlString
         cmd.Connection = sqlConnect
@@ -446,40 +456,43 @@ Module Module1
         reader = cmd.ExecuteReader()
 
         If reader.HasRows Then
-            On Error Resume Next
+            '            On Error Resume Next
 
             While reader.Read()
+
                 sInvUPC = ("" + reader.Item("InvUPC").ToString.Trim)
                 sUPCinPost = ("" + reader.Item("UPC").ToString.Trim)
                 sItemNumber = ("" + reader.Item("Id").ToString.Trim)
 
-                If sItemNumber.Trim <> "" Then
-                    sNewUPC = GetUPCByItemNumber(sItemNumber)
-                sNewUPC = sNewUPC.Trim
-                sUPCinPost = sUPCinPost.Trim
+                If sUPCinPost <> sInvUPC Then
+                    If sItemNumber.Trim <> "" Then
+                        If sInvUPC.Trim = "" Then
+                            sNewUPC = GetUPCByItemNumber(sItemNumber)
+                        Else
+                            sNewUPC = sInvUPC
+                        End If
 
-                    If sNewUPC.Trim <> "" Then
-                        UpdateReceiptUPC(sNewUPC, sUPCinPost)
-                        bFixedRecords = True
-                        nFixedRecords += 1
+                        sNewUPC = sNewUPC.Trim
+                            sUPCinPost = sUPCinPost.Trim
+
+                            If sNewUPC.Trim <> "" Then
+                                UpdateReceiptUPC(sNewUPC, sUPCinPost)
+                                bFixedRecords = True
+                                nFixedRecords += 1
+                            End If
+                        End If
                     End If
-                End If
             End While
         Else
-        End If
-
-        If Not bFixedRecords Then
-            BigMsgBox("No Unlinked Records Found.")
-        Else
-            BigMsgBox(nFixedRecords.ToString.Trim + " Posts Linked.")
         End If
 
         reader.Close()
 
         sqlConnect.Close()
 
+        Return nFixedRecords
+    End Function
 
-    End Sub
 
     Public Function GetUPCByItemNumber(ByVal parItemNumber As String) As String
         Dim sqlConnect As New SqlConnection()

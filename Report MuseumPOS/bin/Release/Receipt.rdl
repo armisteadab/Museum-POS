@@ -22,7 +22,7 @@
             <Value>=Parameters!rID.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate
+        <CommandText>SELECT a.UPC, a.ReceiptID, a.Description, b.InvName, a.Price, a.Paid, b.InvUPC, a.TaxPaid, a.Quantity, a.TaxRate, a.ReceiptDateTime, a.ReceiptDate
 FROM     Receipt AS a LEFT OUTER JOIN
                   InventoryItems AS b ON a.UPC = b.InvUPC
 WHERE  (a.ReceiptID = @rID)</CommandText>
@@ -67,6 +67,14 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
         <Field Name="TaxRate">
           <DataField>TaxRate</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ReceiptDateTime">
+          <DataField>ReceiptDateTime</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ReceiptDate">
+          <DataField>ReceiptDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -318,11 +326,46 @@ WHERE  (a.ReceiptID = @rID)</CommandText>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!ReceiptDateTime.Value, "Receipt")</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>1.02388in</Top>
+            <Left>0.19001in</Left>
+            <Height>0.25in</Height>
+            <Width>2.34054in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>1.15278in</Height>
+        <Height>1.27388in</Height>
         <Style />
       </Body>
-      <Width>2.64834in</Width>
+      <Width>3.43in</Width>
       <Page>
         <PageHeader>
           <Height>1.18112in</Height>
