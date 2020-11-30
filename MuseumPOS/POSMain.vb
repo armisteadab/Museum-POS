@@ -487,7 +487,7 @@ Public Class POSMain
             Exit Sub
         End If
 
-        If nSumPriceItems < 0 Then ' there are rows and they end up at zero (payment made)
+        If nSumPriceItems < 0 Then ' there are rows and they DO NOT end up at zero (change required)
             If bIsReturn Then
                 BigMsgBox("Return to Customer: " & lblReceiptTotal.Text.Replace("-", ""))
             Else
@@ -1184,7 +1184,7 @@ Public Class POSMain
 
         dblCashAmount = (dblCashIn - dblCashOut)
 
-        SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####.0.00") + ", " + QTrim(Today.ToShortDateString.Trim)
+        SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####0.00") + ", " + QTrim(Today.ToShortDateString.Trim)
 
         Try
 

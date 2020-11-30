@@ -408,7 +408,7 @@ Module Module1
         End Try
     End Sub
 
-    Public Sub ReConnectUPCsInReceipts()
+    Public Sub ReConnectUPCsInReceipts(Optional ByVal noMessage As Boolean = False)
         Dim sqlString$
 
         sqlString = "select a.UPC, a.paid,a.ReceiptDate, b.InvUPC, b.InvName, b.Id from receipt "
@@ -422,12 +422,13 @@ Module Module1
 
         nFixedRecords = nFixedRecords + (ReConnectUPCsBySQL(sqlString))
 
-        If Not (nFixedRecords > 0) Then
-            BigMsgBox("No Unlinked Records Found.")
-        Else
-            BigMsgBox(nFixedRecords.ToString.Trim + " Posts Linked.")
+        If Not noMessage Then
+            If Not (nFixedRecords > 0) Then
+                BigMsgBox("No Unlinked Records Found.")
+            Else
+                BigMsgBox(nFixedRecords.ToString.Trim + " Posts Linked.")
+            End If
         End If
-
 
     End Sub
     Public Function ReConnectUPCsBySQL(Optional ByVal sqlString As String = "") As Long

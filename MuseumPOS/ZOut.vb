@@ -122,6 +122,7 @@ Public Class ZOut
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        ReConnectUPCsInReceipts(True)
         ZOutShow()
         lblZDone.Visible = True
         Timer1.Enabled = False

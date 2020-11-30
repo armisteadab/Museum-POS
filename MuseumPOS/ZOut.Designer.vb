@@ -76,7 +76,7 @@ Partial Class ZOut
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ReportViewer1)
         Me.Name = "ZOut"
-        Me.Text = "ZOut"
+        Me.Text = "End of Day Process"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
