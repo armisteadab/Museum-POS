@@ -565,16 +565,26 @@ Public Class POSMain
                 End If
 
             Else
-                sqlString = "INSERT INTO Returns(UPC, Price, Paid, TaxPaid, ReturnID, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate) "
-                sqlString += " VALUES ("
-                sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
-                sqlString = sqlString & LatestReturnNumber & "," & Me.ReceiptNumber & "," & sQuantity
-                sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
-                sqlString = sqlString & " As datetime), " & QTrim(Now)
-                sqlString = sqlString & ")"
+
+                sqlString = "EXEC InsertReturn @sInvUPC, @Price, @Paid, @nTaxedAmount, @ReturnID, @ReceiptNumber, @Quantity"
+                sqlString += ", @TaxRate, @Descript, @sNameItem, @Now, @NowDT, @sPayType, @sCardType"
 
                 commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
 
+                commandSQL1.Parameters.AddWithValue("@sInvUPC", sInvUPC)
+                commandSQL1.Parameters.AddWithValue("@Price", nPrice)
+                commandSQL1.Parameters.AddWithValue("@Paid", nPrice)
+                commandSQL1.Parameters.AddWithValue("@nTaxedAmount", nTaxedAmount)
+                commandSQL1.Parameters.AddWithValue("@ReturnID", Me.ReceiptNumber)
+                commandSQL1.Parameters.AddWithValue("@ReceiptNumber", LatestReturnNumber)
+                commandSQL1.Parameters.AddWithValue("@Quantity", nQuantity)
+                commandSQL1.Parameters.AddWithValue("@TaxRate", nTaxRate)
+                commandSQL1.Parameters.AddWithValue("@Descript", sNameItem)
+                commandSQL1.Parameters.AddWithValue("@sNameItem", sNameItem)
+                commandSQL1.Parameters.AddWithValue("@Now", Now)
+                commandSQL1.Parameters.AddWithValue("@NowDT", Now)
+                commandSQL1.Parameters.AddWithValue("@sPayType", sPayType)
+                commandSQL1.Parameters.AddWithValue("@sCardType", sCardType)
 
             End If
 
