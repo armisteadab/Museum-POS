@@ -174,11 +174,12 @@ Public Class POSMain
 
         sqlConnect.ConnectionString = sConnectionString
 
-        sSearchLikeValue = QLike(txtEntry.Text)
+        sSearchLikeValue = AddLikeSymbol(txtEntry.Text)
         Dim cmd As New SqlCommand
+        cmd.Parameters.AddWithValue("@InvName", sSearchLikeValue)
         cmd.CommandType = CommandType.Text
 
-        sSQL = "EXEC InventoryItemSearchByName " + sSearchLikeValue
+        sSQL = "EXEC InventoryItemSearchByName @InvName"
 
         cmd.CommandText = sSQL
         cmd.Connection = sqlConnect
@@ -504,7 +505,7 @@ Public Class POSMain
         Dim nRow As Integer, sQuantity As String
         Dim nTaxRate As Double, nPrice As Double, nTaxedAmount As Double
         Dim sPayType As String = "", sCardType As String = ""
-        Dim nRowFinal As Integer
+        Dim nRowFinal As Integer, nQuantity As Integer
 
         nRowFinal = DataGridView1.Rows.Count - 1
 
@@ -533,15 +534,31 @@ Public Class POSMain
             nPrice = CDbl(sPrice)
             nTaxRate = nTaxRate / 100
             nTaxedAmount = (nPrice * nTaxRate)
+            nTaxRate = nTaxRate * 100  'convert it right back for reciept insertion
+            nQuantity = CInt(sQuantity)
+
+            sqlConnect1.Open()
 
             If Not bIsReturn Then
 
-                sqlString = "EXEC InsertReceipt "
-                sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
-                sqlString = sqlString & Me.ReceiptNumber & "," & sQuantity
-                sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", " & QTrim(Now)
-                sqlString = sqlString & ", " & QTrim(Now)
-                sqlString = sqlString & ", " & QTrim(sPayType) & "," & QTrim(sCardType)
+                sqlString = "EXEC InsertReceipt @sInvUPC, @Price, @Paid, @nTaxedAmount, @ReceiptNumber, @Quantity"
+                sqlString += ", @TaxRate, @Descript, @sNameItem, @Now, @NowDT, @sPayType, @sCardType"
+
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+
+                commandSQL1.Parameters.AddWithValue("@sInvUPC", sInvUPC)
+                commandSQL1.Parameters.AddWithValue("@Price", nPrice)
+                commandSQL1.Parameters.AddWithValue("@Paid", nPrice)
+                commandSQL1.Parameters.AddWithValue("@nTaxedAmount", nTaxedAmount)
+                commandSQL1.Parameters.AddWithValue("@ReceiptNumber", Me.ReceiptNumber)
+                commandSQL1.Parameters.AddWithValue("@Quantity", nQuantity)
+                commandSQL1.Parameters.AddWithValue("@TaxRate", nTaxRate)
+                commandSQL1.Parameters.AddWithValue("@Descript", sNameItem)
+                commandSQL1.Parameters.AddWithValue("@sNameItem", sNameItem)
+                commandSQL1.Parameters.AddWithValue("@Now", Now)
+                commandSQL1.Parameters.AddWithValue("@NowDT", Now)
+                commandSQL1.Parameters.AddWithValue("@sPayType", sPayType)
+                commandSQL1.Parameters.AddWithValue("@sCardType", sCardType)
 
                 If sPayType.Trim.ToUpper = "CASH" Then
                     nCashIn = (nPrice * -1)
@@ -553,14 +570,16 @@ Public Class POSMain
                 sqlString = sqlString & QTrim(sInvUPC) & "," & (sPrice) & "," & (sPrice) & "," & nTaxedAmount.ToString & ","
                 sqlString = sqlString & LatestReturnNumber & "," & Me.ReceiptNumber & "," & sQuantity
                 sqlString = sqlString & "," & sTaxRate & "," & QTrim(sNameItem) & ", cast(" & QTrim(Now)
-                sqlString = sqlString & " AS datetime), " & QTrim(Now)
+                sqlString = sqlString & " As datetime), " & QTrim(Now)
                 sqlString = sqlString & ")"
+
+                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+
+
             End If
 
             Try
 
-                sqlConnect1.Open()
-                commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
                 'commandSQL1.CommandType = CommandType.Text
                 commandSQL1.ExecuteNonQuery()
                 commandSQL1.Dispose()
@@ -578,7 +597,7 @@ Public Class POSMain
                 sqlString = "EXEC UpdateQuantity " & QTrim(sInvUPC) & ", " & sQuantity
             Else
                 'return item to inventory
-                sqlString = "UPDATE InventoryItems SET OnHandQuantity = (OnHandQuantity + " & sQuantity & ")"
+                sqlString = "UPDATE InventoryItems Set OnHandQuantity = (OnHandQuantity + " & sQuantity & ")"
                 sqlString += " WHERE InvType <> 'NonInventory'"
                 sqlString += " AND InvUPC = " & QTrim(sInvUPC)
             End If

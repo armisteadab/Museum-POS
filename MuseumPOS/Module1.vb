@@ -14,6 +14,10 @@ Module Module1
         sPar = "" & sPar
         Return "'" & sPar.Trim & "'"
     End Function
+    Public Function AddLikeSymbol(ByVal sPar As String) As String
+        sPar = "" & sPar
+        Return "%" & sPar.Trim & "%"
+    End Function
 
     Public Function QLike(ByVal sPar As String) As String
         sPar = "" & sPar
