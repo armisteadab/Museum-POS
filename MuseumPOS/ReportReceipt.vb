@@ -104,27 +104,27 @@ Public Class ReportReceipt
 
 
         If sReportType = "RANGE" Then
-            sSQL += " WHERE a.ReceiptDate BETWEEN " + QTrim(Me.DateTimePicker_Start.Value.ToShortDateString) + " AND " + QTrim(Me.DateTimePicker_End.Value.ToShortDateString)
+            sSQL += " WHERE a.ReceiptDate BETWEEN @parDate AND @parDate2"
         End If
 
         If sReportType = "SINGLE" Then
-            sSQL += " WHERE a.ReceiptDate = " + QTrim(DateTimePicker_Start.Value.ToShortDateString)
+            sSQL += " WHERE a.ReceiptDate = @parDate "
         End If
 
         If Not (txtSearchDescription.Text.Trim = "") Then
-            sSQL += " AND a.Description LIKE " + QLike(txtSearchDescription.Text.Trim)
+            sSQL += " AND a.Description LIKE @parDesc"
         End If
 
         If Not cboDept.Text.Trim = "" Then
-            sSQL += " AND b.Department = " + QTrim(cboDept.Text.Trim)
+            sSQL += " AND b.Department = @parDept"
         End If
 
         If Not cboVendor.Text.Trim = "" Then
-            sSQL += " AND b.Vendor = " + QTrim(cboVendor.Text.Trim)
+            sSQL += " AND b.Vendor = @parVendor"
         End If
 
         If Not cboType.Text.Trim = "" Then
-            sSQL += " AND b.InvType = " + QTrim(cboType.Text.Trim)
+            sSQL += " AND b.InvType = @parType"
         End If
         sSQL += " AND a.UPC <> ''"
 
@@ -136,15 +136,26 @@ Public Class ReportReceipt
 
         Debug.Print(sSQL)
 
-            Using connection As New SqlConnection(sConnectionString)
 
-            Dim command As New SqlCommand(sSQL, connection)
+        Dim command As New SqlCommand()
+        command.Connection = sqlConnect
+        command.CommandType = CommandType.Text
+        command.CommandText = sSQL
+        command.Parameters.AddWithValue("@parDate", DateTimePicker_Start.Value)
+        command.Parameters.AddWithValue("@parDate2", DateTimePicker_End.Value)
+        command.Parameters.AddWithValue("@parType", cboType.Text.Trim)
+        command.Parameters.AddWithValue("@parVendor", cboVendor.Text.Trim)
+        command.Parameters.AddWithValue("@parDept", cboDept.Text.Trim)
+        command.Parameters.AddWithValue("@parDesc", AddLikeSymbol(txtSearchDescription.Text.Trim))
 
-            Dim ReceiptAdapter As New SqlDataAdapter(command)
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
 
-            ReceiptAdapter.Fill(parDataSet, "Receipt")
+        Dim ReceiptAdapter As New SqlDataAdapter(command)
 
-        End Using
+        ReceiptAdapter.Fill(parDataSet, "Receipt")
+
 
     End Sub
 

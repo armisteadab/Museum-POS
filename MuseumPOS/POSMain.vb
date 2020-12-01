@@ -471,12 +471,12 @@ Public Class POSMain
             End If
         End If
 
-        If nSumPriceItems > 0 Then ' there are rows and they end up at zero (payment made)
+        If nSumPriceItems > 0 Then
             If Not bIsReturn Then
                 BigMsgBox("Full Payment Required")
                 Exit Sub
             End If
-        Else
+        Else ' there are rows and they end up at zero (payment made)
             If bIsReturn Then
                 BigMsgBox("Manually Return Payment First")
                 Exit Sub
@@ -590,7 +590,7 @@ Public Class POSMain
 
             Try
 
-                'commandSQL1.CommandType = CommandType.Text
+                commandSQL1.CommandType = CommandType.Text
                 commandSQL1.ExecuteNonQuery()
                 commandSQL1.Dispose()
                 sqlConnect1.Close()

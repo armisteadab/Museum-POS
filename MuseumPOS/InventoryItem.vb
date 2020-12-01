@@ -124,7 +124,7 @@ Public Class InventoryItem
         LoadGrid()
     End Sub
 
-    Private Sub LoadGrid(Optional ByVal parSQL$ = "")
+    Private Sub LoadGrid(Optional ByVal parSQL$ = "", Optional ByVal parSearchString$ = "")
 
         Dim sqlConnect As New SqlConnection()
 
@@ -143,6 +143,9 @@ Public Class InventoryItem
 
         cmd.Connection = sqlConnect
         ' Create a SqlParameter for each parameter in the stored procedure.
+        If parSearchString.Length > 0 Then
+            cmd.Parameters.AddWithValue("@InvName", parSearchString)
+        End If
 
         Dim reader As SqlDataReader
         Dim previousConnectionState As ConnectionState = sqlConnect.State
@@ -504,18 +507,12 @@ Public Class InventoryItem
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
         sqlConnect.ConnectionString = sConnectionString
-        sSearchLikeValue = QLike(txtSearch.Text)
+        sSearchLikeValue = AddLikeSymbol(txtSearch.Text.Trim)
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
-        sSQL = "SELECT Id, InvUPC, InvName, InvType, Vendor, Department, InvPrice, InvCost, OnHandQuantity, TaxRate, InvNotes, UniqueID FROM InventoryItems"
+        sSQL = "InventoryItemSearchByName @InvName"
 
-        sSQL += " WHERE InvName LIKE " & sSearchLikeValue
-        sSQL += " OR InvUPC LIKE " & sSearchLikeValue
-        If sSearchLikeValue.Length < 12 Then
-            sSQL += " OR Id LIKE " & sSearchLikeValue
-        End If
-
-        LoadGrid(sSQL) ' run LoadGrid() but with SQL parameter
+        LoadGrid(sSQL, sSearchLikeValue) ' run LoadGrid() but with SQL parameter
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
