@@ -134,15 +134,13 @@ Public Class ReportReceipt
             sSQL += " GROUP BY a.Description, b.InvName, b.InvUPC"
         End If
 
-        Debug.Print(sSQL)
-
 
         Dim command As New SqlCommand()
         command.Connection = sqlConnect
         command.CommandType = CommandType.Text
         command.CommandText = sSQL
-        command.Parameters.AddWithValue("@parDate", DateTimePicker_Start.Value)
-        command.Parameters.AddWithValue("@parDate2", DateTimePicker_End.Value)
+        command.Parameters.AddWithValue("@parDate", DateTimePicker_Start.Value.Date)
+        command.Parameters.AddWithValue("@parDate2", DateTimePicker_End.Value.Date)
         command.Parameters.AddWithValue("@parType", cboType.Text.Trim)
         command.Parameters.AddWithValue("@parVendor", cboVendor.Text.Trim)
         command.Parameters.AddWithValue("@parDept", cboDept.Text.Trim)

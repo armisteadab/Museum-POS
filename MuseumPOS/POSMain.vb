@@ -141,12 +141,6 @@ Public Class POSMain
         lblChange.Text = ""
         Timer1.Enabled = False
 
-        If Not DataGridView2.Visible Then ' allow user to use keys to select item from search list
-            '            txtEntry.Focus()
-        Else
-            '           txtEntry.Enabled = False
-        End If
-
     End Sub
 
     Private Sub DoSearch()
@@ -1175,6 +1169,18 @@ Public Class POSMain
 
     Private Sub btnQuick4_Click(sender As Object, e As EventArgs) Handles btnQuick4.Click
         Me.DataGridView1.Rows.Add(sItemNameButton(4), "1", sItemPriceButton(4), sUPCButton(4), sItemTaxButton(4))
+
+    End Sub
+
+    Private Sub TimerEntryFocus_Tick(sender As Object, e As EventArgs) Handles TimerEntryFocus.Tick
+        If Timer1.Enabled Then
+            Exit Sub ' don't interfere with other timer
+        End If
+
+
+        If Not DataGridView2.Visible Then ' allow user to use keys to select item from search list
+            txtEntry.Focus()
+        End If
 
     End Sub
 

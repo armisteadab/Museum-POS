@@ -82,6 +82,7 @@ Partial Class POSMain
         Me.lblChange = New System.Windows.Forms.Label()
         Me.btnDrawer = New System.Windows.Forms.Button()
         Me.btnQuick4 = New System.Windows.Forms.Button()
+        Me.TimerEntryFocus = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -629,6 +630,11 @@ Partial Class POSMain
         Me.btnQuick4.UseVisualStyleBackColor = False
         Me.btnQuick4.Visible = False
         '
+        'TimerEntryFocus
+        '
+        Me.TimerEntryFocus.Enabled = True
+        Me.TimerEntryFocus.Interval = 8000
+        '
         'POSMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -727,4 +733,5 @@ Partial Class POSMain
     Friend WithEvents lblChange As Label
     Friend WithEvents btnDrawer As Button
     Friend WithEvents btnQuick4 As Button
+    Friend WithEvents TimerEntryFocus As Timer
 End Class
