@@ -128,6 +128,7 @@ Partial Class ManagerFunctions
         Me.Controls.Add(Me.btnReceiptDelete)
         Me.Controls.Add(Me.btnCreateTables)
         Me.Controls.Add(Me.btnInventory)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "ManagerFunctions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Manager's Functions"

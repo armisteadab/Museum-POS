@@ -16,6 +16,9 @@ Public Class InventoryItem
 
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
+        Dim SaveCell As DataGridViewCell = DataGridView1.CurrentCell
+        Dim nSaveRow As Integer = SaveCell.RowIndex
+        Dim nSaveID As Integer = Convert.ToInt32(lblUniqueID.Text)
 
         sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
 
@@ -48,14 +51,30 @@ Public Class InventoryItem
         If Not AlreadyInTable Then
             sqlString = "INSERT INTO InventoryItems(Id, InvUPC, InvName, InvNotes, InvType, InvCost, OnHandQuantity, Vendor, InvPrice, Department, TaxRate) "
             sqlString += " VALUES ("
-            sqlString = sqlString & (numItemNumber.Value.ToString) & "," & QTrim(txtUPC.Text) & "," & QTrim(txtItemName.Text) & ","
-            sqlString = sqlString & QTrim(txtNotes.Text) & "," & QTrim(cboType.Text) & "," & numUnitCost.Value.ToString & ","
-            sqlString = sqlString & numOnHandQuantity.Value & "," & QTrim(cboVendor.Text) & "," & numPrice.Value.ToString
-            sqlString = sqlString & "," & QTrim(cboDepartment.Text) & ", " & nTaxRate.Value.ToString.Trim & ")"
+            sqlString += "@Id, @InvUPC, @InvName, @InvNotes, @InvType, @InvCost, @OnHandQuantity, @Vendor, @InvPrice, @Department, @TaxRate) "
+
+
+            '            sqlString = sqlString & (numItemNumber.Value.ToString) & "," & QTrim(txtUPC.Text) & "," & QTrim(txtItemName.Text) & ","
+            '            sqlString = sqlString & QTrim(txtNotes.Text) & "," & QTrim(cboType.Text) & "," & numUnitCost.Value.ToString & ","
+            '            sqlString = sqlString & numOnHandQuantity.Value & "," & QTrim(cboVendor.Text) & "," & numPrice.Value.ToString
+            '            sqlString = sqlString & "," & QTrim(cboDepartment.Text) & ", " & nTaxRate.Value.ToString.Trim & ")"
+
             Try
 
                 sqlConnect1.Open()
                 commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+                commandSQL1.Parameters.AddWithValue("@Id", numItemNumber.Value)
+                commandSQL1.Parameters.AddWithValue("@InvUPC", (txtUPC.Text))
+                commandSQL1.Parameters.AddWithValue("@InvName", (txtItemName.Text))
+                commandSQL1.Parameters.AddWithValue("@InvNotes", (txtNotes.Text))
+                commandSQL1.Parameters.AddWithValue("@InvType", (cboType.Text))
+                commandSQL1.Parameters.AddWithValue("@InvCost", numUnitCost.Value)
+                commandSQL1.Parameters.AddWithValue("@OnHandQuantity", numOnHandQuantity.Value)
+                commandSQL1.Parameters.AddWithValue("@Vendor", cboVendor.Text)
+                commandSQL1.Parameters.AddWithValue("@InvPrice", numPrice.Value)
+                commandSQL1.Parameters.AddWithValue("@Department", cboDepartment.Text)
+                commandSQL1.Parameters.AddWithValue("@TaxRate", nTaxRate.Value)
+
                 'commandSQL1.CommandType = CommandType.Text
                 commandSQL1.ExecuteNonQuery()
                 commandSQL1.Dispose()
@@ -108,6 +127,17 @@ Public Class InventoryItem
         End If
 
         LoadGrid()
+
+        '  DataGridView1.Rows(nSaveRow).Selected = True
+
+        If bNewItemBeingAdded_LOCAL Then
+            DataGridView1.CurrentCell = DataGridView1.Rows(DataGridView1.Rows.Count - 1).Cells(0)
+        Else
+            If nSaveRow <= DataGridView1.Rows.Count And nSaveRow > 0 Then
+                DataGridView1.CurrentCell = DataGridView1.Rows(nSaveRow).Cells(0)
+            End If
+        End If
+
         Scatter()
         Me.Changed = False
 
