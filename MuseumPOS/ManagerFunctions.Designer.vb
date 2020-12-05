@@ -67,6 +67,7 @@ Partial Class ManagerFunctions
         '
         Me.nReceiptDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nReceiptDelete.Location = New System.Drawing.Point(171, 200)
+        Me.nReceiptDelete.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.nReceiptDelete.Name = "nReceiptDelete"
         Me.nReceiptDelete.Size = New System.Drawing.Size(120, 34)
         Me.nReceiptDelete.TabIndex = 6

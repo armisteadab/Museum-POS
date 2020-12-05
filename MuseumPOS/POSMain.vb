@@ -447,8 +447,13 @@ Public Class POSMain
     End Sub
 
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
+        Dim bTimerEntryFocus_EnableState As Boolean
+
+        bTimerEntryFocus_EnableState = (TimerEntryFocus.Enabled)
+        TimerEntryFocus.Enabled = False
         FireReceipt(False)
         ShowTicketsSoldToday()
+        TimerEntryFocus.Enabled = bTimerEntryFocus_EnableState
     End Sub
     Private Sub FireReceipt(ByVal bIsReturn As Boolean)
         Dim sqlString As String, AlreadyInTable As Boolean = False
