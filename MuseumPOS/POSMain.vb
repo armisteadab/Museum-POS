@@ -32,6 +32,10 @@ Public Class POSMain
         lblTicketSum.Text = Format(GetSumTicketsByDate(Today.ToShortDateString), "###0.00")
     End Sub
     Private Sub POSMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim apprd = New MySettings
+        APPConnectionString = apprd("MuseumPOSConnectionString")
+
         lblChange.Text = ""
         LoadButtonSetup()
         CashTillSetupForToday()
@@ -45,7 +49,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String
         'Release\
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -164,7 +168,7 @@ Public Class POSMain
 
         If txtEntry.Text.Trim.Length = 0 Then Exit Sub
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -461,7 +465,7 @@ Public Class POSMain
         Dim sConnectionString As String
         Dim nCashIn As Double, nCashOut As Double
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         If nReceiptCurrent <> nReceiptLatest Then
             If Not Me.ManagerMode Then
@@ -663,7 +667,7 @@ Public Class POSMain
         Dim commandSQL1 As SqlCommand
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -742,7 +746,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String, sSearchLikeValue$
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -996,7 +1000,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -1029,7 +1033,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -1137,7 +1141,7 @@ Public Class POSMain
         Dim sConnectionString As String, sqlString As String
         Dim nReturnCurrent As Integer, nReturnLatest As Integer
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -1217,7 +1221,7 @@ Public Class POSMain
         Dim sConnectionString As String, SQLString As String
         Dim dblCashAmount As Double
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
@@ -1249,7 +1253,7 @@ Public Class POSMain
         Dim sqlConnect As New SqlConnection(), dPrice As Double
         Dim sConnectionString As String, sqlString As String, nButton As Long
         'Release\
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         btnQuick1.Visible = False
         btnQuick2.Visible = False

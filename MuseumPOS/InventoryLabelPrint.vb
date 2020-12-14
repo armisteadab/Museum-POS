@@ -91,7 +91,7 @@ Public Class InventoryLabelPrint
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 

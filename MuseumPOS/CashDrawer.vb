@@ -7,7 +7,7 @@ Public Class CashDrawer
     Private Sub LoadCashAmount()
         Dim sqlString As String
         Dim sqlConnect As New SqlConnection()
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sConnectionString As String = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         sqlConnect.Open()
@@ -40,7 +40,7 @@ Public Class CashDrawer
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim sqlString As String
         Dim sqlConnect As New SqlConnection()
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sConnectionString As String = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         sqlConnect.Open()

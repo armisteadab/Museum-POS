@@ -10,7 +10,7 @@ Public Class ManagerFunctions
     End Sub
 
     Private Sub btnCreateTables_Click(sender As Object, e As EventArgs) Handles btnCreateTables.Click
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sConnectionString As String = APPConnectionString
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand, SQLstring As String
 
@@ -44,7 +44,7 @@ Public Class ManagerFunctions
 
     Private Sub btnReceiptDelete_Click(sender As Object, e As EventArgs) Handles btnReceiptDelete.Click
 
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sConnectionString As String = APPConnectionString
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand, SQLstring As String
 

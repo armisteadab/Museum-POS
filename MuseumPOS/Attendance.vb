@@ -7,7 +7,7 @@ Public Class Attendance
     Private Sub RecordThere()
         Dim sqlString As String
         Dim sqlConnect As New SqlConnection()
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sConnectionString As String = APPConnectionString
 
         '    [Id] Int Not NULL PRIMARY KEY, 
         '    [Worker] Int NULL, 
@@ -47,7 +47,7 @@ Public Class Attendance
         Dim sqlString As String
         Dim sqlConnect As New SqlConnection(), NEWID As Integer
         Dim sTimeNOW$
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sConnectionString As String = APPConnectionString
 
         If (TextBox1.Text.Trim = "") Then
             Exit Sub

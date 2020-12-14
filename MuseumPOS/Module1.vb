@@ -10,6 +10,9 @@ Imports System.Xml
 Imports Microsoft.VisualBasic.CompilerServices
 
 Module Module1
+
+    Public APPConnectionString As String
+
     Public Function QTrim(ByVal sPar As String) As String
         sPar = "" & sPar
         Return "'" & sPar.Trim & "'"
@@ -37,7 +40,7 @@ Module Module1
         Dim commandSQL1 As SqlCommand
         Dim sConnectionString As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
@@ -69,7 +72,7 @@ Module Module1
         Dim sqlConnect As New SqlConnection()
         Dim sConnectionString As String, sqlString As String, sReturnValue As String
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -106,7 +109,7 @@ Module Module1
         Dim sConnectionString As String, sqlString As String
         Dim nReturnSum As Double
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -146,7 +149,7 @@ Module Module1
         Dim sConnectionString As String, sqlString As String
         Dim nReturnSum As Double
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -190,7 +193,7 @@ Module Module1
         Dim sConnectionString As String, sqlString As String
         Dim nReturnSum As Double, nRunningTotal As Double
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -233,7 +236,7 @@ Module Module1
         Dim sConnectionString As String, sqlString As String
         Dim nReturnSum As Double, nRunningTotal As Double
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -278,7 +281,7 @@ Module Module1
         Dim sConnectionString As String, sqlString As String
         Dim nReturnMAX As Long
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -318,7 +321,7 @@ Module Module1
 
         Dim sqlConnect As New SqlConnection(), sSQL$, sConnectionString$
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -358,7 +361,7 @@ Module Module1
     Public Sub CashTillSetupForToday()
         Dim sqlString As String, sLastDate As String, dLastDate As Date
         Dim sqlConnect As New SqlConnection(), commandSQL As SqlCommand
-        Dim sConnectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        Dim sConnectionString As String = APPConnectionString
 
         ' get previous values
         sqlConnect.ConnectionString = sConnectionString
@@ -441,7 +444,7 @@ Module Module1
         Dim sNewUPC As String
         Dim sItemNumber As String, sID As String = ""
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -478,15 +481,15 @@ Module Module1
                         End If
 
                         sNewUPC = sNewUPC.Trim
-                            sUPCinPost = sUPCinPost.Trim
+                        sUPCinPost = sUPCinPost.Trim
 
-                            If sNewUPC.Trim <> "" Then
-                                UpdateReceiptUPC(sNewUPC, sUPCinPost)
-                                bFixedRecords = True
-                                nFixedRecords += 1
-                            End If
+                        If sNewUPC.Trim <> "" Then
+                            UpdateReceiptUPC(sNewUPC, sUPCinPost)
+                            bFixedRecords = True
+                            nFixedRecords += 1
                         End If
                     End If
+                End If
             End While
         Else
         End If
@@ -506,7 +509,7 @@ Module Module1
 
         sReturnUPC = ""
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -548,7 +551,7 @@ Module Module1
         Dim sConnectionString As String, sqlString As String
         Dim nReturnMAX As Long
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand
@@ -586,7 +589,7 @@ Module Module1
         Dim sReturnString As String
 
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         Dim cmd As New SqlCommand, nPrice As Double

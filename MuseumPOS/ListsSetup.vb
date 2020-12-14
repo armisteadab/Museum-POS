@@ -17,7 +17,7 @@ Public Class ListsSetup
 
         Dim sqlConnect As New SqlConnection()
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -177,7 +177,7 @@ Public Class ListsSetup
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         If Not (lblID.Text = "0") Then
             sqlConnect.ConnectionString = sConnectionString
@@ -200,7 +200,7 @@ Public Class ListsSetup
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         If Not (lblID.Text = "0") Then
             sqlConnect.ConnectionString = sConnectionString

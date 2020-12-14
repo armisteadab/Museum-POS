@@ -20,7 +20,7 @@ Public Class InventoryItem
         Dim nSaveRow As Integer = SaveCell.RowIndex
         Dim nSaveID As Integer = Convert.ToInt32(lblUniqueID.Text)
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         If txtUPC.Text.Trim.Length < 10 Then
             Dim sBC_Formatted$
@@ -158,7 +158,7 @@ Public Class InventoryItem
 
         Dim sqlConnect As New SqlConnection()
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
 
@@ -274,7 +274,7 @@ Public Class InventoryItem
                     End If
 
                     Me.numItemNumber.Value = reader.Item("Id")
-                        Me.txtUPC.Text = reader.Item("InvUPC").ToString.Trim
+                    Me.txtUPC.Text = reader.Item("InvUPC").ToString.Trim
                     Me.txtNotes.Text = reader.Item("InvNotes").ToString.Trim
                     If Not IsDBNull(reader.Item("TaxRate")) Then
                         Me.nTaxRate.Value = reader.Item("TaxRate")
@@ -478,7 +478,7 @@ Public Class InventoryItem
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         If Not (lblUniqueID.Text = "0") Then
             sqlConnect.ConnectionString = sConnectionString
@@ -534,7 +534,7 @@ Public Class InventoryItem
         Dim sqlConnect As New SqlConnection(), sSQL$
         Dim sConnectionString As String, sSearchLikeValue$
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         sqlConnect.ConnectionString = sConnectionString
         sSearchLikeValue = AddLikeSymbol(txtSearch.Text.Trim)
@@ -581,7 +581,7 @@ Public Class InventoryItem
         If RadioButton6.Checked Then nRadioButtonValue = 6
         If RadioButtonNONE.Checked Then nRadioButtonValue = 0
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         If Not (txtUPC.Text.Trim = "") Then
             sqlConnect.ConnectionString = sConnectionString
@@ -658,7 +658,7 @@ Public Class InventoryItem
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
 
-        sConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Release\MuseumPOS.mdf;Integrated Security=True;Connect Timeout=30"
+        sConnectionString = APPConnectionString
 
         If Not (txtUPC.Text.Trim = "") Then
             sqlConnect.ConnectionString = sConnectionString
