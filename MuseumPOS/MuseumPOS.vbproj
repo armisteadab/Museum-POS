@@ -291,6 +291,7 @@
     <Compile Include="ReportsMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ReturnFunds.vb" />
     <Compile Include="SwipeBluePay.Designer.vb">
       <DependentUpon>SwipeBluePay.vb</DependentUpon>
     </Compile>

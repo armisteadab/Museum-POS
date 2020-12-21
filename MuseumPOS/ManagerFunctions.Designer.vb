@@ -32,6 +32,7 @@ Partial Class ManagerFunctions
         Me.btnCashDrawer = New System.Windows.Forms.Button()
         Me.btnPostReconnect = New System.Windows.Forms.Button()
         Me.lblReconnectInProcess = New System.Windows.Forms.Label()
+        Me.btnCreditCardTest = New System.Windows.Forms.Button()
         CType(Me.nReceiptDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -116,11 +117,21 @@ Partial Class ManagerFunctions
         Me.lblReconnectInProcess.Text = "In Process..."
         Me.lblReconnectInProcess.Visible = False
         '
+        'btnCreditCardTest
+        '
+        Me.btnCreditCardTest.Location = New System.Drawing.Point(13, 328)
+        Me.btnCreditCardTest.Name = "btnCreditCardTest"
+        Me.btnCreditCardTest.Size = New System.Drawing.Size(194, 52)
+        Me.btnCreditCardTest.TabIndex = 12
+        Me.btnCreditCardTest.Text = "BluePay Test Mode"
+        Me.btnCreditCardTest.UseVisualStyleBackColor = True
+        '
         'ManagerFunctions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnCreditCardTest)
         Me.Controls.Add(Me.lblReconnectInProcess)
         Me.Controls.Add(Me.btnPostReconnect)
         Me.Controls.Add(Me.btnCashDrawer)
@@ -148,4 +159,5 @@ Partial Class ManagerFunctions
     Friend WithEvents btnCashDrawer As Button
     Friend WithEvents btnPostReconnect As Button
     Friend WithEvents lblReconnectInProcess As Label
+    Friend WithEvents btnCreditCardTest As Button
 End Class

@@ -12,6 +12,9 @@ Imports Microsoft.VisualBasic.CompilerServices
 Module Module1
 
     Public APPConnectionString As String
+    Public BluePay_AccountID As String
+    Public BluePay_SecretKey As String
+    Public BluePay_Mode As String = "LIVE" '"TEST"
 
     Public Function QTrim(ByVal sPar As String) As String
         sPar = "" & sPar

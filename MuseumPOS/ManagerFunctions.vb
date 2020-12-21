@@ -86,4 +86,12 @@ Public Class ManagerFunctions
         ReConnectUPCsInReceipts()
         lblReconnectInProcess.Visible = False
     End Sub
+
+    Private Sub btnCreditCardTest_Click(sender As Object, e As EventArgs) Handles btnCreditCardTest.Click
+        BluePay_AccountID = "100868017209"  '"DEMO-ROADSANDRAILS"
+        BluePay_SecretKey = "P7KKNNCTELSV12VWSNQ8OAZAXX/IKI4X"
+        BluePay_Mode = "TEST"
+        BigMsgBox("BluePay Test Server ON")
+        POSMain.Text += " BluePay Test Server ON"
+    End Sub
 End Class

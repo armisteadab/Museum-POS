@@ -12,6 +12,9 @@ Public Class SwipeBluePay
     Private sManualCC As String
     Private sManualCCExp As String
     Private sManualCVV2 As String
+    Dim accountID As String = BluePay_AccountID
+    Dim secretKey As String = BluePay_SecretKey
+    Dim mode As String = BluePay_Mode '"TEST"
 
     Public Property TransactionID() As String
         Get
@@ -72,8 +75,10 @@ Public Class SwipeBluePay
     End Property
 
     Private Sub SwipeBluePay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TextBox1.Text = "" '
-        '("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
+
+        If mode = "TEST" Then
+            TextBox1.Text = ("%B4111111111111111^TEST/BLUEPAY^2511101100001100000000667000000?;4111111111111111=251110110000667?")
+        End If
 
         'load testing info
 
@@ -85,10 +90,6 @@ Public Class SwipeBluePay
 
     Private Sub btnRunCard_Click(sender As Object, e As EventArgs) Handles btnRunCard.Click
 
-        Dim accountID As String = "100917175390"
-        'Dim accountID As String = "DEMO-ROADSANDRAILS"
-        Dim secretKey As String = "OE9WGXEY1XOBL1F0RTIWHR31PJR6B1OM"
-        Dim mode As String = "LIVE" '"TEST"
         Dim sRefundAmount As String
 
         Dim payment As BluePay = New BluePay(
@@ -127,6 +128,7 @@ Public Class SwipeBluePay
             nSaleAmount = nSaleAmount * -1
             sRefundAmount = nSaleAmount.ToString
             payment.refund(sTransactionID, sRefundAmount)
+            payment.process()
         End If
 
         btnRunCard.Enabled = False ' you did it- don't need to do it again

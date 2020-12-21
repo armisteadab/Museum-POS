@@ -36,6 +36,14 @@ Public Class POSMain
         Dim apprd = New MySettings
         APPConnectionString = apprd("MuseumPOSConnectionString")
 
+        BluePay_AccountID = System.Configuration.ConfigurationManager.AppSettings("BluePay_AccountID")
+        BluePay_SecretKey = System.Configuration.ConfigurationManager.AppSettings("BluePay_SecretKey")
+        BluePay_Mode = System.Configuration.ConfigurationManager.AppSettings("BluePay_Mode")
+
+        'BluePay_AccountID = "100868017209"  '"DEMO-ROADSANDRAILS"
+        'BluePay_SecretKey = "P7KKNNCTELSV12VWSNQ8OAZAXX/IKI4X"
+        'BluePay_Mode = "TEST"
+
         lblChange.Text = ""
         LoadButtonSetup()
         CashTillSetupForToday()
@@ -55,7 +63,7 @@ Public Class POSMain
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
 
-        sqlString = "SELECT Max(ReceiptID) as MaxID, Count(ReceiptID) as CountID from Receipt"
+        sqlString = "Select Max(ReceiptID) As MaxID, Count(ReceiptID) As CountID from Receipt"
         cmd.CommandText = sqlString
         cmd.Connection = sqlConnect
 
@@ -91,9 +99,9 @@ Public Class POSMain
         Set(ByVal value As Boolean)
             bManagerMode = (value)
             If bManagerMode Then
-                btnManagerMode.Text = "Manager Mode is ON"
+                btnManagerMode.Text = "Manager Mode Is On"
             Else
-                btnManagerMode.Text = "Manager Mode is OFF"
+                btnManagerMode.Text = "Manager Mode Is OFF"
             End If
             btnManagerFunctions.Visible = bManagerMode
         End Set
