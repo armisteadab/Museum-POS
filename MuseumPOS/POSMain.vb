@@ -1201,6 +1201,14 @@ Public Class POSMain
 
     End Sub
 
+    Private Sub POSMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
+            BigMsgBox("You need to resolve this open receipt before closing the system")
+            e.Cancel = True
+        End If
+
+    End Sub
+
     Private Sub ReturnShow(ByVal sReturnToShow As String)
         Dim ReturnDataSource As New WinForms.ReportDataSource
         Dim dataset As New DataSet("Receipt")
@@ -1237,7 +1245,6 @@ Public Class POSMain
         dblCashAmount = (dblCashIn - dblCashOut)
 
         SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####0.00") + ", " + QTrim(Today.ToShortDateString.Trim)
-
         Try
 
             sqlConnect1.Open()
