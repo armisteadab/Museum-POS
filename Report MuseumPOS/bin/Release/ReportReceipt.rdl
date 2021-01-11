@@ -139,7 +139,9 @@ ORDER BY a.ReceiptID</CommandText>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Quantity</rd:DefaultName>
@@ -165,14 +167,16 @@ ORDER BY a.ReceiptID</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Paid.Value*Fields!Quantity.Value</Value>
+                                  <Value>=FormatCurrency(Fields!Paid.Value*Fields!Quantity.Value)</Value>
                                   <Style>
                                     <Format>'$'0.00;('$'0.00)</Format>
                                     <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Paid</rd:DefaultName>
@@ -187,6 +191,7 @@ ORDER BY a.ReceiptID</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -198,11 +203,13 @@ ORDER BY a.ReceiptID</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TaxPaid.Value</Value>
+                                  <Value>=FormatCurrency(Fields!TaxPaid.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>TaxPaid</rd:DefaultName>
@@ -290,7 +297,7 @@ ORDER BY a.ReceiptID</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=FormatCurrency(Sum(Fields!Paid.Value, "Receipt"))</Value>
+                    <Value>=FormatCurrency(SUM(Fields!Paid.Value * Fields!Quantity.Value))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -366,10 +373,10 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>0.50945in</Top>
-            <Left>3.54721in</Left>
+            <Top>0.48278in</Top>
+            <Left>3.19667in</Left>
             <Height>0.25in</Height>
-            <Width>1in</Width>
+            <Width>0.77778in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -399,8 +406,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>0.50945in</Top>
-            <Left>4.38055in</Left>
+            <Top>0.52333in</Top>
+            <Left>4.13055in</Left>
             <Height>0.25in</Height>
             <Width>0.89722in</Width>
             <ZIndex>4</ZIndex>
@@ -432,10 +439,10 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>0.50945in</Top>
-            <Left>5.55555in</Left>
+            <Top>0.49667in</Top>
+            <Left>5.29166in</Left>
             <Height>0.25in</Height>
-            <Width>1in</Width>
+            <Width>0.52499in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
