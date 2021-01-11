@@ -1205,6 +1205,12 @@ Public Class POSMain
         If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
             BigMsgBox("You need to resolve this open receipt before closing the system")
             e.Cancel = True
+            Exit Sub
+        End If
+
+        If MsgBox("Are You Sure?", vbYesNo, "Exiting Point Of Sale System") = MsgBoxResult.Yes Then
+        Else
+            e.Cancel = True
         End If
 
     End Sub
@@ -1333,6 +1339,20 @@ Public Class POSMain
 
         sqlConnect.Close()
 
+    End Sub
+
+    Private Sub OpenCashDrawer()
+        Dim intFileNo As Integer = FreeFile()
+        'Use this code if you are using LPT Port 
+        'FileOpen(1, "c:\escapes.txt", OpenMode.Output)
+        'PrintLine(1, Chr(27) & "p" & Chr(0) & Chr(25) & Chr(250))
+        'FileClose(1)
+        'Shell("print /d:lpt1 c:\escapes.txt", vbNormalFocus)
+        'Use this code if you are using COM Port 
+        FileOpen(1, AppDomain.CurrentDomain.BaseDirectory & "open.txt", OpenMode.Output)
+        PrintLine(1, Chr(27) & Chr(112) & Chr(0) & Chr(25) & Chr(250))
+        FileClose(1)
+        Shell("print /d:com1 open.txt", AppWinStyle.Hide)
     End Sub
 
 End Class

@@ -97,7 +97,7 @@ Public Class ReportReceipt
             sSQL += " FROM Receipt AS a INNER JOIN"
             sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
         Else
-            sSQL = "SELECT a.Description, b.InvName, SUM(a.Paid) AS Paid, b.InvUPC, SUM(a.TaxPaid) AS TaxPaid, SUM(Quantity) AS Quantity"
+            sSQL = "SELECT a.Description, b.InvName, SUM(a.Paid) * SUM(Quantity) AS Paid, b.InvUPC, SUM(a.TaxPaid) AS TaxPaid, SUM(Quantity) AS Quantity"
             sSQL += " FROM Receipt AS a INNER JOIN"
             sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
         End If
