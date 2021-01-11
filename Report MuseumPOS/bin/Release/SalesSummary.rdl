@@ -147,7 +147,7 @@ ORDER BY a.ReceiptID</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Quantity.Value</Value>
+                                  <Value>=SUM(Fields!Quantity.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -177,7 +177,7 @@ ORDER BY a.ReceiptID</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Paid.Value * Fields!Quantity.Value</Value>
+                                  <Value>=(Fields!Paid.Value) * SUM(Fields!Quantity.Value)</Value>
                                   <Style>
                                     <Format>'$'0.00;('$'0.00)</Format>
                                     <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
@@ -212,7 +212,7 @@ ORDER BY a.ReceiptID</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TaxPaid.Value * Fields!Quantity.Value</Value>
+                                  <Value>=(Fields!TaxPaid.Value) * SUM(Fields!Quantity.Value)</Value>
                                   <Style>
                                     <Format>'$'0.00;('$'0.00)</Format>
                                   </Style>
@@ -246,7 +246,7 @@ ORDER BY a.ReceiptID</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatCurrency((Fields!TaxPaid.Value + Fields!Paid.Value) * Fields!Quantity.Value)</Value>
+                                  <Value>=FormatCurrency((Fields!TaxPaid.Value + Fields!Paid.Value)  * SUM(Fields!Quantity.Value))</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -285,7 +285,11 @@ ORDER BY a.ReceiptID</CommandText>
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="Details" />
+                  <Group Name="Details">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!InvUPC.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
@@ -308,7 +312,7 @@ ORDER BY a.ReceiptID</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=FormatCurrency(Sum((Fields!Paid.Value * Fields!Quantity.Value), "Receipt"))</Value>
+                    <Value>=FormatCurrency((Fields!Paid.Value) * SUM(Fields!Quantity.Value))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -541,7 +545,7 @@ ORDER BY a.ReceiptID</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=FormatCurrency(Sum((Fields!Paid.Value * Fields!Quantity.Value), "Receipt"))</Value>
+                    <Value>=FormatCurrency((Fields!TaxPaid.Value) * SUM(Fields!Quantity.Value))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -573,7 +577,7 @@ ORDER BY a.ReceiptID</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=FormatCurrency(Sum((Fields!TaxPaid.Value * Fields!Quantity.Value), "Receipt") + Sum((Fields!Paid.Value * Fields!Quantity.Value), "Receipt"))</Value>
+                    <Value>=FormatCurrency((Fields!TaxPaid.Value + Fields!Paid.Value)  * SUM(Fields!Quantity.Value))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>

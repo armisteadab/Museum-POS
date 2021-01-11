@@ -97,7 +97,7 @@ Public Class ReportReceipt
             sSQL += " FROM Receipt AS a INNER JOIN"
             sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
         Else
-            sSQL = "SELECT a.Description, b.InvName, SUM(a.Paid) AS Paid, b.InvUPC, SUM(a.TaxPaid) AS TaxPaid, SUM(Quantity) AS Quantity"
+            sSQL = "SELECT a.Description, b.InvName, a.Paid, b.InvUPC, a.TaxPaid, Quantity"
             sSQL += " FROM Receipt AS a INNER JOIN"
             sSQL += " InventoryItems AS b ON a.UPC = b.InvUPC"
         End If
@@ -131,7 +131,7 @@ Public Class ReportReceipt
         If Not bSummary Then
             sSQL += " ORDER BY a.ReceiptDateTime"
         Else
-            sSQL += " GROUP BY a.Description, b.InvName, b.InvUPC"
+            sSQL += " ORDER BY a.Description, b.InvName, b.InvUPC"
         End If
 
 
