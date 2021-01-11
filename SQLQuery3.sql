@@ -1,1 +1,1 @@
-﻿INSERT INTO CASH (CashDate, CashIn) SELECT '9/30/2020' AS CashDate, CashIN AS CashOut FROM CASH WHERE CashDate = '9/29/2020';
+﻿select * from Receipt where ReceiptDate BETWEEN '12/1/2020' AND '12/31/2020' AND Quantity > 1
