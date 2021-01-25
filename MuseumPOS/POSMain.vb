@@ -644,10 +644,12 @@ Public Class POSMain
 
         If Not bIsReturn Then
             If Me.ReceiptNumber = nReceiptLatest Then
+                CashDrawerSync(nCashIn, nCashOut)
                 Me.ReceiptNumber = (Me.ReceiptNumber + 1)
                 nReceiptLatest = (Me.ReceiptNumber) ' increment the latest to agree with table
                 nReceiptCurrent = nReceiptLatest
             Else
+                CashDrawerSync(0, nCashOut)
                 Me.ReceiptNumber = (nReceiptLatest) ' done changing old receipt- go to latest
             End If
 
@@ -661,12 +663,15 @@ Public Class POSMain
 
             ReportViewer1.PrintDialog()
             ReceiptShow(nReceiptLatest.ToString.Trim)
-            CashDrawerSync(nCashIn, nCashOut)
+
             If Not (lblChange.Text.Trim = "") Then
                 BigMsgBox(lblChange.Text)
                 Timer1.Enabled = True ' clear message within a few seconds
             End If
             ReturnShow(LatestReturnNumber)
+
+        Else
+            CashDrawerSync(0, nCashOut) ' return
         End If
 
     End Sub
@@ -1251,6 +1256,8 @@ Public Class POSMain
         dblCashAmount = (dblCashIn - dblCashOut)
 
         SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####0.00") + ", " + QTrim(Today.ToShortDateString.Trim)
+        BigMsgBox("" & SQLString)
+
         Try
 
             sqlConnect1.Open()
