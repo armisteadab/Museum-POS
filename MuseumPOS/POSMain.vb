@@ -1143,6 +1143,7 @@ Public Class POSMain
 
     Private Sub btnDrawer_Click(sender As Object, e As EventArgs) Handles btnDrawer.Click
         Printer.CashDrawer()
+        ' Shell("C:\Release\OPENCashDrawer.exe")
     End Sub
 
     Private Sub lblTicketSum_Click(sender As Object, e As EventArgs) Handles lblTicketSum.Click
@@ -1256,7 +1257,6 @@ Public Class POSMain
         dblCashAmount = (dblCashIn - dblCashOut)
 
         SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####0.00") + ", " + QTrim(Today.ToShortDateString.Trim)
-        BigMsgBox("" & SQLString)
 
         Try
 
