@@ -407,7 +407,7 @@ ORDER BY a.ReceiptID</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatCurrency(SUM(Fields!TaxPaid.Value + Fields!Paid.Value)  * (Fields!Quantity.Value))</Value>
+                                  <Value>=FormatCurrency(SUM(Fields!Paid.Value * Fields!Quantity.Value) + SUM(Fields!TaxPaid.Value * Fields!Quantity.Value))</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
