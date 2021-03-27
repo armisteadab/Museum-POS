@@ -1245,6 +1245,35 @@ Public Class POSMain
 
     End Sub
 
+
+    Private Function GetCashAmount() As Double
+        Dim sqlString As String
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String = APPConnectionString
+        Dim dRetval As Double = 0
+
+        sqlConnect.ConnectionString = sConnectionString
+        sqlConnect.Open()
+
+        sqlString = "EXEC IsThereCashTillSetupForToday " & QTrim(Today.ToShortDateString.Trim)
+
+        Dim commandSQL As New SqlCommand(sqlString, sqlConnect)
+
+        Dim reader = commandSQL.ExecuteReader()
+        Dim AlreadyInTable As Boolean = reader.HasRows
+
+        If AlreadyInTable Then
+            reader.Read()
+            dRetval = (reader.Item("CashOut"))
+            reader.Close()
+        End If
+
+        reader.Close()
+        sqlConnect.Close()
+        Return dRetval
+    End Function
+
+
     Private Sub CashDrawerSync(ByVal dblCashIn As Double, ByVal dblCashOut As Double)
         Dim sConnectionString As String, SQLString As String
         Dim dblCashAmount As Double
@@ -1254,9 +1283,8 @@ Public Class POSMain
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand
 
-        dblCashAmount = (dblCashIn - dblCashOut)
-
-        SQLString = "EXEC UpdateCashTill " + Format(dblCashAmount, "#####0.00") + ", " + QTrim(Today.ToShortDateString.Trim)
+        dblCashAmount = GetCashAmount() + (dblCashIn - dblCashOut)
+        SQLString = "UPDATE CASH SET CashOut = " + dblCashAmount.ToString + " WHERE CashDate = " + QTrim(Today.Date.ToShortDateString.Trim)
 
         Try
 
