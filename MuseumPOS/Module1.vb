@@ -631,5 +631,89 @@ Module Module1
 
     End Function
 
+    Public Sub ArchiveReceipts()
+        ' archive receipts more than 4 months old
+
+        Dim MaxARCHIVEDReceiptNumber As Long = GetMaxARCHIVEDReceiptNumber()
+
+
+        Dim commandSQL1 As SqlCommand
+        Dim sConnectionString As String
+
+        sConnectionString = APPConnectionString
+        Dim sqlString As String, AlreadyInTable As Boolean = False
+        Dim sqlConnect As New SqlConnection()
+        Dim sqlConnect1 As New SqlConnection(sConnectionString)
+
+        sqlString = "INSERT INTO ReceiptsReporting"
+        sqlString += "(UPC, Price,Paid, TaxPaid, ReceiptID, Quantity,  TaxRate, Description, ReceiptDateTime, ReceiptDate, PayType,  CardType) "
+
+        sqlString += " SELECT UPC, Price,Paid, TaxPaid, ReceiptID, Quantity, TaxRate, Description, ReceiptDateTime, ReceiptDate, PayType, CardType"
+        sqlString += "  FROM Receipt a WHERE DATEDIFF(dd, a.ReceiptDate, '" + Today.Date + "') > 1"
+        ''        sqlString += "  FROM Receipt a WHERE DATEDIFF(dd, a.ReceiptDate, '" + Today.Date.AddMonths(-2) + "') > 1"
+        sqlString += " AND a.ReceiptID > " + MaxARCHIVEDReceiptNumber.ToString.Trim
+
+        Debug.Print(sqlString)
+
+        Try
+
+            sqlConnect1.Open()
+            commandSQL1 = New SqlCommand(sqlString, sqlConnect1)
+            'commandSQL1.CommandType = CommandType.Text
+            commandSQL1.ExecuteNonQuery()
+            commandSQL1.Dispose()
+            sqlConnect1.Close()
+
+        Catch ex As ArgumentException
+            BigMsgBox("" & ex.Message)
+
+        Finally
+
+        End Try
+        Debug.Print(sqlString)
+
+
+    End Sub
+
+    Public Function GetMaxARCHIVEDReceiptNumber() As Long
+        Dim sqlConnect As New SqlConnection()
+        Dim sConnectionString As String, sqlString As String
+        Dim nReturnMAX As Long
+
+        sConnectionString = APPConnectionString
+
+        sqlConnect.ConnectionString = sConnectionString
+        Dim cmd As New SqlCommand
+        cmd.CommandType = CommandType.Text
+
+        sqlString = "SELECT TOP 1 ReceiptID as MAXId FROM ReceiptsReporting ORDER BY ReceiptID DESC"
+
+        cmd.CommandText = sqlString
+        cmd.Connection = sqlConnect
+
+        Dim reader As SqlDataReader
+        Dim previousConnectionState As ConnectionState = sqlConnect.State
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+        reader = cmd.ExecuteReader()
+
+        If reader.HasRows Then
+            On Error Resume Next
+
+            While reader.Read()
+                nReturnMAX += (reader.Item("MAXId"))
+            End While
+        End If
+
+        reader.Close()
+
+        sqlConnect.Close()
+
+        Return (nReturnMAX)
+
+    End Function
+
 
 End Module

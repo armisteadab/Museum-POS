@@ -14,12 +14,7 @@ Public Class ManagerFunctions
         Dim sqlConnect1 As New SqlConnection(sConnectionString)
         Dim commandSQL1 As SqlCommand, SQLstring As String
 
-        SQLstring = "CREATE TABLE [dbo].[Buttons] ("
-        SQLstring += "[ButtonNumber] Int  NOT NULL, "
-        SQLstring += "[ButtonText]   VARCHAR (50) NULL, "
-        SQLstring += "[ButtonUPC]    VARCHAR (50) NULL, "
-        SQLstring += "[ButtonColor] VARCHAR(50) NULL, "
-        SQLstring += "PRIMARY KEY CLUSTERED ([ButtonNumber] ASC));"
+        SQLstring = "SELECT * INTO ReceiptsReporting FROM Receipt  "
 
         BigMsgBox(SqlString)
         Try
