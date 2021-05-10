@@ -1033,7 +1033,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rDtV2F2Gdqmed/nuYngTyOyTHSeKNUJFlsX1hcq43Wg=</dsig:DigestValue>
+        <dsig:DigestValue>euC+R/f/ganQi+H9wSwDtA/15R1gNlQoK6IuMrWLM14=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

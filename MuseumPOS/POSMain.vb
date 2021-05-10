@@ -101,9 +101,14 @@ Public Class POSMain
             If bManagerMode Then
                 btnManagerMode.Text = "Manager Mode Is On"
             Else
+                ' have we been looking at old receipts out of non-manager range? might want to move it to latest if so
+                If Me.ReceiptNumber < (nReceiptLatest - 5) Then
+                    GoToLatestReceipt() ' don't keep it on previous receipt
+                End If
+
                 btnManagerMode.Text = "Manager Mode Is OFF"
-            End If
-            btnManagerFunctions.Visible = bManagerMode
+                End If
+                btnManagerFunctions.Visible = bManagerMode
         End Set
     End Property
     Public Property ReceiptNumber() As Integer
@@ -980,6 +985,10 @@ Public Class POSMain
     End Sub
 
     Private Sub btnGo2LatestReceipt_Click(sender As Object, e As EventArgs) Handles btnGo2LatestReceipt.Click
+        GoToLatestReceipt()
+    End Sub
+
+    Private Sub GoToLatestReceipt()
         If nReceiptLatest = nReceiptCurrent Then ' already there
             Exit Sub
         End If

@@ -13,11 +13,22 @@ Public Class InventoryItem
         Dim bNewItemBeingAdded_LOCAL As Boolean ' a place to keep this value so we can clear the form-wide value without delay
         bNewItemBeingAdded_LOCAL = (bNewItemBeingAdded)
         bNewItemBeingAdded = False  ' set this flag OFF
+        Dim bRowSaved As Boolean = True
 
         Dim sqlString As String, AlreadyInTable As Boolean = False
         Dim sqlConnect As New SqlConnection()
-        Dim SaveCell As DataGridViewCell = DataGridView1.CurrentCell
-        Dim nSaveRow As Integer = SaveCell.RowIndex
+        Dim SaveCell As DataGridViewCell
+        Dim nSaveRow As Integer
+
+        Try
+            SaveCell = DataGridView1.CurrentCell
+            nSaveRow = SaveCell.RowIndex
+        Catch ex As ArgumentException
+            bRowSaved = False
+
+        Finally
+
+        End Try
         Dim nSaveID As Integer = Convert.ToInt32(lblUniqueID.Text)
 
         sConnectionString = APPConnectionString
@@ -130,11 +141,13 @@ Public Class InventoryItem
 
         '  DataGridView1.Rows(nSaveRow).Selected = True
 
-        If bNewItemBeingAdded_LOCAL Then
-            DataGridView1.CurrentCell = DataGridView1.Rows(DataGridView1.Rows.Count - 1).Cells(0)
-        Else
-            If nSaveRow <= DataGridView1.Rows.Count And nSaveRow > 0 Then
-                DataGridView1.CurrentCell = DataGridView1.Rows(nSaveRow).Cells(0)
+        If bRowSaved Then
+            If bNewItemBeingAdded_LOCAL Then
+                DataGridView1.CurrentCell = DataGridView1.Rows(DataGridView1.Rows.Count - 1).Cells(0)
+            Else
+                If nSaveRow <= DataGridView1.Rows.Count And nSaveRow > 0 Then
+                    DataGridView1.CurrentCell = DataGridView1.Rows(nSaveRow).Cells(0)
+                End If
             End If
         End If
 

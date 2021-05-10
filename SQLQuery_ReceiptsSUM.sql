@@ -1,0 +1,1 @@
+﻿select count(ReceiptDate) as Records from ReceiptsReporting
