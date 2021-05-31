@@ -132,9 +132,12 @@ Public Class POSMain
         If fSwipe.CardWorked Then
             LoadRowToGrid(fSwipe.TransactionID, fSwipe.CardType + Space(1) + fSwipe.Last4 + Space(1) + "Auth:" + fSwipe.AuthorizationCode, "-" + Me.lblReceiptTotal.Text.Trim, "0", "1", "CARD", fSwipe.CardType.Trim.ToUpper)
             GridTotals()
+            If nSumPriceItems = 0 Then ' done? then don't wait for the user to hit button
+                DONE_routine()
+            End If
         End If
 
-        fSwipe = Nothing
+            fSwipe = Nothing
 
     End Sub
     Private Function RefundCC(ByVal sTotal As String, ByVal sTransID As String) As Boolean
@@ -464,6 +467,11 @@ Public Class POSMain
     End Sub
 
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
+        DONE_routine()
+    End Sub
+
+    Private Sub DONE_routine()
+
         Dim bTimerEntryFocus_EnableState As Boolean
 
         bTimerEntryFocus_EnableState = (TimerEntryFocus.Enabled)

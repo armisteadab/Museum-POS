@@ -89,6 +89,10 @@ Public Class SwipeBluePay
 
 
     Private Sub btnRunCard_Click(sender As Object, e As EventArgs) Handles btnRunCard.Click
+        RunCard()
+    End Sub
+
+    Private Sub RunCard()
 
         Dim sRefundAmount As String
 
@@ -186,6 +190,22 @@ Public Class SwipeBluePay
 
     Private Sub TimerCloseAfterSuccess_Tick(sender As Object, e As EventArgs) Handles TimerCloseAfterSuccess.Tick
         Me.Close()
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        If TextBox1.Text.Length > 30 Then TimerRunCard.Enabled = True ' run the card!
+
+    End Sub
+
+    Private Sub TextBox1_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles TextBox1.Validating
+
+
+    End Sub
+
+    Private Sub TimerRunCard_Tick(sender As Object, e As EventArgs) Handles TimerRunCard.Tick
+        TimerRunCard.Enabled = False
+        RunCard()
+
     End Sub
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click

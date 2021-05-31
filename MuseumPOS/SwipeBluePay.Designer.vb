@@ -49,6 +49,7 @@ Partial Class SwipeBluePay
         Me.TextBoxEmail = New System.Windows.Forms.TextBox()
         Me.btnManualEntry = New System.Windows.Forms.Button()
         Me.TimerCloseAfterSuccess = New System.Windows.Forms.Timer(Me.components)
+        Me.TimerRunCard = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'btnRunCard
@@ -286,6 +287,10 @@ Partial Class SwipeBluePay
         '
         Me.TimerCloseAfterSuccess.Interval = 1000
         '
+        'TimerRunCard
+        '
+        Me.TimerRunCard.Interval = 700
+        '
         'SwipeBluePay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -354,4 +359,5 @@ Partial Class SwipeBluePay
     Friend WithEvents TextBoxEmail As TextBox
     Friend WithEvents btnManualEntry As Button
     Friend WithEvents TimerCloseAfterSuccess As Timer
+    Friend WithEvents TimerRunCard As Timer
 End Class

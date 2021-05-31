@@ -20,15 +20,18 @@ Public Class InventoryItem
         Dim SaveCell As DataGridViewCell
         Dim nSaveRow As Integer
 
-        Try
-            SaveCell = DataGridView1.CurrentCell
-            nSaveRow = SaveCell.RowIndex
-        Catch ex As ArgumentException
-            bRowSaved = False
+        If Not bNewItemBeingAdded Then
+            Try
+                SaveCell = DataGridView1.CurrentCell
+                nSaveRow = SaveCell.RowIndex
+            Catch ex As ArgumentException
+                bRowSaved = False
 
-        Finally
+            Finally
 
-        End Try
+            End Try
+        End If
+
         Dim nSaveID As Integer = Convert.ToInt32(lblUniqueID.Text)
 
         sConnectionString = APPConnectionString
