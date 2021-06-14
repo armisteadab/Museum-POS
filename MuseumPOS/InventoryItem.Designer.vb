@@ -482,7 +482,7 @@ Partial Class InventoryItem
         Me.txtSearch.Location = New System.Drawing.Point(655, 23)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(510, 41)
-        Me.txtSearch.TabIndex = 33
+        Me.txtSearch.TabIndex = 0
         '
         'nTaxRate
         '

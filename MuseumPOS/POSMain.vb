@@ -675,6 +675,7 @@ Public Class POSMain
             End While
 
             ReportViewer1.PrintDialog()
+
             ReceiptShow(nReceiptLatest.ToString.Trim)
 
             If Not (lblChange.Text.Trim = "") Then
@@ -1290,6 +1291,9 @@ Public Class POSMain
         Return dRetval
     End Function
 
+    Private Sub ReportViewer1_RenderingComplete(sender As Object, e As RenderingCompleteEventArgs) Handles ReportViewer1.RenderingComplete
+
+    End Sub
 
     Private Sub CashDrawerSync(ByVal dblCashIn As Double, ByVal dblCashOut As Double)
         Dim sConnectionString As String, SQLString As String
