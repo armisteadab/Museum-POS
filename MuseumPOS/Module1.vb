@@ -158,7 +158,7 @@ Module Module1
         Dim cmd As New SqlCommand
         cmd.CommandType = CommandType.Text
 
-        sqlString = "SELECT SUM(a.Paid) as SumReturn, b.InvName FROM Receipt AS a INNER JOIN InventoryItems AS b"
+        sqlString = "SELECT SUM(a.Paid * a.Quantity) as SumReturn, b.InvName FROM Receipt AS a INNER JOIN InventoryItems AS b"
         sqlString += " ON a.UPC = b.InvUPC "
         sqlString += "WHERE ReceiptDate = "
         sqlString += QTrim(sDate)
