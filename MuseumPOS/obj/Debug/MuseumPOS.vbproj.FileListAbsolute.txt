@@ -117,11 +117,7 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.v
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.exe
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.pdb
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\MuseumPOS.exe.manifest
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Debug\MuseumPOS.application
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.ZOut.resources
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.exe.manifest
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.application
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.Attendance.resources
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.AttendReport.resources
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Debug\MuseumPOS.ManagerFunctions.resources
