@@ -1,8 +1,6 @@
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS.mdf
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS_log.ldf
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS.exe.config
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS.exe.manifest
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS.application
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS.exe
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS.pdb
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\MuseumPOS.xml
@@ -114,8 +112,6 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.TaxAdjust.resources
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.GenerateResource.cache
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.CoreCompileInputs.cache
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.exe.manifest
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.application
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.CopyComplete
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.exe
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.xml

@@ -101,10 +101,6 @@ Public Class POSMain
             If bManagerMode Then
                 btnManagerMode.Text = "Manager Mode Is On"
             Else
-                ' have we been looking at old receipts out of non-manager range? might want to move it to latest if so
-                If Me.ReceiptNumber < (nReceiptLatest - 5) Then
-                    GoToLatestReceipt() ' don't keep it on previous receipt
-                End If
 
                 btnManagerMode.Text = "Manager Mode Is OFF"
                 End If
@@ -850,13 +846,6 @@ Public Class POSMain
             Exit Sub
         End If
 
-        If nReceiptCurrent < (nReceiptLatest - 3) And ManagerMode = False Then
-            nManagerWarningCounter += 1
-            If nManagerWarningCounter > 3 Then BigMsgBox("Manager Access Needed for Receipts Further than 4 Back")
-            Timer1.Enabled = True
-            Exit Sub ' no more than 4 back without manager function
-        End If
-
         If nReceiptLatest = nReceiptCurrent And DataGridView1.Rows.Count > 0 Then
             BigMsgBox("You need to resolve this open receipt before going to other receipts")
             Exit Sub
@@ -1015,10 +1004,6 @@ Public Class POSMain
     End Sub
 
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
-        If Not Me.ManagerMode Then
-            BigMsgBox("Manager Access Needed")
-            Exit Sub
-        End If
 
         FireReceipt(True)
 
@@ -1100,11 +1085,6 @@ Public Class POSMain
 
         btxtReceiptNumber_EnterKeyPressed = True ' indicate this so that we can undo changes if we lose focus w/out enter key pressed
         nTextBoxValue = Val(txtReceiptNumber.Text)
-        If nTextBoxValue < (nReceiptLatest - 3) And ManagerMode = False Then
-            BigMsgBox("Manager Access Needed for Receipts Further than 4 Back")
-            txtReceiptNumber.Text = (sInitial_txtReceiptNumber) ' restore original value
-            Exit Sub ' no more than 4 back without manager function
-        End If
 
         If nTextBoxValue < 1 Then
             Exit Sub
