@@ -459,8 +459,8 @@ ORDER BY a.ReceiptID</CommandText>
             </TablixRowHierarchy>
             <NoRowsMessage>No Charges</NoRowsMessage>
             <DataSetName>Receipt</DataSetName>
-            <Top>0.76056in</Top>
-            <Left>0.28333in</Left>
+            <Top>1.41056in</Top>
+            <Left>0.25277in</Left>
             <Height>0.5in</Height>
             <Width>6.54722in</Width>
             <Style>
@@ -487,8 +487,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.52333in</Top>
-            <Left>0.34667in</Left>
+            <Top>1.17333in</Top>
+            <Left>0.31611in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>1</ZIndex>
@@ -520,8 +520,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>0.51056in</Top>
-            <Left>3.57499in</Left>
+            <Top>1.16056in</Top>
+            <Left>3.54443in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>2</ZIndex>
@@ -553,8 +553,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>0.51056in</Top>
-            <Left>4.34721in</Left>
+            <Top>1.16056in</Top>
+            <Left>4.31665in</Left>
             <Height>0.25in</Height>
             <Width>0.89722in</Width>
             <ZIndex>3</ZIndex>
@@ -586,8 +586,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>0.51056in</Top>
-            <Left>5.31388in</Left>
+            <Top>1.16056in</Top>
+            <Left>5.28332in</Left>
             <Height>0.25in</Height>
             <Width>0.79167in</Width>
             <ZIndex>4</ZIndex>
@@ -623,8 +623,8 @@ ORDER BY a.ReceiptID</CommandText>
             <rd:DefaultName>Textbox12</rd:DefaultName>
             <Top>0.13722in</Top>
             <Left>0.34667in</Left>
-            <Height>0.31667in</Height>
-            <Width>5.53944in</Width>
+            <Height>0.64167in</Height>
+            <Width>6.45332in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -646,7 +646,7 @@ ORDER BY a.ReceiptID</CommandText>
                     <Value>End of Report</Value>
                     <Style>
                       <FontFamily>Arial</FontFamily>
-                      <FontSize>16pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -655,10 +655,10 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>1.78166in</Top>
-            <Left>3.19667in</Left>
+            <Top>4.28166in</Top>
+            <Left>2.64111in</Left>
             <Height>0.35833in</Height>
-            <Width>1.62in</Width>
+            <Width>2.28944in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -688,8 +688,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>0.51056in</Top>
-            <Left>6.14721in</Left>
+            <Top>1.16056in</Top>
+            <Left>6.11665in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>7</ZIndex>
@@ -703,8 +703,212 @@ ORDER BY a.ReceiptID</CommandText>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=FormatCurrency(SUM(Fields!Paid.Value * Fields!Quantity.Value))</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>2.10778in</Top>
+            <Left>4.31665in</Left>
+            <Height>0.475in</Height>
+            <Width>1.86944in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox21">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total (No Tax)</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>2.10778in</Top>
+            <Left>2.04944in</Left>
+            <Height>0.475in</Height>
+            <Width>2.19777in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=FormatCurrency(SUM(Fields!TaxPaid.Value * Fields!Quantity.Value))</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>2.73889in</Top>
+            <Left>4.31665in</Left>
+            <Height>0.475in</Height>
+            <Width>1.86944in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox22">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Tax</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>2.73889in</Top>
+            <Left>2.04944in</Left>
+            <Height>0.475in</Height>
+            <Width>2.19777in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=FormatCurrency(SUM(Fields!Paid.Value * Fields!Quantity.Value) + SUM(Fields!TaxPaid.Value * Fields!Quantity.Value))</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>3.38055in</Top>
+            <Left>4.31665in</Left>
+            <Height>0.475in</Height>
+            <Width>1.86944in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox23">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total (with Tax)</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>3.38055in</Top>
+            <Left>2.04944in</Left>
+            <Height>0.475in</Height>
+            <Width>2.19777in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2.53611in</Height>
+        <Height>4.86944in</Height>
         <Style />
       </Body>
       <Width>7.4in</Width>

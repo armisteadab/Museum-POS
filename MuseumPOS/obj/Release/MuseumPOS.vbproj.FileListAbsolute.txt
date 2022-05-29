@@ -112,7 +112,6 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.TaxAdjust.resources
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.GenerateResource.cache
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.CoreCompileInputs.cache
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.CopyComplete
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.exe
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.pdb
@@ -136,9 +135,9 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\FluentFTP
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\SdkApi.Core.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\SdkApi.Desktop.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\ZebraPrinterSdk.xml
-C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbprojAssemblyReference.cache
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.CashDrawer.resources
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.InventoryLabelPrint.resources
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\NetBarcode.dll
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\System.Drawing.Common.dll
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\NetBarcode.xml
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.AssemblyReference.cache

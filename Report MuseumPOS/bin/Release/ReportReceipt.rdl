@@ -191,7 +191,6 @@ ORDER BY a.ReceiptID</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -280,8 +279,8 @@ ORDER BY a.ReceiptID</CommandText>
             </TablixRowHierarchy>
             <NoRowsMessage>No Charges</NoRowsMessage>
             <DataSetName>Receipt</DataSetName>
-            <Top>0.76056in</Top>
-            <Left>0.28333in</Left>
+            <Top>1.165in</Top>
+            <Left>0.34667in</Left>
             <Height>0.25in</Height>
             <Width>6.53332in</Width>
             <Style>
@@ -307,8 +306,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>1.165in</Top>
-            <Left>3.90555in</Left>
+            <Top>1.56944in</Top>
+            <Left>3.96889in</Left>
             <Height>0.25in</Height>
             <Width>0.91111in</Width>
             <ZIndex>1</ZIndex>
@@ -340,8 +339,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.52333in</Top>
-            <Left>0.34667in</Left>
+            <Top>0.92777in</Top>
+            <Left>0.41001in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>2</ZIndex>
@@ -373,8 +372,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>0.48278in</Top>
-            <Left>3.19667in</Left>
+            <Top>0.88722in</Top>
+            <Left>3.26001in</Left>
             <Height>0.25in</Height>
             <Width>0.77778in</Width>
             <ZIndex>3</ZIndex>
@@ -406,8 +405,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>0.52333in</Top>
-            <Left>4.13055in</Left>
+            <Top>0.92777in</Top>
+            <Left>4.19389in</Left>
             <Height>0.25in</Height>
             <Width>0.89722in</Width>
             <ZIndex>4</ZIndex>
@@ -439,8 +438,8 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>0.49667in</Top>
-            <Left>5.29166in</Left>
+            <Top>0.90111in</Top>
+            <Left>5.355in</Left>
             <Height>0.25in</Height>
             <Width>0.52499in</Width>
             <ZIndex>5</ZIndex>
@@ -463,7 +462,7 @@ ORDER BY a.ReceiptID</CommandText>
                   <TextRun>
                     <Value>=Parameters!ReportTitleText.Value</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -476,8 +475,8 @@ ORDER BY a.ReceiptID</CommandText>
             <rd:DefaultName>Textbox12</rd:DefaultName>
             <Top>0.13722in</Top>
             <Left>0.34667in</Left>
-            <Height>0.31667in</Height>
-            <Width>5.53944in</Width>
+            <Height>0.575in</Height>
+            <Width>6.53332in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -499,7 +498,7 @@ ORDER BY a.ReceiptID</CommandText>
                     <Value>End of Report</Value>
                     <Style>
                       <FontFamily>Arial</FontFamily>
-                      <FontSize>16pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -508,10 +507,10 @@ ORDER BY a.ReceiptID</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>1.78166in</Top>
-            <Left>3.19667in</Left>
-            <Height>0.35833in</Height>
-            <Width>1.62in</Width>
+            <Top>2.59443in</Top>
+            <Left>2.34888in</Left>
+            <Height>0.49166in</Height>
+            <Width>2.21167in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -523,8 +522,43 @@ ORDER BY a.ReceiptID</CommandText>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=FormatCurrency(Sum(Fields!Paid.Value * Fields!Quantity.Value))</Value>
+                    <Style>
+                      <FontSize>20pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>2.08472in</Top>
+            <Left>4.36332in</Left>
+            <Height>0.375in</Height>
+            <Width>1.90279in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2.53611in</Height>
+        <Height>3.96944in</Height>
         <Style />
       </Body>
       <Width>7.64166in</Width>

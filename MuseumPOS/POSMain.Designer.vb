@@ -48,7 +48,6 @@ Partial Class POSMain
         Me.btnQuick6 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.btnDone = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -291,16 +290,6 @@ Partial Class POSMain
         Me.Button10.TabIndex = 13
         Me.Button10.Text = "CASH"
         Me.Button10.UseVisualStyleBackColor = False
-        '
-        'Button11
-        '
-        Me.Button11.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button11.Location = New System.Drawing.Point(825, 836)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(141, 87)
-        Me.Button11.TabIndex = 14
-        Me.Button11.Text = "CHECK" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(limited use)"
-        Me.Button11.UseVisualStyleBackColor = True
         '
         'Button12
         '
@@ -556,6 +545,7 @@ Partial Class POSMain
         Me.btnReturn.TabIndex = 38
         Me.btnReturn.Text = "RETURN"
         Me.btnReturn.UseVisualStyleBackColor = True
+        Me.btnReturn.Visible = False
         '
         'txtReceiptNumber
         '
@@ -660,7 +650,6 @@ Partial Class POSMain
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnDone)
         Me.Controls.Add(Me.Button12)
-        Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.btnQuick6)
@@ -671,6 +660,7 @@ Partial Class POSMain
         Me.Controls.Add(Me.btnQuick1)
         Me.Controls.Add(Me.btnManagerFunctions)
         Me.Controls.Add(Me.txtEntry)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "POSMain"
         Me.Text = "Roads and Rails Museum Point-of-Sale"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -691,7 +681,6 @@ Partial Class POSMain
     Friend WithEvents btnQuick6 As Button
     Friend WithEvents Button9 As Button
     Friend WithEvents Button10 As Button
-    Friend WithEvents Button11 As Button
     Friend WithEvents Button12 As Button
     Friend WithEvents btnDone As Button
     Friend WithEvents Label1 As Label

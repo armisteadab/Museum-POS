@@ -304,13 +304,6 @@ Public Class POSMain
 
         Dim sPayType As String, sInvUPC As String, nRow As Integer
 
-        If nReceiptCurrent <> nReceiptLatest Then
-            If Not Me.ManagerMode Then
-                BigMsgBox("Manager Access Needed")
-                Exit Sub
-            End If
-        End If
-
         Select Case e.ColumnIndex
 
             Case 1
@@ -483,13 +476,6 @@ Public Class POSMain
         Dim nCashIn As Double, nCashOut As Double
 
         sConnectionString = APPConnectionString
-
-        If nReceiptCurrent <> nReceiptLatest Then
-            If Not Me.ManagerMode Then
-                BigMsgBox("Manager Access Needed")
-                Exit Sub
-            End If
-        End If
 
         If nSumPriceItems > 0 Then
             If Not bIsReturn Then

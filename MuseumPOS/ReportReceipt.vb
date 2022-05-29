@@ -50,13 +50,13 @@ Public Class ReportReceipt
         rParam.Values.Clear()
         rParam.Name = "ReportTitleText"
 
-        sReportTitle = ""
+        sReportTitle = "Sales "
         If sReportType = "RANGE" Then
-            sReportTitle = "From " & DateTimePicker_Start.Value.ToShortDateString.Trim & " To " & DateTimePicker_End.Value.ToShortDateString.Trim
+            sReportTitle += "From " & DateTimePicker_Start.Value.ToShortDateString.Trim & " To " & DateTimePicker_End.Value.ToShortDateString.Trim
         End If
 
         If sReportType = "SINGLE" Then
-            sReportTitle = DateTimePicker_Start.Value.ToShortDateString.Trim
+            sReportTitle += DateTimePicker_Start.Value.ToShortDateString.Trim
         End If
 
         If Not cboDept.Text.Trim = "" Then
