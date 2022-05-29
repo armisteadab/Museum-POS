@@ -83,6 +83,46 @@ Public Class ReportReceipt
 
     End Sub
 
+
+    Private Sub Settlements(ByVal sReportType As String)
+        Dim receiptDataSource As New WinForms.ReportDataSource
+        Dim dataset As New DataSet("Receipt")
+        Dim sReportTitle As String
+
+        GetSettlementDataSet(dataset, sReportType)
+
+        receiptDataSource.Name = "Receipt"
+        receiptDataSource.Value = dataset.Tables("Receipt")
+
+        ReportViewer1.ProcessingMode = WinForms.ProcessingMode.Local
+        ReportViewer1.LocalReport.DataSources.Clear()
+        ReportViewer1.LocalReport.DataSources.Add(receiptDataSource)
+        ReportViewer1.PrinterSettings.PrinterName = "HP7D48B1 (HP Office Jet Pro 8720)"
+
+        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ReportReceipt.rdl"
+
+        Dim rParam As New WinForms.ReportParameter
+        rParam.Values.Clear()
+        rParam.Name = "ReportTitleText"
+
+        sReportTitle = "Sales "
+        If sReportType = "RANGE" Then
+            sReportTitle += "From " & DateTimePicker_Start.Value.ToShortDateString.Trim & " To " & DateTimePicker_End.Value.ToShortDateString.Trim
+        End If
+
+        If sReportType = "SINGLE" Then
+            sReportTitle += DateTimePicker_Start.Value.ToShortDateString.Trim
+        End If
+
+        rParam.Values.Add(sReportTitle)
+        ReportViewer1.LocalReport.SetParameters(rParam)
+
+        ReportViewer1.RefreshReport()
+
+    End Sub
+
+
+
     Private Sub GetReceiptDataSet(ByRef parDataSet As DataSet, ByVal sReportType As String, ByVal bSummary As Boolean)
 
         Dim sqlConnect As New SqlConnection(), sSQL$
@@ -157,6 +197,54 @@ Public Class ReportReceipt
 
     End Sub
 
+
+
+    Private Sub GetSettlementDataSet(ByRef parDataSet As DataSet, ByVal sReportType As String)
+
+        Dim sqlConnect As New SqlConnection(), sSQL$
+        Dim sConnectionString As String
+
+        sConnectionString = APPConnectionString
+
+        sqlConnect.ConnectionString = sConnectionString
+
+        sSQL = "SELECT UPC, ReceiptID, Description, PayType as InvName, Price * -1 as Price, Paid, '' as InvUPC, TaxPaid, Quantity, TaxRate, ReceiptDateTime"
+        sSQL += " FROM Receipt "
+
+        If sReportType = "RANGE" Then
+            sSQL += " WHERE ReceiptDate BETWEEN @parDate AND @parDate2"
+        End If
+
+        If sReportType = "SINGLE" Then
+            sSQL += " WHERE ReceiptDate = @parDate "
+        End If
+
+        If Not (txtSearchDescription.Text.Trim = "") Then
+            sSQL += " AND Description LIKE @parDesc"
+        End If
+
+        sSQL += " AND price < 0"
+
+        sSQL += " ORDER BY ReceiptDateTime"
+
+        Dim command As New SqlCommand()
+        command.Connection = sqlConnect
+        command.CommandType = CommandType.Text
+        command.CommandText = sSQL
+        command.Parameters.AddWithValue("@parDate", DateTimePicker_Start.Value.Date)
+        command.Parameters.AddWithValue("@parDate2", DateTimePicker_End.Value.Date)
+        command.Parameters.AddWithValue("@parDesc", AddLikeSymbol(txtSearchDescription.Text.Trim))
+
+        If sqlConnect.State = ConnectionState.Closed Then
+            sqlConnect.Open()
+        End If
+
+        Dim ReceiptAdapter As New SqlDataAdapter(command)
+
+        ReceiptAdapter.Fill(parDataSet, "Receipt")
+
+
+    End Sub
     Private Sub ReportReceipt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         LoadComboBox("INVTYPE", cboType)
@@ -173,5 +261,13 @@ Public Class ReportReceipt
     Private Sub btnSummary_Click(sender As Object, e As EventArgs) Handles btnSummary.Click
         RunReport(True) ' false = not summarized
 
+    End Sub
+
+    Private Sub btnSettlements_Click(sender As Object, e As EventArgs) Handles btnSettlements.Click
+        If DateTimePicker_Start.Value.ToShortDateString.Trim = DateTimePicker_End.Value.ToShortDateString.Trim Then
+            Settlements("SINGLE")
+        Else
+            Settlements("RANGE")
+        End If
     End Sub
 End Class

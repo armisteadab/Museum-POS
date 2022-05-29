@@ -141,3 +141,4 @@ C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\NetBarcod
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\System.Drawing.Common.dll
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\bin\Release\NetBarcode.xml
 C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.AssemblyReference.cache
+C:\Users\armis\source\repos\MuseumPOS\Museum POS\MuseumPOS\obj\Release\MuseumPOS.vbproj.CopyComplete

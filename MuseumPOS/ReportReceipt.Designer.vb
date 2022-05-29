@@ -38,6 +38,7 @@ Partial Class ReportReceipt
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboDept = New System.Windows.Forms.ComboBox()
         Me.btnSummary = New System.Windows.Forms.Button()
+        Me.btnSettlements = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -103,6 +104,7 @@ Partial Class ReportReceipt
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnSettlements)
         Me.GroupBox1.Controls.Add(Me.txtSearchDescription)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
@@ -119,7 +121,7 @@ Partial Class ReportReceipt
         Me.GroupBox1.Controls.Add(Me.DateTimePicker_Start)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(442, 639)
+        Me.GroupBox1.Size = New System.Drawing.Size(442, 713)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Date Range"
@@ -209,11 +211,21 @@ Partial Class ReportReceipt
         Me.btnSummary.Text = "Summary"
         Me.btnSummary.UseVisualStyleBackColor = True
         '
+        'btnSettlements
+        '
+        Me.btnSettlements.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSettlements.Location = New System.Drawing.Point(40, 649)
+        Me.btnSettlements.Name = "btnSettlements"
+        Me.btnSettlements.Size = New System.Drawing.Size(255, 45)
+        Me.btnSettlements.TabIndex = 15
+        Me.btnSettlements.Text = "Settlements"
+        Me.btnSettlements.UseVisualStyleBackColor = True
+        '
         'ReportReceipt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1159, 663)
+        Me.ClientSize = New System.Drawing.Size(1159, 737)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ReportViewer1)
         Me.Name = "ReportReceipt"
@@ -240,4 +252,5 @@ Partial Class ReportReceipt
     Friend WithEvents cboDept As ComboBox
     Friend WithEvents txtSearchDescription As TextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents btnSettlements As Button
 End Class
