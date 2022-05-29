@@ -64,6 +64,7 @@
     <Report Include="ReportInventory.rdl" />
     <Report Include="ReportReceipt.rdl" />
     <Report Include="SalesSummary.rdl" />
+    <Report Include="Settlements.rdl" />
     <Report Include="ZOut.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

@@ -99,13 +99,13 @@ Public Class ReportReceipt
         ReportViewer1.LocalReport.DataSources.Add(receiptDataSource)
         ReportViewer1.PrinterSettings.PrinterName = "HP7D48B1 (HP Office Jet Pro 8720)"
 
-        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\ReportReceipt.rdl"
+        ReportViewer1.LocalReport.ReportPath = "c:\release\Report MuseumPOS\Settlements.rdl"
 
         Dim rParam As New WinForms.ReportParameter
         rParam.Values.Clear()
         rParam.Name = "ReportTitleText"
 
-        sReportTitle = "Sales "
+        sReportTitle = "Settlements "
         If sReportType = "RANGE" Then
             sReportTitle += "From " & DateTimePicker_Start.Value.ToShortDateString.Trim & " To " & DateTimePicker_End.Value.ToShortDateString.Trim
         End If
@@ -208,7 +208,7 @@ Public Class ReportReceipt
 
         sqlConnect.ConnectionString = sConnectionString
 
-        sSQL = "SELECT UPC, ReceiptID, Description, PayType as InvName, Price * -1 as Price, Paid, '' as InvUPC, TaxPaid, Quantity, TaxRate, ReceiptDateTime"
+        sSQL = "SELECT UPC, ReceiptID, Description, PayType as InvName, Price * -1 as Price, Paid * -1 as Paid, '' as InvUPC, TaxPaid, Quantity, TaxRate, ReceiptDateTime"
         sSQL += " FROM Receipt "
 
         If sReportType = "RANGE" Then
